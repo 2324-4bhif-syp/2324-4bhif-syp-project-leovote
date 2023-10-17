@@ -1,0 +1,34 @@
+//Leovote (ned richtig aber das ma mal ans haben)
+@startuml
+
+class Wahl{
+   - WahlTyp
+   - string WahlName
+}
+
+enum WahlTyp{
+    - PunkteWahl
+    - KreuzerlWahl
+}
+
+class Wahlberechtigter{
+   - Code
+   - SchülerNR
+}
+
+
+class Kandidat{
+   - string Vorname
+   - string Nachname
+   - string Klasse
+   - string Wahlprogramm
+}
+
+
+
+Wahl   ||--|{ Kandidat  : > hat
+Wahl -- WahlTyp
+Wahl   ||--|{ Wahlberechtigter  : > hat
+
+
+@enduml
