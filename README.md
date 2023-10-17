@@ -7,3 +7,15 @@ Problem: Die Wahlen an der Schule (Schülersprecher, Abteilungssprecher) sind la
 Use Cases:
 
 Beschreibung:
+
+
+
+
+MOC:
+
+blockchain möglich (andere fälschungssichere Techniken)
+
+fälschungssicher
+
+Entscheidung zwischen: minimaler nutzen/ keine Nutzung (bei nicht sicherer Nutzung)
+
