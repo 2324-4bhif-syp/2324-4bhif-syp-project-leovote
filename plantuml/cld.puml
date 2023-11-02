@@ -1,3 +1,4 @@
+```
 @startuml
 
 class Election {
@@ -24,6 +25,5 @@ class Candidate {
 
 Election   "1"--"*" Candidate  : > hat
 Election   "1"--"*" Voter  : < nimmt Teil
-
-
 @enduml
+```
