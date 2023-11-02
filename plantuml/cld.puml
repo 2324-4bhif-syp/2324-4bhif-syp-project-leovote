@@ -2,9 +2,9 @@
 
 class Election {
     - id: Long
-    - begin: Date
-    - end: Date
-    - electionType: ElectionType
+    - electionStart: DateTime
+    - electionEnd: DateTime
+    - electionType: String
 }
 
 class Vote {
@@ -13,27 +13,21 @@ class Vote {
     - election: Election
 }
 
-enum ElectionType{
-    - Points
-    - Crosses
-}
-
 class Voter {
-    - schoolID: String
+    - schoolId: String
     - schoolPassword: String
     - alreadyVoted: Boolean
 }
 
 class Candidate {
-   - schoolID: String
+   - schoolId: String
    - firstname: String
    - lastname: String
    - class: String
 }
 
-Vote   "1"--"*" Candidate  : > hat
-Vote   "1"--"*" Voter  : < nimmt Teil
-Election "1"--"*" Vote : < Teil von
-Election -- ElectionType : > ist
+Vote   "1"--"*" Candidate  : > has
+Vote   "1"--"*" Voter  : < takes part
+Election "1"--"*" Vote : < part of
 
 @enduml
