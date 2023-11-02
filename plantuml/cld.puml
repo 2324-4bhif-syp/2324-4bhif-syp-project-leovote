@@ -16,7 +16,7 @@ class Vote {
 class Voter {
     - schoolId: String
     - schoolPassword: String
-    - alreadyVoted: Boolean
+    - hasVoted: Boolean
 }
 
 class Candidate {
