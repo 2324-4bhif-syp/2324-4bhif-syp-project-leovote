@@ -1,0 +1,14 @@
+@startuml
+
+actor Voter as V
+actor Admin as A
+
+left to right direction
+
+rectangle "Leovote" {
+    V -- (Vote Candidate)
+    A -- (Read result)
+    A -- (Add candidates)
+}
+
+@enduml
