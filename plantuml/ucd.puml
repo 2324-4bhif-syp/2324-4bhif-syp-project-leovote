@@ -1,15 +1,14 @@
 @startuml
 
 actor Voter as V
-actor Candidate as C
 actor Admin as A
 
 left to right direction
 
 rectangle "Leovote" {
- V -- (Vote Candidate)
- C -- (Participate in election)
- A -- (Read result)
+    V -- (Vote Candidate)
+    A -- (Read result)
+    A -- (Add candidates)
 }
 
 @enduml

@@ -1,8 +1,16 @@
 @startuml
 
 class Election {
+    - id: Long
+    - begin: Date
+    - end: Date
+    - electionType: ElectionType
+}
+
+class Vote {
     - voter: Voter
     - candidate: Candidate
+    - election: Election
 }
 
 enum ElectionType{
@@ -11,18 +19,21 @@ enum ElectionType{
 }
 
 class Voter {
-    - schoolIdentity: String
+    - schoolID: String
     - schoolPassword: String
     - alreadyVoted: Boolean
 }
 
 class Candidate {
+   - schoolID: String
    - firstname: String
    - lastname: String
    - class: String
 }
 
-Election   "1"--"*" Candidate  : > hat
-Election   "1"--"*" Voter  : < nimmt Teil
+Vote   "1"--"*" Candidate  : > hat
+Vote   "1"--"*" Voter  : < nimmt Teil
+Election "1"--"*" Vote : < Teil von
+Election -- ElectionType : > ist
 
 @enduml
