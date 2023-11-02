@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+@startuml FarmManagement
+
+actor Voter as V
+actor Candidate as C
+actor Admin as A
+
+left to right direction
+
+rectangle "Leovote" {
+ V -- (Vote Candidate)
+ C -- (Participate in election)
+ A -- (Read result)
+}
+@enduml

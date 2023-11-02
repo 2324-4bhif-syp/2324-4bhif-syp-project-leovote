@@ -1,34 +1,29 @@
-//Leovote (ned richtig aber das ma mal ans haben)
 @startuml
 
-class Wahl{
-   - WahlTyp
-   - string WahlName
+class Election {
+    - voter: Voter
+    - candidate: Candidate
 }
 
-enum WahlTyp{
-    - PunkteWahl
-    - KreuzerlWahl
+enum ElectionType{
+    - Points
+    - Crosses
 }
 
-class Wahlberechtigter{
-   - Code
-   - SchülerNR
+class Voter {
+    - schoolIdentity: String
+    - schoolPassword: String
+    - alreadyVoted: Boolean
 }
 
-
-class Kandidat{
-   - string Vorname
-   - string Nachname
-   - string Klasse
-   - string Wahlprogramm
+class Candidate {
+   - firstname: String
+   - lastname: String
+   - class: String
 }
 
-
-
-Wahl   ||--|{ Kandidat  : > hat
-Wahl -- WahlTyp
-Wahl   ||--|{ Wahlberechtigter  : > hat
+Election   "1"--"*" Candidate  : > hat
+Election   "1"--"*" Voter  : < nimmt Teil
 
 
 @enduml
