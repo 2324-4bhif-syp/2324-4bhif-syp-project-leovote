@@ -1,9 +1,4 @@
-```
 @startuml
-
-'https://plantuml.com/use-case-diagram
-
-@startuml FarmManagement
 
 actor Voter as V
 actor Candidate as C
@@ -16,5 +11,5 @@ rectangle "Leovote" {
  C -- (Participate in election)
  A -- (Read result)
 }
+
 @enduml
-```

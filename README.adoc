@@ -1,6 +1,4 @@
 = Leovote
-
-:icons: font
 :sectnums:
 :toc: left
 
@@ -19,3 +17,6 @@ image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubuse
 * Felix Fröller
 * Alexander Nikolaus
 * David Lehner
+
+== Sprint Backlog
+https://vm81.htl-leonding.ac.at/agiles/99-385/current[Sprint Backlog]
