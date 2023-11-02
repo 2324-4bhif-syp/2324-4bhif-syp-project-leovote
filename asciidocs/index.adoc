@@ -1,6 +1,22 @@
-----
--Team: Cao Anton, Fröller Felix, Lehner David, Nikolaus Alexander
--Kontakt: d.lehner2@stundents.htl-leonding.ac.at
-----
+= Leovote
+:sectnums:
+:toc: left
 
-== https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/README[ReadMe]
+== Description
+"Leovote" is an innovative project specifically designed for students at HTL Leonding, providing them with a user-friendly platform to participate in school elections. This electronic voting system allows students to take part in various elections, including the selection of student representatives, such as the Student Council President and other important positions. The election results can be easily accessed and managed by the system's administrator.
+
+== CLD
+image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/main/plantuml/cld.puml[]
+
+== UCD
+image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/main/plantuml/ucd.puml[]
+
+== Team Members
+
+* Anton Cao
+* Felix Fröller
+* Alexander Nikolaus
+* David Lehner
+
+== Sprint Backlog
+https://vm81.htl-leonding.ac.at/agiles/99-385/current[Sprint Backlog]
