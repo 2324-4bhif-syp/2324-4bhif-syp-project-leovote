@@ -15,7 +15,7 @@ class Vote {
 
 class Voter {
     - schoolId: String
-    - schoolPassword: String
+    - password: String
     - hasVoted: Boolean
 }
 
@@ -23,7 +23,7 @@ class Candidate {
    - schoolId: String
    - firstname: String
    - lastname: String
-   - class: String
+   - grade: String
 }
 
 Vote   "1"--"*" Candidate  : > has
