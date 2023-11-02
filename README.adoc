@@ -11,7 +11,7 @@
 
 
 == UCD
-image::http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/main/asciidoc/plantuml/cld.puml?token=GHSAT0AAAAAACIAIBJRU7N5XB532TZPX5QWZKDPN3Q[]
+image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/main/plantuml/cld.puml[]
 
 
 == Team Members
