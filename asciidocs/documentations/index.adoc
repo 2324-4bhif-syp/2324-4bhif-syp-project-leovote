@@ -1,0 +1,5 @@
+= Documentations
+:sectnums:
+:toc: left
+
+== https://github.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/tree/main/asciidocs/asciidocs/documentationEncryption[Documentation about Encryption]

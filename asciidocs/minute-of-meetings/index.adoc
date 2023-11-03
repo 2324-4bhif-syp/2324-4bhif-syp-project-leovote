@@ -1,0 +1,5 @@
+= Minute of Meetings
+:sectnums:
+:toc: left
+
+== https://github.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/tree/main/asciidocs/minute-of-meetings/mom-171023[Minute of Meeting 17-10-23]
