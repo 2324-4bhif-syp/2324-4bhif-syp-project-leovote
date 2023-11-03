@@ -1,0 +1,14 @@
+GET http://localhost:8080/api/candidates
+Accept: application/json
+
+###
+
+POST http://localhost:8080/api/candidates
+Content-Type: application/json
+
+{
+  "schoolId": "if200362",
+  "firstName": "Anton",
+  "lastName": "Cao",
+  "grade": "4BHIF"
+}
