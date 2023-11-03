@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Documentation about mom from 17.10.23 - 03.11.23</title>
+<title>Documentations</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,125 +437,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Documentation about mom from 17.10.23 - 03.11.23</h1>
+<h1>Documentations</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_security">1. Security</a>
-<ul class="sectlevel2">
-<li><a href="#_creating_security_against_forgery_in_election_situations">1.1. Creating security against forgery in election situations:</a></li>
-<li><a href="#_can_votes_online_be_safe">1.2. Can votes online be safe?</a></li>
-</ul>
-</li>
-<li><a href="#_annother_cld_idea">2. Annother CLD Idea</a></li>
+<li><a href="#_documentation_about_encryption">1. Documentation about Encryption</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_security"><a class="anchor" href="#_security"></a>1. Security</h2>
+<h2 id="_documentation_about_encryption"><a class="anchor" href="#_documentation_about_encryption"></a>1. <a href="https://github.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/tree/main/asciidocs/asciidocs/documentationEncryption">Documentation about Encryption</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_creating_security_against_forgery_in_election_situations"><a class="anchor" href="#_creating_security_against_forgery_in_election_situations"></a>1.1. Creating security against forgery in election situations:</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Blockchains: Not useful in our Case.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Blockchains work like this:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>We have a block, which contains a hash of the block, and a hash of the previous Block.</p>
-</li>
-<li>
-<p>If a block changes, which in our Case would be a voter, the whole votes database would have to be changed.</p>
-</li>
-<li>
-<p>This would use way too much resources in the first place.</p>
-</li>
-<li>
-<p>Secondly we&#8217;re not able to identify the hash anymore, which then makes the whole hashing useless. We would have to mine the Blocks, which needs way too many resources aswell.</p>
-</li>
-<li>
-<p>We have to recognise the specific voter, to know if he/she already voted. If we use Blockchains, we could just leave the Voter out of the Vote class, and not save any Voter</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>RSA would suit the situation more.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Why? And how does it work?</p>
-<div class="ulist">
-<ul>
-<li>
-<p>With RSA there are two keys. In the first place a public key, and secondly a private key</p>
-</li>
-<li>
-<p>The Voter, or further, the voters ID gets encrypted with the public key. The message can now only be decrypted with the private key.</p>
-</li>
-<li>
-<p>The private key would stay in our Database, which no one is able to access, excepted us.</p>
-</li>
-<li>
-<p>This is the only way, we would be able to confirm, that a person has already voted for a specific election</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Leave the voter out of Votes</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The idea we had, is to leave the voter out of the vote, and only save, that he has already voted in an external table, which connects to the election.</p>
-</li>
-<li>
-<p>No encryption needed.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_can_votes_online_be_safe"><a class="anchor" href="#_can_votes_online_be_safe"></a>1.2. Can votes online be safe?</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>There are many countries which already use online elections.</p>
-</li>
-<li>
-<p>There are specific standards, which are required for online elections</p>
-</li>
-<li>
-<p>Different approaches</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_annother_cld_idea"><a class="anchor" href="#_annother_cld_idea"></a>2. Annother CLD Idea</h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/gh-pages/plantuml/cldIdea.puml" alt="cldIdea">
-</div>
-</div>
+
 </div>
 </div>
 </div>
