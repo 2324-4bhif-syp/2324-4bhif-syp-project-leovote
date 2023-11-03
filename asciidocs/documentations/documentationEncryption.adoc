@@ -1,0 +1,31 @@
+= Documentation about mom from 17.10.23 - 03.11.23
+
+== Security
+
+=== Creating security against forgery in election situations:
+* Blockchains: Not useful in our Case.
+** Blockchains work like this:
+*** We have a block, which contains a hash of the block, and a hash of the previous Block.
+*** If a block changes, which in our Case would be a voter, the whole votes database would have to be changed.
+*** This would use way too much resources in the first place.
+*** Secondly we're not able to identify the hash anymore, which then makes the whole hashing useless. We would have to mine the Blocks, which needs way too many resources aswell.
+*** We have to recognise the specific voter, to know if he/she already voted. If we use Blockchains, we could just leave the Voter out of the Vote class, and not save any Voter
+* RSA would suit the situation more.
+** Why? And how does it work?
+*** With RSA there are two keys. In the first place a public key, and secondly a private key
+*** The Voter, or further, the voters ID gets encrypted with the public key. The message can now only be decrypted with the private key.
+*** The private key would stay in our Database, which no one is able to access, excepted us.
+*** This is the only way, we would be able to confirm, that a person has already voted for a specific election
+* Leave the voter out of Votes
+** The idea we had, is to leave the voter out of the vote, and only save, that he has already voted in an external table, which connects to the election.
+** No encryption needed.
+
+=== Can votes online be safe?
+* There are many countries which already use online elections.
+* There are specific standards, which are required for online elections
+* Different approaches
+
+== Annother CLD Idea
+image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/2324-4bhif-syp/2324-4bhif-syp-project-leovote/gh-pages/plantuml/cldIdea.puml[]
+
+

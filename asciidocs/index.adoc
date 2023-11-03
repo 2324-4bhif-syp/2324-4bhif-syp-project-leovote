@@ -20,3 +20,8 @@ image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubuse
 
 == Sprint Backlog
 https://vm81.htl-leonding.ac.at/agiles/99-385/current[Sprint Backlog]
+
+== Documentations
+
+== Minute of Meetings
+

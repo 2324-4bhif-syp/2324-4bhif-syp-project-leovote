@@ -12,7 +12,7 @@
     <input type="text" id="schoolId" placeholder="School Id">
     <input type="text" id="firstName" placeholder="First Name">
     <input type="text" id="lastName" placeholder="Last Name">
-    <input type="text" id="grade" placeholder="Grade">
+    <input type="text" id="grade" placeholder="Class">
     <button type="button" onclick="addCandidate()">Create Candidate</button>
 </form>
 
@@ -60,7 +60,7 @@
 
                 data.forEach(candidate => {
                     var li = document.createElement("li");
-                    li.appendChild(document.createTextNode("SchoolId: " + candidate.schoolId + " - Name: " + candidate.firstName + " " + candidate.lastName + " -  Grade: " + candidate.grade));
+                    li.appendChild(document.createTextNode("SchoolId: " + candidate.schoolId + " - Name: " + candidate.firstName + " " + candidate.lastName + " -  Klasse: " + candidate.grade));
                     candidatesList.appendChild(li);
                 });
             })
