@@ -1,14 +1,20 @@
 @startuml
 
 class Election {
+    - id: Long
     - name: String
     - electionStart: LocalDateTime
     - electionEnd: LocalDateTime
     - electionType: String
 }
 
+class HasVoted {
+    - schoolId: String
+    - voted: Boolean
+    - election: Election
+}
+
 class Vote {
-    - voter: Voter
     - candidate: Candidate
     - election: Election
 }
@@ -25,8 +31,8 @@ class Candidate {
    - grade: String
 }
 
-Vote   "1"--"*" Candidate  : > has
-Vote   "1"--"*" Voter  : < takes part
+Vote   "*"--"1" Candidate  : > has
+(Election, Voter) .. HasVoted
 Election "1"--"*" Vote : < part of
 
 @enduml
