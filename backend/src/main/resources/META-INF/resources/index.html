@@ -18,12 +18,12 @@
 
 <script>
     function addCandidate() {
-        var schoolId = document.getElementById("schoolId").value;
-        var firstName = document.getElementById("firstName").value;
-        var lastName = document.getElementById("lastName").value;
-        var grade = document.getElementById("grade").value;
+        let schoolId = document.getElementById("schoolId").value;
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+        let grade = document.getElementById("grade").value;
 
-        var candidate = {
+        let candidate = {
             schoolId: schoolId,
             firstName: firstName,
             lastName: lastName,
@@ -55,11 +55,11 @@
                 return response.json();
             })
             .then(data => {
-                var candidatesList = document.getElementById("candidatesList");
+                let candidatesList = document.getElementById("candidatesList");
                 candidatesList.innerHTML = "";
 
                 data.forEach(candidate => {
-                    var li = document.createElement("li");
+                    let li = document.createElement("li");
                     li.appendChild(document.createTextNode("SchoolId: " + candidate.schoolId + " - Name: " + candidate.firstName + " " + candidate.lastName + " -  Klasse: " + candidate.grade));
                     candidatesList.appendChild(li);
                 });

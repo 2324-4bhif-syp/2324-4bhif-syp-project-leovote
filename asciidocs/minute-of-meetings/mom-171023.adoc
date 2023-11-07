@@ -18,19 +18,19 @@ endif::backend-html5[]
 
 .Teilnehmer
 |===
-|anwesend |Verteiler
+|anwesend
 
 | David Lehner
-|
+
 
 | Anton Cao
-|
+
 
 | Alexander Nikolaus
-|
+
 
 | Fröller Felix
-|
+
 
 |===
 
@@ -46,15 +46,12 @@ endif::backend-html5[]
 |15 min
 |===
 
-
-
 == Besprochene Themen
 
 * Wie kann man Fälschungssicherheit in Wahlsituationen herstellen (Blockchain)
 * Proof of Concept erstellen: können Wahlen online sicher ablaufen?
 Ist die Verwendung von Blockchain sinnvoll? Gibt es andere Technologien
 * MVP ausgemacht. List von Wahlkandidaten eingeben und auslesen.
-
 
 == Vereinbarungen und Entscheidungen
 
