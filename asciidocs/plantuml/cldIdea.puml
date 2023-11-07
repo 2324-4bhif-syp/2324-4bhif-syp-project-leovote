@@ -9,9 +9,9 @@ class Election {
 }
 
 class HasVoted {
-    - schoolId: String
-    - voted: Boolean
     - election: Election
+    - voter: Voter
+    - voted: Boolean
 }
 
 class Vote {
