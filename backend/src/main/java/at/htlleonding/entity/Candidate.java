@@ -49,5 +49,9 @@ public class Candidate {
     public void setGrade(String grade) {
         this.grade = grade;
     }
-    //</editor-fold>
+
+    public String toCSVString() {
+        return schoolId + ';' + firstName + ';' + lastName + ';' + grade + "\n";
+    }
+//</editor-fold>
 }
