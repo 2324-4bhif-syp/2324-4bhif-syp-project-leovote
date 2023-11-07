@@ -3,18 +3,23 @@ package at.htlleonding.entity;
 import java.time.LocalDateTime;
 
 public class Election {
+    //<editor-fold desc="Fields">
     private String name;
     private LocalDateTime electionStart;
     private LocalDateTime electionEnd;
     private String electionType;
+    //</editor-fold>
 
+    //<editor-fold desc="Constructors">
     public Election(String name, LocalDateTime electionStart, LocalDateTime electionEnd, String electionType){
         this.name = name;
         this.electionStart = electionStart;
         this.electionEnd = electionEnd;
         this.electionType = electionType;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Getter and Setter">
     public String getName() {
         return name;
     }
@@ -46,4 +51,5 @@ public class Election {
     public void setElectionType(String electionType) {
         this.electionType = electionType;
     }
+    //</editor-fold>
 }
