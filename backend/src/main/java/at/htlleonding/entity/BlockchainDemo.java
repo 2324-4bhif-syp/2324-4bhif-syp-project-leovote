@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockchainDemo {
-
     @Transactional
     void startUp(@Observes StartupEvent startup) {
         Blockchain blockchain = new Blockchain();
