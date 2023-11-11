@@ -1,12 +1,10 @@
 package at.htlleonding.entity;
 
 import at.htlleonding.control.HashService;
-import jakarta.inject.Inject;
 
 public class Candidate {
     //<editor-fold desc="Fields">
-    @Inject
-    HashService hashService;
+    HashService hashService = new HashService();
     private String id;
     private String schoolId;
     private String firstName;
@@ -20,7 +18,7 @@ public class Candidate {
         setFirstName(firstName);
         setLastName(lastName);
         setGrade(grade);
-        setId();
+        setId(this.toString());
     }
     //</editor-fold>
 
@@ -29,8 +27,8 @@ public class Candidate {
         return id;
     }
 
-    public void setId() {
-        this.id = hashService.calculateSHA256Hash(this.toString());
+    public void setId(String id) {
+        this.id = hashService.calculateSHA256Hash(id);
     }
 
     public String getSchoolId() {

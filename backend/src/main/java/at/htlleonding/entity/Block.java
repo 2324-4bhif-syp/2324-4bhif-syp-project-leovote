@@ -1,14 +1,12 @@
 package at.htlleonding.entity;
 
 import at.htlleonding.control.HashService;
-import jakarta.inject.Inject;
 
 import java.util.List;
 
 class Block {
     //<editor-fold desc="Fields">
-    @Inject
-    HashService hashService;
+    HashService hashService = new HashService();
     private final int index;
     private final long timestamp;
     private final List<Vote> votes;

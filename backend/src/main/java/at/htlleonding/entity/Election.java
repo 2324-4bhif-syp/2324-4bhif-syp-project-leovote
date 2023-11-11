@@ -1,14 +1,12 @@
 package at.htlleonding.entity;
 
 import at.htlleonding.control.HashService;
-import jakarta.inject.Inject;
 
 import java.time.LocalDateTime;
 
 public class Election {
     //<editor-fold desc="Fields">
-    @Inject
-    HashService hashService;
+    HashService hashService = new HashService();
     private String id;
     private String name;
     private LocalDateTime electionStart;
@@ -18,11 +16,11 @@ public class Election {
 
     //<editor-fold desc="Constructors">
     public Election(String name, LocalDateTime electionStart, LocalDateTime electionEnd, String electionType) {
-        this.name = name;
-        this.electionStart = electionStart;
-        this.electionEnd = electionEnd;
-        this.electionType = electionType;
-        this.id = hashService.calculateSHA256Hash(this.toString());
+        setName(name);
+        setElectionStart(electionStart);
+        setElectionEnd(electionEnd);
+        setElectionType(electionType);
+        setId(this.toString());
     }
     //</editor-fold>
 
@@ -32,7 +30,7 @@ public class Election {
     }
 
     public void setId(String id) {
-        this.id = hashService.calculateSHA256Hash(this.toString());
+        this.id = hashService.calculateSHA256Hash(id);
     }
 
     public String getName() {
