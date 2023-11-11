@@ -9,11 +9,11 @@ class Block {
     //<editor-fold desc="Fields">
     @Inject
     HashService hashService;
-    private int index;
-    private long timestamp;
-    private List<Vote> votes;
-    private String previousHash;
-    private String hash;
+    private final int index;
+    private final long timestamp;
+    private final List<Vote> votes;
+    private final String previousHash;
+    private final String hash;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
