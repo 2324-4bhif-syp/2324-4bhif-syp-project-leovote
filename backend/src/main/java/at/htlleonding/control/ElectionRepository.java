@@ -9,8 +9,6 @@ import java.util.List;
 
 @ApplicationScoped
 public class ElectionRepository {
-    @Inject
-    HashService hashService;
     private final List<Election> elections = new ArrayList<>();
 
     public List<Election> getAllElections() {
