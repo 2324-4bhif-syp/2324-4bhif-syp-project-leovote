@@ -1,7 +1,12 @@
 package at.htlleonding.entity;
 
+import at.htlleonding.control.HashService;
+import jakarta.inject.Inject;
+
 public class Candidate {
     //<editor-fold desc="Fields">
+    @Inject
+    HashService hashService;
     private String id;
     private String schoolId;
     private String firstName;
@@ -20,6 +25,14 @@ public class Candidate {
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
+    public String getId() {
+        return id;
+    }
+
+    public void setId() {
+        this.id = hashService.calculateSHA256Hash(this.toString());
+    }
+
     public String getSchoolId() {
         return schoolId;
     }
@@ -58,9 +71,6 @@ public class Candidate {
     //</editor-fold>
 
     //<editor-fold desc="Methods">
-    private void setId() {
-    }
-
     @Override
     public String toString() {
         return "Candidate{" +
