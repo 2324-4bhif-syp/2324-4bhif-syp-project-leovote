@@ -2,6 +2,7 @@ package at.htlleonding.entity;
 
 public class Candidate {
     //<editor-fold desc="Fields">
+    private String id;
     private String schoolId;
     private String firstName;
     private String lastName;
@@ -10,10 +11,11 @@ public class Candidate {
 
     //<editor-fold desc="Constructors">
     public Candidate(String schoolId, String firstName, String lastName, String grade) {
-        this.schoolId = schoolId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.grade = grade;
+        setSchoolId(schoolId);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setGrade(grade);
+        setId();
     }
     //</editor-fold>
 
@@ -23,7 +25,7 @@ public class Candidate {
     }
 
     public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId;
+        this.schoolId = schoolId.toLowerCase();
     }
 
     public String getFirstName() {
@@ -47,11 +49,26 @@ public class Candidate {
     }
 
     public void setGrade(String grade) {
-        this.grade = grade;
+        this.grade = grade.toUpperCase();
     }
 
     public String toCSVString() {
         return schoolId + ';' + firstName + ';' + lastName + ';' + grade + "\n";
     }
-//</editor-fold>
+    //</editor-fold>
+
+    //<editor-fold desc="Methods">
+    private void setId() {
+    }
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "schoolId='" + schoolId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", grade='" + grade + '\'' +
+                '}';
+    }
+    //</editor-fold>
 }

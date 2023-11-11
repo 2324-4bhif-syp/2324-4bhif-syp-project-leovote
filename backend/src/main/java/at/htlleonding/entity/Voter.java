@@ -19,7 +19,7 @@ public class Voter {
     }
 
     public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId;
+        this.schoolId = schoolId.toLowerCase();
     }
 
     public String getPassword() {
