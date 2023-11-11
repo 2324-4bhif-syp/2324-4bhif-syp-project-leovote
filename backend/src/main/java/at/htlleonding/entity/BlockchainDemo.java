@@ -34,7 +34,7 @@ public class BlockchainDemo {
         // Print the blockchain
         for (Block block : blockchain.chain) {
             System.out.println("Block #" + block.getHash());
-            System.out.println("Transactions: " + block.toString());
+            System.out.println("Votes: " + block);
             System.out.println();
         }
     }
