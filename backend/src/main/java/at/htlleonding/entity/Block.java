@@ -1,33 +1,39 @@
 package at.htlleonding.entity;
 
-import java.util.Arrays;
-import java.util.Date;
+import at.htlleonding.control.HashService;
+import jakarta.inject.Inject;
 
-public class Block {
-    private int blockHash;
-    private final int previousHash;
-    private final Date timeStamp = new Date();
-    private final String data;
+import java.util.List;
 
-    public Block (int previousHash, String data){
+class Block {
+    //<editor-fold desc="Fields">
+    @Inject
+    HashService hashService;
+    private int index;
+    private long timestamp;
+    private List<Vote> votes;
+    private String previousHash;
+    private String hash;
+    //</editor-fold>
+
+    //<editor-fold desc="Constructors">
+    public Block(int index, long timestamp, List<Vote> votes, String previousHash) {
+        this.index = index;
+        this.timestamp = timestamp;
+        this.votes = votes;
         this.previousHash = previousHash;
-        this.data = data;
+        this.hash = calculateHash();
+    }
+    //</editor-fold>
 
-        Object[] contens = {Arrays.hashCode(data.toCharArray()), previousHash, Arrays.hashCode(timeStamp.toString().toCharArray())};
-        this.blockHash = Arrays.hashCode(contens);
-    }
-
-    public int getPreviousHash() {
-        return previousHash;
-    }
-    public String getData() {
-        return data;
-    }
-    public int getBlockHash() {
-        return blockHash;
+    //<editor-fold desc="Methods">
+    private String calculateHash() {
+            String data = index + timestamp + votes.toString() + previousHash;
+            return hashService.calculateSHA256Hash(data);
     }
 
-    public Date getTimeStamp(){
-        return timeStamp;
+    public String getHash() {
+        return hash;
     }
+    //</editor-fold>
 }
