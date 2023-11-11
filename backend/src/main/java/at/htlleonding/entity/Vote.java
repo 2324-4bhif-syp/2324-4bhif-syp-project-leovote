@@ -2,33 +2,43 @@ package at.htlleonding.entity;
 
 public class Vote {
     //<editor-fold desc="Fields">
-    private Candidate candidate;
-    private Election election;
+    private String candidateId;
+    private String electionId;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
-    public Vote(Voter voter, Candidate candidate, Election election) {
-        this.election = election;
-        this.candidate = candidate;
+    public Vote(String candidateId, String electionId) {
+        this.electionId = electionId;
+        this.candidateId = candidateId;
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
 
-    public Candidate getCandidate() {
-        return candidate;
+    public String getCandidateId() {
+        return candidateId;
     }
 
-    public void setCandidate(Candidate candidate) {
-        this.candidate = candidate;
+    public void setCandidateId(String candidateId) {
+        this.candidateId = candidateId;
     }
 
-    public Election getElection() {
-        return election;
+    public String getElectionId() {
+        return electionId;
     }
 
-    public void setElection(Election election) {
-        this.election = election;
+    public void setElectionId(String electionId) {
+        this.electionId = electionId;
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Vote">
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "candidateId=" + candidateId +
+                ", electionId=" + electionId +
+                '}';
     }
     //</editor-fold>
 }
