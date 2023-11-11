@@ -5,7 +5,6 @@ import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @ApplicationScoped
 public class CandidateRepository {
-    private List<Candidate> candidates = new ArrayList<>();
+    private final List<Candidate> candidates = new ArrayList<>();
 
     public List<Candidate> getAllCandidates() {
         return candidates;
@@ -24,14 +23,14 @@ public class CandidateRepository {
         candidates.add(candidate);
         String inputPath = "src/main/resources/candidates.csv";
         Path inputCSVPath = Paths.get(inputPath);
-        String candidateData = "";
-        Log.info(candidateData);
+        StringBuilder candidateData = new StringBuilder();
+        Log.info(candidateData.toString());
 
         for (Candidate can : candidates) {
-            candidateData += can.toCSVString();
+            candidateData.append(can.toCSVString());
         }
         try {
-            Files.write(inputCSVPath, candidateData.getBytes());
+            Files.write(inputCSVPath, candidateData.toString().getBytes());
             System.out.println("Candidates added to the CSV file.");
         } catch (IOException e) {
             Log.error(e);
