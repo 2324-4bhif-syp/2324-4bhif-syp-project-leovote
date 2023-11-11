@@ -7,7 +7,7 @@ public class Voter {
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
-    public Voter(String studentId, String password, boolean hasVoted) {
+    public Voter(String studentId, String password) {
         setSchoolId(studentId);
         setPassword(password);
     }
