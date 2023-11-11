@@ -14,12 +14,12 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class InitBean {
-    private final String inputPath = "src/main/resources/candidates.csv";
     @Inject
     CandidateRepository candidateRepository;
     @Transactional
     void startUp(@Observes StartupEvent event) {
         Log.info("It is working!");
+        String inputPath = "src/main/resources/candidates.csv";
         Path inputCSVPath = Paths.get(inputPath);
         try {
             Log.info(String.format("Started reading from path %s", inputCSVPath));
@@ -38,7 +38,7 @@ public class InitBean {
                 );
             }
         } catch (Exception e) {
-            Log.error(String.format("FAILED:", inputCSVPath, e.getMessage()));
+            Log.error(String.format("FAILED: %s, %s", inputCSVPath, e.getMessage()));
         }
         Log.info("Setup: completed setup");}
 }
