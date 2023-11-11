@@ -28,8 +28,8 @@ class Block {
 
     //<editor-fold desc="Methods">
     private String calculateHash() {
-            String data = index + timestamp + votes.toString() + previousHash;
-            return hashService.calculateSHA256Hash(data);
+        String data = index + timestamp + votes.toString() + previousHash;
+        return hashService.calculateSHA256Hash(data);
     }
 
     public String getHash() {
