@@ -1,7 +1,7 @@
 @startuml
 
 class Election {
-    - id: Long
+    - id: String
     - name: String
     - electionStart: LocalDateTime
     - electionEnd: LocalDateTime
@@ -15,8 +15,8 @@ class HasVoted {
 }
 
 class Vote {
-    - candidate: Candidate
-    - election: Election
+    - candidateId: String
+    - electionId: String
 }
 
 class Voter {
@@ -25,6 +25,7 @@ class Voter {
 }
 
 class Candidate {
+   - id: String
    - schoolId: String
    - firstname: String
    - lastname: String
