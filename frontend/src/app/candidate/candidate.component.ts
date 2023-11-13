@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {CandidateService} from "../shared/control/candidate.service";
+import {Candidate} from "../shared/entity/candidate-model";
 
 @Component({
   selector: 'app-candidate',
@@ -6,5 +8,31 @@ import { Component } from '@angular/core';
   styleUrls: ['./candidate.component.css']
 })
 export class CandidateComponent {
-
+  private candidateService: CandidateService;
+  protected candidates: Candidate[];
+  protected newCandidate: Candidate;
+  constructor(candidateService: CandidateService) {
+    this.candidateService = candidateService;
+    this.candidates = [];
+    this.initCandidate();
+    this.newCandidate = {
+      schoolId: "",
+      firstName: "",
+      lastName: "",
+      grade: ""
+    }
+  }
+  async initCandidate() {
+    this.candidates = await this.candidateService.getCandidates();
+    console.debug(this.candidates);
+  }
+  add() {
+    this.candidateService.createCandidate(this.newCandidate);
+    this.newCandidate = {
+      schoolId:"",
+      firstName:"",
+      lastName: "",
+      grade:""
+    }
+  }
 }
