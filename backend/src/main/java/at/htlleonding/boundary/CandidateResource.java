@@ -4,27 +4,29 @@ import at.htlleonding.control.CandidateRepository;
 import at.htlleonding.entity.Candidate;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.*;
 
 import java.util.List;
 
-@Path("/api")
+@Path("/candidates")
+
 public class CandidateResource {
 
     @Inject
     CandidateRepository candidateRepository;
 
     @GET
-    @Path("/candidates")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Candidate> getAllCandidates() {
-        return candidateRepository.getAllCandidates();
+    public Response getAllCandidates() {
+        return Response.ok(candidateRepository.getAllCandidates()).build();
     }
 
     @POST
-    @Path("/candidates")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addCandidate(Candidate candidate) {
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response createCustomer(Candidate candidate, @Context UriInfo uriInfo) {
         candidateRepository.addCandidate(candidate);
+        UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(candidate.getSchoolId());
+        return Response.created(uriBuilder.build()).build();
     }
 }

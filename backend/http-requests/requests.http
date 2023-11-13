@@ -1,9 +1,9 @@
-GET http://localhost:8080/api/candidates
+GET http://localhost:8080/candidates
 Accept: application/json
 
 ###
 
-POST http://localhost:8080/api/candidates
+POST http://localhost:8080/candidates
 Content-Type: application/json
 
 {
