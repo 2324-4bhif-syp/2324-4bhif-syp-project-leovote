@@ -9,23 +9,22 @@ export class CandidateService {
   private candidates: Candidate[] =[];
   constructor() { }
   public async getCandidates(): Promise<Candidate[]> {
-    /*let response = await fetch(this.url);
+    let response = await fetch(this.url);
     let data = await response.json();
     this.candidates = data.map((candidate: any) => {
-      let customer: Candidate = {
+      let candidate1: Candidate = {
         schoolId: candidate.schoolId,
         firstName: candidate.firstName,
         lastName: candidate.lastName,
         grade: candidate.grade
       }
-      return customer;
-    });*/
+      return candidate1;
+    })
     return this.candidates;
   }
   public async createCandidate(candidate: Candidate) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-
     try {
       let response = await fetch(this.url, {
         body: JSON.stringify(candidate),

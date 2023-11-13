@@ -26,8 +26,8 @@ export class CandidateComponent {
     this.candidates = await this.candidateService.getCandidates();
     console.debug(this.candidates);
   }
-  add() {
-    this.candidateService.createCandidate(this.newCandidate);
+  async add() {
+    await this.candidateService.createCandidate(this.newCandidate);
     this.newCandidate = {
       schoolId:"",
       firstName:"",
