@@ -8,13 +8,12 @@ import {Candidate} from "../shared/entity/candidate-model";
   styleUrls: ['./candidate.component.css']
 })
 export class CandidateComponent {
-  private candidateService: CandidateService;
   protected candidates: Candidate[];
   protected newCandidate: Candidate;
-  constructor(candidateService: CandidateService) {
-    this.candidateService = candidateService;
+  constructor(public CS: CandidateService) {
+    this.CS = CS;
     this.candidates = [];
-    this.initCandidate();
+    this.initCandidates();
     this.newCandidate = {
       schoolId: "",
       firstName: "",
@@ -22,12 +21,16 @@ export class CandidateComponent {
       grade: ""
     }
   }
-  async initCandidate() {
-    this.candidates = await this.candidateService.getCandidates();
+  async initCandidates() {
+    this.candidates = await this.CS.getCandidates();
+    console.debug(this.candidates);
+  }
+  async clearCandidates() {
+    this.candidates = [];
     console.debug(this.candidates);
   }
   async add() {
-    await this.candidateService.createCandidate(this.newCandidate);
+    await this.CS.createCandidate(this.newCandidate);
     this.newCandidate = {
       schoolId:"",
       firstName:"",
