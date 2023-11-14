@@ -8,6 +8,7 @@ export class CandidateService {
   private url: string = 'http://localhost:8080/candidates';
   private candidates: Candidate[] =[];
   constructor() { }
+
   public async getCandidates(): Promise<Candidate[]> {
     let response = await fetch(this.url);
     let data = await response.json();
