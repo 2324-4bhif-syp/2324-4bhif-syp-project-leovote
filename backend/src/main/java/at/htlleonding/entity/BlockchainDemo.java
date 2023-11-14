@@ -20,7 +20,6 @@ public class BlockchainDemo {
 
         // Add some votes
         List<Vote> votes1 = new ArrayList<>();
-
         votes1.add(new Vote(candidate1.toString(), election1.toString()));
         votes1.add(new Vote(candidate1.toString(), election1.toString()));
         blockchain.addBlock(votes1);
