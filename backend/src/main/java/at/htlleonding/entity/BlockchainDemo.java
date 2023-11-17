@@ -16,14 +16,14 @@ public class BlockchainDemo {
         Election election1 = new Election("Class representative", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses");
         Election election2 = new Election("School council", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses");
 
-        Vote vote1 = new Vote(candidate1.toString(), election1.toString());
-        Vote vote2 = new Vote(candidate1.toString(), election1.toString());
+        Vote vote1 = new Vote(candidate1, election1);
+        Vote vote2 = new Vote(candidate1, election1);
         blockchain.addBlock(vote1);
         blockchain.addBlock(vote2);
 
 
-        Vote vote3 = new Vote(candidate1.toString(), election1.toString());
-        Vote vote4 = new Vote(candidate2.toString(), election2.toString());
+        Vote vote3 = new Vote(candidate1, election1);
+        Vote vote4 = new Vote(candidate2, election2);
         blockchain.addBlock(vote3);
         blockchain.addBlock(vote4);
 

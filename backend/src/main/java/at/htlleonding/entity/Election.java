@@ -1,12 +1,10 @@
 package at.htlleonding.entity;
 
-import at.htlleonding.control.HashService;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import javax.annotation.processing.Generated;
 import java.time.LocalDateTime;
 
 @Entity

@@ -28,7 +28,7 @@ class Blockchain {
                 "genType"
         );
 
-        Vote vote = new Vote(candidate1.toString(), election1.toString());
+        Vote vote = new Vote(candidate1, election1);
         return new Block(0, System.currentTimeMillis(), vote, "0");
     }
 

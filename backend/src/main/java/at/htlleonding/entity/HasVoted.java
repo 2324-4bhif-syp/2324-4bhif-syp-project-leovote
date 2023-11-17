@@ -1,12 +1,12 @@
 package at.htlleonding.entity;
 
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.IdClass;
+
+import java.io.Serializable;
 
 @Entity
-public class HasVoted {
+public class HasVoted implements Serializable {
     //<editor-fold desc="Fields">
     @EmbeddedId
     private HasVotedId hasVotedId;
@@ -25,6 +25,7 @@ public class HasVoted {
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
+
     public HasVotedId getHasVotedId() {
         return hasVotedId;
     }
@@ -39,6 +40,22 @@ public class HasVoted {
 
     public void setVoted(boolean voted) {
         this.voted = voted;
+    }
+
+    public Election getElection() {
+        return hasVotedId.getElection();
+    }
+
+    public void setElection(Election election) {
+        this.hasVotedId.setElection(election);
+    }
+
+    public Voter getVoter() {
+        return hasVotedId.getVoter();
+    }
+
+    public void setVoter(Voter voter) {
+        this.hasVotedId.setVoter(voter);
     }
     //</editor-fold>
 }

@@ -1,54 +1,63 @@
 package at.htlleonding.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Vote {
     //<editor-fold desc="Fields">
     @Id
     private Long id;
-    @Column(unique = true)
-    private String schoolId;
-    private String electionId;
+    @ManyToOne
+    private Candidate candidate;
+    @ManyToOne
+    private Election election;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     public Vote() {
 
     }
-    public Vote(String schoolId, String electionId) {
-        this.electionId = electionId;
-        this.schoolId = schoolId;
+
+    public Vote(Candidate candidate, Election election) {
+        this.candidate = candidate;
+        this.election = election;
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
-
-    public String getSchoolId() {
-        return schoolId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSchoolId(String candidateId) {
-        this.schoolId = candidateId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getElectionId() {
-        return electionId;
+    public Candidate getCandidate() {
+        return candidate;
     }
 
-    public void setElectionId(String electionId) {
-        this.electionId = electionId;
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
     }
+
+    public Election getElection() {
+        return election;
+    }
+
+    public void setElection(Election election) {
+        this.election = election;
+    }
+
     //</editor-fold>
 
-    //<editor-fold desc="Vote">
+    //<editor-fold desc="Methods">
     @Override
     public String toString() {
         return "Vote{" +
-                "candidateId=" + schoolId +
-                ", electionId=" + electionId +
+                "id=" + id +
+                ", candidate=" + candidate +
+                ", election=" + election +
                 '}';
     }
     //</editor-fold>
