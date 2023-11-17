@@ -15,7 +15,6 @@ class Blockchain {
     }
 
     private Block createGenesisBlock() {
-        List<Vote> votes = new ArrayList<>();
         Candidate candidate1 = new Candidate(
                 "IF92837497234",
                 "genesisFirstName",
@@ -29,16 +28,16 @@ class Blockchain {
                 "genType"
         );
 
-        votes.add(new Vote(candidate1.toString(), election1.toString()));
-        return new Block(0, System.currentTimeMillis(), votes, "0");
+        Vote vote = new Vote(candidate1.toString(), election1.toString());
+        return new Block(0, System.currentTimeMillis(), vote, "0");
     }
 
-    public void addBlock(List<Vote> votes) {
+    public void addBlock(Vote vote) {
         Block previousBlock = chain.get(chain.size() - 1);
         int index = chain.size();
         long timestamp = System.currentTimeMillis();
         String previousHash = previousBlock.getHash();
-        Block newBlock = new Block(index, timestamp, votes, previousHash);
+        Block newBlock = new Block(index, timestamp, vote, previousHash);
         chain.add(newBlock);
     }
 }

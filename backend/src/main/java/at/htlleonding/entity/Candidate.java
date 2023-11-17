@@ -4,7 +4,7 @@ import at.htlleonding.control.HashService;
 
 public class Candidate {
     //<editor-fold desc="Fields">
-    HashService hashService = new HashService();
+    private final HashService hashService = new HashService();
     private String id;
     private String schoolId;
     private String firstName;

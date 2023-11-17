@@ -5,8 +5,6 @@ import jakarta.enterprise.event.Observes;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BlockchainDemo {
     @Transactional
@@ -18,22 +16,21 @@ public class BlockchainDemo {
         Election election1 = new Election("Class representative", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses");
         Election election2 = new Election("School council", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses");
 
-        // Add some votes
-        List<Vote> votes1 = new ArrayList<>();
-        votes1.add(new Vote(candidate1.toString(), election1.toString()));
-        votes1.add(new Vote(candidate1.toString(), election1.toString()));
-        blockchain.addBlock(votes1);
+        Vote vote1 = new Vote(candidate1.toString(), election1.toString());
+        Vote vote2 = new Vote(candidate1.toString(), election1.toString());
+        blockchain.addBlock(vote1);
+        blockchain.addBlock(vote2);
 
 
-        List<Vote> votes2 = new ArrayList<>();
-        votes2.add(new Vote(candidate1.toString(), election1.toString()));
-        votes2.add(new Vote(candidate2.toString(), election2.toString()));
-        blockchain.addBlock(votes2);
+        Vote vote3 = new Vote(candidate1.toString(), election1.toString());
+        Vote vote4 = new Vote(candidate2.toString(), election2.toString());
+        blockchain.addBlock(vote3);
+        blockchain.addBlock(vote4);
 
         // Print the blockchain
         for (Block block : blockchain.chain) {
             System.out.println("Block #" + block.getHash());
-            System.out.println("Votes: " + block);
+            System.out.println("Votes: " + block.getVote());
             System.out.println();
         }
     }

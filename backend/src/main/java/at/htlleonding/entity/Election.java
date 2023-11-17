@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class Election {
     //<editor-fold desc="Fields">
-    HashService hashService = new HashService();
+    private final HashService hashService = new HashService();
     private String id;
     private String name;
     private LocalDateTime electionStart;
