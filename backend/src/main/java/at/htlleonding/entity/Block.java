@@ -32,7 +32,7 @@ class Block {
         return hash;
     }
 
-    public Vote getVote(){
+    public Vote getVote() {
         return this.vote;
     }
     //</editor-fold>

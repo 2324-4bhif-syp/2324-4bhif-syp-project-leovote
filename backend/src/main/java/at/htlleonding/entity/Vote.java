@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 public class Vote {
     //<editor-fold desc="Fields">
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Candidate candidate;
