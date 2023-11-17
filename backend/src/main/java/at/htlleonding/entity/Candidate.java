@@ -1,11 +1,13 @@
 package at.htlleonding.entity;
 
-import at.htlleonding.control.HashService;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
 public class Candidate {
     //<editor-fold desc="Fields">
-    private final HashService hashService = new HashService();
-    private String id;
+    @Id
+    private Long id;
     private String schoolId;
     private String firstName;
     private String lastName;
@@ -13,22 +15,25 @@ public class Candidate {
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
+    public Candidate() {
+
+    }
+
     public Candidate(String schoolId, String firstName, String lastName, String grade) {
         setSchoolId(schoolId);
         setFirstName(firstName);
         setLastName(lastName);
         setGrade(grade);
-        setId(this.toString());
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = hashService.calculateSHA256Hash(id);
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSchoolId() {

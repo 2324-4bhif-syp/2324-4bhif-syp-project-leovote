@@ -1,26 +1,37 @@
 package at.htlleonding.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Vote {
     //<editor-fold desc="Fields">
-    private String candidateId;
+    @Id
+    private Long id;
+    @Column(unique = true)
+    private String schoolId;
     private String electionId;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
-    public Vote(String candidateId, String electionId) {
+    public Vote() {
+
+    }
+    public Vote(String schoolId, String electionId) {
         this.electionId = electionId;
-        this.candidateId = candidateId;
+        this.schoolId = schoolId;
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
 
-    public String getCandidateId() {
-        return candidateId;
+    public String getSchoolId() {
+        return schoolId;
     }
 
-    public void setCandidateId(String candidateId) {
-        this.candidateId = candidateId;
+    public void setSchoolId(String candidateId) {
+        this.schoolId = candidateId;
     }
 
     public String getElectionId() {
@@ -36,7 +47,7 @@ public class Vote {
     @Override
     public String toString() {
         return "Vote{" +
-                "candidateId=" + candidateId +
+                "candidateId=" + schoolId +
                 ", electionId=" + electionId +
                 '}';
     }

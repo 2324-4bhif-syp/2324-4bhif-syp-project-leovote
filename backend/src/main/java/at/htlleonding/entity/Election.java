@@ -1,13 +1,20 @@
 package at.htlleonding.entity;
 
 import at.htlleonding.control.HashService;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+import javax.annotation.processing.Generated;
 import java.time.LocalDateTime;
 
+@Entity
 public class Election {
     //<editor-fold desc="Fields">
-    private final HashService hashService = new HashService();
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private LocalDateTime electionStart;
     private LocalDateTime electionEnd;
@@ -15,22 +22,25 @@ public class Election {
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
+    public Election() {
+
+    }
+
     public Election(String name, LocalDateTime electionStart, LocalDateTime electionEnd, String electionType) {
         setName(name);
         setElectionStart(electionStart);
         setElectionEnd(electionEnd);
         setElectionType(electionType);
-        setId(this.toString());
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = hashService.calculateSHA256Hash(id);
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

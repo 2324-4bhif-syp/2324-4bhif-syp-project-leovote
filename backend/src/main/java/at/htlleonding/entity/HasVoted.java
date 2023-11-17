@@ -1,30 +1,36 @@
 package at.htlleonding.entity;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.IdClass;
+
+@Entity
 public class HasVoted {
-    private Election election;
-    private Voter voter;
+    //<editor-fold desc="Fields">
+    @EmbeddedId
+    private HasVotedId hasVotedId;
     private boolean voted;
+    //</editor-fold>
+
+    //<editor-fold desc="Constructors">
+    public HasVoted() {
+
+    }
 
     public HasVoted(Election election, Voter voter, boolean voted) {
-        this.election = election;
-        this.voter = voter;
+        this.hasVotedId = new HasVotedId(election, voter);
         this.voted = voted;
     }
+    //</editor-fold>
 
-    public Election getElection() {
-        return election;
+    //<editor-fold desc="Getter and Setter">
+    public HasVotedId getHasVotedId() {
+        return hasVotedId;
     }
 
-    public void setElection(Election election) {
-        this.election = election;
-    }
-
-    public Voter getVoter() {
-        return voter;
-    }
-
-    public void setVoter(Voter voter) {
-        this.voter = voter;
+    public void setHasVotedId(HasVotedId hasVotedId) {
+        this.hasVotedId = hasVotedId;
     }
 
     public boolean isVoted() {
@@ -34,4 +40,5 @@ public class HasVoted {
     public void setVoted(boolean voted) {
         this.voted = voted;
     }
+    //</editor-fold>
 }
