@@ -1,18 +1,28 @@
 package at.htlleonding.control;
 
 import at.htlleonding.entity.Vote;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VoteRepository {
-    private final List<Vote> votes = new ArrayList<>();
+    @Inject
+    EntityManager em;
+
+    public VoteRepository() {
+
+    }
 
     public List<Vote> getAllVotes() {
-        return votes;
+        return null;
+    }
+
+    public Vote getVoteById(Long id){
+        return null;
     }
 
     public void addVote(Vote vote) {
-        votes.add(vote);
+        // Work with Blockchain
     }
 }

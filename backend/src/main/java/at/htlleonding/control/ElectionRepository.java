@@ -3,19 +3,39 @@ package at.htlleonding.control;
 import at.htlleonding.entity.Election;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class ElectionRepository {
-    private final List<Election> elections = new ArrayList<>();
+
+    @Inject
+    EntityManager em;
+
+    public ElectionRepository() {
+
+    }
 
     public List<Election> getAllElections() {
-        return elections;
+        return null;
+    }
+
+    public Election getElectionById(Long id){
+        return null;
     }
 
     public void addElection(Election election) {
-        elections.add(election);
+
     }
+
+    public void deleteElectionById(Long id){
+
+    }
+
+    public Optional<Election> updateElectionById(Long id, Election updatedElection){
+        return null;
+    }
+
 }
