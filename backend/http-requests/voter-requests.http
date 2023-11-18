@@ -1,0 +1,23 @@
+### Get all voters
+GET http://localhost:8080/voters
+
+### Get voter by ID
+GET http://localhost:8080/voters/1
+
+### Get voter by school ID
+GET http://localhost:8080/voters/school-id/student1
+
+### Create a new voter
+POST http://localhost:8080/voters
+Content-Type: application/json
+
+{
+  "schoolId": "newStudent",
+  "password": "newPassword"
+}
+
+### Delete voter by ID
+DELETE http://localhost:8080/voters/2
+
+### Delete voter by school ID
+DELETE http://localhost:8080/voters/school-id/student1
