@@ -1,16 +1,23 @@
 package at.htlleonding.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.EmbeddedId;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
-
-import java.io.Serializable;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-public class HasVoted extends PanacheEntityBase implements Serializable {
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"election_id", "voter_id"}))
+public class HasVoted extends PanacheEntity {
     //<editor-fold desc="Fields">
-    @EmbeddedId
-    public HasVotedId hasVotedId;
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    public Election election;
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    public Voter voter;
     public boolean voted;
     //</editor-fold>
 
@@ -20,7 +27,8 @@ public class HasVoted extends PanacheEntityBase implements Serializable {
     }
 
     public HasVoted(Election election, Voter voter, boolean voted) {
-        this.hasVotedId = new HasVotedId(election, voter);
+        this.election = election;
+        this.voter = voter;
         this.voted = voted;
     }
     //</editor-fold>
