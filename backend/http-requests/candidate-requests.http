@@ -5,7 +5,7 @@ GET http://localhost:8080/candidates
 GET http://localhost:8080/candidates/1
 
 ### Get candidate by school ID
-GET http://localhost:8080/candidates/school-id/id123
+#GET http://localhost:8080/candidates/school-id/id123
 
 ### Create a new candidate
 POST http://localhost:8080/candidates
@@ -33,4 +33,4 @@ Content-Type: application/json
 DELETE http://localhost:8080/candidates/2
 
 ### Delete candidate by school ID
-DELETE http://localhost:8080/candidates/school-id/id123
+#DELETE http://localhost:8080/candidates/school-id/id123

@@ -5,7 +5,7 @@ GET http://localhost:8080/voters
 GET http://localhost:8080/voters/1
 
 ### Get voter by school ID
-GET http://localhost:8080/voters/school-id/student1
+#GET http://localhost:8080/voters/school-id/student1
 
 ### Create a new voter
 POST http://localhost:8080/voters
@@ -30,4 +30,4 @@ Content-Type: application/json
 DELETE http://localhost:8080/voters/2
 
 ### Delete voter by school ID
-DELETE http://localhost:8080/voters/school-id/student1
+#DELETE http://localhost:8080/voters/school-id/student1

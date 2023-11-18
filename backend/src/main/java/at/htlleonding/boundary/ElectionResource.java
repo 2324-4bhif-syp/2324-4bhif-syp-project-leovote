@@ -1,10 +1,10 @@
 package at.htlleonding.boundary;
 
-import at.htlleonding.entity.Vote;
+import at.htlleonding.entity.Election;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
-
-@ResourceProperties(path = "vote")
-public interface VoteRessource extends PanacheEntityResource<Vote, Long> {
+@ResourceProperties(path = "elections")
+public interface ElectionResource extends PanacheEntityResource<Election, Long> {
 
 }
+
