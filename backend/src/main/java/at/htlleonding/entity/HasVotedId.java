@@ -1,5 +1,6 @@
 package at.htlleonding.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
 import org.hibernate.annotations.OnDelete;
@@ -8,7 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serializable;
 
 @Embeddable
-public class HasVotedId implements Serializable {
+public class HasVotedId extends PanacheEntityBase implements Serializable {
     //<editor-fold desc="Fields">
     @ManyToOne
     @OnDelete(action = OnDeleteAction.SET_NULL)
