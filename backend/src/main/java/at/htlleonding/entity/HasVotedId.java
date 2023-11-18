@@ -2,6 +2,8 @@ package at.htlleonding.entity;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 
@@ -9,8 +11,10 @@ import java.io.Serializable;
 public class HasVotedId implements Serializable {
     //<editor-fold desc="Fields">
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Election election;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Voter voter;
     //</editor-fold>
 

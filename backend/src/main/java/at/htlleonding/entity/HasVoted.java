@@ -2,6 +2,8 @@ package at.htlleonding.entity;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 

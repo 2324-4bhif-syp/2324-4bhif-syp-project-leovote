@@ -1,52 +1,22 @@
 package at.htlleonding.entity;
 
-import jakarta.persistence.*;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+
 
 @Entity
-public class Voter {
-    //<editor-fold desc="Fields">
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Voter extends PanacheEntity {
     @Column(unique = true)
-    private String schoolId; // The ifxxxxxx ids every student has
-    private String password; // Hash of the password (should be similar to the one in the school db)
-    //</editor-fold>
+    public String schoolId; // The ifxxxxxx ids every student has
+    public String password; // Hash of the password (should be similar to the one in the school db)
 
-    //<editor-fold desc="Constructors">
     public Voter() {
 
     }
 
-    public Voter(String studentId, String password) {
-        setSchoolId(studentId);
-        setPassword(password);
-    }
-    //</editor-fold>
-
-    //<editor-fold desc="Getter and Setter">
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId.toLowerCase();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
+    public Voter(String schoolId, String password) {
+        this.schoolId = schoolId;
         this.password = password;
     }
-    //</editor-fold>
 }

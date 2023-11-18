@@ -1,6 +1,8 @@
 package at.htlleonding.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Vote {
@@ -9,8 +11,10 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Candidate candidate;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Election election;
     //</editor-fold>
 
