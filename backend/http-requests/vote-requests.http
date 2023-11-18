@@ -1,0 +1,46 @@
+### Get all Votes
+GET http://localhost:8080/votes
+
+### Get Votes by ID
+GET http://localhost:8080/votes/1
+
+### Create a new Vote
+POST http://localhost:8080/votes
+Content-Type: application/json
+
+{
+  "candidate": {
+    "schoolId": "123456",
+    "firstName": "John",
+    "lastName": "Doe",
+    "grade": "12"
+  },
+  "election": {
+    "name": "Sample Election",
+    "electionStart": "2023-11-18T12:00:00",
+    "electionEnd": "2023-11-20T12:00:00",
+    "electionType": "General"
+  }
+}
+
+### Update A Vote by ID
+PUT http://localhost:8080/votes/1
+Content-Type: application/json
+
+{
+  "candidate": {
+    "schoolId": "updated123456",
+    "firstName": "UpdatedJohn",
+    "lastName": "UpdatedDoe",
+    "grade": "11"
+  },
+  "election": {
+    "name": "UpdatedElection",
+    "electionStart": "2023-11-19T12:00:00",
+    "electionEnd": "2023-11-21T12:00:00",
+    "electionType": "Special"
+  }
+}
+
+### Delete Vote by ID
+DELETE http://localhost:8080/votes/2

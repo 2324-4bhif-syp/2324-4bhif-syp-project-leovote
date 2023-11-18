@@ -16,6 +16,16 @@ Content-Type: application/json
   "password": "newPassword"
 }
 
+### Update a Voter
+PUT http://localhost:8080/voters/1
+Content-Type: application/json
+
+{
+  "schoolId": "updatedStudent",
+  "password": "updatedPassword"
+}
+
+
 ### Delete voter by ID
 DELETE http://localhost:8080/voters/2
 

@@ -18,6 +18,17 @@ Content-Type: application/json
   "password": "newPassword"
 }
 
+### Update candidate by ID
+PUT http://localhost:8080/candidates/1
+Content-Type: application/json
+
+{
+  "schoolId": "updatedStudent",
+  "firstName": "UpdatedHans",
+  "lastName": "UpdatedMeier",
+  "password": "updatedPassword"
+}
+
 ### Delete candidate by ID
 DELETE http://localhost:8080/candidates/2
 

@@ -1,0 +1,32 @@
+### Get all Elections
+GET http://localhost:8080/election
+
+### Get Election by ID
+GET http://localhost:8080/election/1
+
+### Create a new election
+POST http://localhost:8080/election
+Content-Type: application/json
+
+{
+  "name": "Election2",
+  "electionStart": "2023-11-18T12:00:00",
+  "electionEnd": "2023-11-20T12:00:00",
+  "electionType": "Crosses"
+}
+
+
+### Update Election by ID
+PUT http://localhost:8080/election/1
+Content-Type: application/json
+
+{
+  "name": "UpdatedElection",
+  "electionStart": "2023-11-19T12:00:00",
+  "electionEnd": "2023-11-21T12:00:00",
+  "electionType": "Boxes"
+}
+
+
+### Delete election by ID
+DELETE http://localhost:8080/election/2

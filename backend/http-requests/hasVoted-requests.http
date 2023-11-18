@@ -1,0 +1,21 @@
+### These Requests are not Finished... TODO:
+
+### Get all hasVoted
+GET http://localhost:8080/hasVoted
+
+### Get hasVoted by ID
+GET http://localhost:8080/hasVoted/
+
+### Create a new hasVoted
+POST http://localhost:8080/hasVoted/??
+Content-Type: application/json
+
+{
+  "name": "Election2",
+  "electionStart": "2023-11-18T12:00:00",
+  "electionEnd": "2023-11-20T12:00:00",
+  "electionType": "Crosses"
+}
+
+### Delete hasVoted by ID
+DELETE http://localhost:8080/hasVoted/2
