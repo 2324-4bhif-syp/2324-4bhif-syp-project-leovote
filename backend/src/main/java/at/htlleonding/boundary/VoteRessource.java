@@ -4,7 +4,7 @@ import at.htlleonding.entity.Vote;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
 
-@ResourceProperties(path = "vote")
+@ResourceProperties(path = "votes")
 public interface VoteRessource extends PanacheEntityResource<Vote, Long> {
 
 }
