@@ -1,20 +1,16 @@
 package at.htlleonding.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.*;
 
 @Entity
-public class Candidate {
+public class Candidate extends PanacheEntity {
     //<editor-fold desc="Fields">
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String schoolId;
-    private String firstName;
-    private String lastName;
-    private String grade;
+    @Column(unique = true)
+    public String schoolId;
+    public String firstName;
+    public String lastName;
+    public String grade;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
@@ -23,68 +19,10 @@ public class Candidate {
     }
 
     public Candidate(String schoolId, String firstName, String lastName, String grade) {
-        setSchoolId(schoolId);
-        setFirstName(firstName);
-        setLastName(lastName);
-        setGrade(grade);
-    }
-    //</editor-fold>
-
-    //<editor-fold desc="Getter and Setter">
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId.toLowerCase();
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
+        this.schoolId = schoolId;
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade.toUpperCase();
-    }
-
-    public String toCSVString() {
-        return schoolId + ';' + firstName + ';' + lastName + ';' + grade + "\n";
-    }
-    //</editor-fold>
-
-    //<editor-fold desc="Methods">
-    @Override
-    public String toString() {
-        return "Candidate{" +
-                "schoolId='" + schoolId + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", grade='" + grade + '\'' +
-                '}';
+        this.grade = grade;
     }
     //</editor-fold>
 }

@@ -1,14 +1,25 @@
+### Get all candidates
 GET http://localhost:8080/candidates
-Accept: application/json
 
-###
+### Get candidate by ID
+GET http://localhost:8080/candidates/1
 
+### Get candidate by school ID
+GET http://localhost:8080/candidates/school-id/id123
+
+### Create a new candidate
 POST http://localhost:8080/candidates
 Content-Type: application/json
 
 {
-  "schoolId": "if200362",
-  "firstName": "Anton",
-  "lastName": "Cao",
-  "grade": "4BHIF"
+  "schoolId": "newStudent",
+  "firstName": "Hans",
+  "lastName": "Meier",
+  "password": "newPassword"
 }
+
+### Delete candidate by ID
+DELETE http://localhost:8080/candidates/2
+
+### Delete candidate by school ID
+DELETE http://localhost:8080/candidates/school-id/id123
