@@ -1,1 +1,25 @@
-<p>candidate-list works!</p>
+<h3>Click to use Sample Data:</h3><input type="checkbox" value="SampleData">
+<button (click)="clearCandidates();initCandidates()">Refresh</button>
+
+  <div *ngFor="let candidate of candidates">
+    <app-candidate></app-candidate>
+  </div>
+<table>
+  <tr>
+    <td>
+      <input type="text" placeholder="School Id" [(ngModel)]="newCandidate.schoolId">
+    </td>
+    <td>
+      <input type="text" placeholder="First Name" [(ngModel)]="newCandidate.firstName">
+    </td>
+    <td>
+      <input type="text" placeholder="Last Name" [(ngModel)]="newCandidate.lastName">
+    </td>
+    <td>
+      <input type="text" placeholder="Grade" [(ngModel)]="newCandidate.grade">
+    </td>
+    <td>
+      <button (click)="add()">Add</button>
+    </td>
+  </tr>
+</table>
