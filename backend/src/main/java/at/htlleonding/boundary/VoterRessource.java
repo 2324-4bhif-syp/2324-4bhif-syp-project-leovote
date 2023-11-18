@@ -27,6 +27,16 @@ public class VoterRessource {
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
+    @GET
+    @Path("school-id/{school-id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById(@PathParam("school-id") String id) {
+        return Voter.find("schoolId", id)
+                .singleResultOptional()
+                .map(candidate -> Response.ok(candidate).build())
+                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+    }
+
     @POST
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
