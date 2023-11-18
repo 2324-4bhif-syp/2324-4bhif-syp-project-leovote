@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import {FormsModule} from "@angular/forms";
-import { BlockComponent } from './block/block.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
 import { VoteComponent } from './vote/vote.component';
 import { ElectionComponent } from './election/election.component';
@@ -14,7 +13,6 @@ import { ElectionListComponent } from './election-list/election-list.component';
   declarations: [
     AppComponent,
     CandidateComponent,
-    BlockComponent,
     CandidateListComponent,
     VoteComponent,
     ElectionComponent,

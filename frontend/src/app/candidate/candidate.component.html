@@ -1,12 +1,11 @@
-<button (click)="clearCandidates();initCandidates()">Refresh</button>
 <table>
   <tr>
-    <th>School ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Grade</th>
+    <td>School ID</td>
+    <td>First Name</td>
+    <td>Last Name</td>
+    <td>Grade</td>
   </tr>
-  <tr *ngFor="let candidate of candidates">
+  <tr>
     <td>
       {{ candidate.schoolId }}
     </td>
@@ -18,25 +17,6 @@
     </td>
     <td>
       {{ candidate.grade }}
-    </td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <td>
-      <input type="text" placeholder="School Id" [(ngModel)]="newCandidate.schoolId">
-    </td>
-    <td>
-      <input type="text" placeholder="First Name" [(ngModel)]="newCandidate.firstName">
-    </td>
-    <td>
-      <input type="text" placeholder="Last Name" [(ngModel)]="newCandidate.lastName">
-    </td>
-    <td>
-      <input type="text" placeholder="Grade" [(ngModel)]="newCandidate.grade">
-    </td>
-    <td>
-      <button (click)="add()">Add</button>
     </td>
   </tr>
 </table>
