@@ -10,10 +10,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class CandidateRepository {
     private final List<Candidate> candidates = new ArrayList<>();
+
+    public CandidateRepository(){
+
+    }
 
     public List<Candidate> getAllCandidates() {
         return candidates;
@@ -35,5 +40,17 @@ public class CandidateRepository {
         } catch (IOException e) {
             Log.error(e);
         }
+    }
+
+    public Candidate getCandidateById(Long id){
+        return null;
+    }
+
+    public void deleteCandidateById(Long id){
+
+    }
+
+    public Optional<Candidate> updateCandidate(Long id, Candidate updatedCandidate){
+        return null;
     }
 }
