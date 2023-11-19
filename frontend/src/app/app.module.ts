@@ -8,6 +8,7 @@ import { CandidateListComponent } from './candidate-list/candidate-list.componen
 import { VoteComponent } from './vote/vote.component';
 import { ElectionComponent } from './election/election.component';
 import { ElectionListComponent } from './election-list/election-list.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ElectionListComponent } from './election-list/election-list.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
