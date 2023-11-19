@@ -17,5 +17,8 @@ export class LeovoteWebApiService {
   public getAllCandidates(){
     return this.http.get<Candidate[]>(this.baseUrl + this.candidatesAll, {headers: this.headers});
   }
+  public addCandidate(candidate: Candidate){
+    return this.http.post<number>(this.baseUrl + this.candidatesAll, candidate, {headers: this.headers});
+  }
   constructor() { }
 }
