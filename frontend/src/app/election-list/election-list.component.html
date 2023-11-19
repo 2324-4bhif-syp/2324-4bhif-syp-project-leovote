@@ -13,6 +13,9 @@
   <input *ngIf="doEdit" type="date" [valueAsDate]="createElection.electionStart" (input)="createElection.electionStart=parseDate($event)">
   <h3>End of Election: </h3>
   <input *ngIf="doEdit" type="date" [valueAsDate]="createElection.electionEnd" (input)="createElection.electionEnd=parseDate($event)">
+  <div *ngIf="isError">
+    <h5 style="color: red">End date must be equal to or after start date!</h5>
+  </div>
   <span>
     <div>
       <h3>Type of Election: </h3>

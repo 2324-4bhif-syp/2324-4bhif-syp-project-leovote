@@ -11,7 +11,7 @@ export class ElectionListComponent implements OnInit {
   @Input() doEdit: boolean = false;
   elections: Election[] = [];
   createElection: Election = this.initElection();
-
+  isError: boolean = false;
   constructor(private electionService: ElectionService) {}
 
   ngOnInit(): void {
@@ -26,25 +26,35 @@ export class ElectionListComponent implements OnInit {
   }
 
   create() {
-    this.doEdit = false;
-    this.electionService.add(this.createElection).subscribe(
-      response => {
-        console.log('Election added successfully', response);
-        this.electionService.refreshList(); // Trigger a list refresh after adding an election
-      },
-      error => {
-        console.error('Error adding election', error);
-      }
-    );
-    this.createElection = this.initElection();
+    if (this.isEndDateValid(this.createElection.electionStart, this.createElection.electionEnd)) {
+      this.doEdit = false;
+      this.isError = false;
+      this.electionService.add(this.createElection).subscribe(
+        response => {
+          console.log('Election added successfully', response);
+          this.loadElections();
+        },
+        error => {
+          console.error('Error adding election', error);
+        }
+      );
+      this.createElection = this.initElection();
+    } else {
+      console.error('End date must be equal to or after start date.');
+      this.isError = true;
+    }
   }
-
   parseDate(eventData: Event){
     const dateString = (eventData.target as HTMLInputElement).value;
     if(dateString){
       return new Date(dateString);
     }
     return new Date();
+  }
+  isEndDateValid(startDate: Date, endDate: Date): boolean {
+    const startDay = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+    const endDay = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+    return !endDate || !startDate || endDay >= startDay;
   }
   private loadElections() {
     this.electionService.getList().subscribe(
