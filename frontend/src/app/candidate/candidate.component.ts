@@ -6,6 +6,4 @@ import {Candidate} from "../shared/entity/candidate-model";
   templateUrl: './candidate.component.html',
   styleUrls: ['./candidate.component.css']
 })
-export class CandidateComponent {
-  candidate:Candidate =  new Candidate("if00", "John", "Doe", "0AHIF");
-}
+export class CandidateComponent {}

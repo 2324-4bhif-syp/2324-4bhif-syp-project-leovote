@@ -1,25 +1,24 @@
-<!--<h3>Click to use Sample Data:</h3><input type="checkbox" value="SampleData">
-<button (click)="clearCandidates();initCandidates()">Refresh</button>
+ <div *ngFor="let candidate of candidates">
+    {{candidate.schoolId}},     {{candidate.firstName}},    {{candidate.lastName}},     {{candidate.grade}}
 
-  <div *ngFor="let candidate of candidates">
-    <app-candidate></app-candidate>
-  </div>
-<table>
+ </div>
+ <button (click)="doEdit = true">Create</button>
+<table *ngIf="doEdit">
   <tr>
     <td>
-      <input type="text" placeholder="School Id" [(ngModel)]="newCandidate.schoolId">
+      <input type="text" placeholder="School Id" [(ngModel)]="createCandidate.schoolId">
     </td>
     <td>
-      <input type="text" placeholder="First Name" [(ngModel)]="newCandidate.firstName">
+      <input type="text" placeholder="First Name" [(ngModel)]="createCandidate.firstName">
     </td>
     <td>
-      <input type="text" placeholder="Last Name" [(ngModel)]="newCandidate.lastName">
+      <input type="text" placeholder="Last Name" [(ngModel)]="createCandidate.lastName">
     </td>
     <td>
-      <input type="text" placeholder="Grade" [(ngModel)]="newCandidate.grade">
+      <input type="text" placeholder="Grade" [(ngModel)]="createCandidate.grade">
     </td>
     <td>
-      <button (click)="add()">Add</button>
+      <button (click)="create()">Done</button>
     </td>
   </tr>
-</table>-->
+</table>

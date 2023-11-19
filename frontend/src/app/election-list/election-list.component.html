@@ -1,12 +1,28 @@
 <button (click)="doEdit = true">Create</button>
-<div>
-  <input *ngIf="doEdit" type="text" placeholder="Name" [(ngModel)]="createElection.name">
+<ul *ngFor="let election of elections">
+  <li><h4>{{election.name}}, {{election.electionStart.toLocaleDateString()}},  {{election.electionEnd.toLocaleDateString()}},  {{election.electionType}}</h4></li>
+</ul>
+<div *ngIf="doEdit">
+  <span>
+    <div>
+      <h3>Name: </h3>
+      <input *ngIf="doEdit" type="text" placeholder="Name" [(ngModel)]="createElection.name">
+    </div>
+  </span>
+  <h3>Start of Election: </h3>
   <input *ngIf="doEdit" type="date" [valueAsDate]="createElection.electionStart" (input)="createElection.electionStart=parseDate($event)">
+  <h3>End of Election: </h3>
   <input *ngIf="doEdit" type="date" [valueAsDate]="createElection.electionEnd" (input)="createElection.electionEnd=parseDate($event)">
-  <input *ngIf="doEdit" type="text" placeholder="Type" [(ngModel)]="createElection.electionType">
-  <button *ngIf="doEdit" (click)="create()">Done</button>
+  <span>
+    <div>
+      <h3>Type of Election: </h3>
+        <input *ngIf="doEdit" type="text" placeholder="Type" [(ngModel)]="createElection.electionType">
+    </div>
+  </span>
+  <span>
+    <div>
+      <hr>
+      <button *ngIf="doEdit" (click)="create()">Done</button>
+    </div>
+  </span>
 </div>
-<div *ngFor="let election of elections">
-  {{election.id}}, {{election.electionStart}},  {{election.electionEnd}},  {{election.electionType}},
-</div>
-

@@ -23,7 +23,7 @@ export class LeovoteWebApiService {
     return this.http.get<Election[]>(this.baseUrl + this.elections, {headers: this.headers});
   }
   public addCandidate(candidate: Candidate){
-    return this.http.post<number>(this.baseUrl + this.candidates, candidate, {headers: this.headers});
+    return this.http.post(this.baseUrl + this.candidates, candidate, {headers: this.headers});
   }
   public addElection(election: Election){
     console.log("Id: " + election.id + ", Name: " + election.name + ", Date1: " + election.electionStart.toLocaleDateString() + ", Date2: " + election.electionEnd.toLocaleDateString() + ", Type: " + election.electionType);

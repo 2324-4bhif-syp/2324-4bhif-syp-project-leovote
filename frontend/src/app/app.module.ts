@@ -14,8 +14,9 @@ import {RouterModule, Routes} from "@angular/router";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'overview', pathMatch: "full"},
-  {path: 'election/:id', component: ElectionComponent},
-  {path: 'overview', component: LeovotePageComponent}
+  {path: 'overview', component: LeovotePageComponent},
+  {path: 'elections', component: ElectionListComponent},
+  {path: 'candidates', component: CandidateListComponent}
 ]
 @NgModule({
   declarations: [
