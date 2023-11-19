@@ -6,7 +6,7 @@ import {LeovoteWebApiService} from "../api/leovote-web-api.service";
   providedIn: 'root'
 })
 export class CandidateService {
-  protected candidates: Candidate[]
+  protected candidates: Candidate[] = [];
   constructor(private apiClient: LeovoteWebApiService) {
     this.apiClient.getAllCandidates()
       .subscribe((c) => {
