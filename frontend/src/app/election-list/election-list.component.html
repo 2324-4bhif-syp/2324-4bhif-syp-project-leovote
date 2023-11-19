@@ -1,4 +1,12 @@
+<button (click)="doEdit = true">Create</button>
+<div>
+  <input *ngIf="doEdit" type="text" placeholder="Name" [(ngModel)]="createElection.name">
+  <input *ngIf="doEdit" type="date" [valueAsDate]="createElection.electionStart" (input)="createElection.electionStart=parseDate($event)">
+  <input *ngIf="doEdit" type="date" [valueAsDate]="createElection.electionEnd" (input)="createElection.electionEnd=parseDate($event)">
+  <input *ngIf="doEdit" type="text" placeholder="Type" [(ngModel)]="createElection.electionType">
+  <button *ngIf="doEdit" (click)="create()">Done</button>
+</div>
 <div *ngFor="let election of elections">
   {{election.id}}, {{election.electionStart}},  {{election.electionEnd}},  {{election.electionType}},
 </div>
-asfsaf
+

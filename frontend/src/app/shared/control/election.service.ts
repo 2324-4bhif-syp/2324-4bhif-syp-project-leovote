@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import {Election} from "../entity/election-model";
 import {Candidate} from "../entity/candidate-model";
 import {LeovoteWebApiService} from "../api/leovote-web-api.service";
-import {map, Observable} from "rxjs";
+import {map, Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElectionService {
   constructor(private apiClient: LeovoteWebApiService) {}
-  add(election: Election){
-    this.apiClient.addElection(election);
+  private refreshListSubject = new Subject<void>();
+  add(election: Election): Observable<any> {
+    return this.apiClient.addElection(election);
   }
-  getList(): Observable<Election[]>{
+
+  getList(): Observable<Election[]> {
     return this.apiClient.getAllElections().pipe(
       map(elections => {
         return elections.map(election => {
@@ -22,5 +24,12 @@ export class ElectionService {
         });
       })
     );
+  }
+  refreshList(): void {
+    this.refreshListSubject.next();
+  }
+
+  onListRefresh(): Observable<void> {
+    return this.refreshListSubject.asObservable();
   }
 }
