@@ -1,0 +1,24 @@
+<button (click)="doEdit = true">Create</button>
+<ul *ngFor="let vote of votes">
+  <li><h4>Candidate {{vote.candidate.firstName}} {{vote.candidate.lastName}} in Election: {{vote.election.name}}</h4></li>
+</ul>
+<div *ngIf="doEdit">
+  <span>
+    <h3>Choose a Election:</h3>
+    <select [(ngModel)]="selectedElection">
+      <option *ngFor="let election of elections" [ngValue]="election">{{election.name}}</option>
+    </select>
+    <h3>Choose a Candidate:</h3>
+    <select [(ngModel)]="selectedCandidate">
+      <option *ngFor="let candidate of candidates" [ngValue]="candidate">{{candidate.firstName}}
+      {{candidate.lastName}}, {{candidate.grade}}</option>
+    </select>
+  </span>
+  <span>
+    <div>
+      <hr>
+      <button *ngIf="doEdit" (click)="create()">Done</button>
+    </div>
+  </span>
+</div>
+

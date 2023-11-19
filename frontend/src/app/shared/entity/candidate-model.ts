@@ -1,11 +1,12 @@
 export class Candidate{
-  public schoolId: string
-  public firstName:string
-  public lastName:string
-  public grade:string
+  id: number | null
+  schoolId: string
+  firstName:string
+  lastName:string
+  grade:string
 
-
-  constructor(schoolId: string, firstName: string, lastName: string, grade: string) {
+  constructor(id: number | null, schoolId: string, firstName: string, lastName: string, grade: string) {
+    this.id = id;
     this.schoolId = schoolId;
     this.firstName = firstName;
     this.lastName = lastName;

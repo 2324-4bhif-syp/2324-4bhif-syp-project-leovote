@@ -24,7 +24,7 @@ export class CandidateListComponent {
   }
 
   initCandidate(): Candidate {
-    return new Candidate("", "", "", "");
+    return new Candidate(null, "", "", "", "");
   }
 
   create() {
