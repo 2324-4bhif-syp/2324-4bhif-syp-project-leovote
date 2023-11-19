@@ -2,26 +2,25 @@ import { Injectable } from '@angular/core';
 import {Election} from "../entity/election-model";
 import {Candidate} from "../entity/candidate-model";
 import {LeovoteWebApiService} from "../api/leovote-web-api.service";
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElectionService {
-  protected elections: Election[] = [];
-  constructor(private apiClient: LeovoteWebApiService) {
-    this.apiClient.getAllElections()
-      .subscribe({
-        next: (elec) => {
-          elec.forEach(e =>{
-            e.electionStart = new Date((e.electionStart as unknown) as string)
-            e.electionEnd = new Date((e.electionEnd as unknown) as string)
-          });
-          this.elections = elec;
-        },
-        error: (err) => {console.error(err)}
-      });
-  }
+  constructor(private apiClient: LeovoteWebApiService) {}
   add(election: Election){
     this.apiClient.addElection(election);
+  }
+  getList(): Observable<Election[]>{
+    return this.apiClient.getAllElections().pipe(
+      map(elections => {
+        return elections.map(election => {
+          election.electionStart = new Date((election.electionStart as unknown) as string);
+          election.electionEnd = new Date((election.electionEnd as unknown) as string);
+          return election;
+        });
+      })
+    );
   }
 }

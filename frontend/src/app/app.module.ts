@@ -9,7 +9,14 @@ import { VoteComponent } from './vote/vote.component';
 import { ElectionComponent } from './election/election.component';
 import { ElectionListComponent } from './election-list/election-list.component';
 import {HttpClientModule} from "@angular/common/http";
+import { LeovotePageComponent } from './leovote-page/leovote-page.component';
+import {RouterModule, Routes} from "@angular/router";
 
+const appRoutes: Routes = [
+  {path: '', redirectTo: 'overview', pathMatch: "full"},
+  {path: 'election/:id', component: ElectionComponent},
+  {path: 'overview', component: LeovotePageComponent}
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,12 +24,14 @@ import {HttpClientModule} from "@angular/common/http";
     CandidateListComponent,
     VoteComponent,
     ElectionComponent,
-    ElectionListComponent
+    ElectionListComponent,
+    LeovotePageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
