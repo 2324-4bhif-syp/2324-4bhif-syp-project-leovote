@@ -1,8 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CandidateService} from "../shared/control/candidate.service";
 import {Candidate} from "../shared/entity/candidate-model";
-import {Election} from "../shared/entity/election-model";
-import {ElectionService} from "../shared/control/election.service";
+
 
 @Component({
   selector: 'app-candidate-list',

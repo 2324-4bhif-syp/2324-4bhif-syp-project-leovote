@@ -10,7 +10,7 @@ export class CandidateComponent {
   @Input() doEdit: boolean = false;
   @Input() candidate: Candidate = new Candidate(null, "", "", "", "");
   createCandidate: Candidate = new Candidate(null, "", "", "", "");
-  @Output() editDone = new EventEmitter<Candidate>();
+  @Output() editDone:EventEmitter<Candidate> = new EventEmitter<Candidate>();
 
   create(){
     this.doEdit = false;
