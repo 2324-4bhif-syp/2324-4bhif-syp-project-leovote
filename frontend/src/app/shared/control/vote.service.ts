@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {LeovoteWebApiService} from "../api/leovote-web-api.service";
 import {map, Observable, Subject} from "rxjs";
-import {Election} from "../entity/election-model";
 import {Vote} from "../entity/vote-model";
 
 @Injectable({

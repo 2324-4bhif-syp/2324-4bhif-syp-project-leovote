@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Election} from "../entity/election-model";
-import {Candidate} from "../entity/candidate-model";
 import {LeovoteWebApiService} from "../api/leovote-web-api.service";
 import {map, Observable, Subject} from "rxjs";
 
