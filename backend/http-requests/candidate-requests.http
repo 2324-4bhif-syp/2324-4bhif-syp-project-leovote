@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### Delete candidate by ID
-DELETE http://localhost:8080/candidates/2
+DELETE http://localhost:8080/candidates/3
 
 ### Delete candidate by school ID
 #DELETE http://localhost:8080/candidates/school-id/id123

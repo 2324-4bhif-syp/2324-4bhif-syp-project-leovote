@@ -13,7 +13,7 @@ Content-Type: application/json
   "electionStart": "2023-11-18T12:00:00",
   "electionEnd": "2023-11-20T12:00:00",
   "electionType": "Crosses",
-  "voteables": [
+  "participatingCandidates": [
     {
       "id": 1
     },
@@ -33,7 +33,7 @@ Content-Type: application/json
   "electionStart": "2023-11-19T12:00:00",
   "electionEnd": "2023-11-21T12:00:00",
   "electionType": "Boxes",
-  "voteables": [
+  "participatingCandidates": [
     {
       "id": 1
     }
