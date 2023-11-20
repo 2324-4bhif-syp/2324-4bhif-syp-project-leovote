@@ -8,6 +8,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InitBean {
     @Inject
@@ -15,26 +17,33 @@ public class InitBean {
 
     @Transactional
     public void initData(@Observes StartupEvent event) {
-        // Create and persist elections
-        Election election1 = new Election(
-                "Student Council Election",
-                LocalDateTime.now(),
-                LocalDateTime.now().plusDays(7),
-                "General");
-        Election election2 = new Election(
-                "Class Representative Election",
-                LocalDateTime.now(),
-                LocalDateTime.now().plusDays(7),
-                "Class"
-        );
-        entityManager.persist(election1);
-        entityManager.persist(election2);
-
         // Create and persist candidates
         Candidate candidate1 = new Candidate("id123", "John", "Doe", "12A");
         Candidate candidate2 = new Candidate("id456", "Jane", "Smith", "11B");
         entityManager.persist(candidate1);
         entityManager.persist(candidate2);
+
+
+        List<Candidate> candidateList = new ArrayList<>();
+        candidateList.add(candidate1);
+        candidateList.add(candidate2);
+        // Create and persist elections
+        Election election1 = new Election(
+                "Student Council Election",
+                LocalDateTime.now(),
+                LocalDateTime.now().plusDays(7),
+                "General",
+                candidateList
+                );
+        Election election2 = new Election(
+                "Class Representative Election",
+                LocalDateTime.now(),
+                LocalDateTime.now().plusDays(7),
+                "Class",
+                candidateList
+        );
+        entityManager.persist(election1);
+        entityManager.persist(election2);
 
         // Create and persist voters
         Voter voter1 = new Voter("student1", "password1");

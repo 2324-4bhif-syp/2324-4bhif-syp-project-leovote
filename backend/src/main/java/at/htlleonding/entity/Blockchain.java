@@ -21,11 +21,14 @@ class Blockchain {
                 "genesisLastName",
                 "genClass"
         );
+        List<Candidate> candidates = new ArrayList<>();
+        candidates.add(candidate1);
         Election election1 = new Election(
                 "genElection",
                 LocalDateTime.now(),
                 LocalDateTime.now().plusHours(1),
-                "genType"
+                "genType",
+                candidates
         );
 
         Vote vote = new Vote(candidate1, election1);

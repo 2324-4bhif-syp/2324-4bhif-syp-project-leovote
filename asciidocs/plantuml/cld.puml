@@ -17,6 +17,7 @@ class Election {
   - electionEnd: LocalDateTime
   - name: String
   - id: Long
+  - voteables: List<Candidate>
 }
 
 class HasVoted {

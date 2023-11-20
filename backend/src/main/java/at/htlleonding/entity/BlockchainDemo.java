@@ -5,6 +5,8 @@ import jakarta.enterprise.event.Observes;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockchainDemo {
     @Transactional
@@ -13,8 +15,11 @@ public class BlockchainDemo {
 
         Candidate candidate1 = new Candidate("IF200362", "Anton", "Cao", "4BHIF");
         Candidate candidate2 = new Candidate("IF200762", "Felix", "Fröller", "4BHIF");
-        Election election1 = new Election("Class representative", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses");
-        Election election2 = new Election("School council", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses");
+        List<Candidate> candidateList = new ArrayList<>();
+        candidateList.add(candidate1);
+        candidateList.add(candidate2);
+        Election election1 = new Election("Class representative", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses", candidateList);
+        Election election2 = new Election("School council", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses", candidateList);
 
         Vote vote1 = new Vote(candidate1, election1);
         Vote vote2 = new Vote(candidate1, election1);
