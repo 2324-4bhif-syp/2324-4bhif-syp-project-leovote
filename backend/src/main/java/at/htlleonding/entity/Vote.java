@@ -10,10 +10,10 @@ public class Vote extends PanacheEntity {
     //<editor-fold desc="Fields">
     @ManyToOne
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    public Candidate candidate;
+    private Candidate candidate;
     @ManyToOne
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    public Election election;
+    private Election election;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
@@ -26,7 +26,7 @@ public class Vote extends PanacheEntity {
         this.election = election;
     }
     //</editor-fold>
-    
+
 
     //<editor-fold desc="Methods">
     @Override
@@ -36,6 +36,24 @@ public class Vote extends PanacheEntity {
                 ", candidate=" + candidate +
                 ", election=" + election +
                 '}';
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Getter and Setter">
+    public Candidate getCandidate() {
+        return candidate;
+    }
+
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
+    }
+
+    public Election getElection() {
+        return election;
+    }
+
+    public void setElection(Election election) {
+        this.election = election;
     }
     //</editor-fold>
 }
