@@ -20,4 +20,4 @@ Content-Type: application/json
 
 
 ### Delete has-voted by ID
-DELETE http://localhost:8080/has-voted/2
+DELETE http://localhost:8080/has-voted/1
