@@ -1,17 +1,14 @@
 package at.htlleonding.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"election_id", "voter_id"}))
-public class HasVoted extends PanacheEntityBase {
+@Table(uniqueConstraints = {@UniqueConstraint(name = "UniqueElectionAndVoter", columnNames = {"election_id", "voter_id"})})
+public class HasVoted extends PanacheEntity {
     //<editor-fold desc="Fields">
-    @Id
-    @GeneratedValue
-    private Long id;
     @ManyToOne
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private Election election;
@@ -34,14 +31,6 @@ public class HasVoted extends PanacheEntityBase {
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Election getElection() {
         return election;
     }
