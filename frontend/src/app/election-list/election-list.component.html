@@ -1,31 +1,7 @@
 <button (click)="doEdit = true">Create</button>
 <ul *ngFor="let election of elections">
-  <li><h4>{{election.name}}, {{election.electionStart.toLocaleDateString()}},  {{election.electionEnd.toLocaleDateString()}},  {{election.electionType}}</h4></li>
+  <app-election [doEdit]="false" [election]="election"></app-election>
 </ul>
 <div *ngIf="doEdit">
-  <span>
-    <div>
-      <h3>Name: </h3>
-      <input *ngIf="doEdit" type="text" placeholder="Name" [(ngModel)]="createElection.name">
-    </div>
-  </span>
-  <h3>Start of Election: </h3>
-  <input *ngIf="doEdit" type="date" [valueAsDate]="createElection.electionStart" (input)="createElection.electionStart=parseDate($event)">
-  <h3>End of Election: </h3>
-  <input *ngIf="doEdit" type="date" [valueAsDate]="createElection.electionEnd" (input)="createElection.electionEnd=parseDate($event)">
-  <div *ngIf="isError">
-    <h5 style="color: red">End date must be equal to or after start date!</h5>
-  </div>
-  <span>
-    <div>
-      <h3>Type of Election: </h3>
-        <input *ngIf="doEdit" type="text" placeholder="Type" [(ngModel)]="createElection.electionType">
-    </div>
-  </span>
-  <span>
-    <div>
-      <hr>
-      <button *ngIf="doEdit" (click)="create()">Done</button>
-    </div>
-  </span>
+  <app-election [doEdit]="doEdit" (editDone)="create($event)"></app-election>
 </div>

@@ -9,6 +9,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { LeovotePageComponent } from './leovote-page/leovote-page.component';
 import {RouterModule, Routes} from "@angular/router";
 import { VoteListComponent } from './vote-list/vote-list.component';
+import { ElectionComponent } from './election/election.component';
+import { CandidateComponent } from './candidate/candidate.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'overview', pathMatch: "full"},
@@ -23,7 +25,9 @@ const appRoutes: Routes = [
     CandidateListComponent,
     ElectionListComponent,
     LeovotePageComponent,
-    VoteListComponent
+    VoteListComponent,
+    ElectionComponent,
+    CandidateComponent
   ],
   imports: [
     BrowserModule,

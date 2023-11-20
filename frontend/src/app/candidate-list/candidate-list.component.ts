@@ -11,25 +11,18 @@ import {ElectionService} from "../shared/control/election.service";
 })
 export class CandidateListComponent {
   @Input() doEdit: boolean = false;
-  candidates: Candidate[] = [];
-  createCandidate: Candidate = this.initCandidate();
-
+  candidates: Candidate[] =[]
   constructor(private candidateService: CandidateService) {}
-
   ngOnInit(): void {
     this.loadCandidates();
     this.candidateService.onListRefresh().subscribe(() => {
       this.loadCandidates();
     });
   }
-
-  initCandidate(): Candidate {
-    return new Candidate(null, "", "", "", "");
-  }
-
-  create() {
+  create(candidate: Candidate) {
+    console.log(candidate)
     this.doEdit = false;
-    this.candidateService.add(this.createCandidate).subscribe(
+    this.candidateService.add(candidate).subscribe(
       response => {
         console.log('Candidate added successfully', response);
         this.candidateService.refreshList();
@@ -38,7 +31,6 @@ export class CandidateListComponent {
         console.error('Error adding candidate', error);
       }
     );
-    this.createCandidate = this.initCandidate();
   }
   private loadCandidates() {
     this.candidateService.getList().subscribe(
