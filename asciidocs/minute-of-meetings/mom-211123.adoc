@@ -1,0 +1,69 @@
+= Besprechungsprotokoll 21.11.2023
+1.0, 2023-10-17: Some notes
+ifndef::imagesdir[:imagesdir: images]
+:icons: font
+//:sectnums:    // Nummerierung der Überschriften / section numbering
+//:toc: left
+
+//Need this blank line after ifdef, don't know why...
+ifdef::backend-html5[]
+
+// https://fontawesome.com/v4.7.0/icons/
+icon:file-text-o[link=https://raw.githubusercontent.com/htl-leonding-college/asciidoctor-docker-template/master/asciidocs/{docname}.adoc] ‏ ‏ ‎
+icon:github-square[link=https://github.com/htl-leonding-college/asciidoctor-docker-template] ‏ ‏ ‎
+icon:home[link=https://htl-leonding.github.io/]
+endif::backend-html5[]
+
+
+.Teilnehmer
+|===
+|anwesend
+
+| David Lehner
+
+
+| Anton Cao
+
+
+| Alexander Nikolaus
+
+
+| Fröller Felix
+
+
+|===
+
+.Ort und Zeit
+[cols=2*]
+|===
+|Ort
+|HTBLA Leonding (Unterricht)
+
+|von-bis
+|Di. 21.11.2023
+|Dauer
+| 30min
+|===
+
+== Besprochene Themen
+
+* Blockchainarchitekur besprochen
+* Jeder Voter bekommt eine Transactional Value, anstatt der Name gespeichert wird
+* Man zählt die Anzahl der Blöcke (also die Voter) von einer Blockchain
+* Frontend überflüssig
+
+== Vereinbarungen und Entscheidungen
+
+.Was wurde vereinbart?
+[%autowidth]
+|===
+|wer |macht was |bis wann
+
+| leovote-Team
+a|
+* Blockchain in der Datenbank persistieren und mittels mit einer API holen, wie viele gevotet wurden
+* Die vorgefertigten Daten in einer import.sql mit candidate, election, voters (und ob es gewählt wurde) anlegen
+* Anzahl der Voter mittels Blockchain ermitteln
+* Test mit vorgefertigten Beispiele schreiben ("Wahl simulieren")
+| 05.12.2023
+|===

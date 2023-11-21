@@ -1,0 +1,22 @@
+= LeoVote
+
+:revealjs_theme: white
+ifndef::imagesdir[:imagesdir: ../images]
+
+== Team
+* Cao Anton
+* Lehner David
+* Fröller Felix
+* Nikolaus Alexander
+
+== Problemstellung
+
+
+== Warum Leovote?
+
+
+== Ziele
+
+* Fälschungssicherheit
+
+=== Live Demo
