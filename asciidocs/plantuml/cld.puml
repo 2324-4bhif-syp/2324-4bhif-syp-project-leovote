@@ -29,9 +29,9 @@ class Voter {
   - password: String
 }
 
-Election  "1" *-[#595959,plain]-> "*" Candidate
-HasVoted  "1" *-[#595959,plain]-> "1" Election
-HasVoted  "1" *-[#595959,plain]-> "1" Voter
-Vote      "1" *-[#595959,plain]-> "1" Candidate
-Vote      "1" *-[#595959,plain]-> "1" Election
+Election  "*" *-[#595959,plain]-> "*" Candidate
+HasVoted  "*" *-[#595959,plain]-> "1" Election
+HasVoted  "*" *-[#595959,plain]-> "1" Voter
+Vote      "*" *-[#595959,plain]-> "1" Candidate
+Vote      "*" *-[#595959,plain]-> "1" Election
 @enduml
