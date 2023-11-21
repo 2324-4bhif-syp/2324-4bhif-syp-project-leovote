@@ -1,52 +1,37 @@
 @startuml
 
 top to bottom direction
-skinparam linetype ortho
 
 class Candidate {
   - schoolId: String
   - grade: String
-  - id: Long
-  - lastName: String
   - firstName: String
+  - lastName: String
 }
-
 class Election {
-  - electionStart: LocalDateTime
-  - electionType: String
+  - participatingCandidates: List<Candidate>
   - electionEnd: LocalDateTime
+  - electionType: String
   - name: String
-  - id: Long
-  - voteables: List<Candidate>
+  - electionStart: LocalDateTime
 }
-
 class HasVoted {
-  - voted: boolean
-  - hasVotedId: HasVotedId
-}
-
-class HasVotedId {
   - election: Election
   - voter: Voter
+  - voted: boolean
 }
-
 class Vote {
   - candidate: Candidate
-  - id: Long
   - election: Election
 }
-
 class Voter {
-  - id: Long
   - schoolId: String
   - password: String
 }
 
-HasVoted   "1" *-[#595959,plain]-> "hasVotedId\n1" HasVotedId
-HasVoted    -[#595959,dashed]->  HasVotedId : "«create»"
-HasVotedId "1" *-[#595959,plain]-> "election\n1" Election
-HasVotedId "1" *-[#595959,plain]-> "voter\n1" Voter
-Vote       "1" *-[#595959,plain]-> "candidate\n1" Candidate
-Vote       "1" *-[#595959,plain]-> "election\n1" Election
-
+Election  "*" *-[#595959,plain]-> "*" Candidate
+HasVoted  "*" *-[#595959,plain]-> "1" Election
+HasVoted  "*" *-[#595959,plain]-> "1" Voter
+Vote      "*" *-[#595959,plain]-> "1" Candidate
+Vote      "*" *-[#595959,plain]-> "1" Election
 @enduml
