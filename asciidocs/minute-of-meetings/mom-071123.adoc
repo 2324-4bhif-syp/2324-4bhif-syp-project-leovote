@@ -1,0 +1,63 @@
+= Besprechungsprotokoll 07.11.2023
+david lehner
+1.0, 2023-10-17: Some notes
+ifndef::imagesdir[:imagesdir: images]
+:icons: font
+//:sectnums:    // Nummerierung der Überschriften / section numbering
+//:toc: left
+
+//Need this blank line after ifdef, don't know why...
+ifdef::backend-html5[]
+
+// https://fontawesome.com/v4.7.0/icons/
+icon:file-text-o[link=https://raw.githubusercontent.com/htl-leonding-college/asciidoctor-docker-template/master/asciidocs/{docname}.adoc] ‏ ‏ ‎
+icon:github-square[link=https://github.com/htl-leonding-college/asciidoctor-docker-template] ‏ ‏ ‎
+icon:home[link=https://htl-leonding.github.io/]
+endif::backend-html5[]
+
+
+.Teilnehmer
+|===
+|anwesend
+
+| David Lehner
+
+
+| Anton Cao
+
+
+| Alexander Nikolaus
+
+
+| Fröller Felix
+
+
+|===
+
+.Ort und Zeit
+[cols=2*]
+|===
+|Ort
+|HTBLA Leonding (Unterricht)
+
+|von-bis
+|Di. 07.11.2023, 7. EH
+|Dauer
+|10 min
+|===
+
+== Besprochene Themen
+
+* Genaue Ausführung von Blockchain besprochen
+
+== Vereinbarungen und Entscheidungen
+
+.Was wurde vereinbart?
+[%autowidth]
+|===
+|wer |macht was |bis wann
+
+| leovote-Team
+a| Überarbeitung und genaue Arbeit von Blockchain, Kandidaten, Wahl und Stimme abbilden
+| 21.11.23
+|===
