@@ -6,14 +6,14 @@ class Block {
     //<editor-fold desc="Fields">
     private final HashService hashService = new HashService();
     private final int index;
-    private final long timestamp;
+    private final Long timestamp;
     private final Vote vote;
     private final String previousHash;
     private final String hash;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
-    public Block(int index, long timestamp, Vote vote, String previousHash) {
+    public Block(int index, Long timestamp, Vote vote, String previousHash) {
         this.index = index;
         this.timestamp = timestamp;
         this.vote = vote;
