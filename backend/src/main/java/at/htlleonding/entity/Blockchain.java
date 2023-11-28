@@ -1,19 +1,15 @@
 package at.htlleonding.entity;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
 public class Blockchain {
-    @OneToOne
-    private final Election election;
     protected List<Block> chain;
 
-    public Blockchain(Election election) {
-        this.election = election;
+    public Blockchain() {
         this.chain = new ArrayList<>();
         // Genesis block
         Block genesisBlock = createGenesisBlock();

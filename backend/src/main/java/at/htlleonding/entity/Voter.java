@@ -21,10 +21,13 @@ public class Voter extends PanacheEntity {
     //<editor-fold desc="Constructors">
     public Voter() {
         participatingIn = new ArrayList<>();
+        this.generatedId = UUID.randomUUID();
+        this.voted = false;
     }
 
     public Voter(List<Election> participatingIn) {
         this.participatingIn = participatingIn;
+        this.generatedId = UUID.randomUUID();
         this.voted = false;
     }
     //</editor-fold>

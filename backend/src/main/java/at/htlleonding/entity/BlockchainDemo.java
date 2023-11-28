@@ -19,7 +19,7 @@ public class BlockchainDemo {
         candidateList.add(candidate2);
         Election election1 = new Election("Class representative", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses", candidateList);
 
-        election1.getBlockchain().addBlock(candidate1);
+        /*election1.getBlockchain().addBlock(candidate1);
         election1.getBlockchain().addBlock(candidate2);
 
         // Print the blockchain
@@ -27,6 +27,6 @@ public class BlockchainDemo {
             System.out.println("Block #" + block.getHash());
             System.out.println("Votes: " + block.getVote());
             System.out.println();
-        }
+        }*/
     }
 }
