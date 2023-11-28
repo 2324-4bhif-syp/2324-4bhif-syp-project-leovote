@@ -18,6 +18,7 @@ class Block {
 }
 
 class Blockchain {
+    - election: Election
     - blocks: List<Block>
 }
 

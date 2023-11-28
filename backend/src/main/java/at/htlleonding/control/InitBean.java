@@ -46,21 +46,11 @@ public class InitBean {
         entityManager.persist(election2);
 
         // Create and persist voters
-        Voter voter1 = new Voter("student1", "password1");
-        Voter voter2 = new Voter("student2", "password2");
+        Voter voter1 = new Voter();
+        voter1.addParticipating(election1);
+        Voter voter2 = new Voter();
+        voter2.addParticipating(election2);
         entityManager.persist(voter1);
         entityManager.persist(voter2);
-
-        // Create and persist votes
-        Vote vote1 = new Vote(candidate1, election1);
-        Vote vote2 = new Vote(candidate2, election1);
-        entityManager.persist(vote1);
-        entityManager.persist(vote2);
-
-        // Create and persist hasVoted entries
-        HasVoted hasVoted1 = new HasVoted(election1, voter1, true);
-        HasVoted hasVoted2 = new HasVoted(election1, voter2, true);
-        entityManager.persist(hasVoted1);
-        entityManager.persist(hasVoted2);
     }
 }

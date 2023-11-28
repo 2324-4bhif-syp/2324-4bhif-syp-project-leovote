@@ -1,13 +1,19 @@
 package at.htlleonding.entity;
 
-import java.time.LocalDateTime;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class Blockchain {
+@ApplicationScoped
+public class Blockchain {
+    @OneToOne
+    private final Election election;
     protected List<Block> chain;
 
-    public Blockchain() {
+    public Blockchain(Election election) {
+        this.election = election;
         this.chain = new ArrayList<>();
         // Genesis block
         Block genesisBlock = createGenesisBlock();
@@ -23,24 +29,16 @@ class Blockchain {
         );
         List<Candidate> candidates = new ArrayList<>();
         candidates.add(candidate1);
-        Election election1 = new Election(
-                "genElection",
-                LocalDateTime.now(),
-                LocalDateTime.now().plusHours(1),
-                "genType",
-                candidates
-        );
 
-        Vote vote = new Vote(candidate1, election1);
-        return new Block(0, System.currentTimeMillis(), vote, "0");
+        return new Block(0, System.currentTimeMillis(), candidate1 , "0");
     }
 
-    public void addBlock(Vote vote) {
+    public void addBlock(Candidate voted) {
         Block previousBlock = chain.get(chain.size() - 1);
         int index = chain.size();
         long timestamp = System.currentTimeMillis();
         String previousHash = previousBlock.getHash();
-        Block newBlock = new Block(index, timestamp, vote, previousHash);
+        Block newBlock = new Block(index, timestamp, voted, previousHash);
         chain.add(newBlock);
     }
 }

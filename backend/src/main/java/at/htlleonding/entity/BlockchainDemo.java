@@ -11,29 +11,19 @@ import java.util.List;
 public class BlockchainDemo {
     @Transactional
     void startUp(@Observes StartupEvent startup) {
-        Blockchain blockchain = new Blockchain();
 
+        List<Candidate> candidateList = new ArrayList<>();
         Candidate candidate1 = new Candidate("IF200362", "Anton", "Cao", "4BHIF");
         Candidate candidate2 = new Candidate("IF200762", "Felix", "Fröller", "4BHIF");
-        List<Candidate> candidateList = new ArrayList<>();
         candidateList.add(candidate1);
         candidateList.add(candidate2);
         Election election1 = new Election("Class representative", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses", candidateList);
-        Election election2 = new Election("School council", LocalDateTime.now(), LocalDateTime.now().plusHours(1), "Crosses", candidateList);
 
-        Vote vote1 = new Vote(candidate1, election1);
-        Vote vote2 = new Vote(candidate1, election1);
-        blockchain.addBlock(vote1);
-        blockchain.addBlock(vote2);
-
-
-        Vote vote3 = new Vote(candidate1, election1);
-        Vote vote4 = new Vote(candidate2, election2);
-        blockchain.addBlock(vote3);
-        blockchain.addBlock(vote4);
+        election1.getBlockchain().addBlock(candidate1);
+        election1.getBlockchain().addBlock(candidate2);
 
         // Print the blockchain
-        for (Block block : blockchain.chain) {
+        for (Block block : election1.getBlockchain().chain) {
             System.out.println("Block #" + block.getHash());
             System.out.println("Votes: " + block.getVote());
             System.out.println();

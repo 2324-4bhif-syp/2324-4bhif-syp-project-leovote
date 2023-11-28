@@ -1,7 +1,9 @@
 package at.htlleonding.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.inject.Inject;
 import jakarta.persistence.*;
+import org.hibernate.annotations.NotFound;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Election extends PanacheEntity {
     private LocalDateTime electionStart;
     private LocalDateTime electionEnd;
     private String electionType;
+
     @ManyToMany(cascade = {
             CascadeType.MERGE
     })
@@ -30,10 +33,16 @@ public class Election extends PanacheEntity {
         this.electionEnd = electionEnd;
         this.electionType = electionType;
         this.participatingCandidates = participatingCandidates;
+        this.blockchain = new Blockchain(this);
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
+
+    public Blockchain getBlockchain(){
+        return this.blockchain;
+    }
+
     public String getName() {
         return name;
     }

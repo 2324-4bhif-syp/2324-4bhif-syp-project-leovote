@@ -1,44 +1,65 @@
 package at.htlleonding.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 public class Voter extends PanacheEntity {
     //<editor-fold desc="Fields">
-    @Column(unique = true)
-    private String schoolId; // The ifxxxxxx ids every student has
-    private String password; // Hash of the password (should be similar to the one in the school db)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long generatedId;
+    @OneToMany
+    private List<Election> participatingIn;
+    private boolean voted;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     public Voter() {
-
+        participatingIn = new ArrayList<>();
     }
 
-    public Voter(String schoolId, String password) {
-        this.schoolId = schoolId;
-        this.password = password;
+    public Voter(List<Election> participatingIn) {
+        this.participatingIn = participatingIn;
+        this.voted = false;
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
-    public String getSchoolId() {
-        return schoolId;
+
+    public Long getGeneratedId() {
+        return generatedId;
     }
 
-    public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId;
+    public void setGeneratedId(Long generatedId) {
+        this.generatedId = generatedId;
     }
 
-    public String getPassword() {
-        return password;
+    public void addParticipating(Election election){
+        if(!participatingIn.contains(election)){
+            participatingIn.add(election);
+        }
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public List<Election> getParticipatingIn() {
+        return participatingIn;
     }
+
+    public void setParticipatingIn(List<Election> participatingIn) {
+        this.participatingIn = participatingIn;
+    }
+
+    public boolean isVoted() {
+        return voted;
+    }
+
+    public void setVoted(boolean voted) {
+        this.voted = voted;
+    }
+
     //</editor-fold>
 }
