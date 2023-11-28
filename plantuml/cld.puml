@@ -8,30 +8,36 @@ class Candidate {
   - firstName: String
   - lastName: String
 }
+
+class Block {
+    - index: int
+    - timeStamp: Long
+    - candidate: Candidate
+    - previousHash: String
+    - currentBlockHash: String
+}
+
+class Blockchain {
+    - blocks: List<Block>
+}
+
 class Election {
   - participatingCandidates: List<Candidate>
   - electionEnd: LocalDateTime
+  - electionStart: LocalDateTime
   - electionType: String
   - name: String
-  - electionStart: LocalDateTime
-}
-class HasVoted {
-  - election: Election
-  - voter: Voter
-  - voted: boolean
-}
-class Vote {
-  - candidate: Candidate
-  - election: Election
-}
-class Voter {
-  - schoolId: String
-  - password: String
+  - blockchain: Blockchain
 }
 
-Election  "*" *-[#595959,plain]-> "*" Candidate
-HasVoted  "*" *-[#595959,plain]-> "1" Election
-HasVoted  "*" *-[#595959,plain]-> "1" Voter
-Vote      "*" *-[#595959,plain]-> "1" Candidate
-Vote      "*" *-[#595959,plain]-> "1" Election
+class Voter {
+  - generatedId: Long
+  - election: List<Election>
+  - voted: boolean
+}
+
+Election "1"--"1" Blockchain
+Blockchain "1"--"*" Block
+Candidate "1"--"*" Block
+Voter "*"--"*" Election
 @enduml
