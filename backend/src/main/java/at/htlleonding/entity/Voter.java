@@ -5,14 +5,14 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Entity
 public class Voter extends PanacheEntity {
     //<editor-fold desc="Fields">
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long generatedId;
+    @Column(unique = true)
+    private UUID generatedId;
     @OneToMany
     private List<Election> participatingIn;
     private boolean voted;
@@ -31,12 +31,8 @@ public class Voter extends PanacheEntity {
 
     //<editor-fold desc="Getter and Setter">
 
-    public Long getGeneratedId() {
+    public UUID getGeneratedId() {
         return generatedId;
-    }
-
-    public void setGeneratedId(Long generatedId) {
-        this.generatedId = generatedId;
     }
 
     public void addParticipating(Election election){

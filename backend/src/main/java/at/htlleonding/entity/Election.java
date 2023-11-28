@@ -15,6 +15,7 @@ public class Election extends PanacheEntity {
     private LocalDateTime electionStart;
     private LocalDateTime electionEnd;
     private String electionType;
+    private Blockchain blockchain;
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
