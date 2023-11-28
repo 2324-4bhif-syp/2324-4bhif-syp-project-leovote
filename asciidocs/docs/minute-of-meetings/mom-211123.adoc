@@ -61,7 +61,7 @@ endif::backend-html5[]
 
 | leovote-Team
 a|
-* Blockchain in der Datenbank persistieren und mittels mit einer API holen, wie viele gevotet wurden
+* Blockchain in der File speichern -> Dateiname wird in der Datenbank gespeichert
 * Die vorgefertigten Daten in einer import.sql mit candidate, election, voters (und ob es gewählt wurde) anlegen
 * Anzahl der Voter mittels Blockchain ermitteln
 * Test mit vorgefertigten Beispiele schreiben ("Wahl simulieren")
