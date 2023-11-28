@@ -11,12 +11,22 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 == Problemstellung
 
+* Der Wahlaufwand
+** Zeit
+** Auszählen der Wahlen
+
+* unnötige Papierverschwendung
 
 == Warum Leovote?
 
+* Leovote ermöglicht eine fälschungssichere Wahldurchführung
+* Verhinderung von Unsicherheiten
 
 == Ziele
 
+* Digitalisierung
+* Vereinfachung
 * Fälschungssicherheit
+* Schnelle Auswertung
 
 === Live Demo
