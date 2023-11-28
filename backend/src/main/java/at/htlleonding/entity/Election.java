@@ -15,7 +15,7 @@ public class Election extends PanacheEntity {
     private LocalDateTime electionStart;
     private LocalDateTime electionEnd;
     private String electionType;
-    private Blockchain blockchain;
+    private String blockchainFileName;
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
@@ -34,14 +34,14 @@ public class Election extends PanacheEntity {
         this.electionEnd = electionEnd;
         this.electionType = electionType;
         this.participatingCandidates = participatingCandidates;
-        this.blockchain = new Blockchain(this);
+        this.blockchainFileName = String.format("%s_%s_%s.csv",this.name, this.electionStart.toString(), this.electionEnd.toString());
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
 
-    public Blockchain getBlockchain(){
-        return this.blockchain;
+    public String getBlockchainFileName(){
+        return blockchainFileName;
     }
 
     public String getName() {
