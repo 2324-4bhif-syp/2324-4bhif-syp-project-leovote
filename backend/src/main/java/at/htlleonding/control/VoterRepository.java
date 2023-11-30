@@ -7,7 +7,6 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,6 @@ public class VoterRepository implements PanacheRepository<Voter> {
     @Inject
     EntityManager entityManager;
 
-    @Transactional
     // Creates voters, which are able to vote in elections contained in the election List
     public List<Voter> createVotersForElection(int count, List<Election> election){
         List<Voter> votersList = new ArrayList<>();
@@ -29,7 +27,6 @@ public class VoterRepository implements PanacheRepository<Voter> {
         return votersList;
     }
 
-    @Transactional
     // Logic for the vote.
     // Vote passes, if candidate exists, voter hasn't voted, voter is able to vote in election
     // and election exists
