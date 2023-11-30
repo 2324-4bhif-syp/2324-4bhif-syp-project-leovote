@@ -61,6 +61,6 @@ public class InitBean {
         voterRepository.createVotersForElection(10, electionList1);
         voterRepository.createVotersForElection(10, electionList);
 
-        voterRepository.voteForCandidate(voter, candidate1, election2);
+        voterRepository.voteForCandidate(voter, candidate1, election1);
     }
 }
