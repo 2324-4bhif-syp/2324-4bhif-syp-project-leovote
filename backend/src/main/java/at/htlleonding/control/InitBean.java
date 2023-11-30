@@ -2,6 +2,7 @@ package at.htlleonding.control;
 
 import at.htlleonding.entity.*;
 import io.quarkus.runtime.StartupEvent;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -11,9 +12,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
 public class InitBean {
     @Inject
     EntityManager entityManager;
+
+    @Inject
+    VoterRepository voterRepository;
 
     @Transactional
     public void initData(@Observes StartupEvent event) {
@@ -45,12 +50,17 @@ public class InitBean {
         entityManager.persist(election1);
         entityManager.persist(election2);
 
-        // Create and persist voters
-        Voter voter1 = new Voter();
-        voter1.addParticipating(election1);
-        Voter voter2 = new Voter();
-        voter2.addParticipating(election2);
-        entityManager.persist(voter1);
-        entityManager.persist(voter2);
+        List<Election> electionList = new ArrayList<>();
+        electionList.add(election1);
+
+        List<Election> electionList1 = new ArrayList<>();
+        electionList1.add(election2);
+
+        Voter voter = new Voter();
+        voter.addParticipating(election1);
+        voterRepository.createVotersForElection(10, electionList1);
+        voterRepository.createVotersForElection(10, electionList);
+
+        voterRepository.voteForCandidate(voter, candidate1, election2);
     }
 }

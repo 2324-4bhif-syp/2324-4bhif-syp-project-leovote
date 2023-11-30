@@ -1,9 +1,7 @@
 package at.htlleonding.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.inject.Inject;
 import jakarta.persistence.*;
-import org.hibernate.annotations.NotFound;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,13 +26,16 @@ public class Election extends PanacheEntity {
 
     }
 
-    public Election(String name, LocalDateTime electionStart, LocalDateTime electionEnd, String electionType, List<Candidate> participatingCandidates) {
+    public Election(String name, LocalDateTime electionStart, LocalDateTime electionEnd,
+                    String electionType, List<Candidate> participatingCandidates) {
         this.name = name;
         this.electionStart = electionStart;
         this.electionEnd = electionEnd;
         this.electionType = electionType;
         this.participatingCandidates = participatingCandidates;
-        this.blockchainFileName = String.format("%s_%s_%s.csv",this.name, this.electionStart.toString(), this.electionEnd.toString());
+        this.blockchainFileName = String.format("%s-%s%s-%s-%s-%s-%s%s-%s-%s-%s.csv",this.name.replaceAll(" ", "_"),
+                this.electionStart.getSecond(), "sec", this.electionStart.getDayOfMonth(), this.electionStart.getMonthValue(), this.electionStart.getYear(),
+                this.electionEnd.getSecond(), "sec", this.electionEnd.getDayOfMonth(), this.electionEnd.getMonthValue(), this.electionEnd.getYear());
     }
     //</editor-fold>
 

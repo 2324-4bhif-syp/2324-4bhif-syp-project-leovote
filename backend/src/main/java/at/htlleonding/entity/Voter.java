@@ -13,7 +13,7 @@ public class Voter extends PanacheEntity {
     //<editor-fold desc="Fields">
     @Column(unique = true)
     private UUID generatedId;
-    @OneToMany
+    @ManyToMany
     private List<Election> participatingIn;
     private boolean voted;
     //</editor-fold>
