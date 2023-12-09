@@ -8,6 +8,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,9 @@ public class VoterRepository implements PanacheRepository<Voter> {
                 .filter(candidate2 -> candidate2 == candidate)
                 .findFirst();
         if(candidate1.isPresent() && election1 != null && !voter.isVoted()
-                && voter.getParticipatingIn().contains(election)){
+                && voter.getParticipatingIn().contains(election) &&
+        election1.getElectionStart().isBefore(LocalDateTime.now()) &&
+        election1.getElectionEnd().isAfter(LocalDateTime.now())){
             voter.setVoted(true);
             entityManager.merge(voter);
             return true;
