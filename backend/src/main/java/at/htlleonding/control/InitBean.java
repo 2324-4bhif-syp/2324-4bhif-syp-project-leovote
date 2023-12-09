@@ -62,5 +62,11 @@ public class InitBean {
         voterRepository.createVotersForElection(10, electionList);
 
         voterRepository.voteForCandidate(voter, candidate1, election1);
+
+        Blockchain blockchain = new Blockchain(election1);
+        blockchain.addBlock(candidate1);
+        blockchain.addBlock(candidate1);
+        blockchain.addBlock(candidate2);
+        blockchain.addBlock(candidate2);
     }
 }
