@@ -2,25 +2,20 @@ package at.htlleonding.control;
 
 import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
-import at.htlleonding.entity.Election;
-import org.json.JSONObject;
-import org.json.JSONWriter;
+import jakarta.enterprise.context.ApplicationScoped;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
 public class Blockchain {
-    protected List<Block> chain = new ArrayList<>();
-    private final String fileName;
+    protected List<Block> chain;
 
-    public Blockchain(Election election) {
+    public Blockchain() {
+        this.chain = new ArrayList<>();
         // Genesis block
         Block genesisBlock = createGenesisBlock();
         chain.add(genesisBlock);
-        fileName = election.getBlockchainFileName();
-        addJson(genesisBlock);
     }
 
     private Block createGenesisBlock() {
@@ -43,36 +38,5 @@ public class Blockchain {
         String previousHash = previousBlock.getHash();
         Block newBlock = new Block(index, timestamp, voted, previousHash);
         chain.add(newBlock);
-        addJson(newBlock);
-    }
-
-    public void addJson(Block addedBlock){
-        // Create a JSON object
-        JSONObject block = new JSONObject();
-        block.put("blockHash", addedBlock.getHash());
-        block.put("previousHash", addedBlock.getPreviousHash());
-        block.put("timeStamp", addedBlock.getTimestamp());
-        block.put("index", addedBlock.getIndex());
-
-        JSONObject candidateVoted = new JSONObject();
-        candidateVoted.put("schoolId", addedBlock.getVote().getSchoolId());
-        candidateVoted.put("firstName", addedBlock.getVote().getFirstName());
-        candidateVoted.put("lastName", addedBlock.getVote().getLastName());
-        candidateVoted.put("grade", addedBlock.getVote().getGrade());
-
-        block.put("voted", candidateVoted);
-
-        try (FileWriter fileWriter = new FileWriter("src/main/resources/blockchain/" + fileName)) {
-            JSONWriter writer = new JSONWriter(fileWriter);
-            writer.object();
-            for (String key : block.keySet()) {
-                writer.key(key).value(block.get(key));
-            }
-            writer.endObject();
-            System.out.println("JSON file created successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
     }
 }
