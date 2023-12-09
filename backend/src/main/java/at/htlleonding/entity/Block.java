@@ -33,19 +33,7 @@ public class Block {
     }
 
     public Candidate getVote() {
-        return voted;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public String getPreviousHash() {
-        return previousHash;
+        return this.voted;
     }
     //</editor-fold>
 }
