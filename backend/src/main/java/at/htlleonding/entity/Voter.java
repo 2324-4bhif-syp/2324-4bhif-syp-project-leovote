@@ -3,8 +3,6 @@ package at.htlleonding.entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -13,19 +11,19 @@ public class Voter extends PanacheEntity {
     //<editor-fold desc="Fields">
     @Column(unique = true)
     private UUID generatedId;
-    @ManyToMany
-    private List<Election> participatingIn;
+    @ManyToOne
+    private Election participatingIn;
     private boolean voted;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     public Voter() {
-        participatingIn = new ArrayList<>();
+        participatingIn = null;
         this.generatedId = UUID.randomUUID();
         this.voted = false;
     }
 
-    public Voter(List<Election> participatingIn) {
+    public Voter(Election participatingIn) {
         this.participatingIn = participatingIn;
         this.generatedId = UUID.randomUUID();
         this.voted = false;
@@ -38,19 +36,14 @@ public class Voter extends PanacheEntity {
         return generatedId;
     }
 
-    public void addParticipating(Election election){
-        if(!participatingIn.contains(election)){
-            participatingIn.add(election);
-        }
+    public void setParticipatingIn(Election election){
+        participatingIn = election;
     }
 
-    public List<Election> getParticipatingIn() {
+    public Election getParticipatingIn() {
         return participatingIn;
     }
 
-    public void setParticipatingIn(List<Election> participatingIn) {
-        this.participatingIn = participatingIn;
-    }
 
     public boolean isVoted() {
         return voted;
