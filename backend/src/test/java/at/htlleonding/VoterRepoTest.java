@@ -125,11 +125,11 @@ public class VoterRepoTest {
     @Transactional
     public void Election_Test_Voter_in_no_Election() {
         //arrange
-        Candidate candidate_notInElection = new Candidate("id1", "c1", "notInElection", "1b");
+        Candidate candidate1 = new Candidate("id1", "c1", "notInElection", "1b");
         List<Candidate> candidateList = new ArrayList<>();
 
         //act
-        entityManager.persist(candidate_notInElection);
+        entityManager.persist(candidate1);
         Election election1 = new Election(
                 "TestElection2",
                 LocalDateTime.now(),
@@ -140,12 +140,18 @@ public class VoterRepoTest {
         entityManager.persist(election1);
         List<Voter> voterList = voterRepository.createVotersForElection(10, new ArrayList<>());
         for (Voter v : voterList) {
-            voterRepository.voteForCandidate(v, candidate_notInElection, election1);
+            voterRepository.voteForCandidate(v, candidate1, election1);
 
         }
 
-        //after
-        entityManager.remove(candidate_notInElection);
+        //assert
+        assertThat(candidate1).isNotIn(election1.getParticipatingCandidates());
+        System.out.println("Candidate1 not in Election :) \n\n");
+
+        //TODO: assertThat() votes von candidate1 sind 0 (oder gar nicht vorhanden)
+
+        //after0
+        entityManager.remove(candidate1);
         for (Voter v : voterList) {
             entityManager.remove(v);
         }
