@@ -25,6 +25,7 @@ public class VoterRepoTest {
 
     @Inject
     VoterRepository voterRepository;
+
     @Test
     @Transactional
     public void Election_good() {
@@ -46,13 +47,14 @@ public class VoterRepoTest {
                 "TestType",
                 candidateList
         );
+        entityManager.persist(election1);
         electionList.add(election1);
-        List<Voter> voterList = voterRepository.createVotersForElection(10,electionList);
-        for (Voter v:voterList             ) {
-            voterRepository.voteForCandidate(v,candidate1,election1);
+        List<Voter> voterList = voterRepository.createVotersForElection(10, electionList);
+        for (Voter v : voterList) {
+            voterRepository.voteForCandidate(v, candidate1, election1);
         }
 
         //assert
-        assert(election1.getParticipatingCandidates().equals(candidateList));
+        assertThat(election1.getParticipatingCandidates()).isEqualTo(candidateList);
     }
 }
