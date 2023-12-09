@@ -12,15 +12,19 @@ import java.util.List;
 
 public class Blockchain {
     protected List<Block> chain = new ArrayList<>();
-    private final String fileName;
+    private final String filePath;
 
     public Blockchain(String electionFileName) {
-        // Genesis block
-        Block genesisBlock = createGenesisBlock();
-        chain.add(genesisBlock);
-        fileName = electionFileName;
-        File file = new File(electionFileName);
-        addJson(genesisBlock);
+        filePath = "src/main/resources/blockchain/" + electionFileName;
+        File file = new File(filePath);
+        if(file.exists()){
+            chain.addAll(readJsonArray());
+        } else {
+            // Genesis block
+            Block genesisBlock = createGenesisBlock();
+            chain.add(genesisBlock);
+            addJson(genesisBlock);
+        }
     }
 
     private Block createGenesisBlock() {
@@ -59,7 +63,7 @@ public class Blockchain {
 
     private List<Block> readJsonArray() {
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File("src/main/resources/blockchain/" + fileName);
+        File file = new File(filePath);
 
         if (!file.exists() && !file.isDirectory()) {
             // If the file doesn't exist yet, return an empty list
@@ -67,7 +71,8 @@ public class Blockchain {
         }
 
         try {
-            return objectMapper.readValue(file, new TypeReference<List<Block>>() {});
+            List<Block> blocksRead = objectMapper.readValue(file, new TypeReference<List<Block>>() {});
+            return blocksRead;
         } catch (IOException e) {
             throw new RuntimeException("Error reading existing JSON array from file", e);
         }
@@ -75,7 +80,7 @@ public class Blockchain {
 
     private void writeJsonArray(List<Block> blocks) {
         ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File("src/main/resources/blockchain/" + fileName);
+        File file = new File(filePath);
 
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, blocks);
