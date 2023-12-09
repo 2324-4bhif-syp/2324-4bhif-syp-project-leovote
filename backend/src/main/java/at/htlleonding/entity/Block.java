@@ -2,7 +2,7 @@ package at.htlleonding.entity;
 
 import at.htlleonding.control.HashService;
 
-class Block {
+public class Block {
     //<editor-fold desc="Fields">
     private final HashService hashService = new HashService();
     private final int index;

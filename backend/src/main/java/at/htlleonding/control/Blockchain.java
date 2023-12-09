@@ -1,5 +1,7 @@
-package at.htlleonding.entity;
+package at.htlleonding.control;
 
+import at.htlleonding.entity.Block;
+import at.htlleonding.entity.Candidate;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.ArrayList;
