@@ -1,8 +1,10 @@
 package at.htlleonding.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Candidate extends PanacheEntity {
@@ -18,7 +20,7 @@ public class Candidate extends PanacheEntity {
     public Candidate() {
     }
 
-    public Candidate(String schoolId, String firstName, String lastName, String grade) {
+    public Candidate(@JsonProperty("schoolId") String schoolId, @JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("grade") String grade) {
         this.schoolId = schoolId;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -1,6 +1,7 @@
 package at.htlleonding.entity;
 
 import at.htlleonding.control.HashService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Block {
     //<editor-fold desc="Fields">
@@ -13,7 +14,7 @@ public class Block {
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
-    public Block(int index, Long timestamp, Candidate voted, String previousHash) {
+    public Block(@JsonProperty("index") int index, @JsonProperty("timestamp") Long timestamp, @JsonProperty("vote") Candidate voted, @JsonProperty("previousHash") String previousHash) {
         this.index = index;
         this.timestamp = timestamp;
         this.voted = voted;
@@ -33,7 +34,19 @@ public class Block {
     }
 
     public Candidate getVote() {
-        return this.voted;
+        return voted;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public String getPreviousHash() {
+        return previousHash;
     }
     //</editor-fold>
 }
