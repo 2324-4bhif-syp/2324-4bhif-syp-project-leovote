@@ -30,7 +30,6 @@ public class VoterRepoTest {
         //arrange
         Candidate candidate_winner = new Candidate("id1", "c1", "votedFor", "1a");
         Candidate candidate_loser = new Candidate("id2", "c2", "notVotedFor", "2b");
-        List<Election> electionList = new ArrayList<>();
         List<Candidate> candidateList = new ArrayList<>();
 
         //act
@@ -46,12 +45,11 @@ public class VoterRepoTest {
                 candidateList
         );
         entityManager.persist(election1);
-        electionList.add(election1);
-        List<Voter> voterList_winner = voterRepository.createVotersForElection(10, electionList);
+        List<Voter> voterList_winner = voterRepository.createVotersForElection(10, election1);
         for (Voter v : voterList_winner) {
             voterRepository.voteForCandidate(v, candidate_winner, election1);
         }
-        List<Voter> voterList_loser = voterRepository.createVotersForElection(2, electionList);
+        List<Voter> voterList_loser = voterRepository.createVotersForElection(2, election1);
         for (Voter v : voterList_winner) {
             voterRepository.voteForCandidate(v, candidate_loser, election1);
         }
@@ -83,7 +81,6 @@ public class VoterRepoTest {
         //arrange
         Candidate candidate_notVotedFor = new Candidate("id1", "c1", "notVotedFor", "1a");
         Candidate candidate_notInElection = new Candidate("id2", "c2", "notInElection", "2b");
-        List<Election> electionList = new ArrayList<>();
         List<Candidate> candidateList = new ArrayList<>();
 
         //act
@@ -98,8 +95,7 @@ public class VoterRepoTest {
                 candidateList
         );
         entityManager.persist(election1);
-        electionList.add(election1);
-        List<Voter> voterList = voterRepository.createVotersForElection(10, electionList);
+        List<Voter> voterList = voterRepository.createVotersForElection(10, election1);
         for (Voter v : voterList) {
             voterRepository.voteForCandidate(v, candidate_notInElection, election1);
         }
@@ -138,7 +134,7 @@ public class VoterRepoTest {
                 candidateList
         );
         entityManager.persist(election1);
-        List<Voter> voterList = voterRepository.createVotersForElection(10, new ArrayList<>());
+        List<Voter> voterList = voterRepository.createVotersForElection(10, null);
         for (Voter v : voterList) {
             voterRepository.voteForCandidate(v, candidate1, election1);
 

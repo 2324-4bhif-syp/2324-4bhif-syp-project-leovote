@@ -50,23 +50,12 @@ public class InitBean {
         entityManager.persist(election1);
         entityManager.persist(election2);
 
-        List<Election> electionList = new ArrayList<>();
-        electionList.add(election1);
-
-        List<Election> electionList1 = new ArrayList<>();
-        electionList1.add(election2);
-
-        Voter voter = new Voter();
-        voter.addParticipating(election1);
-        voterRepository.createVotersForElection(10, electionList1);
-        voterRepository.createVotersForElection(10, electionList);
+        Voter voter = new Voter(election1);
+        voterRepository.createVotersForElection(10, election1);
+        voterRepository.createVotersForElection(10, election2);
 
         voterRepository.voteForCandidate(voter, candidate1, election1);
 
-        Blockchain blockchain = new Blockchain("Student_Council_Election-3sec-9-12-2023-3sec-16-12-2023.json");
-        blockchain.addBlock(candidate1);
-        blockchain.addBlock(candidate1);
-        blockchain.addBlock(candidate2);
-        blockchain.addBlock(candidate2);
+        voterRepository.voteForCandidate(voter, candidate1, election1);
     }
 }
