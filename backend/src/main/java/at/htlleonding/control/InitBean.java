@@ -63,7 +63,7 @@ public class InitBean {
 
         voterRepository.voteForCandidate(voter, candidate1, election1);
 
-        Blockchain blockchain = new Blockchain(election1.getBlockchainFileName());
+        Blockchain blockchain = new Blockchain("Student_Council_Election-3sec-9-12-2023-3sec-16-12-2023.json");
         blockchain.addBlock(candidate1);
         blockchain.addBlock(candidate1);
         blockchain.addBlock(candidate2);

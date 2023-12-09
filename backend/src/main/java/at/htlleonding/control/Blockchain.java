@@ -4,11 +4,8 @@ import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
-import org.json.JSONWriter;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +78,7 @@ public class Blockchain {
         File file = new File("src/main/resources/blockchain/" + fileName);
 
         try {
-            objectMapper.writeValue(file, blocks);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, blocks);
         } catch (IOException e) {
             throw new RuntimeException("Error writing updated JSON array to file", e);
         }
