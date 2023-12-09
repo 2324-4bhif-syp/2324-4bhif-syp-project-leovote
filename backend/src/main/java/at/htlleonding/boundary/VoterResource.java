@@ -14,8 +14,9 @@ import jakarta.ws.rs.core.Response;
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
     VoterRepository voterRepository = CDI.current().select(VoterRepository.class).get();
 
-    @GET
+    @POST
     @Path("/vote/{electionId}/{candidateId}")
+    @Consumes("application/json")
     @Produces("application/json")
     default Response vote(
             @PathParam("electionId") Long electionId,
