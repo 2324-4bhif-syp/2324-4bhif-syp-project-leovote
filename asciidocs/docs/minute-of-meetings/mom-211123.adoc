@@ -65,5 +65,5 @@ a|
 * Die vorgefertigten Daten in einer import.sql mit candidate, election, voters (und ob es gewählt wurde) anlegen
 * Anzahl der Voter mittels Blockchain ermitteln
 * Test mit vorgefertigten Beispiele schreiben ("Wahl simulieren")
-| 05.12.2023
+| 12.12.2023
 |===
