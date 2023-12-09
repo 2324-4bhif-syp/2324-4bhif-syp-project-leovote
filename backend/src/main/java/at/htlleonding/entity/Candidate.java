@@ -16,7 +16,6 @@ public class Candidate extends PanacheEntity {
 
     //<editor-fold desc="Constructors">
     public Candidate() {
-
     }
 
     public Candidate(String schoolId, String firstName, String lastName, String grade) {
