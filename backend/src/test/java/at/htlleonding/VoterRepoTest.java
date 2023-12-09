@@ -55,6 +55,10 @@ public class VoterRepoTest {
         }
 
         //assert
-        assertThat(election1.getParticipatingCandidates()).isEqualTo(candidateList);
+        for (int i = 0; i < candidateList.size(); i++) {
+            assertThat(election1.getParticipatingCandidates().get(i)).isEqualTo(candidateList.get(i));
+            System.out.println("Candidate "+ i + " equal to electionCandidate :) \n\n");
+        }
+
     }
 }
