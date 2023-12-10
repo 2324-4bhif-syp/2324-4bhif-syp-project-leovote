@@ -38,8 +38,6 @@ public class Blockchain {
                 "genesisLastName",
                 "genClass"
         );
-        List<Candidate> candidates = new ArrayList<>();
-        candidates.add(candidate1);
 
         return new Block(0, System.currentTimeMillis(), candidate1, "0");
     }
