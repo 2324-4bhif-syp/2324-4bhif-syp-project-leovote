@@ -10,6 +10,9 @@ import jakarta.enterprise.inject.spi.CDI;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
+import java.util.List;
+import java.util.UUID;
+
 @ResourceProperties(path = "voters")
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
     VoterRepository voterRepository = CDI.current().select(VoterRepository.class).get();
@@ -21,7 +24,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     default Response vote(
             @PathParam("electionId") Long electionId,
             @PathParam("candidateId") Long candidateId,
-            @HeaderParam("voterId") Long voterId
+            @HeaderParam("voterId") UUID voterId
     ) {
         Election election = Election.findById(electionId);
         Candidate candidate = Candidate.findById(candidateId);
@@ -34,5 +37,24 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         }
 
         return Response.status(Response.Status.FORBIDDEN).build();
+    }
+
+    @POST
+    @Path("/elecetion/{electionId}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    default Response createVoters(
+            @PathParam("electionId") Long electionId,
+            @HeaderParam("voterCount") int voterCount
+    ) {
+        Election election = Election.findById(electionId);
+
+        List<Voter> voters = voterRepository.createVotersForElection(voterCount, election);
+
+        if (!voters.isEmpty()) {
+            return Response.status(Response.Status.CREATED).entity(voters).build();
+        }
+
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }
