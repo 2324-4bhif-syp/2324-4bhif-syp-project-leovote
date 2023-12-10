@@ -7,11 +7,13 @@ import at.htlleonding.entity.Voter;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
 import jakarta.enterprise.inject.spi.CDI;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 
 @ResourceProperties(path = "voters")
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
@@ -19,13 +21,15 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
 
     @POST
     @Path("/vote/{electionId}/{candidateId}")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
     default Response vote(
             @PathParam("electionId") Long electionId,
             @PathParam("candidateId") Long candidateId,
-            @HeaderParam("voterId") UUID voterId
+            Map<String, Integer> requestBody
     ) {
+        Integer voterId = requestBody.get("voterId");
         Election election = Election.findById(electionId);
         Candidate candidate = Candidate.findById(candidateId);
         Voter voter = Voter.findById(voterId);
@@ -41,8 +45,8 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
 
     @POST
     @Path("/elecetion/{electionId}")
-    @Consumes("application/json")
-    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     default Response createVoters(
             @PathParam("electionId") Long electionId,
             @HeaderParam("voterCount") int voterCount

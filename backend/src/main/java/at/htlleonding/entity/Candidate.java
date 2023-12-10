@@ -76,4 +76,13 @@ public class Candidate extends PanacheEntity {
     public int hashCode() {
         return Objects.hash(schoolId, firstName, lastName, grade);
     }
+
+    @Override
+    public String toString() {
+        return "Candidate: " +
+                "Firstname: " + firstName + " " +
+                "Lastname: " + lastName + " " +
+                "Grade: " + grade + " " +
+                "SchoolId" + schoolId + " ";
+    }
 }

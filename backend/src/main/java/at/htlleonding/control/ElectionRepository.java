@@ -3,10 +3,8 @@ package at.htlleonding.control;
 import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
-import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.EntityManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +34,6 @@ public class ElectionRepository implements PanacheRepository<Election> {
             double percentage = (double) votes / totalVotes * 100.0;
             results.put(candidate, percentage);
         }
-
         return results;
     }
 }
