@@ -43,6 +43,11 @@ image::prove.jpg[background]
 * Blockchain
 * Verhinderung von Unsicherheiten
 
+=== Anforderungen
+* Implementation der Blockchain
+* Wahlsimulation in der Konsole
+* Zugriff via REST
+
 [%auto-animate]
 === [.margin-b-10]#Blockchain#
 image::blockchain.png[height=80%, width=80%]
@@ -57,3 +62,8 @@ image::ziele.jpg[background]
 * Schnelle Auswertung
 
 === Live Demo
+
+== Ideen für nächsten Sprint:
+
+* Sicherheit gewährleisten
+* Frontend
