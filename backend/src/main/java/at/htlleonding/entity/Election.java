@@ -17,7 +17,7 @@ public class Election extends PanacheEntity {
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
-    })
+    }, fetch = FetchType.EAGER)
     private List<Candidate> participatingCandidates;
     //</editor-fold>
 

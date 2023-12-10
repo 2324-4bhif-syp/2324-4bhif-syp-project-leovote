@@ -26,6 +26,16 @@ Accept: application/json
   "voterId": 1
 }
 
+###
+POST http://localhost:8080/voters/elecetion/2
+Content-Type: application/json
+Accept: application/json
+
+{
+  "voterCount": 10
+}
+
+
 ### Update a Voter
 PUT http://localhost:8080/voters/1
 Content-Type: application/json

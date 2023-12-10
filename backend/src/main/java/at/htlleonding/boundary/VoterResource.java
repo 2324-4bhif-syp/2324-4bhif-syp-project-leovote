@@ -47,18 +47,19 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     @Path("/elecetion/{electionId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
     default Response createVoters(
             @PathParam("electionId") Long electionId,
-            @HeaderParam("voterCount") int voterCount
+            Map<String, Integer> requestBody
     ) {
         Election election = Election.findById(electionId);
+        Integer voterCount = requestBody.get("voterCount");
 
         List<Voter> voters = voterRepository.createVotersForElection(voterCount, election);
 
         if (voters.isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
-
-        return Response.status(Response.Status.CREATED).entity(voters).build();
+        return Response.ok(voters).build();
     }
 }
