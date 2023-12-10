@@ -20,6 +20,13 @@ jobs:
           java-version: '17'
           cache: maven
 
+      - name: Start Postgres DB
+        run: |
+          ./postgres-download-script.sh
+          ./postgres-create-db.sh
+          ./postgres-start.sh
+        working-directory: backend
+
       - name: Build
         run: cd backend && ./mvnw package
 
