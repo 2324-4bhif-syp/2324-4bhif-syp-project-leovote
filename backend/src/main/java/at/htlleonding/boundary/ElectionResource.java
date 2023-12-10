@@ -27,16 +27,12 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
         Election election = Election.findById(electionId);
 
         if (election == null) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         HashMap<Candidate, Double> results = electionRepository.reviewResults(election);
 
-        if (results.isEmpty()) {
-            return Response.accepted().build();
-        }
-
-        return Response.status(Response.Status.FORBIDDEN).build();
+        return Response.accepted(results).build();
     }
 }
 
