@@ -18,5 +18,84 @@ image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubuse
 * Alexander Nikolaus
 * David Lehner
 
+== Start
+
+=== Backend
+* Open your terminal and go to backend folder
+[source, bash]
+----
+cd backend
+----
+.Set up Postgres-DB
+
+[%collapsible]
+====
+Terminal:
+[source, bash]
+----
+cd backend
+----
+Datenbank erstellen:
+
+[source, bash]
+----
+./postgres-download-scripts.sh
+./postgres-create-db.sh
+./postgres-start.sh
+----
+Datasource in IntelliJ IDEA erstellen:
+
+1. datasource.txt öffnen
+2. datasource.txt kopieren
+3. auf rechte Seite Database -> `{plus}`
+4. Import from Clipboard
+5. beim ersten Mal die Treiber installieren
+6. Password: app
+7. Test connection
+8. Auf OK klicken
+====
+
+* Start quarkus
+[source, bash]
+----
+./mvnw clean quarkus:dev
+----
+
+
+=== Frontend
+* Open a new terminal and go to frontend folder
+[source, bash]
+----
+cd frontend
+----
+
+* Install node_modules
+[source, bash]
+----
+npm install
+----
+
+.Install Angular
+
+[%collapsible]
+====
+
+[source, bash]
+----
+npm install -g @angular/cli
+----
+
+====
+
+
+* Start angular app
+[source, bash]
+----
+ng serve
+----
+
 == Sprint Backlog
 https://vm81.htl-leonding.ac.at/agiles/99-385/current[Sprint Backlog]
+
+== Slides
+https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/slides/slide.html[Slides]
