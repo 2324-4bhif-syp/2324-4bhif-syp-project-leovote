@@ -88,4 +88,8 @@ public class Blockchain {
             throw new RuntimeException("Error writing updated JSON array to file", e);
         }
     }
+
+    public List<Block> getBlocks(){
+        return chain;
+    }
 }
