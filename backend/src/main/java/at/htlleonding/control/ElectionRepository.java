@@ -9,18 +9,20 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 
 import java.util.HashMap;
+import java.util.List;
 
 @ApplicationScoped
 public class ElectionRepository implements PanacheRepository<Election> {
-    EntityManager entityManager = Panache.getEntityManager();
 
     public HashMap<Candidate, Double> reviewResults (Election election){
         HashMap<Candidate, Integer> voteCounts = new HashMap<>();
         Blockchain blockchain = new Blockchain(election.getBlockchainFileName());
+        List<Block> chain = blockchain.getBlocks();
 
         // Assuming the Candidate class has proper equals() and hashCode() implementations
-        for (Block block : blockchain.getBlocks()) {
-            Candidate votedCandidate = block.getVote();
+        for (int i = 1; i < chain.size(); i++) {
+            Candidate votedCandidate = chain.get(i).getVote();
+            System.out.println((votedCandidate.getFirstName() + " " + votedCandidate.getSchoolId()));
 
             // Update vote count for the candidate
             voteCounts.put(votedCandidate, voteCounts.getOrDefault(votedCandidate, 0) + 1);

@@ -20,6 +20,9 @@ public class InitBean {
     @Inject
     VoterRepository voterRepository;
 
+    @Inject
+    ElectionRepository electionRepository;
+
     @Transactional
     public void initData(@Observes StartupEvent event) {
         // Create and persist candidates
@@ -56,6 +59,6 @@ public class InitBean {
 
         voterRepository.voteForCandidate(voter, candidate1, election1);
 
-        voterRepository.voteForCandidate(voter, candidate1, election1);
+        System.out.println((electionRepository.reviewResults(election1)));
     }
 }
