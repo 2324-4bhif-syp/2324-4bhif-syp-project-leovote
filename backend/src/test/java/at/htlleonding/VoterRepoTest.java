@@ -28,8 +28,8 @@ public class VoterRepoTest {
     @Transactional
     public void Election_Test_good() {
         //arrange
-        Candidate candidate_winner = new Candidate("id1", "c1", "votedFor", "1a");
-        Candidate candidate_loser = new Candidate("id2", "c2", "notVotedFor", "2b");
+        Candidate candidate_winner = new Candidate("id1", "c1", "winner", "1a");
+        Candidate candidate_loser = new Candidate("id2", "c2", "looser", "1a");
         List<Candidate> candidateList = new ArrayList<>();
 
         //act
@@ -50,19 +50,30 @@ public class VoterRepoTest {
             voterRepository.voteForCandidate(v, candidate_winner, election1);
         }
         List<Voter> voterList_loser = voterRepository.createVotersForElection(2, election1);
-        for (Voter v : voterList_winner) {
+        for (Voter v : voterList_loser) {
             voterRepository.voteForCandidate(v, candidate_loser, election1);
         }
 
         //assert
         assertThat(candidateList.size()).isEqualTo(2);
-        System.out.println("CandidateList Size :) \n\n");
+        System.out.println("CandidateList Size good \n\n");
         for (int i = 0; i < candidateList.size(); i++) {
             assertThat(election1.getParticipatingCandidates().get(i)).isEqualTo(candidateList.get(i));
-            System.out.println("Candidate " + i + " equal to electionCandidate :) \n\n");
         }
+        System.out.println("Candidates are equal to electionCandidates \n\n");
+
         //TODO: assertThat() votes von Candidate equal zu den abgegebenen votes (10) und (2)
 
+
+
+        //DONE: assertThat() Voters von Candidate haben ihren Vote verbraucht
+
+        for (Voter v : voterList_winner) {
+            assertThat(v.isVoted()).isEqualTo(true);
+        }
+        for (Voter v : voterList_loser) {
+            assertThat(v.isVoted()).isEqualTo(true);
+        }
         //after
         entityManager.remove(candidate_winner);
         entityManager.remove(candidate_loser);
@@ -79,14 +90,11 @@ public class VoterRepoTest {
     @Transactional
     public void Election_Test_Candidate_not_in_Election() {
         //arrange
-        Candidate candidate_notVotedFor = new Candidate("id1", "c1", "notVotedFor", "1a");
         Candidate candidate_notInElection = new Candidate("id2", "c2", "notInElection", "2b");
         List<Candidate> candidateList = new ArrayList<>();
 
         //act
-        entityManager.persist(candidate_notVotedFor);
         entityManager.persist(candidate_notInElection);
-        candidateList.add(candidate_notVotedFor);
         Election election1 = new Election(
                 "TestElection2",
                 LocalDateTime.now(),
@@ -108,8 +116,11 @@ public class VoterRepoTest {
         //TODO: assertThat() votes von candidate_notInElection sind 0 (oder gar nicht vorhanden)
         //TODO: assertThat() voters haben noch ihre votes (weil sie einen nicht verfügbaren candidate gevotet haben
 
+        for (Voter v : voterList) {
+            assertThat(v.isVoted()).isEqualTo(false);
+        }
+
         //after
-        entityManager.remove(candidate_notVotedFor);
         entityManager.remove(candidate_notInElection);
         for (Voter v : voterList) {
             entityManager.remove(v);
@@ -134,7 +145,7 @@ public class VoterRepoTest {
                 candidateList
         );
         entityManager.persist(election1);
-        List<Voter> voterList = voterRepository.createVotersForElection(10, null);
+        List<Voter> voterList = voterRepository.createVotersForElection(10, election1);
         for (Voter v : voterList) {
             voterRepository.voteForCandidate(v, candidate1, election1);
 
@@ -145,6 +156,10 @@ public class VoterRepoTest {
         System.out.println("Candidate1 not in Election :) \n\n");
 
         //TODO: assertThat() votes von candidate1 sind 0 (oder gar nicht vorhanden)
+
+        for (Voter v : voterList) {
+            assertThat(v.isVoted()).isEqualTo(false);
+        }
 
         //after0
         entityManager.remove(candidate1);
