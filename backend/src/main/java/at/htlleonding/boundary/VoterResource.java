@@ -32,11 +32,11 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
 
         boolean voteIsValid = voterRepository.voteForCandidate(voter, candidate, election);
 
-        if (voteIsValid) {
-            return Response.accepted().build();
+        if (!voteIsValid) {
+            return Response.status(Response.Status.FORBIDDEN).build();
         }
 
-        return Response.status(Response.Status.FORBIDDEN).build();
+        return Response.accepted().build();
     }
 
     @POST
@@ -51,10 +51,10 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
 
         List<Voter> voters = voterRepository.createVotersForElection(voterCount, election);
 
-        if (!voters.isEmpty()) {
-            return Response.status(Response.Status.CREATED).entity(voters).build();
+        if (voters.isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.CREATED).entity(voters).build();
     }
 }
