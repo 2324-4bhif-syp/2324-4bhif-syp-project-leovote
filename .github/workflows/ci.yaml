@@ -22,7 +22,7 @@ jobs:
 
       - name: Start Postgres DB
         run: |
-          ./postgres-download-script.sh
+          ./postgres-download-scripts.sh
           ./postgres-create-db.sh
           ./postgres-start.sh
         working-directory: backend
