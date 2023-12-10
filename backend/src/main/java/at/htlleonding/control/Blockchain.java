@@ -71,8 +71,7 @@ public class Blockchain {
         }
 
         try {
-            List<Block> blocksRead = objectMapper.readValue(file, new TypeReference<List<Block>>() {});
-            return blocksRead;
+            return objectMapper.readValue(file, new TypeReference<List<Block>>() {});
         } catch (IOException e) {
             throw new RuntimeException("Error reading existing JSON array from file", e);
         }

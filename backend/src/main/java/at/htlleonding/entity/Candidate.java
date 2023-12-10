@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+
+import java.util.Objects;
 
 @Entity
 public class Candidate extends PanacheEntity {
@@ -61,4 +62,18 @@ public class Candidate extends PanacheEntity {
         this.grade = grade;
     }
     //</editor-fold>
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Candidate candidate = (Candidate) o;
+        return Objects.equals(schoolId, candidate.schoolId) && Objects.equals(firstName, candidate.firstName) && Objects.equals(lastName, candidate.lastName) && Objects.equals(grade, candidate.grade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(schoolId, firstName, lastName, grade);
+    }
 }
