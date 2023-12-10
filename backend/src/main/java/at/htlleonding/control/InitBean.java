@@ -57,12 +57,18 @@ public class InitBean {
         List<Voter> voters2 = voterRepository.createVotersForElection(10, election2);
 
         for(Voter voter: voters1){
+            System.out.println(voter.getGeneratedId());
             voterRepository.voteForCandidate(voter, candidate1, election1);
         }
         System.out.println((electionRepository.reviewResults(election1)));
 
         for(Voter voter: voters2){
-            voterRepository.voteForCandidate(voter, candidate1, election2);
+            System.out.println(voter.getGeneratedId());
+            if(voter.id %2 == 0){
+                voterRepository.voteForCandidate(voter, candidate2, election2);
+            } else {
+                voterRepository.voteForCandidate(voter, candidate1, election2);
+            }
         }
         System.out.println((electionRepository.reviewResults(election2)));
 
