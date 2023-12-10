@@ -17,6 +17,11 @@ public class ElectionRepository implements PanacheRepository<Election> {
         Blockchain blockchain = new Blockchain(election.getBlockchainFileName());
         List<Block> chain = blockchain.getBlocks();
 
+        // Add candidates to Hashmap
+        for(Candidate candidate: election.getParticipatingCandidates()){
+            voteCounts.put(candidate, 0);
+        }
+
         // Assuming the Candidate class has proper equals() and hashCode() implementations
         for (int i = 1; i < chain.size(); i++) {
             Candidate votedCandidate = chain.get(i).getVote();

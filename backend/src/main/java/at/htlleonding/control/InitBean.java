@@ -53,12 +53,18 @@ public class InitBean {
         entityManager.persist(election1);
         entityManager.persist(election2);
 
-        Voter voter = new Voter(election1);
-        voterRepository.createVotersForElection(10, election1);
-        voterRepository.createVotersForElection(10, election2);
+        List<Voter> voters1 = voterRepository.createVotersForElection(10, election1);
+        List<Voter> voters2 = voterRepository.createVotersForElection(10, election2);
 
-        voterRepository.voteForCandidate(voter, candidate1, election1);
-
+        for(Voter voter: voters1){
+            voterRepository.voteForCandidate(voter, candidate1, election1);
+        }
         System.out.println((electionRepository.reviewResults(election1)));
+
+        for(Voter voter: voters2){
+            voterRepository.voteForCandidate(voter, candidate1, election2);
+        }
+        System.out.println((electionRepository.reviewResults(election2)));
+
     }
 }
