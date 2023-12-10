@@ -1,5 +1,6 @@
 package at.htlleonding;
 
+import at.htlleonding.control.ElectionRepository;
 import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
@@ -20,6 +21,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class VoterRepoTest {
     @Inject
     EntityManager entityManager;
+
+    @Inject
+    ElectionRepository electionRepository;
 
     @Inject
     VoterRepository voterRepository;
@@ -45,7 +49,7 @@ public class VoterRepoTest {
                 candidateList
         );
         entityManager.persist(election1);
-        List<Voter> voterList_winner = voterRepository.createVotersForElection(10, election1);
+        List<Voter> voterList_winner = voterRepository.createVotersForElection(8, election1);
         for (Voter v : voterList_winner) {
             voterRepository.voteForCandidate(v, candidate_winner, election1);
         }
@@ -62,11 +66,9 @@ public class VoterRepoTest {
         }
         System.out.println("Candidates are equal to electionCandidates \n\n");
 
-        //TODO: assertThat() votes von Candidate equal zu den abgegebenen votes (10) und (2)
-
-
-
-        //DONE: assertThat() Voters von Candidate haben ihren Vote verbraucht
+        assertThat(electionRepository.reviewResults(election1).get(candidate_winner)).isEqualTo(80);
+        assertThat(electionRepository.reviewResults(election1).get(candidate_loser)).isEqualTo(20);
+        System.out.println("Candidates results are good");
 
         for (Voter v : voterList_winner) {
             assertThat(v.isVoted()).isEqualTo(true);
@@ -74,6 +76,7 @@ public class VoterRepoTest {
         for (Voter v : voterList_loser) {
             assertThat(v.isVoted()).isEqualTo(true);
         }
+
         //after
         entityManager.remove(candidate_winner);
         entityManager.remove(candidate_loser);
@@ -113,8 +116,8 @@ public class VoterRepoTest {
             assertThat(election1.getParticipatingCandidates().get(i)).isEqualTo(candidateList.get(i));
             System.out.println("Candidate " + i + " equal to electionCandidate :) \n\n");
         }
-        //TODO: assertThat() votes von candidate_notInElection sind 0 (oder gar nicht vorhanden)
-        //TODO: assertThat() voters haben noch ihre votes (weil sie einen nicht verfügbaren candidate gevotet haben
+
+        assertThat(electionRepository.reviewResults(election1).get(candidate_notInElection)).isEqualTo(null);
 
         for (Voter v : voterList) {
             assertThat(v.isVoted()).isEqualTo(false);
@@ -155,7 +158,7 @@ public class VoterRepoTest {
         assertThat(candidate1).isNotIn(election1.getParticipatingCandidates());
         System.out.println("Candidate1 not in Election :) \n\n");
 
-        //TODO: assertThat() votes von candidate1 sind 0 (oder gar nicht vorhanden)
+        assertThat(electionRepository.reviewResults(election1).get(candidate1)).isEqualTo(null);
 
         for (Voter v : voterList) {
             assertThat(v.isVoted()).isEqualTo(false);
