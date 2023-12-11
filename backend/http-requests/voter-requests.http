@@ -18,12 +18,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/voters/vote/1/1
+POST http://localhost:8080/voters/vote/2/2
 Content-Type: application/json
 Accept: application/json
 
 {
-  "voterId": 1
+  "voterId": "c779e51e-4f68-4619-8ae6-1a99033d0bfb"
 }
 
 ###

@@ -62,9 +62,10 @@ public class InitBean {
         }
         System.out.println((electionRepository.reviewResults(election1)));
 
-        for(Voter voter: voters2){
+        for(int i = 0; i < voters2.size(); i++){
+            Voter voter = voters2.get(i);
             System.out.println(voter.getGeneratedId());
-            if(voter.id %2 == 0){
+            if(i %2 == 0){
                 voterRepository.voteForCandidate(voter, candidate2, election2);
             } else {
                 voterRepository.voteForCandidate(voter, candidate1, election2);

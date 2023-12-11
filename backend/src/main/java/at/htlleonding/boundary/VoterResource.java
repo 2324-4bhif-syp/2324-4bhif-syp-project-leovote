@@ -14,6 +14,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @ResourceProperties(path = "voters")
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
@@ -27,9 +28,9 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     default Response vote(
             @PathParam("electionId") Long electionId,
             @PathParam("candidateId") Long candidateId,
-            Map<String, Integer> requestBody
+            Map<String, UUID> requestBody
     ) {
-        Integer voterId = requestBody.get("voterId");
+        UUID voterId = requestBody.get("voterId");
         Election election = Election.findById(electionId);
         Candidate candidate = Candidate.findById(candidateId);
         Voter voter = Voter.findById(voterId);

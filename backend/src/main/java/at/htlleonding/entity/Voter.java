@@ -1,14 +1,15 @@
 package at.htlleonding.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
 import java.util.UUID;
 
 
 @Entity
-public class Voter extends PanacheEntity {
+public class Voter extends PanacheEntityBase {
     //<editor-fold desc="Fields">
+    @Id
     @Column(unique = true)
     private UUID generatedId;
     @ManyToOne
