@@ -176,7 +176,7 @@ public class VoterRepoTest {
             assertThat(v.isVoted()).isEqualTo(false);
         }
 
-        //after0
+        //after
         entityManager.remove(candidate1);
         for (Voter v : voterList) {
             entityManager.remove(v);

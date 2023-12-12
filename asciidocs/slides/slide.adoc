@@ -77,5 +77,4 @@ image::blockchain.png[height=80%, width=80%]
 
 == Ideen für den nächsten Sprint:
 
-* Sicherheit der Blockchain gewährleisten
 * Frontend
