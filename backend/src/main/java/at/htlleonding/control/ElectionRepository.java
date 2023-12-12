@@ -13,26 +13,25 @@ import java.util.List;
 public class ElectionRepository implements PanacheRepository<Election> {
     private final HashService hashService = new HashService();
 
-    public HashMap<Candidate, Double> reviewResults (Election election) throws Exception {
+    public HashMap<Candidate, Double> reviewResults(Election election) throws Exception {
         HashMap<Candidate, Integer> voteCounts = new HashMap<>();
         Blockchain blockchain = new Blockchain(election.getBlockchainFileName());
         List<Block> chain = blockchain.getBlocks();
 
         // Add candidates to Hashmap
-        for(Candidate candidate: election.getParticipatingCandidates()){
+        for (Candidate candidate : election.getParticipatingCandidates()) {
             voteCounts.put(candidate, 0);
         }
 
         String lastHash = "";
-        for(Block block: chain){
-            if (!block.getPreviousHash().equals("0")) {
-                if (!block.getPreviousHash().equals(lastHash)) {
-                    throw new Exception("Hashes don't fit. Could've been manipulated");
-                }
+        for (Block block : chain) {
+            if (!block.getPreviousHash().equals("0") &&
+                    !block.getPreviousHash().equals(lastHash)) {
+                throw new Exception("Hashes don't fit. Could've been manipulated");
             }
             lastHash = block.getHash();
 
-            if(!block.getHash().equals(calculateHash(block))){
+            if (!block.getHash().equals(calculateHash(block))) {
                 throw new Exception("Hashes don't fit. Could've been manipulated");
             }
         }
@@ -57,7 +56,7 @@ public class ElectionRepository implements PanacheRepository<Election> {
         return results;
     }
 
-    private String calculateHash(Block block){
+    private String calculateHash(Block block) {
         String data = block.getIndex() + block.getTimestamp() + block.getVote().toString() + block.getPreviousHash();
         return hashService.calculateSHA256Hash(data);
     }
