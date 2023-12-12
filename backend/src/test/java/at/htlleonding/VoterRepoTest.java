@@ -66,8 +66,12 @@ public class VoterRepoTest {
         }
         System.out.println("Candidates are equal to electionCandidates \n\n");
 
-        assertThat(electionRepository.reviewResults(election1).get(candidate_winner)).isEqualTo(80);
-        assertThat(electionRepository.reviewResults(election1).get(candidate_loser)).isEqualTo(20);
+        try {
+            assertThat(electionRepository.reviewResults(election1).get(candidate_winner)).isEqualTo(80);
+            assertThat(electionRepository.reviewResults(election1).get(candidate_loser)).isEqualTo(20);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("Candidates results are good");
 
         for (Voter v : voterList_winner) {
@@ -117,7 +121,11 @@ public class VoterRepoTest {
             System.out.println("Candidate " + i + " equal to electionCandidate :) \n\n");
         }
 
-        assertThat(electionRepository.reviewResults(election1).get(candidate_notInElection)).isEqualTo(null);
+        try {
+            assertThat(electionRepository.reviewResults(election1).get(candidate_notInElection)).isEqualTo(null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         for (Voter v : voterList) {
             assertThat(v.isVoted()).isEqualTo(false);
@@ -158,7 +166,11 @@ public class VoterRepoTest {
         assertThat(candidate1).isNotIn(election1.getParticipatingCandidates());
         System.out.println("Candidate1 not in Election :) \n\n");
 
-        assertThat(electionRepository.reviewResults(election1).get(candidate1)).isEqualTo(null);
+        try {
+            assertThat(electionRepository.reviewResults(election1).get(candidate1)).isEqualTo(null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         for (Voter v : voterList) {
             assertThat(v.isVoted()).isEqualTo(false);

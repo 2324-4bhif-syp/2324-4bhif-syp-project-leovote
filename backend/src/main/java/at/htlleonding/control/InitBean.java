@@ -60,7 +60,11 @@ public class InitBean {
             System.out.println(voter.getGeneratedId());
             voterRepository.voteForCandidate(voter, candidate1, election1);
         }
-        System.out.println((electionRepository.reviewResults(election1)));
+        try {
+            System.out.println((electionRepository.reviewResults(election1)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         for(int i = 0; i < voters2.size(); i++){
             Voter voter = voters2.get(i);
@@ -71,7 +75,11 @@ public class InitBean {
                 voterRepository.voteForCandidate(voter, candidate1, election2);
             }
         }
-        System.out.println((electionRepository.reviewResults(election2)));
+        try {
+            System.out.println((electionRepository.reviewResults(election2)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

@@ -5,7 +5,7 @@ GET http://localhost:8080/elections
 GET http://localhost:8080/elections/1
 
 ### Get Result from Election
-GET http://localhost:8080/elections/results/1
+GET http://localhost:8080/elections/results/2
 
 ### Create a new election
 POST http://localhost:8080/elections
