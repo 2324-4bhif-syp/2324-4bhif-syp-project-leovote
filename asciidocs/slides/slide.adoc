@@ -1,4 +1,7 @@
 = Leovote
+
+Sprint 3
+
 :revdate: {docdate}
 :encoding: utf-8
 :lang: de
@@ -48,9 +51,14 @@ image::prove.jpg[background]
 * Wahlsimulation in der Konsole
 * Zugriff via REST
 
-[%auto-animate]
-=== [.margin-b-10]#Blockchain#
-image::blockchain.png[height=80%, width=80%]
+== Ist-Zustand
+
+=== Datenbank
+image::ERD.png[height=80%, width=80%]
+
+=== Klassendiagramm
+image::CLD.png[height=50%, width=50%]
+
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
@@ -63,7 +71,11 @@ image::ziele.jpg[background]
 
 === Live Demo
 
+[%auto-animate]
+=== [.margin-b-10]#Blockchain#
+image::blockchain.png[height=80%, width=80%]
+
 == Ideen für nächsten Sprint:
 
-* Sicherheit gewährleisten
+* Sicherheit der Blockchain gewährleisten
 * Frontend
