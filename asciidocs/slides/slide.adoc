@@ -75,7 +75,7 @@ image::ziele.jpg[background]
 === [.margin-b-10]#Blockchain#
 image::blockchain.png[height=80%, width=80%]
 
-== Ideen für nächsten Sprint:
+== Ideen für den nächsten Sprint:
 
 * Sicherheit der Blockchain gewährleisten
 * Frontend
