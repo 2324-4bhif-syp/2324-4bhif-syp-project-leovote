@@ -33,9 +33,13 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         UUID voterId = requestBody.get("voterId");
         Election election = Election.findById(electionId);
         Candidate candidate = Candidate.findById(candidateId);
-        Voter voter = Voter.findById(voterId);
-
-        boolean voteIsValid = voterRepository.voteForCandidate(voter, candidate, election);
+        boolean voteIsValid = true;
+        try {
+            Voter voter = Voter.findById(voterId);
+            voteIsValid = voterRepository.voteForCandidate(voter, candidate, election);
+        } catch (Exception e) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
 
         if (!voteIsValid) {
             return Response.status(Response.Status.FORBIDDEN).build();
