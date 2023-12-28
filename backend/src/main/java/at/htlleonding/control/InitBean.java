@@ -42,7 +42,7 @@ public class InitBean {
                 LocalDateTime.now().plusDays(7),
                 "General",
                 candidateList
-                );
+        );
         Election election2 = new Election(
                 "Class Representative Election",
                 LocalDateTime.now(),
@@ -56,15 +56,30 @@ public class InitBean {
         List<Voter> voters1 = voterRepository.createVotersForElection(10, election1);
         List<Voter> voters2 = voterRepository.createVotersForElection(10, election2);
 
-        for(Voter voter: voters1){
+        for (Voter voter : voters1) {
+            System.out.println(voter.getGeneratedId());
             voterRepository.voteForCandidate(voter, candidate1, election1);
         }
-        System.out.println((electionRepository.reviewResults(election1)));
-
-        for(Voter voter: voters2){
-            voterRepository.voteForCandidate(voter, candidate1, election2);
+        try {
+            System.out.println((electionRepository.reviewResults(election1)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        System.out.println((electionRepository.reviewResults(election2)));
+
+        for (int i = 0; i < voters2.size(); i++) {
+            Voter voter = voters2.get(i);
+            System.out.println(voter.getGeneratedId());
+            if (i % 2 == 0) {
+                voterRepository.voteForCandidate(voter, candidate2, election2);
+            } else {
+                voterRepository.voteForCandidate(voter, candidate1, election2);
+            }
+        }
+        try {
+            System.out.println((electionRepository.reviewResults(election2)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

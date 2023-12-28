@@ -31,7 +31,12 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        HashMap<Candidate, Double> results = electionRepository.reviewResults(election);
+        HashMap<Candidate, Double> results = null;
+        try {
+            results = electionRepository.reviewResults(election);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         return Response.accepted(results).build();
     }
