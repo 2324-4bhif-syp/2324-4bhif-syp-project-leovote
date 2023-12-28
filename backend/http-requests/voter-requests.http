@@ -2,10 +2,7 @@
 GET http://localhost:8080/voters
 
 ### Get voter by ID
-GET http://localhost:8080/voters/1
-
-### Get voter by school ID
-#GET http://localhost:8080/voters/school-id/student1
+GET http://localhost:8080/voters/voter/5eead029-ea0c-4478-9c15-ed7ce40789e6
 
 ### Create a new voter
 POST http://localhost:8080/voters
@@ -23,7 +20,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "voterId": "11f2629c-135b-4615-9b01-6db038d0a7eb"
+  "voterId": "f3bd1843-5771-487a-8dd4-d21379a384bd"
 }
 
 ###
@@ -41,8 +38,9 @@ PUT http://localhost:8080/voters/1
 Content-Type: application/json
 
 {
-  "schoolId": "updatedStudent",
-  "password": "updatedPassword"
+  "generatedId": "94a39a0f-acfa-4264-8918-7805201dc4df",
+  "participatingIn": 1,
+  "voted": true
 }
 
 
