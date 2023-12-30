@@ -4,50 +4,76 @@ package at.htlleonding.control;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 @ApplicationScoped
 public class EmailService {
-    public static void sendEmail(String senderEmail, String senderPassword, String recipientEmail, String subject, String body) {
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+    private static final Properties PROPERTIES = new Properties();
+    private static final String EMAIL = "discord.news.bot.interface@gmail.com";
+    private static final String PASSWORD = "erzp bind soza xzte";
+    private static final String HOST = "smtp.gmail.com";
 
-        Session session = Session.getInstance(props, new Authenticator() {
-            @Override
+    static {
+        PROPERTIES.put("mail.smtp.host", HOST);
+        PROPERTIES.put("mail.smtp.port", "587");
+        PROPERTIES.put("mail.smtp.auth", "true");
+        PROPERTIES.put("mail.smtp.starttls.enable", "true");
+    }
+
+    public static void sendPlainTextEmail(String to, String subject, List<String> messages, boolean debug) {
+        Authenticator authenticator = new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderEmail, senderPassword);
+                return new PasswordAuthentication(EmailService.EMAIL, PASSWORD);
             }
-        });
+        };
+
+        Session session = Session.getInstance(PROPERTIES, authenticator);
+        session.setDebug(debug);
 
         try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-            message.setSubject(subject);
-            message.setText(body);
+            // create a message with headers
+            MimeMessage msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(EMAIL));
+            InternetAddress[] address = {new InternetAddress(to)};
+            msg.setRecipients(Message.RecipientType.TO, address);
+            msg.setSubject(subject);
+            msg.setSentDate(new Date());
 
-            Transport.send(message);
+            // create message body
+            Multipart mp = new MimeMultipart();
+            for (String message : messages) {
+                MimeBodyPart mbp = new MimeBodyPart();
+                mbp.setText(message, "us-ascii");
+                mp.addBodyPart(mbp);
+            }
+            msg.setContent(mp);
 
-            System.out.println("Email sent successfully!");
+            // send the message
+            Transport.send(msg);
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+            Exception ex = null;
 
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            if ((ex = mex.getNextException()) != null) {
+                ex.printStackTrace();
+            }
         }
     }
 
+    // Only for testing purposes
+    // TODO: Remove this method
     public static void main(String[] args) {
-        String senderEmail = "discord.news.bot.interface@gmail.com";
-        String senderPassword = "tyL#n3m0pZOW%@Cif7X@ifolo5RLpWVbj%We2e8eYJETM2JppE";
-        String recipientEmail = "frfelix05@example.com";
-        String subject = "Subject of the email";
-        String body = "Body of the email";
-
-        sendEmail(senderEmail, senderPassword, recipientEmail, subject, body);
+        sendPlainTextEmail(
+                "david.spetzi@gmail.com",
+                "Test Email",
+                List.of("Hello", "World"),
+                true
+        );
     }
 }
