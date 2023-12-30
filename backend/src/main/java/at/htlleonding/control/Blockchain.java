@@ -2,6 +2,7 @@ package at.htlleonding.control;
 
 import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
+import at.htlleonding.entity.Voter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Blockchain {
     private static final String fileDir = "src/main/resources/blockchain/";
@@ -39,15 +41,15 @@ public class Blockchain {
                 "genClass"
         );
 
-        return new Block(0, System.currentTimeMillis(), candidate1, "0");
+        return new Block(0, System.currentTimeMillis(), candidate1, "0", UUID.randomUUID());
     }
 
-    public synchronized void addBlock(Candidate voted) {
+    public synchronized void addBlock(Candidate voted, Voter voter) {
         Block previousBlock = chain.get(chain.size() - 1);
         int index = chain.size();
         long timestamp = System.currentTimeMillis();
         String previousHash = previousBlock.getHash();
-        Block newBlock = new Block(index, timestamp, voted, previousHash);
+        Block newBlock = new Block(index, timestamp, voted, previousHash, voter.getGeneratedId());
         chain.add(newBlock);
         addJson(newBlock);
     }

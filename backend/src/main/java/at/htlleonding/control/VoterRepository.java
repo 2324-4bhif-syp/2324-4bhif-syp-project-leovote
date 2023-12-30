@@ -1,5 +1,6 @@
 package at.htlleonding.control;
 
+import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Voter;
@@ -36,15 +37,25 @@ public class VoterRepository implements PanacheRepository<Voter> {
                 .stream()
                 .filter(candidate2 -> candidate2 == candidate)
                 .findFirst();
-        if(candidate1.isPresent() && election1 != null && !voter.isVoted()
+        Blockchain blockchain = new Blockchain(election1.getBlockchainFileName());
+        if(candidate1.isPresent() && election1 != null
                 && voter.getParticipatingIn() == election1 &&
         election1.getElectionStart().isBefore(LocalDateTime.now()) &&
-        election1.getElectionEnd().isAfter(LocalDateTime.now())){
-            voter.setVoted(true);
+        election1.getElectionEnd().isAfter(LocalDateTime.now()) &&
+        !hasAlreadyVoted(blockchain, voter)
+        ){
             entityManager.merge(voter);
-            Blockchain blockchain = new Blockchain(election1.getBlockchainFileName());
-            blockchain.addBlock(candidate);
+            blockchain.addBlock(candidate, voter);
             return true;
+        }
+        return false;
+    }
+
+    public boolean hasAlreadyVoted(Blockchain blockchain, Voter voter){
+        for(Block block : blockchain.getBlocks()){
+            if(block.getVoterUUID().equals(voter.getGeneratedId())){
+                return true;
+            }
         }
         return false;
     }

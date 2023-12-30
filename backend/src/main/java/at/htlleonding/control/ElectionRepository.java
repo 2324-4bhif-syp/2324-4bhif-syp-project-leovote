@@ -57,7 +57,7 @@ public class ElectionRepository implements PanacheRepository<Election> {
     }
 
     private String calculateHash(Block block) {
-        String data = block.getIndex() + block.getTimestamp() + block.getVote().toString() + block.getPreviousHash();
+        String data = block.getIndex() + block.getTimestamp() + block.getVote().toString() + block.getPreviousHash() + block.getVoterUUID();
         return hashService.calculateSHA256Hash(data);
     }
 

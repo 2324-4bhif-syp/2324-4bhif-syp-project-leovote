@@ -14,20 +14,17 @@ public class Voter extends PanacheEntityBase {
     private UUID generatedId;
     @ManyToOne
     private Election participatingIn;
-    private boolean voted;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     public Voter() {
         participatingIn = null;
         this.generatedId = UUID.randomUUID();
-        this.voted = false;
     }
 
     public Voter(Election participatingIn) {
         this.participatingIn = participatingIn;
         this.generatedId = UUID.randomUUID();
-        this.voted = false;
     }
     //</editor-fold>
 
@@ -37,21 +34,8 @@ public class Voter extends PanacheEntityBase {
         return generatedId;
     }
 
-    public void setParticipatingIn(Election election){
-        participatingIn = election;
-    }
-
     public Election getParticipatingIn() {
         return participatingIn;
-    }
-
-
-    public boolean isVoted() {
-        return voted;
-    }
-
-    public void setVoted(boolean voted) {
-        this.voted = voted;
     }
 
     //</editor-fold>

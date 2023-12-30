@@ -1,5 +1,6 @@
 package at.htlleonding.boundary;
 
+import at.htlleonding.control.Blockchain;
 import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
@@ -34,7 +35,9 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
                 .setParameter(1, uuid);
         try{
             Voter voter = query.getSingleResult();
-            VoterDTO voterDTO = new VoterDTO(voter.getGeneratedId(), voter.getParticipatingIn().id, voter.isVoted());
+            Election election = Election.findById(voter.getParticipatingIn().id);
+            Blockchain blockchain = new Blockchain(election.getBlockchainFileName());
+            VoterDTO voterDTO = new VoterDTO(voter.getGeneratedId(), voter.getParticipatingIn().id, voterRepository.hasAlreadyVoted(blockchain, voter));
             return Response.status(Response.Status.OK).entity(voterDTO).build();
         } catch(NoResultException e){
             return Response.status(Response.Status.NOT_FOUND).build();

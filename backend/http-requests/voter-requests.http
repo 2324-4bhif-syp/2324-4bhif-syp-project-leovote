@@ -15,12 +15,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/voters/vote/2/2
+POST http://localhost:8080/voters/vote/1/1
 Content-Type: application/json
 Accept: application/json
 
 {
-  "voterId": "f3bd1843-5771-487a-8dd4-d21379a384bd"
+  "voterId": "f2b198ea-e917-4dd0-8089-61ac276db31f"
 }
 
 ###
@@ -46,6 +46,3 @@ Content-Type: application/json
 
 ### Delete voter by ID
 DELETE http://localhost:8080/voters/2
-
-### Delete voter by school ID
-#DELETE http://localhost:8080/voters/school-id/student1
