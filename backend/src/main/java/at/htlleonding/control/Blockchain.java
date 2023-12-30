@@ -42,7 +42,7 @@ public class Blockchain {
         return new Block(0, System.currentTimeMillis(), candidate1, "0");
     }
 
-    public void addBlock(Candidate voted) {
+    public synchronized void addBlock(Candidate voted) {
         Block previousBlock = chain.get(chain.size() - 1);
         int index = chain.size();
         long timestamp = System.currentTimeMillis();
@@ -52,7 +52,7 @@ public class Blockchain {
         addJson(newBlock);
     }
 
-    public void addJson(Block addedBlock) {
+    public synchronized void addJson(Block addedBlock) {
         // Read existing JSON array from file
         List<Block> existingBlocks = readJsonArray();
 
@@ -63,7 +63,7 @@ public class Blockchain {
         writeJsonArray(existingBlocks);
     }
 
-    private List<Block> readJsonArray() {
+    private synchronized List<Block> readJsonArray() {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(filePath);
 
@@ -80,7 +80,7 @@ public class Blockchain {
         }
     }
 
-    private void writeJsonArray(List<Block> blocks) {
+    private synchronized void writeJsonArray(List<Block> blocks) {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(filePath);
         Path dirPath = Paths.get(fileDir);
