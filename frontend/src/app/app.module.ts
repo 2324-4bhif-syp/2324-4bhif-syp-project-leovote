@@ -8,16 +8,15 @@ import { ElectionListComponent } from './election-list/election-list.component';
 import {HttpClientModule} from "@angular/common/http";
 import { LeovotePageComponent } from './leovote-page/leovote-page.component';
 import {RouterModule, Routes} from "@angular/router";
-import { VoteListComponent } from './vote-list/vote-list.component';
 import { ElectionComponent } from './election/election.component';
 import { CandidateComponent } from './candidate/candidate.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
-  {path: '', redirectTo: 'overview', pathMatch: "full"},
-  {path: 'overview', component: LeovotePageComponent},
+  {path: '', redirectTo: 'login', pathMatch: "full"},
+  {path: 'login', component: LoginComponent},
   {path: 'elections', component: ElectionListComponent},
   {path: 'candidates', component: CandidateListComponent},
-  {path: 'votes', component: VoteListComponent}
 ]
 @NgModule({
   declarations: [
@@ -25,9 +24,9 @@ const appRoutes: Routes = [
     CandidateListComponent,
     ElectionListComponent,
     LeovotePageComponent,
-    VoteListComponent,
     ElectionComponent,
-    CandidateComponent
+    CandidateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

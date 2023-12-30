@@ -1,32 +1,30 @@
 import { Injectable } from '@angular/core';
 import {LeovoteWebApiService} from "../api/leovote-web-api.service";
-import {map, Observable, Subject} from "rxjs";
-import {Vote} from "../entity/vote-model";
-
+import {Vote} from "../entity/vote";
 @Injectable({
   providedIn: 'root'
 })
 export class VoteService {
-  constructor(private apiClient: LeovoteWebApiService) {}
-  private refreshListSubject = new Subject<void>();
-  add(vote: Vote): Observable<any> {
-    return this.apiClient.addVote(vote);
+  protected vote: Vote | undefined;
+  isLoggedIn: boolean = false;
+  constructor(private apiClient: LeovoteWebApiService) {
   }
+  checkCode(code: string): boolean {
+    console.log(code);
 
-  getList(): Observable<Vote[]> {
-    return this.apiClient.getAllVotes().pipe(
-      map(votes => {
-        return votes.map(vote => {
-          return vote;
-        });
-      })
+    this.apiClient.getVoteByCode(code).subscribe(
+      (v: Vote) => {
+        this.vote = v;
+        //this.vote.voted = false; da alle Votes automatisch auf true gesetzt wird
+        if (this.vote !== undefined && !this.vote.voted) {
+          this.isLoggedIn = true;
+        }
+      },
+      (error) => {
+        console.error('Error fetching vote:', error);
+      }
     );
-  }
-  refreshList(): void {
-    this.refreshListSubject.next();
-  }
 
-  onListRefresh(): Observable<void> {
-    return this.refreshListSubject.asObservable();
+    return this.isLoggedIn;
   }
 }
