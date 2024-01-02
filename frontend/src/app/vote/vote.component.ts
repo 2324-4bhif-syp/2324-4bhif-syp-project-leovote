@@ -11,6 +11,7 @@ import {Candidate} from "../shared/entity/candidate-model";
   styleUrls: ['./vote.component.css']
 })
 export class VoteComponent {
+  isVoted: boolean = false;
   voter: Vote | undefined = this.voteService.vote;
   election: Election | undefined = undefined;
   selecedCandidate: Candidate | undefined;
@@ -19,6 +20,7 @@ export class VoteComponent {
     if(this.selecedCandidate?.id != undefined && this.election?.id != undefined){
       this.voteService.voteCall(this.selecedCandidate.id, this.election.id);
       this.voteService.isLoggedIn = false;
+      this.isVoted = true;
     }
   }
 

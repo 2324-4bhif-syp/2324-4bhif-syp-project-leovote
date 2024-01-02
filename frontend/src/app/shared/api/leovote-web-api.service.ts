@@ -31,8 +31,6 @@ export class LeovoteWebApiService {
     return this.http.post(this.baseUrl + this.candidates, candidate, {headers: this.headers});
   }
   public addElection(election: Election){
-    console.log("Id: " + election.id + ", Name: " + election.name + ", Date1: " + election.electionStart.toLocaleDateString() + ", Date2: " + election.electionEnd.toLocaleDateString() + ", Type: " + election.electionType);
-    console.log(this.baseUrl + this.elections, election)
     return this.http.post(this.baseUrl + this.elections, election, {headers: this.headers});
   }
   public getVoteByCode(code: string) {

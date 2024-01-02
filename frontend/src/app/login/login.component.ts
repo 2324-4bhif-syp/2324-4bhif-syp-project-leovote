@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent {
   @Input() code: string = "";
-  alreadyVoted: boolean = false;
+  alreadyVotedOrIncorrect: boolean = false;
 
   constructor(
     public voteService: VoteService,
@@ -24,10 +24,11 @@ export class LoginComponent {
     try {
       const success = await this.voteService.checkCode(this.code);
       if (success) {
-        this.router.navigate(['/votes']);
+        await this.router.navigate(['/votes']);
       }
       else {
-        this.alreadyVoted = true;
+        console.log("HIER")
+        this.alreadyVotedOrIncorrect = true;
       }
     } catch (error) {
       console.error('Fehler bei der Überprüfung des Codes:', error);
