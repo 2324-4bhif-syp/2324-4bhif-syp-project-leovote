@@ -1,20 +1,19 @@
 export class Candidate {
   //<editor-fold desc="Fields">
-  id: number | null
-  schoolId: string
-  firstName: string
-  lastName: string
-  grade: string
-  candidates: Candidate[] = []
-  //</editor-fold>
+  schoolId: string;
+  firstName: string;
+  lastName: string;
+  grade: string;
+  id: number | null;
+   //</editor-fold>
 
   //<editor-fold desc="Constructors">
   constructor(
-    id: number | null = null,
     schoolId: string = "",
     firstName: string = "",
     lastName: string = "",
-    grade: string = ""
+    grade: string = "",
+    id: number | null = null,
   ) {
     this.id = id;
     this.schoolId = schoolId;

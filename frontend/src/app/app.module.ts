@@ -11,6 +11,7 @@ import {RouterModule, Routes} from "@angular/router";
 import { ElectionComponent } from './election/election.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { LoginComponent } from './login/login.component';
+import { VoteComponent } from './vote/vote.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     LeovotePageComponent,
     ElectionComponent,
     CandidateComponent,
-    LoginComponent
+    LoginComponent,
+    VoteComponent
   ],
   imports: [
     BrowserModule,
