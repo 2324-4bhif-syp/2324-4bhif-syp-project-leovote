@@ -1,4 +1,13 @@
 <div>
-  <h2>{{voter?.generatedId}}</h2> votes for:
-  <h2></h2>
+  <h2>{{election?.name}}</h2>
+  <p>Code: {{voter?.generatedId}}</p>
+</div>
+
+<div>
+  <p>Candidates:</p>
+  <select [(ngModel)]="selecedCandidate">
+    <option *ngFor="let candidate of election?.participatingCandidates"
+            [ngValue]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
+  </select>
+  <button (click)="voting()">Vote</button>
 </div>

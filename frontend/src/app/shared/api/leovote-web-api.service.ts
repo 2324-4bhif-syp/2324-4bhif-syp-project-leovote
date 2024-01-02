@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Candidate} from "../entity/candidate-model";
 import {Election} from "../entity/election-model";
 import {Vote} from "../entity/vote";
+import {VoteCandidate} from "../entity/vote-candidate-model";
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,8 @@ export class LeovoteWebApiService {
   candidates = 'candidates';
   elections: string = 'elections';
   electionById: string = 'elections/${id}'
-  voters: string = "voters/voter/${id}";
+  voters: string = 'voters/voter/${id}';
+  vote: string = 'voters/vote/${electionId}/${candidateId}';
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
     return this.http.get<Candidate[]>(this.baseUrl + this.candidates, {headers: this.headers});
@@ -21,10 +23,9 @@ export class LeovoteWebApiService {
   public getAllElections(){
     return this.http.get<Election[]>(this.baseUrl + this.elections, {headers: this.headers});
   }
-
-  public getElectionById(electionId: string){
-    return this.http.get<Election[]>(this.baseUrl + this.electionById.replace('${id}', electionId),
-      {headers: this.headers});
+  public voteForCandidate(voter: VoteCandidate, candidateId: number, electionId: number){
+    return this.http.post(this.baseUrl + this.vote.replace('${electionId}', electionId.toString())
+      .replace('${candidateId}', candidateId.toString()), voter, {headers: this.headers});
   }
   public addCandidate(candidate: Candidate){
     return this.http.post(this.baseUrl + this.candidates, candidate, {headers: this.headers});

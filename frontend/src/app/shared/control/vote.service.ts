@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LeovoteWebApiService } from "../api/leovote-web-api.service";
 import { Vote } from "../entity/vote";
+import {VoteCandidate} from "../entity/vote-candidate-model";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,8 @@ export class VoteService {
   public vote: Vote | undefined;
   isLoggedIn: boolean = false;
 
-  constructor(private apiClient: LeovoteWebApiService) {}
+  constructor(private apiClient: LeovoteWebApiService,
+              private router: Router) {}
 
   checkCode(code: string): Promise<boolean> {
     console.log(code);
@@ -31,5 +34,24 @@ export class VoteService {
         }
       );
     });
+  }
+
+  voteCall(candidateId: number, electionId: number){
+    if(this.vote?.generatedId != undefined){
+      let voteCandidate: VoteCandidate = new VoteCandidate(this.vote.generatedId)
+      console.log(voteCandidate);
+      this.apiClient.voteForCandidate(voteCandidate, candidateId, electionId).subscribe(
+        () => {
+          console.log('Vote successful');
+          this.isLoggedIn = false;
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          console.error('Error in voting');
+        }
+      );
+    } else {
+      console.log("No Id given");
+    }
   }
 }
