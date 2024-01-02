@@ -7,7 +7,6 @@ import at.htlleonding.entity.Voter;
 import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 
 import java.time.LocalDateTime;
@@ -18,8 +17,6 @@ import java.util.Optional;
 @ApplicationScoped
 public class VoterRepository implements PanacheRepository<Voter> {
     EntityManager entityManager = Panache.getEntityManager();
-    @Inject
-    EmailService emailService;
 
     // Creates voters, which are able to vote in elections contained in the election List
     public List<Voter> createVotersForElection(int count, Election election) {
@@ -29,15 +26,6 @@ public class VoterRepository implements PanacheRepository<Voter> {
             votersList.add(voterToAdd);
             Voter.persist(voterToAdd);
         }
-        List<String> generatedIds = new ArrayList<>();
-        for(Voter voter : votersList){
-            generatedIds.add(voter.getGeneratedId().toString());
-        }
-        emailService.sendPlainTextEmail(
-                "david.spetzi@gmail.com",
-                election.getName(),
-                generatedIds,
-                true);
         return votersList;
     }
 

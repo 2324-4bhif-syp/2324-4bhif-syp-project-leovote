@@ -33,6 +33,9 @@ Accept: application/json
 }
 
 
+### Create Voter and send Mail
+POST http://localhost:8080/voters/election/david.lehner06@gmail.com/1
+
 ### Update a Voter
 PUT http://localhost:8080/voters/1
 Content-Type: application/json

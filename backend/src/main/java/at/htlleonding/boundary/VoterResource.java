@@ -1,6 +1,7 @@
 package at.htlleonding.boundary;
 
 import at.htlleonding.control.Blockchain;
+import at.htlleonding.control.EmailService;
 import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
@@ -17,6 +18,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -25,6 +27,8 @@ import java.util.UUID;
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
     VoterRepository voterRepository = CDI.current().select(VoterRepository.class).get();
     EntityManager em = voterRepository.getEntityManager();
+
+    EmailService emailService = new EmailService();
 
     @GET
     @Path("voter/{id}")
@@ -89,6 +93,33 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         if (voters.isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
+        return Response.ok(voters).build();
+    }
+
+    @POST
+    @Path("/election/{email}/{electionId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    default Response createVoterAndSendEmail(
+            @PathParam("electionId") Long electionId,
+            @PathParam("email") String email
+    ){
+        Election election = Election.findById(electionId);
+        List<Voter> voters = voterRepository.createVotersForElection(1, election);
+
+        if(voters.isEmpty()){
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
+        List<String> generatedIds = new ArrayList<>();
+        for(Voter voter : voters){
+            generatedIds.add(voter.getGeneratedId().toString());
+        }
+        emailService.sendPlainTextEmail(
+                email,
+                election.getName(),
+                generatedIds,
+                false);
         return Response.ok(voters).build();
     }
 }
