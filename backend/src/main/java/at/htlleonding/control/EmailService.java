@@ -25,6 +25,7 @@ public class EmailService {
         PROPERTIES.put("mail.smtp.auth", "true");
         PROPERTIES.put("mail.smtp.starttls.enable", "true");
     }
+    public EmailService(){}
 
     public void sendPlainTextEmail(String to, String subject, List<String> messages, boolean debug) {
         Authenticator authenticator = new Authenticator() {
