@@ -44,3 +44,4 @@ nb-configuration.xml
 node_modules/
 .angular/
 /dist
+/backend/src/main/resources/blockchain/
