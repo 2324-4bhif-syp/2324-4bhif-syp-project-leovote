@@ -12,6 +12,7 @@ export class LeovoteWebApiService {
   baseUrl = 'http://localhost:8080/';
   candidates = 'candidates';
   elections: string = 'elections';
+  electionById: string = 'elections/${id}'
   voters: string = "voters/voter/${id}";
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
@@ -19,6 +20,11 @@ export class LeovoteWebApiService {
   }
   public getAllElections(){
     return this.http.get<Election[]>(this.baseUrl + this.elections, {headers: this.headers});
+  }
+
+  public getElectionById(electionId: string){
+    return this.http.get<Election[]>(this.baseUrl + this.electionById.replace('${id}', electionId),
+      {headers: this.headers});
   }
   public addCandidate(candidate: Candidate){
     return this.http.post(this.baseUrl + this.candidates, candidate, {headers: this.headers});

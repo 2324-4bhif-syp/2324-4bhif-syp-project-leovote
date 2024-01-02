@@ -6,7 +6,7 @@ import { Vote } from "../entity/vote";
   providedIn: 'root'
 })
 export class VoteService {
-  protected vote: Vote | undefined;
+  public vote: Vote | undefined;
   isLoggedIn: boolean = false;
 
   constructor(private apiClient: LeovoteWebApiService) {}
@@ -18,7 +18,6 @@ export class VoteService {
       this.apiClient.getVoteByCode(code).subscribe(
         (v: Vote) => {
           this.vote = v;
-          this.vote.voted = false;
           if (this.vote !== undefined && !this.vote.voted) {
             this.isLoggedIn = true;
             resolve(true);
