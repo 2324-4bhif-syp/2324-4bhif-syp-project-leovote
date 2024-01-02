@@ -26,7 +26,7 @@ public class EmailService {
         PROPERTIES.put("mail.smtp.starttls.enable", "true");
     }
 
-    public static void sendPlainTextEmail(String to, String subject, List<String> messages, boolean debug) {
+    public void sendPlainTextEmail(String to, String subject, List<String> messages, boolean debug) {
         Authenticator authenticator = new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(EmailService.EMAIL, PASSWORD);
@@ -49,7 +49,7 @@ public class EmailService {
             Multipart mp = new MimeMultipart();
             for (String message : messages) {
                 MimeBodyPart mbp = new MimeBodyPart();
-                mbp.setText(message, "us-ascii");
+                mbp.setText(message + '\n', "us-ascii");
                 mp.addBodyPart(mbp);
             }
             msg.setContent(mp);
@@ -64,16 +64,5 @@ public class EmailService {
                 ex.printStackTrace();
             }
         }
-    }
-
-    // Only for testing purposes
-    // TODO: Remove this method
-    public static void main(String[] args) {
-        sendPlainTextEmail(
-                "david.spetzi@gmail.com",
-                "Test Email",
-                List.of("Hello", "World"),
-                true
-        );
     }
 }
