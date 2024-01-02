@@ -44,7 +44,6 @@ export class VoteService {
         () => {
           console.log('Vote successful');
           this.isLoggedIn = false;
-          this.router.navigate(['/login']);
         },
         (error) => {
           console.error('Error in voting');
