@@ -4,8 +4,6 @@
     <a routerLink="/">Login</a></li>
 </ul>
 <ul *ngIf="voteService.isLoggedIn" class="nav nav-tabs">
-  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="/">Login</a></li>
   <li routerLinkActive="active"><a routerLink="elections">Elections</a></li>
 </ul>
 <hr>
