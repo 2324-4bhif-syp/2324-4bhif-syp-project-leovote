@@ -23,9 +23,9 @@ export class LoginComponent {
     try {
       const success = await this.voteService.checkCode(this.code);
       if (success) {
-        this.router.navigate(['/elections']);
+        this.router.navigate(['/votes']);
       }
-      // eventuell noch eine Felhlermeldung anzeigen
+      // eventuell noch eine Fehlermeldung anzeigen
     } catch (error) {
       console.error('Fehler bei der Überprüfung des Codes:', error);
     }

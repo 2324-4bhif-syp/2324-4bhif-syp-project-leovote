@@ -1,8 +1,0 @@
-<button (click)="doEdit = true">Create</button>
-<ul *ngFor="let candidate of candidates">
-  <app-candidate [doEdit]="false" [candidate]="candidate"></app-candidate>
-</ul>
-<div *ngIf="doEdit">
-  <app-candidate [doEdit]="doEdit" (editDone)="create($event)"></app-candidate>
-</div>
-
