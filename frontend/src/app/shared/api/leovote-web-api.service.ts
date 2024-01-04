@@ -10,6 +10,7 @@ import {VoteCandidate} from "../entity/vote-candidate-model";
 export class LeovoteWebApiService {
 
   headers = new HttpHeaders().set('Accept', 'application/json');
+  //baseUrl = 'http://89.168.107.125/api/';   it's here for the server. This is used at server
   baseUrl = 'http://localhost:8080/';
   candidates = 'candidates';
   elections: string = 'elections';
