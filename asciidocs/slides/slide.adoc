@@ -31,7 +31,11 @@ image::wahl2.jpg[background]
 * Fröller Felix
 * Nikolaus Alexander
 
+[.lightbg,background-opacity="0.2"]
 == Problemstellung
+image::papier.jpg[background]
+
+
 * Der Wahlaufwand
 ** Zeit
 ** Auszählen der Wahlen
@@ -71,6 +75,8 @@ image::ziele.jpg[background]
 
 === Live Demo
 
+[.lightbg,background-opacity="0.2"]
 == Ideen für den nächsten Sprint:
+image::lightbulb.jpg[background]
 
 * Trennung von User/Admin
