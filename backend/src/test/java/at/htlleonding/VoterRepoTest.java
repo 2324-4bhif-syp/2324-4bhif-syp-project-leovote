@@ -1,5 +1,6 @@
 package at.htlleonding;
 
+import at.htlleonding.control.Blockchain;
 import at.htlleonding.control.ElectionRepository;
 import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
@@ -75,10 +76,10 @@ public class VoterRepoTest {
         System.out.println("Candidates results are good");
 
         for (Voter v : voterList_winner) {
-            assertThat(v.isVoted()).isEqualTo(true);
+            assertThat(voterRepository.hasAlreadyVoted(new Blockchain(election1.getBlockchainFileName()), v)).isEqualTo(true);
         }
         for (Voter v : voterList_loser) {
-            assertThat(v.isVoted()).isEqualTo(true);
+            assertThat(voterRepository.hasAlreadyVoted(new Blockchain(election1.getBlockchainFileName()), v)).isEqualTo(true);
         }
 
         //after
@@ -128,7 +129,8 @@ public class VoterRepoTest {
         }
 
         for (Voter v : voterList) {
-            assertThat(v.isVoted()).isEqualTo(false);
+            Election election = Election.findById(v.getParticipatingIn().id);
+            assertThat(voterRepository.hasAlreadyVoted(new Blockchain(election.getBlockchainFileName()), v)).isEqualTo(false);
         }
 
         //after
@@ -159,7 +161,6 @@ public class VoterRepoTest {
         List<Voter> voterList = voterRepository.createVotersForElection(10, election1);
         for (Voter v : voterList) {
             voterRepository.voteForCandidate(v, candidate1, election1);
-
         }
 
         //assert
@@ -173,7 +174,8 @@ public class VoterRepoTest {
         }
 
         for (Voter v : voterList) {
-            assertThat(v.isVoted()).isEqualTo(false);
+            Election election = Election.findById(v.getParticipatingIn().id);
+            assertThat(voterRepository.hasAlreadyVoted(new Blockchain(election.getBlockchainFileName()), v)).isEqualTo(false);
         }
 
         //after

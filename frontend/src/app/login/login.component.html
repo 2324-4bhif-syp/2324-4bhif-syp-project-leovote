@@ -1,0 +1,17 @@
+<h2>Login</h2>
+
+<div>
+  <table>
+    <tbody>
+    <tr>
+      <td><input type="text" [(ngModel)]="code" placeholder="Code"></td>
+    </tr>
+    <tr>
+      <button type="button" (click)="isCodeNotUsedOrIncorrect()">Enter</button>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="alreadyVotedOrIncorrect" >
+  <p style="color: red">Mit diesem Code wurde bereits gewählt oder ist nicht verfügbar!</p>
+</div>

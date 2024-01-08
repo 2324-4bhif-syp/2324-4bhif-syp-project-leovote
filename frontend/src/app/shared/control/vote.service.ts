@@ -1,32 +1,56 @@
 import { Injectable } from '@angular/core';
-import {LeovoteWebApiService} from "../api/leovote-web-api.service";
-import {map, Observable, Subject} from "rxjs";
-import {Vote} from "../entity/vote-model";
+import { LeovoteWebApiService } from "../api/leovote-web-api.service";
+import { Vote } from "../entity/vote";
+import {VoteCandidate} from "../entity/vote-candidate-model";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoteService {
-  constructor(private apiClient: LeovoteWebApiService) {}
-  private refreshListSubject = new Subject<void>();
-  add(vote: Vote): Observable<any> {
-    return this.apiClient.addVote(vote);
+  public vote: Vote | undefined;
+  isLoggedIn: boolean = false;
+
+  constructor(private apiClient: LeovoteWebApiService,
+              private router: Router) {}
+
+  checkCode(code: string): Promise<boolean> {
+    console.log(code);
+
+    return new Promise<boolean>((resolve, reject) => {
+      this.apiClient.getVoteByCode(code).subscribe(
+        (v: Vote) => {
+          this.vote = v;
+          if (this.vote !== undefined && !this.vote.voted) {
+            this.isLoggedIn = true;
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        (error) => {
+          console.error('Error fetching vote:', error);
+          reject(error);
+        }
+      );
+    });
   }
 
-  getList(): Observable<Vote[]> {
-    return this.apiClient.getAllVotes().pipe(
-      map(votes => {
-        return votes.map(vote => {
-          return vote;
-        });
-      })
-    );
-  }
-  refreshList(): void {
-    this.refreshListSubject.next();
-  }
-
-  onListRefresh(): Observable<void> {
-    return this.refreshListSubject.asObservable();
+  voteCall(candidateId: number, electionId: number){
+    if(this.vote?.generatedId != undefined){
+      let voteCandidate: VoteCandidate = new VoteCandidate(this.vote.generatedId)
+      console.log(voteCandidate);
+      this.apiClient.voteForCandidate(voteCandidate, candidateId, electionId).subscribe(
+        () => {
+          console.log('Vote successful');
+          this.isLoggedIn = false;
+        },
+        (error) => {
+          console.error('Error in voting');
+        }
+      );
+    } else {
+      console.log("No Id given");
+    }
   }
 }

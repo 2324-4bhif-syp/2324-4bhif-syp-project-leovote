@@ -2,10 +2,7 @@
 GET http://localhost:8080/voters
 
 ### Get voter by ID
-GET http://localhost:8080/voters/1
-
-### Get voter by school ID
-#GET http://localhost:8080/voters/school-id/student1
+GET http://localhost:8080/voters/voter/e8ef46ee-fbd8-4e54-a91f-62126215c624
 
 ### Create a new voter
 POST http://localhost:8080/voters
@@ -18,12 +15,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/voters/vote/2/2
+POST http://localhost:8080/voters/vote/1/1
 Content-Type: application/json
 Accept: application/json
 
 {
-  "voterId": "c779e51e-4f68-4619-8ae6-1a99033d0bfb"
+  "voterId": "f2b198ea-e917-4dd0-8089-61ac276db31f"
 }
 
 ###
@@ -36,18 +33,19 @@ Accept: application/json
 }
 
 
+### Create Voter and send Mail
+POST http://localhost:8080/voters/election/david.lehner06@gmail.com/1
+
 ### Update a Voter
 PUT http://localhost:8080/voters/1
 Content-Type: application/json
 
 {
-  "schoolId": "updatedStudent",
-  "password": "updatedPassword"
+  "generatedId": "94a39a0f-acfa-4264-8918-7805201dc4df",
+  "participatingIn": 1,
+  "voted": true
 }
 
 
 ### Delete voter by ID
 DELETE http://localhost:8080/voters/2
-
-### Delete voter by school ID
-#DELETE http://localhost:8080/voters/school-id/student1
