@@ -13,6 +13,7 @@ class Block {
     - index: int
     - timeStamp: Long
     - candidate: Candidate
+    - voted: Voter
     - previousHash: String
     - currentBlockHash: String
 }
@@ -34,7 +35,6 @@ class Election {
 class Voter {
   - generatedId: Long
   - election: List<Election>
-  - voted: boolean
 }
 
 Election "1"--"1" Blockchain
