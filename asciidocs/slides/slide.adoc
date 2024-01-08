@@ -57,7 +57,7 @@ image::prove.jpg[background]
 image::ERD.png[height=80%, width=80%]
 
 === Klassendiagramm
-image::CLD.png[height=50%, width=50%]
+image::CLD.png[]
 
 
 [.lightbg,background-opacity="0.3"]
