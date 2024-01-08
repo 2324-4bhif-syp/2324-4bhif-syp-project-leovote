@@ -1,6 +1,6 @@
 = Leovote
 
-Sprint 3
+Sprint 4
 
 :revdate: {docdate}
 :encoding: utf-8
@@ -47,9 +47,9 @@ image::prove.jpg[background]
 * Verhinderung von Unsicherheiten
 
 === Anforderungen
-* Implementation der Blockchain
-* Wahlsimulation in der Konsole
-* Zugriff via REST
+* Frontend zum Wählen
+* E-Mail mit Wahlcode
+* Veränderung der Datenbank/Blockchain
 
 == Ist-Zustand
 
@@ -71,10 +71,6 @@ image::ziele.jpg[background]
 
 === Live Demo
 
-[%auto-animate]
-=== [.margin-b-10]#Blockchain#
-image::blockchain.png[height=80%, width=80%]
-
 == Ideen für den nächsten Sprint:
 
-* Frontend
+* Trennung von User/Admin
