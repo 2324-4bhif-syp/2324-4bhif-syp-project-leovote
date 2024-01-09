@@ -55,15 +55,6 @@ image::prove.jpg[background]
 * E-Mail mit Wahlcode
 * Veränderung der Datenbank/Blockchain
 
-== Ist-Zustand
-
-=== Datenbank
-image::ERD.png[height=80%, width=80%]
-
-=== Klassendiagramm
-image::CLD.png[]
-
-
 [.lightbg,background-opacity="0.3"]
 == Ziele
 image::ziele.jpg[background]
@@ -72,6 +63,14 @@ image::ziele.jpg[background]
 * Vereinfachung
 * Fälschungssicherheit
 * Schnelle Auswertung
+
+== Ist-Zustand
+
+=== Datenbank
+image::ERD.png[height=80%, width=80%]
+
+=== Klassendiagramm
+image::CLD.png[]
 
 === Live Demo
 
