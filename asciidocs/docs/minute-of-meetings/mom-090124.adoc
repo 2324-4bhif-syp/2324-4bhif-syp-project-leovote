@@ -49,9 +49,10 @@ endif::backend-html5[]
 
 * Folien -> Probleme positver, verständlicher schreiben, Verbesserungsvorschläge
 * Klassendiagramm
-* Blockchain in einer File speichern -> bei 10 Mio. Hauptspeicher überlastet
+* Blockchain in einer JSON speichern
+** bei 10 Mio. Wähler Hauptspeicher überlastet
+** Performanceprobleme -> nicht gesamte Blockchain einlesen
 * Sicherheit -> E-Mail können abgefangen werden
-* Performance
 * Quarkus-Mail
 
 
