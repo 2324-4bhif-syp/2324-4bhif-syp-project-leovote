@@ -26,8 +26,8 @@ public class InitBean {
     @Transactional
     public void initData(@Observes StartupEvent event) {
         // Create and persist candidates
-        Candidate candidate1 = new Candidate("id123", "John", "Doe", "12A");
-        Candidate candidate2 = new Candidate("id456", "Jane", "Smith", "11B");
+        Candidate candidate1 = new Candidate("id123", "John", "Doe", "12A", "john-doe.jpg");
+        Candidate candidate2 = new Candidate("id456", "Jane", "Smith", "11B", "mary-doe.jpg");
         entityManager.persist(candidate1);
         entityManager.persist(candidate2);
 

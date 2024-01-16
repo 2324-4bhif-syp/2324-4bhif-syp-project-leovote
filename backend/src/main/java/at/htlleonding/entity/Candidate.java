@@ -15,17 +15,23 @@ public class Candidate extends PanacheEntity {
     private String firstName;
     private String lastName;
     private String grade;
+    private String pathOfImage;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     public Candidate() {
     }
 
-    public Candidate(@JsonProperty("schoolId") String schoolId, @JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("grade") String grade) {
+    public Candidate(@JsonProperty("schoolId") String schoolId,
+                     @JsonProperty("firstName") String firstName,
+                     @JsonProperty("lastName") String lastName,
+                     @JsonProperty("grade") String grade,
+                     @JsonProperty("pathOfImage") String pathOfImage){
         this.schoolId = schoolId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.grade = grade;
+        this.pathOfImage = pathOfImage;
     }
     //</editor-fold>
 
@@ -61,28 +67,33 @@ public class Candidate extends PanacheEntity {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+    public String getPathOfImage() {
+        return pathOfImage;
+    }
+    public void setPathOfImage(String pathToImage) {
+        this.pathOfImage = pathToImage;
+    }
     //</editor-fold>
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Candidate candidate = (Candidate) o;
-        return Objects.equals(schoolId, candidate.schoolId) && Objects.equals(firstName, candidate.firstName) && Objects.equals(lastName, candidate.lastName) && Objects.equals(grade, candidate.grade);
+        return Objects.equals(schoolId, candidate.schoolId) && Objects.equals(firstName, candidate.firstName) && Objects.equals(lastName, candidate.lastName) && Objects.equals(grade, candidate.grade) && Objects.equals(pathOfImage, candidate.pathOfImage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(schoolId, firstName, lastName, grade);
+        return Objects.hash(schoolId, firstName, lastName, grade, pathOfImage);
     }
-
     @Override
     public String toString() {
         return "Candidate: " +
                 "Firstname: " + firstName + " " +
                 "Lastname: " + lastName + " " +
                 "Grade: " + grade + " " +
-                "SchoolId" + schoolId + " ";
+                "SchoolId" + schoolId + " " +
+                "PathOfImage" + pathOfImage + " ";
     }
 }

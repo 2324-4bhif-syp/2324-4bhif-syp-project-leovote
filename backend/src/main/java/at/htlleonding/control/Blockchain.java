@@ -38,7 +38,8 @@ public class Blockchain {
                 "IF92837497234",
                 "genesisFirstName",
                 "genesisLastName",
-                "genClass"
+                "genClass",
+                "imagePath"
         );
 
         return new Block(0, System.currentTimeMillis(), candidate1, "0", UUID.randomUUID());

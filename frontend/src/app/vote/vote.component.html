@@ -1,3 +1,5 @@
+<!-- vote.component.html -->
+
 <div *ngIf="!isVoted">
   <div>
     <h2>{{election?.name}}</h2>
@@ -6,14 +8,20 @@
 
   <div>
     <p>Candidates:</p>
-    <select [(ngModel)]="selecedCandidate">
-      <option *ngFor="let candidate of election?.participatingCandidates"
-              [ngValue]="candidate">{{candidate.firstName}} {{candidate.lastName}}</option>
-    </select>
-    <button (click)="voting()">Vote</button>
+    <div *ngFor="let candidate of election?.participatingCandidates; let index ">
+      <div>
+        <label>
+          <h3>{{candidate.firstName}} {{candidate.lastName}}</h3>
+          <input type="radio" [(ngModel)]="selecedCandidate" [value]="candidate" />
+          <img [src]="'assets/images/' + candidate.pathOfImage" alt="{{candidate.firstName}} {{candidate.lastName}}"
+               style="width: 280px; height: auto;"/>
+        </label>
+      </div>
+    </div>
+    <button [disabled]="!selecedCandidate" (click)="voting()">Vote</button>
   </div>
 </div>
+
 <div *ngIf="isVoted">
   <h2>Thank you for voting in {{election?.name}}</h2>
 </div>
-

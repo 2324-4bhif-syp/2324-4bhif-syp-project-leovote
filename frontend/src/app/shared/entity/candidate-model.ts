@@ -4,6 +4,7 @@ export class Candidate {
   firstName: string;
   lastName: string;
   grade: string;
+  pathOfImage: string;
   id: number | null;
    //</editor-fold>
 
@@ -13,12 +14,14 @@ export class Candidate {
     firstName: string = "",
     lastName: string = "",
     grade: string = "",
-    id: number | null = null,
+    pathOfImage: string = "",
+    id: number | null = null
   ) {
     this.id = id;
     this.schoolId = schoolId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.grade = grade;
+    this.pathOfImage = pathOfImage;
   }
 }
