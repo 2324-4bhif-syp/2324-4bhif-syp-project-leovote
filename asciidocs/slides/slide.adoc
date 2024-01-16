@@ -39,32 +39,34 @@ image::papier.jpg[background]
 * Der Wahlaufwand
 ** Zeit
 ** Auszählen der Wahlen
-
-* unnötige Papierverschwendung
+* hoher Verbrauch von Papier
 
 [.lightbg,background-opacity="0.2"]
 == Warum Leovote?
 image::prove.jpg[background]
 
-* Leovote ermöglicht eine fälschungssichere Wahldurchführung
-* Blockchain
-* Verhinderung von Unsicherheiten
+* Leovote ermöglicht eine fälschungssichere Wahldurchführung mit Blockchain
+* Sparsamkeit
+** Zeit
+** Papier
 
-=== Anforderungen
+[.lightbg,background-opacity="0.2"]
+=== Sprintvereinbarung
+image::handshake.jpg[background]
+
 * Frontend zum Wählen
-* E-Mail mit Wahlcode
-* Veränderung der Datenbank/Blockchain
+* Code zum Wählen per E-Mail versenden
+* Ergebnis einer Wahl
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
 image::ziele.jpg[background]
 
-* Digitalisierung
 * Vereinfachung
 * Fälschungssicherheit
 * Schnelle Auswertung
 
-== Ist-Zustand
+== CLD
 
 === Datenbank
 image::ERD.png[height=80%, width=80%]
@@ -77,5 +79,3 @@ image::CLD.png[]
 [.lightbg,background-opacity="0.2"]
 == Ideen für den nächsten Sprint:
 image::lightbulb.jpg[background]
-
-* Trennung von User/Admin
