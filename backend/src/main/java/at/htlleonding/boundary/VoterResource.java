@@ -1,7 +1,6 @@
 package at.htlleonding.boundary;
 
 import at.htlleonding.control.Blockchain;
-import at.htlleonding.control.EmailService;
 import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
@@ -18,7 +17,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -27,8 +25,6 @@ import java.util.UUID;
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
     VoterRepository voterRepository = CDI.current().select(VoterRepository.class).get();
     EntityManager em = voterRepository.getEntityManager();
-
-    EmailService emailService = new EmailService();
 
     @GET
     @Path("voter/{id}")
@@ -39,9 +35,9 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
                 .setParameter(1, uuid);
         try{
             Voter voter = query.getSingleResult();
-            Election election = Election.findById(voter.getParticipatingIn().id);
+            Election election = Election.findById(voter.getElection().id);
             Blockchain blockchain = new Blockchain(election.getBlockchainFileName());
-            VoterDTO voterDTO = new VoterDTO(voter.getGeneratedId(), voter.getParticipatingIn().id, voterRepository.hasAlreadyVoted(blockchain, voter));
+            VoterDTO voterDTO = new VoterDTO(voter.getGeneratedId(), voter.getElection().id, voterRepository.hasAlreadyVoted(blockchain, voter));
             return Response.status(Response.Status.OK).entity(voterDTO).build();
         } catch(NoResultException e){
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -96,30 +92,30 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         return Response.ok(voters).build();
     }
 
-    @POST
-    @Path("/election/{email}/{electionId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    default Response createVoterAndSendEmail(
-            @PathParam("electionId") Long electionId,
-            @PathParam("email") String email
-    ){
-        Election election = Election.findById(electionId);
-        List<Voter> voters = voterRepository.createVotersForElection(1, election);
-
-        if(voters.isEmpty()){
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-
-        List<String> generatedIds = new ArrayList<>();
-        for(Voter voter : voters){
-            generatedIds.add(voter.getGeneratedId().toString());
-        }
-        emailService.sendPlainTextEmail(
-                email,
-                election.getName(),
-                generatedIds,
-                false);
-        return Response.ok(voters).build();
-    }
+//    @POST
+//    @Path("/election/{email}/{electionId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Transactional
+//    default Response createVoterAndSendEmail(
+//            @PathParam("electionId") Long electionId,
+//            @PathParam("email") String email
+//    ){
+//        Election election = Election.findById(electionId);
+//        List<Voter> voters = voterRepository.createVotersForElection(1, election);
+//
+//        if(voters.isEmpty()){
+//            return Response.status(Response.Status.BAD_REQUEST).build();
+//        }
+//
+//        List<String> generatedIds = new ArrayList<>();
+//        for(Voter voter : voters){
+//            generatedIds.add(voter.getGeneratedId().toString());
+//        }
+//        emailService.sendPlainTextEmail(
+//                email,
+//                election.getName(),
+//                generatedIds,
+//                false);
+//        return Response.ok(voters).build();
+//    }
 }

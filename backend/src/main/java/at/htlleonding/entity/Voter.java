@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 
 import java.util.UUID;
 
-
 @Entity
 public class Voter extends PanacheEntityBase {
     //<editor-fold desc="Fields">
@@ -13,17 +12,17 @@ public class Voter extends PanacheEntityBase {
     @Column(unique = true)
     private UUID generatedId;
     @ManyToOne
-    private Election participatingIn;
+    private Election election;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     public Voter() {
-        participatingIn = null;
+        election = null;
         this.generatedId = UUID.randomUUID();
     }
 
-    public Voter(Election participatingIn) {
-        this.participatingIn = participatingIn;
+    public Voter(Election election) {
+        this.election = election;
         this.generatedId = UUID.randomUUID();
     }
     //</editor-fold>
@@ -34,8 +33,8 @@ public class Voter extends PanacheEntityBase {
         return generatedId;
     }
 
-    public Election getParticipatingIn() {
-        return participatingIn;
+    public Election getElection() {
+        return election;
     }
 
     //</editor-fold>

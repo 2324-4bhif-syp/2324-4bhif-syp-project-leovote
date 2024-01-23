@@ -40,7 +40,7 @@ public class VoterRepository implements PanacheRepository<Voter> {
                 .findFirst();
         Blockchain blockchain = new Blockchain(election1.getBlockchainFileName());
         if (candidate1.isPresent() && election1 != null
-                && voter.getParticipatingIn() == election1 &&
+                && voter.getElection() == election1 &&
                 election1.getElectionStart().isBefore(LocalDateTime.now()) &&
                 election1.getElectionEnd().isAfter(LocalDateTime.now()) &&
                 !hasAlreadyVoted(blockchain, voter)
@@ -59,5 +59,9 @@ public class VoterRepository implements PanacheRepository<Voter> {
             }
         }
         return false;
+    }
+
+    public List<Voter> getVoteCodesByElection(Long electionId) {
+        return list("election.id", electionId);
     }
 }

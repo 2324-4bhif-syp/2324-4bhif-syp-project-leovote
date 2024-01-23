@@ -1,69 +1,47 @@
 package at.htlleonding.control;
 
-
+import at.htlleonding.entity.Election;
+import at.htlleonding.entity.Voter;
+import io.quarkus.mailer.MailTemplate.MailTemplateInstance;
+import io.quarkus.qute.CheckedTemplate;
+import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.mail.*;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
+import jakarta.inject.Inject;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 @ApplicationScoped
 public class EmailService {
-    private static final Properties PROPERTIES = new Properties();
-    private static final String EMAIL = "discord.news.bot.interface@gmail.com";
-    private static final String PASSWORD = "erzp bind soza xzte";
-    private static final String HOST = "smtp.gmail.com";
+    private static final String LINK_BASE = "https://yourwebsite.com/vote";
+    @Inject
+    VoterRepository voterRepository;
+    @Inject
+    ElectionRepository electionRepository;
 
-    static {
-        PROPERTIES.put("mail.smtp.host", HOST);
-        PROPERTIES.put("mail.smtp.port", "587");
-        PROPERTIES.put("mail.smtp.auth", "true");
-        PROPERTIES.put("mail.smtp.starttls.enable", "true");
+    @CheckedTemplate(requireTypeSafeExpressions = false)
+    static class Templates {
+        public static native MailTemplateInstance invite(String link);
     }
-    public EmailService(){}
 
-    public void sendPlainTextEmail(String to, String subject, List<String> messages, boolean debug) {
-        Authenticator authenticator = new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(EmailService.EMAIL, PASSWORD);
-            }
-        };
+    public Uni<Void> sendInvitesAsync(Election election) {
+        List<Voter> voteCodes = voterRepository.getVoteCodesByElection(election.id);
 
-        Session session = Session.getInstance(PROPERTIES, authenticator);
-        session.setDebug(debug);
+        Multi<Void> sendInvitesMulti = Multi.createFrom().iterable(voteCodes)
+                .onItem().transformToUniAndConcatenate(voter -> {
+                    String link = generateLink(voter);
+                    return sendInviteAsync("frfelix05@gmail.com", link, election.getName());
+                });
 
-        try {
-            // create a message with headers
-            MimeMessage msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(EMAIL));
-            InternetAddress[] address = {new InternetAddress(to)};
-            msg.setRecipients(Message.RecipientType.TO, address);
-            msg.setSubject(subject);
-            msg.setSentDate(new Date());
+        return sendInvitesMulti.collect().asList().onItem().ignore().andContinueWithNull();
+    }
 
-            // create message body
-            Multipart mp = new MimeMultipart();
-            for (String message : messages) {
-                MimeBodyPart mbp = new MimeBodyPart();
-                mbp.setText(message + '\n', "us-ascii");
-                mp.addBodyPart(mbp);
-            }
-            msg.setContent(mp);
+    private String generateLink(Voter voter) {
+        return String.format("%s?token=%s", LINK_BASE, voter.getGeneratedId());
+    }
 
-            // send the message
-            Transport.send(msg);
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-            Exception ex = null;
-
-            if ((ex = mex.getNextException()) != null) {
-                ex.printStackTrace();
-            }
-        }
+    private Uni<Void> sendInviteAsync(String recipient, String link, String electionName) {
+        String subject = "Einladung zur Wahl " + electionName;
+        return Templates.invite(link).to(recipient).subject(subject).send().onItem().ignore().andContinueWithNull();
     }
 }
