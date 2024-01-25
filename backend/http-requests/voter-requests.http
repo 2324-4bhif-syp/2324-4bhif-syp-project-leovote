@@ -2,7 +2,7 @@
 GET http://localhost:8080/voters
 
 ### Get voter by ID
-GET http://localhost:8080/voters/voter/e8ef46ee-fbd8-4e54-a91f-62126215c624
+GET http://localhost:8080/voters/voter/fe73da97-7a43-4725-8cb6-9c2b09ddae73
 
 ### Create a new voter
 POST http://localhost:8080/voters

@@ -129,7 +129,7 @@ public class VoterRepoTest {
         }
 
         for (Voter v : voterList) {
-            Election election = Election.findById(v.getParticipatingIn().id);
+            Election election = Election.findById(v.getElection().id);
             assertThat(voterRepository.hasAlreadyVoted(new Blockchain(election.getBlockchainFileName()), v)).isEqualTo(false);
         }
 
@@ -174,7 +174,7 @@ public class VoterRepoTest {
         }
 
         for (Voter v : voterList) {
-            Election election = Election.findById(v.getParticipatingIn().id);
+            Election election = Election.findById(v.getElection().id);
             assertThat(voterRepository.hasAlreadyVoted(new Blockchain(election.getBlockchainFileName()), v)).isEqualTo(false);
         }
 

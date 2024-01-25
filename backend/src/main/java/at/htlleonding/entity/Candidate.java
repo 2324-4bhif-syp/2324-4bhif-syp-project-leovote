@@ -33,6 +33,15 @@ public class Candidate extends PanacheEntity {
         this.grade = grade;
         this.pathOfImage = pathOfImage;
     }
+    public Candidate(@JsonProperty("schoolId") String schoolId,
+                     @JsonProperty("firstName") String firstName,
+                     @JsonProperty("lastName") String lastName,
+                     @JsonProperty("grade") String grade){
+        this.schoolId = schoolId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.grade = grade;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
