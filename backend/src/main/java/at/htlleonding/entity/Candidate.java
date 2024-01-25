@@ -1,5 +1,6 @@
 package at.htlleonding.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Column;
@@ -22,6 +23,7 @@ public class Candidate extends PanacheEntity {
     public Candidate() {
     }
 
+    @JsonCreator
     public Candidate(@JsonProperty("schoolId") String schoolId,
                      @JsonProperty("firstName") String firstName,
                      @JsonProperty("lastName") String lastName,
@@ -33,6 +35,7 @@ public class Candidate extends PanacheEntity {
         this.grade = grade;
         this.pathOfImage = pathOfImage;
     }
+
     public Candidate(@JsonProperty("schoolId") String schoolId,
                      @JsonProperty("firstName") String firstName,
                      @JsonProperty("lastName") String lastName,
@@ -41,6 +44,7 @@ public class Candidate extends PanacheEntity {
         this.firstName = firstName;
         this.lastName = lastName;
         this.grade = grade;
+        this.pathOfImage = "default.jpg";
     }
     //</editor-fold>
 
