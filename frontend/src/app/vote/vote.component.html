@@ -1,30 +1,30 @@
 <!-- vote.component.html -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <div *ngIf="!isVoted">
   <div>
-    <h2>{{election?.name}}</h2>
-    <p>Code: {{voter?.generatedId}}</p>
+    <h2>{{ election?.name }}</h2>
+    <p>Code: {{ voter?.generatedId }}</p>
   </div>
 
-  <div>
-    <p>Candidates:</p>
-    <div *ngFor="let candidate of election?.participatingCandidates; let index ">
-      <div class="card-columns">
-        <div class="card">
-          <img class="card-img-top" [src]="'assets/images/' + candidate.pathOfImage" alt="{{candidate.firstName}} {{candidate.lastName}}"
-          style="max-width: 30%; max-height: 30%"/>
-          <div class="card-body">
-            <h3>{{candidate.firstName}} {{candidate.lastName}}</h3>
-            <input type="radio" [(ngModel)]="selecedCandidate" [value]="candidate" />
-          </div>
+  <p>Candidates:</p>
+  <div *ngFor="let candidate of election?.participatingCandidates; let index ">
+    <div class="card-columns">
+      <div class="card">
+        <img class="card-img-top" [src]="'assets/images/' + candidate.pathOfImage"
+             alt="{{candidate.firstName}} {{candidate.lastName}}"
+             style="max-width: 30%; max-height: 30%"/>
+        <div class="card-body">
+          <h3>{{ candidate.firstName }} {{ candidate.lastName }}</h3>
+          <input type="radio" [(ngModel)]="selecedCandidate" [value]="candidate"/>
         </div>
       </div>
     </div>
-    <button [disabled]="!selecedCandidate" (click)="voting()">Vote</button>
   </div>
+  <button [disabled]="!selecedCandidate" (click)="voting()">Vote</button>
 </div>
 
 <div *ngIf="isVoted">
-  <h2>Thank you for voting in {{election?.name}}</h2>
+  <h2>Thank you for voting in {{ election?.name }}</h2>
 </div>

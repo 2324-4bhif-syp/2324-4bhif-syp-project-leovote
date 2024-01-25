@@ -16,6 +16,10 @@ export class ElectionService {
     return this.apiClient.addElection(election);
   }
 
+  result(id: string): Observable<Object> {
+      return this.apiClient.getResultByElection(id);
+  }
+
   getList(): Observable<Election[]> {
     return this.apiClient.getAllElections().pipe(
       map(elections => {

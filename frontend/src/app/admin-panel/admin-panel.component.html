@@ -1,0 +1,29 @@
+<h1>Admin Panel</h1>
+<div>
+  <h2>Select Election:</h2>
+  <select [(ngModel)]="selectedElection">
+    <option *ngFor="let election of elections"
+            [ngValue]="election">{{election.name}}</option>
+  </select>
+  <table style="width:100%; align-items: center">
+    <tr>
+      <th>
+        <div *ngIf="result !== undefined">
+          <h2>Results:</h2>
+          <div *ngFor="let res of result">
+            {{res.firstname}}
+            {{res.lastname}}
+            {{res.grade}}
+            percentage: {{res.percentage}}
+          </div>
+        </div>
+        <button (click)="getResult()">Get Result</button>
+      </th>
+      <th>
+        <div *ngIf="selectedElection === undefined">
+          <p>Please select election</p>
+        </div>
+      </th>
+    </tr>
+  </table>
+</div>

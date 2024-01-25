@@ -2,6 +2,9 @@
 <ul *ngIf="!voteService.isLoggedIn" class="nav nav-tabs">
   <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
     <a routerLink="/">Login</a></li>
+  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <a routerLink="/admin">Admin</a></li>
+
 </ul>
 <ul *ngIf="voteService.isLoggedIn" class="nav nav-tabs">
   <li routerLinkActive="active"><a routerLink="votes">Vote</a></li>

@@ -8,18 +8,21 @@ import { LeovotePageComponent } from './leovote-page/leovote-page.component';
 import {RouterModule, Routes} from "@angular/router";
 import { LoginComponent } from './login/login.component';
 import { VoteComponent } from './vote/vote.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
   {path: 'login', component: LoginComponent},
   {path: 'votes', component: VoteComponent},
+  {path: 'admin', component: AdminPanelComponent}
 ]
 @NgModule({
   declarations: [
     AppComponent,
     LeovotePageComponent,
     LoginComponent,
-    VoteComponent
+    VoteComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

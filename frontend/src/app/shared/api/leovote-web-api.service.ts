@@ -17,6 +17,7 @@ export class LeovoteWebApiService {
   electionById: string = 'elections/${id}'
   voters: string = 'voters/voter/${id}';
   vote: string = 'voters/vote/${electionId}/${candidateId}';
+  electionResult = 'elections/results/${id}'
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
     return this.http.get<Candidate[]>(this.baseUrl + this.candidates, {headers: this.headers});
@@ -37,5 +38,8 @@ export class LeovoteWebApiService {
   public getVoteByCode(code: string) {
     return this.http.get<Vote>(this.baseUrl + this.voters.replace('${id}', code),
       {headers: this.headers});
+  }
+  public getResultByElection(electionId: string){
+    return this.http.get<Object>(this.baseUrl + this.electionResult.replace('${id}', electionId), {headers: this.headers});
   }
 }

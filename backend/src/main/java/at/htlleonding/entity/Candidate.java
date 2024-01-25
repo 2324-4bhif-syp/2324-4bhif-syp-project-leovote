@@ -105,8 +105,6 @@ public class Candidate extends PanacheEntity {
         return "Candidate: " +
                 "Firstname: " + firstName + " " +
                 "Lastname: " + lastName + " " +
-                "Grade: " + grade + " " +
-                "SchoolId" + schoolId + " " +
-                "PathOfImage" + pathOfImage + " ";
+                "Grade: " + grade + " ";
     }
 }
