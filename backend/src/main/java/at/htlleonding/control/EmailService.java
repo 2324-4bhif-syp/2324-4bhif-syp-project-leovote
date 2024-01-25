@@ -6,6 +6,7 @@ import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
+import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -16,7 +17,6 @@ import java.util.stream.IntStream;
 
 @ApplicationScoped
 public class EmailService {
-
     private static final String LINK_BASE = "http://89.168.107.125/login";
     @Inject
     Mailer mailer;
@@ -30,7 +30,7 @@ public class EmailService {
         static native TemplateInstance invite(String link);
     }
 
-    public Uni<Void> sendInvitations(Election election) {
+    public Multi<Void> sendInvitations(Election election) {
         String subject = "Einladung zur Wahl " + election.getName();
 
         // Read emails for the election and generate the codes
@@ -42,13 +42,18 @@ public class EmailService {
                 .boxed()
                 .collect(HashMap::new, (map, i) -> map.put(emails.get(i), voters.get(i)), HashMap::putAll);
 
-        // Send the emails
-        voterEmailMap.forEach((email, voter) -> {
-            String link = generateLink(voter);
-            mailer.send(Mail.withHtml(email, subject, InviteTemplate.invite(link).render()));
-        });
+        // Send the emails using Mutiny's Multi
+        Multi<Void> multi = Multi.createFrom().iterable(voterEmailMap.entrySet())
+                .onItem().transformToUniAndMerge(entry -> sendEmail(entry.getKey(), entry.getValue(), subject));
 
-        return Uni.createFrom().voidItem();
+        return multi;
+    }
+
+    private Uni<Void> sendEmail(String email, Voter voter, String subject) {
+        String link = generateLink(voter);
+        return Uni.createFrom().voidItem()
+                .onItem().invoke(() -> mailer.send(Mail.withHtml(email, subject, InviteTemplate.invite(link).render())))
+                .onItem().ignore().andContinueWithNull();
     }
 
     private String generateLink(Voter voter) {
