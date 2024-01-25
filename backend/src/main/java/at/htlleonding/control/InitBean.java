@@ -55,6 +55,7 @@ public class InitBean {
 
         List<Voter> voters1 = voterRepository.createVotersForElection(10, election1);
         List<Voter> voters2 = voterRepository.createVotersForElection(10, election2);
+        List<Voter> votersTest = voterRepository.createVotersForElection(10, election1);
 
         for (Voter voter : voters1) {
             System.out.println(voter.getGeneratedId());
