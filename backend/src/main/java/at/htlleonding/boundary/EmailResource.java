@@ -28,7 +28,7 @@ public class EmailResource {
         }
 
         // Perform email sending logic in a background task
-        emailService.sendInvitesAsync(election.get());
+        emailService.sendInvitations(election.get());
 
         // Return a response immediately
         return Uni.createFrom().voidItem();
