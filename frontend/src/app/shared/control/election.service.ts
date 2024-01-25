@@ -16,6 +16,14 @@ export class ElectionService {
     return this.apiClient.addElection(election);
   }
 
+  addEmail(email: string, electionId: string) {
+     return this.apiClient.addEmail(email, electionId);
+  }
+
+  getMails(electionId: string){
+    return this.apiClient.getAllMails(electionId);
+  }
+
   result(id: string): Observable<Object> {
       return this.apiClient.getResultByElection(id);
   }

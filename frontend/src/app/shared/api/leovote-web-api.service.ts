@@ -17,7 +17,9 @@ export class LeovoteWebApiService {
   electionById: string = 'elections/${id}'
   voters: string = 'voters/voter/${id}';
   vote: string = 'voters/vote/${electionId}/${candidateId}';
-  electionResult = 'elections/results/${id}'
+  electionResult: string = 'elections/results/${id}';
+  addEmailUrl: string = 'elections/addEmail/${id}/${email}';
+  allMails: string = 'elections/emails/${electionId}'
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
     return this.http.get<Candidate[]>(this.baseUrl + this.candidates, {headers: this.headers});
@@ -41,5 +43,13 @@ export class LeovoteWebApiService {
   }
   public getResultByElection(electionId: string){
     return this.http.get<Object>(this.baseUrl + this.electionResult.replace('${id}', electionId), {headers: this.headers});
+  }
+
+  public addEmail(email: string, electionId: string){
+    return this.http.post(this.baseUrl + this.addEmailUrl.replace('${id}', electionId).replace('${email}', email), {headers: this.headers});
+  }
+
+  public getAllMails(electionId: string){
+    return this.http.get<string[]>(this.baseUrl + this.allMails.replace('${electionId}', electionId), {headers: this.headers});
   }
 }

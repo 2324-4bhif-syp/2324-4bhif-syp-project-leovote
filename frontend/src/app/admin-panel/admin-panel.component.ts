@@ -12,6 +12,8 @@ export class AdminPanelComponent {
   elections: Election[] | undefined = undefined;
   selectedElection: Election | undefined = undefined;
   result: Result[] | undefined = undefined;
+  emailInput: string = "";
+  emails: string[] | undefined;
 
   constructor(
     public electionService: ElectionService,
@@ -43,9 +45,25 @@ export class AdminPanelComponent {
           }
         });
         this.result = candidateResults;
-      }).then(r =>{
-        console.log("Blockchain has been modified");
       });
+    }
+  }
+
+  addEmail() {
+    if (this.selectedElection !== undefined &&
+      this.selectedElection.id !== null) {
+      this.electionService.addEmail(this.emailInput, this.selectedElection.id.toString()).forEach(value => {
+        console.log(value);
+      })
+    }
+  }
+
+  loadEmails() {
+    if (this.selectedElection !== undefined &&
+      this.selectedElection.id !== null) {
+      this.electionService.getMails(this.selectedElection.id.toString()).forEach(value => {
+        this.emails = value;
+      })
     }
   }
 }

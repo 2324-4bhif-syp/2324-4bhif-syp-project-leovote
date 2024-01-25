@@ -23,6 +23,20 @@
         <div *ngIf="selectedElection === undefined">
           <p>Please select election</p>
         </div>
+        <div *ngIf="selectedElection !== undefined">
+          <h3>Add Emails to {{selectedElection.name}}</h3>
+          <input type="email" [(ngModel)]="emailInput">
+          <button (click)="addEmail()">Add Email</button>
+        </div>
+      </th>
+      <th>
+        <div *ngIf="selectedElection !== undefined">
+          <h3>Emails in Election</h3>
+          <div *ngFor="let email of emails">
+            {{email}}
+          </div>
+          <button (click)="loadEmails()">Refresh</button>
+        </div>
       </th>
     </tr>
   </table>
