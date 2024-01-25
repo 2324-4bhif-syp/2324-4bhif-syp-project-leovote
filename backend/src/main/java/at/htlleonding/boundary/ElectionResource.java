@@ -12,7 +12,9 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import javax.print.attribute.standard.Media;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @ResourceProperties(path = "elections")
@@ -39,6 +41,14 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
         }
 
         return Response.accepted(results).build();
+    }
+
+    @GET
+    @Path("/emails/{electionId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    default Response getEmailPerElection(@PathParam("electionId") Long electionId){
+        List<String> mails = electionRepository.getVotersEmails(electionId);
+        return Response.ok(mails).build();
     }
 
     @POST

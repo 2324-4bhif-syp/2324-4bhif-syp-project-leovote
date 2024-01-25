@@ -67,8 +67,8 @@ public class ElectionRepository implements PanacheRepository<Election> {
 
     public List<String> getVotersEmails(Long electionId) {
         TypedQuery<Email> query = Panache.getEntityManager()
-                .createQuery("select e from Email e where e.election.id = ?1", Email.class);
-        query.setParameter("1", electionId);
+                .createQuery("select e from Email e where e.election.id = :electionId", Email.class);
+        query.setParameter("electionId", electionId);
         List<Email> emails = query.getResultList();
         return emails.stream().map(Email::getEmail).toList();
     }

@@ -7,6 +7,9 @@ GET http://localhost:8080/elections/1
 ### Get Result from Election
 GET http://localhost:8080/elections/results/2
 
+### Get Emails from Election
+GET http://localhost:8080/elections/emails/1
+
 ### Add Email to Election
 POST http://localhost:8080/elections/addEmail/1/david.spetzi@gmail.com
 
