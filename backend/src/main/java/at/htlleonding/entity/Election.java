@@ -33,7 +33,7 @@ public class Election extends PanacheEntity {
         this.electionEnd = electionEnd;
         this.electionType = electionType;
         this.participatingCandidates = participatingCandidates;
-        this.blockchainFileName = String.format("%s-%s%s-%s-%s-%s-%s%s-%s-%s-%s.json",this.name.replaceAll(" ", "_"),
+        this.blockchainFileName = String.format("%s-%s%s-%s-%s-%s-%s%s-%s-%s-%s.json", this.name.replaceAll(" ", "_"),
                 this.electionStart.getSecond(), "sec", this.electionStart.getDayOfMonth(), this.electionStart.getMonthValue(), this.electionStart.getYear(),
                 this.electionEnd.getSecond(), "sec", this.electionEnd.getDayOfMonth(), this.electionEnd.getMonthValue(), this.electionEnd.getYear());
     }
@@ -41,7 +41,7 @@ public class Election extends PanacheEntity {
 
     //<editor-fold desc="Getter and Setter">
 
-    public String getBlockchainFileName(){
+    public String getBlockchainFileName() {
         return blockchainFileName;
     }
 

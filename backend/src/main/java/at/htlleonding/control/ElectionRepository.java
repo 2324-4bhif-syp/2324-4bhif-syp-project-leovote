@@ -60,4 +60,8 @@ public class ElectionRepository implements PanacheRepository<Election> {
         String data = block.getIndex() + block.getTimestamp() + block.getVote().toString() + block.getPreviousHash() + block.getVoterUUID();
         return hashService.calculateSHA256Hash(data);
     }
+
+    public List<String> getVotersEmails(Long electionId) {
+        return List.of("frfelix05@gmail.com", "david.spetzi@gmail.com");
+    }
 }

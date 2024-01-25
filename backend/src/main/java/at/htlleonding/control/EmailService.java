@@ -10,17 +10,20 @@ import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @ApplicationScoped
 public class EmailService {
 
-    private static final String LINK_BASE = "https://yourwebsite.com/vote";
+    private static final String LINK_BASE = "http://89.168.107.125/login";
     @Inject
     Mailer mailer;
-
     @Inject
-    VoterRepository voterRepository; // Assuming you have a VoterRepository injected
+    VoterRepository voterRepository;
+    @Inject
+    ElectionRepository electionRepository;
 
     @CheckedTemplate(requireTypeSafeExpressions = false)
     static class InviteTemplate {
@@ -29,12 +32,21 @@ public class EmailService {
 
     public Uni<Void> sendInvitations(Election election) {
         String subject = "Einladung zur Wahl " + election.getName();
-        List<Voter> voters = voterRepository.getVoteCodesByElection(election.id);
 
-        for (Voter voter : voters) {
+        // Read emails for the election and generate the codes
+        List<String> emails = electionRepository.getVotersEmails(election.id);
+        List<Voter> voters = voterRepository.createVotersForElection(emails.size(), election);
+
+        // Create a map where each key is assigned to an email address
+        HashMap<String, Voter> voterEmailMap = IntStream.range(0, emails.size())
+                .boxed()
+                .collect(HashMap::new, (map, i) -> map.put(emails.get(i), voters.get(i)), HashMap::putAll);
+
+        // Send the emails
+        voterEmailMap.forEach((email, voter) -> {
             String link = generateLink(voter);
-            mailer.send(Mail.withHtml("frfelix05@gmail.com", subject, InviteTemplate.invite(link).render()));
-        }
+            mailer.send(Mail.withHtml(email, subject, InviteTemplate.invite(link).render()));
+        });
 
         return Uni.createFrom().voidItem();
     }
@@ -44,37 +56,3 @@ public class EmailService {
     }
 }
 
-//@ApplicationScoped
-//public class EmailService {
-//    private static final String LINK_BASE = "https://yourwebsite.com/vote";
-//    @Inject
-//    VoterRepository voterRepository;
-//    @Inject
-//    ElectionRepository electionRepository;
-//
-//    @CheckedTemplate(requireTypeSafeExpressions = false)
-//    static class Templates {
-//        public static native MailTemplateInstance invite(String link);
-//    }
-//
-//    public Uni<Void> sendInvitesAsync(Election election) {
-//        List<Voter> voteCodes = voterRepository.getVoteCodesByElection(election.id);
-//
-//        Multi<Void> sendInvitesMulti = Multi.createFrom().iterable(voteCodes)
-//                .onItem().transformToUniAndConcatenate(voter -> {
-//                    String link = generateLink(voter);
-//                    return sendInviteAsync("frfelix05@gmail.com", link, election.getName());
-//                });
-//
-//        return sendInvitesMulti.collect().asList().onItem().ignore().andContinueWithNull();
-//    }
-//
-//    private String generateLink(Voter voter) {
-//        return String.format("%s?token=%s", LINK_BASE, voter.getGeneratedId());
-//    }
-//
-//    private Uni<Void> sendInviteAsync(String recipient, String link, String electionName) {
-//        String subject = "Einladung zur Wahl " + electionName;
-//        return Templates.invite(link).to(recipient).subject(subject).send().onItem().ignore().andContinueWithNull();
-//    }
-//}

@@ -5,6 +5,7 @@ import at.htlleonding.entity.Election;
 import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -17,6 +18,7 @@ public class EmailResource {
     @Inject
     EmailService emailService;
 
+    @Transactional
     @Path("/election/{electionId}")
     @Blocking
     @Produces(MediaType.SERVER_SENT_EVENTS)
