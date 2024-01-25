@@ -57,7 +57,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         UUID voterId = requestBody.get("voterId");
         Election election = Election.findById(electionId);
         Candidate candidate = Candidate.findById(candidateId);
-        boolean voteIsValid = true;
+        boolean voteIsValid;
         try {
             Voter voter = Voter.findById(voterId);
             voteIsValid = voterRepository.voteForCandidate(voter, candidate, election);
@@ -91,31 +91,4 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         }
         return Response.ok(voters).build();
     }
-
-//    @POST
-//    @Path("/election/{email}/{electionId}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Transactional
-//    default Response createVoterAndSendEmail(
-//            @PathParam("electionId") Long electionId,
-//            @PathParam("email") String email
-//    ){
-//        Election election = Election.findById(electionId);
-//        List<Voter> voters = voterRepository.createVotersForElection(1, election);
-//
-//        if(voters.isEmpty()){
-//            return Response.status(Response.Status.BAD_REQUEST).build();
-//        }
-//
-//        List<String> generatedIds = new ArrayList<>();
-//        for(Voter voter : voters){
-//            generatedIds.add(voter.getGeneratedId().toString());
-//        }
-//        emailService.sendPlainTextEmail(
-//                email,
-//                election.getName(),
-//                generatedIds,
-//                false);
-//        return Response.ok(voters).build();
-//    }
 }
