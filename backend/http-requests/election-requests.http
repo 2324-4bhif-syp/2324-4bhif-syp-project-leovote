@@ -7,6 +7,12 @@ GET http://localhost:8080/elections/1
 ### Get Result from Election
 GET http://localhost:8080/elections/results/2
 
+### Add Email to Election
+POST http://localhost:8080/elections/addEmail/1/david.spetzi@gmail.com
+
+### Delete Email from election
+DELETE http://localhost:8080/elections/removeEmail/1
+
 ### Create a new election
 POST http://localhost:8080/elections
 Content-Type: application/json

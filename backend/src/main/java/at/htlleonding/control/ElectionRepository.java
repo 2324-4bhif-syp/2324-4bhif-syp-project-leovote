@@ -3,11 +3,15 @@ package at.htlleonding.control;
 import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
+import at.htlleonding.entity.Email;
+import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.TypedQuery;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class ElectionRepository implements PanacheRepository<Election> {
@@ -62,6 +66,24 @@ public class ElectionRepository implements PanacheRepository<Election> {
     }
 
     public List<String> getVotersEmails(Long electionId) {
-        return List.of("frfelix05@gmail.com", "david.spetzi@gmail.com");
+        TypedQuery<Email> query = Panache.getEntityManager()
+                .createQuery("select e from Email e where e.election.id = ?1", Email.class);
+        query.setParameter("1", electionId);
+        List<Email> emails = query.getResultList();
+        return emails.stream().map(Email::getEmail).toList();
+    }
+
+    public Optional<Email> addEmailtoElection(Long electionId, String email){
+        Optional<Election> election = Election.findByIdOptional(electionId);
+        if(election.isPresent()){
+            Email emailCreated = new Email(email, election.get());
+            Email.persist(emailCreated);
+            return Optional.of(emailCreated);
+        }
+        return Optional.empty();
+    }
+
+    public void removeEmailfromElection(Long emailId){
+        Email.deleteById(emailId);
     }
 }
