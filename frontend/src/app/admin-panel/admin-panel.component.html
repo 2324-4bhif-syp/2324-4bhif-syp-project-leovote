@@ -29,11 +29,13 @@
           <button (click)="addEmail()">Add Email</button>
         </div>
       </th>
+    </tr>
+    <tr>
       <th>
         <div *ngIf="selectedElection !== undefined">
           <h3>Emails in Election</h3>
           <div *ngFor="let email of emails">
-            {{email}}
+            {{email.email}} <button (click)="deleteEmail(email.id)"> Remove </button>
           </div>
           <button (click)="loadEmails()">Refresh</button>
         </div>

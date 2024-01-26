@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Election} from "../entity/election-model";
 import {LeovoteWebApiService} from "../api/leovote-web-api.service";
 import {map, Observable, Subject} from "rxjs";
+import {EmailModel} from "../entity/email-model";
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,12 @@ export class ElectionService {
      return this.apiClient.addEmail(email, electionId);
   }
 
-  getMails(electionId: string){
+  getMails(electionId: string): Observable<EmailModel[]>{
     return this.apiClient.getAllMails(electionId);
+  }
+
+  removeMail(mailId: string) {
+    return this.apiClient.removeMail(mailId);
   }
 
   result(id: string): Observable<Object> {

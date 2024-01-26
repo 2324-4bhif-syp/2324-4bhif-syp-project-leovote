@@ -4,6 +4,7 @@ import {Candidate} from "../entity/candidate-model";
 import {Election} from "../entity/election-model";
 import {Vote} from "../entity/vote";
 import {VoteCandidate} from "../entity/vote-candidate-model";
+import {EmailModel} from "../entity/email-model";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +20,9 @@ export class LeovoteWebApiService {
   vote: string = 'voters/vote/${electionId}/${candidateId}';
   electionResult: string = 'elections/results/${id}';
   addEmailUrl: string = 'elections/addEmail/${id}/${email}';
-  allMails: string = 'elections/emails/${electionId}'
+  allMails: string = 'email/${electionId}';
+  removeMailUrl: string = 'elections/removeEmail/${id}';
+
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
     return this.http.get<Candidate[]>(this.baseUrl + this.candidates, {headers: this.headers});
@@ -50,6 +53,10 @@ export class LeovoteWebApiService {
   }
 
   public getAllMails(electionId: string){
-    return this.http.get<string[]>(this.baseUrl + this.allMails.replace('${electionId}', electionId), {headers: this.headers});
+    return this.http.get<EmailModel[]>(this.baseUrl + this.allMails.replace('${electionId}', electionId), {headers: this.headers});
+  }
+
+  public removeMail(mailId: string){
+    return this.http.delete(this.baseUrl + this.removeMailUrl.replace('${id}', mailId), {headers: this.headers});
   }
 }

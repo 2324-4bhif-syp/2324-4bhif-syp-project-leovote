@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ElectionService} from "../shared/control/election.service";
 import {Election} from "../shared/entity/election-model";
 import {Result} from "../shared/entity/result";
+import {EmailModel} from "../shared/entity/email-model";
 
 @Component({
   selector: 'app-admin-panel',
@@ -13,7 +14,7 @@ export class AdminPanelComponent {
   selectedElection: Election | undefined = undefined;
   result: Result[] | undefined = undefined;
   emailInput: string = "";
-  emails: string[] | undefined;
+  emails: EmailModel[] | undefined;
 
   constructor(
     public electionService: ElectionService,
@@ -54,6 +55,7 @@ export class AdminPanelComponent {
       this.selectedElection.id !== null) {
       this.electionService.addEmail(this.emailInput, this.selectedElection.id.toString()).forEach(value => {
         console.log(value);
+        this.loadEmails();
       })
     }
   }
@@ -64,6 +66,14 @@ export class AdminPanelComponent {
       this.electionService.getMails(this.selectedElection.id.toString()).forEach(value => {
         this.emails = value;
       })
+    }
+  }
+
+  deleteEmail(id: number) {
+    if(Number(id)){
+      this.electionService.removeMail(id.toString()).forEach(value => {
+        this.loadEmails();
+      });
     }
   }
 }
