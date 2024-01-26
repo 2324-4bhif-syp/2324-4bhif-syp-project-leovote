@@ -4,6 +4,7 @@ import at.htlleonding.control.ElectionRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Email;
+import at.htlleonding.entity.dto.EmailDTO;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
 import jakarta.enterprise.inject.spi.CDI;
@@ -12,7 +13,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import javax.print.attribute.standard.Media;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +59,11 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
                                         @PathParam("email") String email){
         Optional<Email> returnedMail = electionRepository.addEmailtoElection(electionId, email);
         if(returnedMail.isPresent()){
-            return Response.accepted(returnedMail).build();
+            EmailDTO  emailDTO = new EmailDTO(returnedMail.get().getEmail(),
+                    returnedMail.get().id,
+                    returnedMail.get().getElection().id);
+
+            return Response.accepted(emailDTO).build();
         }
         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
     }
