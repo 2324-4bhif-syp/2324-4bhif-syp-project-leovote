@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { VoteComponent } from './vote/vote.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ResultsComponent } from './results/results.component';
+import { CreateCandidateElectionComponent } from './create-candidate-election/create-candidate-election.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -17,6 +18,8 @@ const appRoutes: Routes = [
   {path: 'votes', component: VoteComponent},
   { path: 'admin', component: AdminPanelComponent, children: [
       { path: 'results', component: ResultsComponent },
+      { path: 'create-candidate-election', component: CreateCandidateElectionComponent }
+
     ]}
 ]
 @NgModule({
@@ -26,7 +29,8 @@ const appRoutes: Routes = [
     LoginComponent,
     VoteComponent,
     AdminPanelComponent,
-    ResultsComponent
+    ResultsComponent,
+    CreateCandidateElectionComponent
   ],
   imports: [
     BrowserModule,

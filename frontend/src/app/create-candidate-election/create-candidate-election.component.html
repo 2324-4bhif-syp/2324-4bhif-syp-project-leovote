@@ -1,0 +1,24 @@
+<h2>Create Candidate</h2>
+
+<div>
+  <label>School ID:</label>
+  <input [(ngModel)]="candidate.schoolId" placeholder="School ID" />
+</div>
+<div>
+  <label>First Name:</label>
+  <input [(ngModel)]="candidate.firstName" placeholder="First Name" />
+</div>
+<div>
+  <label>Last Name:</label>
+  <input [(ngModel)]="candidate.lastName" placeholder="Last Name" />
+</div>
+<div>
+  <label>Grade:</label>
+  <input [(ngModel)]="candidate.grade" placeholder="Grade" />
+</div>
+<!--
+<div>
+  <label>Image:</label>
+  <input type="file" (change)="onImageChange($event)" />
+</div>-->
+<button (click)="createCandidate()">Create Candidate</button>
