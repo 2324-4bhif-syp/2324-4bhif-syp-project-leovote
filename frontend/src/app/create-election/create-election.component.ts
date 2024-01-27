@@ -54,6 +54,7 @@ export class CreateElectionComponent implements OnInit{
     this.electionService.add(this.election).subscribe(
       (response) => {
         console.log('Election created successfully:', response);
+        this.selectedCandidates = [];
       },
       (error) => {
         console.error('Error creating election:', error);
@@ -66,5 +67,8 @@ export class CreateElectionComponent implements OnInit{
       new Date(),
       "",
       "", [])
+  }
+  isSelected(candidate: Candidate): boolean {
+    return this.selectedCandidates.some(selected => selected.id === candidate.id);
   }
 }

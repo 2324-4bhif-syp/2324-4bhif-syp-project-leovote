@@ -21,7 +21,7 @@
   <h3>Select Participating Candidates:</h3>
   <div *ngFor="let candidate of availableCandidates">
     <label>
-      <input type="checkbox" (change)="toggleCandidateSelection(candidate)" />
+      <input type="checkbox" [checked]="isSelected(candidate)" (change)="toggleCandidateSelection(candidate)" />
       {{ candidate.firstName }} {{ candidate.lastName }}
     </label>
   </div>
