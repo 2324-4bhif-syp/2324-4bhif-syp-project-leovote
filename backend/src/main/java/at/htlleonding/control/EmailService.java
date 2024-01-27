@@ -11,8 +11,10 @@ import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @ApplicationScoped
@@ -33,24 +35,47 @@ public class EmailService {
     public Multi<Void> sendInvitations(Election election) {
         String subject = "Einladung zur Wahl " + election.getName();
 
-        // Read emails for the election and generate the codes
-        List<String> emails = electionRepository.getVotersEmails(election.id);
-        List<Voter> voters = voterRepository.createVotersForElection(emails.size(), election);
+        Uni<List<String>> emailsUni = Uni.createFrom().item(() -> electionRepository.getVotersEmails(election.id));
+        Uni<List<Voter>> votersUni = emailsUni
+                .onItem().transformToUni(emails -> Uni.createFrom().item(() -> voterRepository.createVotersForElection(emails.size(), election)));
 
-        // Create a map where each key is assigned to an email address
-        HashMap<String, Voter> voterEmailMap = IntStream.range(0, emails.size())
-                .boxed()
-                .collect(HashMap::new, (map, i) -> map.put(emails.get(i), voters.get(i)), HashMap::putAll);
+        return Uni.combine().all().unis(emailsUni, votersUni).asTuple()
+                .onItem().transformToMulti(tuple -> {
+                    List<String> emails = tuple.getItem1();
+                    List<Voter> voters = tuple.getItem2();
 
-        return Multi.createFrom().iterable(emails)
-                .onItem().transformToUniAndConcatenate(email -> sendEmailAsync(email, voterEmailMap.get(email), subject));
+                    // Create a map where each key is assigned to an email address
+                    HashMap<String, Voter> voterEmailMap = IntStream.range(0, emails.size())
+                            .boxed()
+                            .collect(HashMap::new, (map, i) -> map.put(emails.get(i), voters.get(i)), HashMap::putAll);
+
+                    // Send emails asynchronously in batches
+                    int batchSize = 10; // Set an appropriate batch size
+                    List<List<String>> emailBatches = new ArrayList<>();
+
+                    for (int i = 0; i < emails.size(); i += batchSize) {
+                        int end = Math.min(i + batchSize, emails.size());
+                        emailBatches.add(emails.subList(i, end));
+                    }
+
+                    return sendEmailAsync(voterEmailMap, emailBatches, subject);
+                });
     }
 
-    private Uni<Void> sendEmailAsync(String email, Voter voter, String subject) {
-        String link = generateLink(voter);
-        String html = InviteTemplate.invite(link).data("link", link).render();
+    private Multi<Void> sendEmailAsync(HashMap<String, Voter> voterEmailMap, List<List<String>> emailBatches, String subject) {
+        return Multi.createFrom().iterable(emailBatches)
+                .onItem().transformToUniAndConcatenate(batch -> {
+                    List<Mail> mails = batch.stream()
+                            .map(email -> {
+                                Voter voter = voterEmailMap.get(email);
+                                String link = generateLink(voter);
+                                String html = InviteTemplate.invite(link).data("link", link).render();
+                                return Mail.withHtml(email, subject, html);
+                            })
+                            .collect(Collectors.toList());
 
-        return reactiveMailer.send(Mail.withHtml(email, subject, html));
+                    return reactiveMailer.send(mails.toArray(new Mail[0]));
+                });
     }
 
     private String generateLink(Voter voter) {
