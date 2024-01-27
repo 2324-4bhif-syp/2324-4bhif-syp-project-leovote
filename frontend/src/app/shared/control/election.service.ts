@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Election} from "../entity/election-model";
 import {LeovoteWebApiService} from "../api/leovote-web-api.service";
-import {map, Observable, Subject} from "rxjs";
+import {catchError, map, Observable, Subject, throwError} from "rxjs";
 import {EmailModel} from "../entity/email-model";
 
 @Injectable({
@@ -18,7 +18,14 @@ export class ElectionService {
   }
 
   addEmail(email: string, electionId: string) {
-     return this.apiClient.addEmail(email, electionId);
+     return this.apiClient.addEmail(email, electionId)    .pipe(
+       catchError((error) => {
+         // Handle the error here
+         console.error("Input Email is not a Email");
+         // Rethrow the error so that the calling code can also handle it if needed
+         return error;
+       })
+     );
   }
 
   getMails(electionId: string): Observable<EmailModel[]>{

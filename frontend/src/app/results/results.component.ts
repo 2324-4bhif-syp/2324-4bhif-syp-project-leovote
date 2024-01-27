@@ -15,6 +15,7 @@ export class ResultsComponent {
   result: Result[] | undefined = undefined;
   emailInput: string = "";
   emails: EmailModel[] | undefined;
+  emailError: boolean = false;
 
   constructor(
     public electionService: ElectionService,
@@ -53,10 +54,14 @@ export class ResultsComponent {
   addEmail() {
     if (this.selectedElection !== undefined &&
       this.selectedElection.id !== null) {
-      this.electionService.addEmail(this.emailInput, this.selectedElection.id.toString()).forEach(value => {
-        console.log(value);
-        this.loadEmails();
-      })
+      this.electionService.addEmail(this.emailInput, this.selectedElection.id.toString()).subscribe((value) => {
+          console.log(value);
+          this.loadEmails();
+          this.emailError = false;
+        },
+        (error) => {
+          this.emailError = true;
+        })
     }
   }
 
