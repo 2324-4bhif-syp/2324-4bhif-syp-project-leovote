@@ -18,17 +18,15 @@ export class ElectionService {
   }
 
   addEmail(email: string, electionId: string) {
-     return this.apiClient.addEmail(email, electionId)    .pipe(
-       catchError((error) => {
-         // Handle the error here
-         console.error("Input Email is not a Email");
-         // Rethrow the error so that the calling code can also handle it if needed
-         return error;
-       })
-     );
+    return this.apiClient.addEmail(email, electionId).pipe(
+      catchError((error) => {
+        console.error("Input Email is not a Email");
+        return error;
+      })
+    );
   }
 
-  getMails(electionId: string): Observable<EmailModel[]>{
+  getMails(electionId: string): Observable<EmailModel[]> {
     return this.apiClient.getAllMails(electionId);
   }
 
@@ -36,8 +34,13 @@ export class ElectionService {
     return this.apiClient.removeMail(mailId);
   }
 
-  result(id: string): Observable<Object> {
-      return this.apiClient.getResultByElection(id);
+  result(id: string): Observable<Object> | Observable<unknown>{
+    return this.apiClient.getResultByElection(id).pipe(
+      catchError((error) => {
+        console.error("Blockchain cannot be checked. Could've been modified");
+        return error;
+      })
+    );
   }
 
   getList(): Observable<Election[]> {

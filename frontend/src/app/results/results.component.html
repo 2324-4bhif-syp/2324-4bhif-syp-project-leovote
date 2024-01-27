@@ -9,11 +9,16 @@
     <th>
       <div *ngIf="result !== undefined">
         <h2>Results:</h2>
-        <div *ngFor="let res of result">
-          {{res.firstname}}
-          {{res.lastname}}
-          {{res.grade}}
-          percentage: {{res.percentage}}
+        <div *ngIf="!resultError">
+          <div *ngFor="let res of result">
+            {{res.firstname}}
+            {{res.lastname}}
+            {{res.grade}}
+            percentage: {{res.percentage}}
+          </div>
+        </div>
+        <div *ngIf="resultError">
+          <p>Error validating Blockchain. Could've been manipulated</p>
         </div>
       </div>
       <button (click)="getResult()">Get Result</button>

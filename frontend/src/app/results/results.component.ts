@@ -16,6 +16,7 @@ export class ResultsComponent {
   emailInput: string = "";
   emails: EmailModel[] | undefined;
   emailError: boolean = false;
+  resultError: boolean = false;
 
   constructor(
     public electionService: ElectionService,
@@ -27,26 +28,30 @@ export class ResultsComponent {
 
   getResult() {
     if (this.selectedElection !== undefined && this.selectedElection.id !== undefined && this.selectedElection.id !== null) {
-      this.electionService.result(this.selectedElection.id.toString()).forEach(value => {
+      this.electionService.result(this.selectedElection.id.toString()).subscribe((value) => {
         const candidateResults: Result[] = [];
-
-        Object.keys(value).forEach(key => {
-          console.log(key);
-          console.log(value);
-          const match = key.match(/Firstname: (\w+) Lastname: (\w+) Grade: (\w+)/);
-          if (match) {
-            let percentage: number = (value as { [key: string]: number })[key];
-            const [, firstname, lastname, grade] = match;
-            const candidateResult: Result = {
-              firstname,
-              lastname,
-              grade,
-              percentage
-            };
-            candidateResults.push(candidateResult);
-          }
-        });
+        if(value instanceof Object){
+          this.resultError = false;
+          Object.keys(value).forEach(key => {
+            console.log(key);
+            console.log(value);
+            const match = key.match(/Firstname: (\w+) Lastname: (\w+) Grade: (\w+)/);
+            if (match) {
+              let percentage: number = (value as { [key: string]: number })[key];
+              const [, firstname, lastname, grade] = match;
+              const candidateResult: Result = {
+                firstname,
+                lastname,
+                grade,
+                percentage
+              };
+              candidateResults.push(candidateResult);
+            }
+          });
+        }
         this.result = candidateResults;
+      }, (error) => {
+        this.resultError = true;
       });
     }
   }
