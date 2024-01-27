@@ -4,10 +4,8 @@ import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Email;
-import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.TypedQuery;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,11 +64,12 @@ public class ElectionRepository implements PanacheRepository<Election> {
     }
 
     public List<String> getVotersEmails(Long electionId) {
-        TypedQuery<Email> query = Panache.getEntityManager()
-                .createQuery("select e from Email e where e.election.id = :electionId", Email.class);
-        query.setParameter("electionId", electionId);
-        List<Email> emails = query.getResultList();
-        return emails.stream().map(Email::getEmail).toList();
+        return List.of("frfelix05@gmail.com");
+//        TypedQuery<Email> query = Panache.getEntityManager()
+//                .createQuery("select e from Email e where e.election.id = :electionId", Email.class);
+//        query.setParameter("electionId", electionId);
+//        List<Email> emails = query.getResultList();
+//        return emails.stream().map(Email::getEmail).toList();
     }
 
     public Optional<Email> addEmailtoElection(Long electionId, String email) {

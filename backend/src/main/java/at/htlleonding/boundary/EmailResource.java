@@ -29,7 +29,6 @@ public class EmailResource {
     EntityManager em;
 
     @Blocking
-    @Transactional
     @Path("/election/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> sendInvite(@PathParam("electionId") Long electionId) {
