@@ -1,0 +1,29 @@
+<h2>Create Election</h2>
+
+<div>
+  <label for="electionName">Election Name:</label>
+  <input id="electionName" [(ngModel)]="election.name" placeholder="Election Name" />
+</div>
+<div>
+  <label for="electionType">Election Type:</label>
+  <input id="electionType" [(ngModel)]="election.electionType" placeholder="Election Type" />
+</div>
+<div>
+  <label for="electionStart">Election Start:</label>
+  <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart" />
+</div>
+<div>
+  <label for="electionEnd">Election End:</label>
+  <input id="electionEnd" type="datetime-local" [(ngModel)]="election.electionEnd" />
+</div>
+
+<div>
+  <h3>Select Participating Candidates:</h3>
+  <div *ngFor="let candidate of availableCandidates">
+    <label>
+      <input type="checkbox" (change)="toggleCandidateSelection(candidate)" />
+      {{ candidate.firstName }} {{ candidate.lastName }}
+    </label>
+  </div>
+</div>
+<button (click)="createElection()">Create Election</button>

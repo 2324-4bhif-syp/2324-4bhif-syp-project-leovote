@@ -11,9 +11,10 @@ import {VoteService} from "./shared/control/vote.service";
 export class AppComponent {
   title = 'Leovote';
   constructor(public voteService: VoteService, private router: Router) {}
+  /*
   ngOnInit(): void {
     if (!this.voteService.isLoggedIn) {
       this.router.navigate(['/']);
     }
-  }
+  }*/
 }

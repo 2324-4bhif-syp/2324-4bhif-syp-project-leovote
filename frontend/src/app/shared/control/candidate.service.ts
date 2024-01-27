@@ -13,27 +13,24 @@ export class CandidateService {
   }
 
   add(candidate: Candidate): Observable<any> {
-    return this.apiClient.addCandidate(candidate).pipe();
+    return this.apiClient.addCandidate(candidate);
   }
 
-  /*
+
   getList(): Observable<Candidate[]> {
     return this.apiClient.getAllCandidates().pipe(
       map(candidates => {
         return candidates.map(candidate => {
-          // Aktualisieren Sie den Bildpfad basierend auf dem Dateinamen des Bildes
-          candidate.pathOfImage = this.generateImagePath(candidate.pathOfImage);
           return candidate;
         });
       })
     );
   }
-
   refreshList(): void {
     this.refreshListSubject.next();
   }
 
   onListRefresh(): Observable<void> {
     return this.refreshListSubject.asObservable();
-  }*/
+  }
 }

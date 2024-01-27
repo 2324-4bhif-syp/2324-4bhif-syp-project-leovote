@@ -36,6 +36,8 @@ export class LeovoteWebApiService {
       .replace('${candidateId}', candidateId.toString()), voter, {headers: this.headers});
   }
   public addCandidate(candidate: Candidate){
+    console.log(candidate);
+    console.log(this.baseUrl + this.candidates)
     return this.http.post(this.baseUrl + this.candidates, candidate, {headers: this.headers});
   }
   public addElection(election: Election){
