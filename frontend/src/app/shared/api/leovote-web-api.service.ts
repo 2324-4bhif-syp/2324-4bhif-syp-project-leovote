@@ -12,16 +12,17 @@ export class LeovoteWebApiService {
 
   headers = new HttpHeaders().set('Accept', 'application/json');
   //baseUrl = 'http://89.168.107.125/api/';   it's here for the server. This is used at server
-  baseUrl = 'http://localhost:8080/';
-  candidates = 'candidates';
-  elections: string = 'elections';
-  electionById: string = 'elections/${id}'
-  voters: string = 'voters/voter/${id}';
-  vote: string = 'voters/vote/${electionId}/${candidateId}';
-  electionResult: string = 'elections/results/${id}';
-  addEmailUrl: string = 'elections/addEmail/${id}/${email}';
-  allMails: string = 'email/${electionId}';
-  removeMailUrl: string = 'elections/removeEmail/${id}';
+  private baseUrl = 'http://localhost:8080/';
+  private candidates = 'candidates';
+  private elections: string = 'elections';
+  private electionById: string = 'elections/${id}'
+  private voters: string = 'voters/voter/${id}';
+  private vote: string = 'voters/vote/${electionId}/${candidateId}';
+  private electionResult: string = 'elections/results/${id}';
+  private addEmailUrl: string = 'elections/addEmail/${id}/${email}';
+  private allMails: string = 'email/${electionId}';
+  private removeMailUrl: string = 'elections/removeEmail/${id}';
+  private sendCodesUrl: string = 'email/election/${electionId}'
 
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
@@ -58,5 +59,9 @@ export class LeovoteWebApiService {
 
   public removeMail(mailId: string){
     return this.http.delete(this.baseUrl + this.removeMailUrl.replace('${id}', mailId), {headers: this.headers});
+  }
+
+  public sendCodes(electionId: string){
+    return this.http.post(this.baseUrl + this.sendCodesUrl.replace('${electionId}', electionId), {headers: this.headers});
   }
 }

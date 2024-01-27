@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Election} from "../shared/entity/election-model";
 import {Result} from "../shared/entity/result";
 import {EmailModel} from "../shared/entity/email-model";
@@ -30,7 +30,7 @@ export class ResultsComponent {
     if (this.selectedElection !== undefined && this.selectedElection.id !== undefined && this.selectedElection.id !== null) {
       this.electionService.result(this.selectedElection.id.toString()).subscribe((value) => {
         const candidateResults: Result[] = [];
-        if(value instanceof Object){
+        if (value instanceof Object) {
           this.resultError = false;
           Object.keys(value).forEach(key => {
             console.log(key);
@@ -80,7 +80,7 @@ export class ResultsComponent {
   }
 
   deleteEmail(id: number) {
-    if(Number(id)){
+    if (Number(id)) {
       this.electionService.removeMail(id.toString()).forEach(value => {
         this.loadEmails();
       });
@@ -88,6 +88,13 @@ export class ResultsComponent {
   }
 
   sendCodes() {
-
+    if (this.selectedElection !== undefined &&
+      this.selectedElection.id !== null) {
+      this.electionService.sendCodes(this.selectedElection.id.toString()).subscribe( (value) => {
+          console.log("emails sent");
+      }, (error) => {
+        console.log("error while sending mail");
+      });
+    }
   }
 }

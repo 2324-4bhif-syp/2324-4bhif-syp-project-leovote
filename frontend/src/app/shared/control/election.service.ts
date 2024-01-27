@@ -34,6 +34,13 @@ export class ElectionService {
     return this.apiClient.removeMail(mailId);
   }
 
+  sendCodes(electionId: string){
+    return this.apiClient.sendCodes(electionId).pipe(
+      catchError((error) => {
+        return error;
+      }));
+  }
+
   result(id: string): Observable<Object> | Observable<unknown>{
     return this.apiClient.getResultByElection(id).pipe(
       catchError((error) => {
