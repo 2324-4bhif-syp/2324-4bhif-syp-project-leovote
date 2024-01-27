@@ -28,29 +28,31 @@ public class EmailResource {
     @Inject
     EntityManager em;
 
+    @Blocking
     @Transactional
     @Path("/election/{electionId}")
-    @Blocking
-    @Produces(MediaType.SERVER_SENT_EVENTS)
-    public Uni<Void> sendInvite(@PathParam("electionId") Long electionId) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<Response> sendInvite(@PathParam("electionId") Long electionId) {
         Optional<Election> election = Election.findByIdOptional(electionId);
 
         if (election.isEmpty()) {
-            return Uni.createFrom().failure(new IllegalArgumentException("Election with id " + electionId + " not found"));
+            return Uni.createFrom().item(Response.status(Response.Status.NOT_FOUND).build());
         }
 
         // Perform email sending logic in a background task
-        emailService.sendInvitations(election.get());
+        emailService.sendInvitations(election.get()).subscribe().with(
+                success -> System.out.println("Emails sent successfully"),
+                failure -> System.out.println("Emails could not be sent")
+        );
 
-        // Return a response immediately
-        return Uni.createFrom().voidItem();
+        return Uni.createFrom().item(Response.ok().entity("{\"message\": \"Emails are being sent asynchronously.\"}").build());
     }
 
     @GET
     @Path("/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response emailsByElection(@PathParam("electionId") Long electionId){
+    public Response emailsByElection(@PathParam("electionId") Long electionId) {
 
         // Should be capsuled outside the resource
         TypedQuery<Email> query = em.createQuery("select e from Email e where e.election.id = :electionId", Email.class);
@@ -58,7 +60,7 @@ public class EmailResource {
         List<Email> emails = query.getResultList();
 
         List<EmailDTO> emailDTOS = emails.stream().map(email ->
-                new EmailDTO(email.getEmail(), email.id, email.getElection().id))
+                        new EmailDTO(email.getEmail(), email.id, email.getElection().id))
                 .toList();
 
         return Response.ok(emailDTOS).build();

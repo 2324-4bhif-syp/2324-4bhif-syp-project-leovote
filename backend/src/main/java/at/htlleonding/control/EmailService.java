@@ -3,7 +3,7 @@ package at.htlleonding.control;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Voter;
 import io.quarkus.mailer.Mail;
-import io.quarkus.mailer.Mailer;
+import io.quarkus.mailer.reactive.ReactiveMailer;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import io.smallrye.mutiny.Multi;
@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
 public class EmailService {
     private static final String LINK_BASE = "http://89.168.107.125/login";
     @Inject
-    Mailer mailer;
+    ReactiveMailer reactiveMailer;
     @Inject
     VoterRepository voterRepository;
     @Inject
@@ -42,22 +42,18 @@ public class EmailService {
                 .boxed()
                 .collect(HashMap::new, (map, i) -> map.put(emails.get(i), voters.get(i)), HashMap::putAll);
 
-        // Send the emails using Mutiny's Multi
-        Multi<Void> multi = Multi.createFrom().iterable(voterEmailMap.entrySet())
-                .onItem().transformToUniAndMerge(entry -> sendEmail(entry.getKey(), entry.getValue(), subject));
-
-        return multi;
+        return Multi.createFrom().iterable(emails)
+                .onItem().transformToUniAndConcatenate(email -> sendEmailAsync(email, voterEmailMap.get(email), subject));
     }
 
-    private Uni<Void> sendEmail(String email, Voter voter, String subject) {
+    private Uni<Void> sendEmailAsync(String email, Voter voter, String subject) {
         String link = generateLink(voter);
-        return Uni.createFrom().voidItem()
-                .onItem().invoke(() -> mailer.send(Mail.withHtml(email, subject, InviteTemplate.invite(link).render())))
-                .onItem().ignore().andContinueWithNull();
+        String html = InviteTemplate.invite(link).data("link", link).render();
+
+        return reactiveMailer.send(Mail.withHtml(email, subject, html));
     }
 
     private String generateLink(Voter voter) {
         return String.format("%s?token=%s", LINK_BASE, voter.getGeneratedId());
     }
 }
-
