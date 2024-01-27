@@ -33,7 +33,7 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        HashMap<Candidate, Double> results = null;
+        HashMap<Candidate, Double> results;
         try {
             results = electionRepository.reviewResults(election);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
     @Path("/removeEmail/{emailId}")
     @Transactional
     default Response removeEmailFromElection(@PathParam("emailId") Long email){
-        electionRepository.removeEmailfromElection(email);
+        electionRepository.removeEmailFromElection(email);
         return Response.noContent().build();
     }
 }
