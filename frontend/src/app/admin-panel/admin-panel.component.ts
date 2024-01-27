@@ -76,4 +76,8 @@ export class AdminPanelComponent {
       });
     }
   }
+
+  sendCodes() {
+
+  }
 }

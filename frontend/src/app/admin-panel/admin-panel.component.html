@@ -2,9 +2,10 @@
 <div>
   <h2>Select Election:</h2>
   <select [(ngModel)]="selectedElection">
-    <option *ngFor="let election of elections"
+    <option (click)="loadEmails()" *ngFor="let election of elections"
             [ngValue]="election">{{election.name}}</option>
   </select>
+  <hr>
   <table style="width:100%; align-items: center">
     <tr>
       <th>
@@ -38,6 +39,7 @@
             {{email.email}} <button (click)="deleteEmail(email.id)"> Remove </button>
           </div>
           <button (click)="loadEmails()">Refresh</button>
+          <button (click)="sendCodes()">Send Codes</button>
         </div>
       </th>
     </tr>
