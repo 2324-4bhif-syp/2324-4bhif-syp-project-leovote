@@ -1,46 +1,9 @@
 <h1>Admin Panel</h1>
 <div>
-  <h2>Select Election:</h2>
-  <select [(ngModel)]="selectedElection">
-    <option (click)="loadEmails()" *ngFor="let election of elections"
-            [ngValue]="election">{{election.name}}</option>
-  </select>
-  <hr>
-  <table style="width:100%; align-items: center">
-    <tr>
-      <th>
-        <div *ngIf="result !== undefined">
-          <h2>Results:</h2>
-          <div *ngFor="let res of result">
-            {{res.firstname}}
-            {{res.lastname}}
-            {{res.grade}}
-            percentage: {{res.percentage}}
-          </div>
-        </div>
-        <button (click)="getResult()">Get Result</button>
-      </th>
-      <th>
-        <div *ngIf="selectedElection === undefined">
-          <p>Please select election</p>
-        </div>
-        <div *ngIf="selectedElection !== undefined">
-          <h3>Add Emails to {{selectedElection.name}}</h3>
-          <input type="email" [(ngModel)]="emailInput">
-          <button (click)="addEmail()">Add Email</button>
-        </div>
-      </th>
-    </tr>
-    <tr>
-      <th>
-        <div *ngIf="selectedElection !== undefined">
-          <h3>Emails in Election</h3>
-          <div *ngFor="let email of emails">
-            {{email.email}} <button (click)="deleteEmail(email.id)"> Remove </button>
-          </div>
-          <button (click)="sendCodes()">Send Codes</button>
-        </div>
-      </th>
-    </tr>
-  </table>
+  <ul class="nav nav-tabs">
+    <li routerLinkActive="active" [routerLink]="['results']"><a>Results</a></li>
+    <li routerLinkActive="active" [routerLink]="['emails']"><a>Emails</a></li>
+  </ul>
+
+  <router-outlet></router-outlet>
 </div>

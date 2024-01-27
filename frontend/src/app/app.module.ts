@@ -9,12 +9,15 @@ import {RouterModule, Routes} from "@angular/router";
 import { LoginComponent } from './login/login.component';
 import { VoteComponent } from './vote/vote.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ResultsComponent } from './results/results.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
   {path: 'login', component: LoginComponent},
   {path: 'votes', component: VoteComponent},
-  {path: 'admin', component: AdminPanelComponent}
+  { path: 'admin', component: AdminPanelComponent, children: [
+      { path: 'results', component: ResultsComponent },
+    ]}
 ]
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ const appRoutes: Routes = [
     LeovotePageComponent,
     LoginComponent,
     VoteComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
