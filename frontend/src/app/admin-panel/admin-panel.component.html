@@ -38,7 +38,6 @@
           <div *ngFor="let email of emails">
             {{email.email}} <button (click)="deleteEmail(email.id)"> Remove </button>
           </div>
-          <button (click)="loadEmails()">Refresh</button>
           <button (click)="sendCodes()">Send Codes</button>
         </div>
       </th>
