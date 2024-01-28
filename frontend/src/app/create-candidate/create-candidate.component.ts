@@ -15,7 +15,14 @@ export class CreateCandidateComponent {
   createCandidate() {
     this.candidate.pathOfImage = "default.jpg";
     console.log(this.candidate)
-    this.candidateService.add(this.candidate);
+    this.candidateService.add(this.candidate).subscribe(
+      (response) => {
+        console.log('Candidate created successfully:', response);
+      },
+      (error) => {
+        console.error('Error creating candidate:', error);
+      }
+    );
     this.candidate = new Candidate();
   }
   /*
