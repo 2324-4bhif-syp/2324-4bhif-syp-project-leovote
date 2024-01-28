@@ -16,6 +16,9 @@ GET http://localhost:8080/email/1
 ### Add Email to Election
 POST http://localhost:8080/elections/addEmail/1/david.spetzi@gmail.com
 
+### Send Emails
+POST http://localhost:8080/email/election/1
+
 ### Delete Email from election
 DELETE http://localhost:8080/elections/removeEmail/1
 
