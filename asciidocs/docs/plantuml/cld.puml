@@ -7,29 +7,35 @@ class Candidate {
   - grade: String
   - firstName: String
   - lastName: String
+  - pathOfImage: String
 }
 
 class Block {
     - index: int
     - timeStamp: Long
-    - candidate: Candidate
-    - voted: Voter
-    - previousHash: String
+    - voted: Candidate
+    - hash: String
     - currentBlockHash: String
+    - voterUUID: UUID
 }
 
 class Blockchain {
-    - election: Election
-    - blocks: List<Block>
+    - filePath: String
+    - chain: List<Block>
 }
 
 class Election {
-  - participatingCandidates: List<Candidate>
-  - electionEnd: LocalDateTime
-  - electionStart: LocalDateTime
-  - electionType: String
   - name: String
-  - blockchain: Blockchain
+  - electionStart: LocalDateTime
+  - electionEnd: LocalDateTime
+  - electionType: String
+  - blockchainFilename: String
+  - participatingCandidates: List<Candidate>
+}
+
+class Email {
+  - email: String
+  - election: Election
 }
 
 class Voter {
@@ -38,6 +44,7 @@ class Voter {
 }
 
 Election "1"--"1" Blockchain
+Election "1"--"*" Email
 Blockchain "1"--"*" Block
 Candidate "1"--"*" Block
 Voter "*"--"*" Election
