@@ -73,7 +73,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     }
 
     @POST
-    @Path("/elecetion/{electionId}")
+    @Path("/election/{electionId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional

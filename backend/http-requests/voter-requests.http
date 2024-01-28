@@ -24,7 +24,7 @@ Accept: application/json
 }
 
 ###
-POST http://localhost:8080/voters/elecetion/3
+POST http://localhost:8080/voters/election/3
 Content-Type: application/json
 Accept: application/json
 
