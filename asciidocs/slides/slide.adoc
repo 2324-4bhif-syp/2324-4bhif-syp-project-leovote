@@ -54,9 +54,9 @@ image::prove.jpg[background]
 === Sprintvereinbarung
 image::handshake.jpg[background]
 
-* Frontend zum Wählen
-* Code zum Wählen per E-Mail versenden
-* Ergebnis einer Wahl
+* Bilder zu jeweiligen Kandidaten anzeigen
+* Link zum Wählen per E-Mail versenden
+* Ergebnis einer Wahl auslesen und anzeigen
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
@@ -66,16 +66,15 @@ image::ziele.jpg[background]
 * Fälschungssicherheit
 * Schnelle Auswertung
 
-== CLD
+== Wahlprozess
+image::process.png[]
+
+== CLD / ERD
 
 === Datenbank
-image::ERD.png[height=80%, width=80%]
+image::erd.png[height=50%, width=50%]
 
 === Klassendiagramm
-image::CLD.png[]
+image::cld.png[]
 
 === Live Demo
-
-[.lightbg,background-opacity="0.2"]
-== Ideen für den nächsten Sprint:
-image::lightbulb.jpg[background]
