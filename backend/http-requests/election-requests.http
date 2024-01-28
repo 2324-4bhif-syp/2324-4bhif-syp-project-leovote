@@ -23,7 +23,7 @@ POST http://localhost:8080/email/election/1
 DELETE http://localhost:8080/elections/removeEmail/1
 
 ### Create a new election
-POST http://localhost:8080/elections
+POST http://localhost:8080/elections/election
 Content-Type: application/json
 
 {

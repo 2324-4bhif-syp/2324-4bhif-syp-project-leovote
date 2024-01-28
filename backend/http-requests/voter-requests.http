@@ -15,16 +15,16 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/voters/vote/1/1
+POST http://localhost:8080/voters/vote/3/1
 Content-Type: application/json
 Accept: application/json
 
 {
-  "voterId": "f2b198ea-e917-4dd0-8089-61ac276db31f"
+  "voterId": "bff17281-2e1c-4cfd-bfc7-6d56b7dd7719"
 }
 
 ###
-POST http://localhost:8080/voters/elecetion/2
+POST http://localhost:8080/voters/elecetion/3
 Content-Type: application/json
 Accept: application/json
 

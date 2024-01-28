@@ -60,6 +60,13 @@ public class ElectionRepository implements PanacheRepository<Election> {
         return results;
     }
 
+    public Election createNewElection(Election election){
+        Election election1 = new Election(election.getName(), election.getElectionStart(), election.getElectionEnd()
+                , election.getElectionType(), election.getParticipatingCandidates());
+        getEntityManager().persist(election1);
+        return election1;
+    }
+
     private String calculateHash(Block block) {
         String data = block.getIndex() + block.getTimestamp() + block.getVote().toString() + block.getPreviousHash() + block.getVoterUUID();
         return hashService.calculateSHA256Hash(data);

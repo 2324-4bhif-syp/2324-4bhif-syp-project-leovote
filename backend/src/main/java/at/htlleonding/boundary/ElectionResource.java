@@ -68,6 +68,15 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
     }
 
+    @POST
+    @Path("/election")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    default Response addElection(Election election){
+        Election got = electionRepository.createNewElection(election);
+        return Response.accepted(got).build();
+    }
+
     @DELETE
     @Path("/removeEmail/{emailId}")
     @Transactional
