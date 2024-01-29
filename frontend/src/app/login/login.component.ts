@@ -19,6 +19,15 @@ export class LoginComponent {
     private route: ActivatedRoute
   ) {}
 
+  ngOnInit() {
+    this.route.queryParamMap.subscribe(params => {
+      const token = params.get('token');
+      if(token != null){
+        this.code = token;
+      }
+    });
+  }
+
   async isCodeNotUsedOrIncorrect() {
     console.log('HELLO');
     try {
