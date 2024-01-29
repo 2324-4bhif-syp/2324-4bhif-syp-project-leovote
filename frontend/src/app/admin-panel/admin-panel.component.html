@@ -1,5 +1,17 @@
 <h1>Admin Panel</h1>
-<div>
+<div *ngIf="!isLoggedIn;">
+  <h2>Login</h2>
+  <form (ngSubmit)="login()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" [(ngModel)]="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+</div>
+<div *ngIf="isLoggedIn">
   <ul class="nav nav-tabs">
     <li routerLinkActive="active" [routerLink]="['results']"><a>Results</a></li>
     <li routerLinkActive="active" [routerLink]="['create-candidate']"><a>Create Candidate</a></li>
