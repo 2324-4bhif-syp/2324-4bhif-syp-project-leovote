@@ -27,6 +27,7 @@ public class EmailResource {
 
     @POST
     @Blocking
+    @Transactional
     @Path("/election/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> sendInvite(@PathParam("electionId") Long electionId) {
@@ -39,7 +40,7 @@ public class EmailResource {
         // Perform email sending logic in a background task
         emailService.sendInvitations(election.get()).subscribe().with(
                 success -> System.out.println("Emails sent successfully"),
-                failure -> System.out.println("Emails could not be sent")
+                failure -> System.out.println("Emails could not be sent\n" + failure.toString())
         );
 
         return Uni.createFrom().item(Response.ok().entity("{\"message\": \"Emails are being sent asynchronously.\"}").build());
