@@ -45,6 +45,7 @@ export class ResultsComponent {
                 grade,
                 percentage
               };
+              candidateResult.percentage = Math.round(candidateResult.percentage * 100) / 100;
               candidateResults.push(candidateResult);
             }
           });
