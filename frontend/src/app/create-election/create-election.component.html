@@ -1,29 +1,48 @@
 <h2>Create Election</h2>
 
-<div>
+<style>
+  .input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .candidates{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  input{
+    margin: 0 0 0 0;
+  }
+</style>
+
+<div class="input">
   <label for="electionName">Election Name:</label>
-  <input id="electionName" [(ngModel)]="election.name" placeholder="Election Name" />
+  <input id="electionName" [(ngModel)]="election.name" placeholder="Election Name"/>
 </div>
-<div>
+<div class="input">
   <label for="electionType">Election Type:</label>
-  <input id="electionType" [(ngModel)]="election.electionType" placeholder="Election Type" />
+  <input id="electionType" [(ngModel)]="election.electionType" placeholder="Election Type"/>
 </div>
-<div>
+<div class="input">
   <label for="electionStart">Election Start:</label>
-  <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart" />
+  <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>
 </div>
-<div>
+<div class="input">
   <label for="electionEnd">Election End:</label>
-  <input id="electionEnd" type="datetime-local" [(ngModel)]="election.electionEnd" />
+  <input id="electionEnd" type="datetime-local" [(ngModel)]="election.electionEnd"/>
 </div>
 
-<div>
-  <h3>Select Participating Candidates:</h3>
-  <div *ngFor="let candidate of availableCandidates">
-    <label>
-      <input type="checkbox" [checked]="isSelected(candidate)" (change)="toggleCandidateSelection(candidate)" />
+<div class="input">
+  <h2>Select Participating Candidates:</h2>
+  <div class="candidates" *ngFor="let candidate of availableCandidates">
+    <h3>
       {{ candidate.firstName }} {{ candidate.lastName }}
-    </label>
+    </h3>
+    <input type="checkbox" [checked]="isSelected(candidate)" (change)="toggleCandidateSelection(candidate)"/>
   </div>
 </div>
-<button (click)="createElection()">Create Election</button>
+<div class="input">
+  <button (click)="createElection()">Create Election</button>
+</div>
