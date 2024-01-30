@@ -1,21 +1,23 @@
-
 <div class="background" *ngIf="!isLoggedIn;">
   <div class="shape"></div>
   <div class="shape"></div>
 </div>
 
-<form class="login" *ngIf="!isLoggedIn;" (ngSubmit)="login()">
+<div class="form" *ngIf="!isLoggedIn;">
+  <div class="login">
 
-  <h2>Login</h2>
+    <h2>Login</h2>
 
-  <label for="username">Username:</label>
-  <input type="text" id="username" [(ngModel)]="username" name="username" required>
+    <label for="username">Username:</label>
+    <input type="text" id="username" [(ngModel)]="username" name="username" required>
 
-  <label for="password">Password:</label>
-  <input type="password" id="password" [(ngModel)]="password" name="password" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required>
 
-  <button type="submit">Login</button>
-</form>
+    <button type="submit" (click)="login()">Login</button>
+  </div>
+</div>
+
 
 <div *ngIf="isLoggedIn">
   <h1>Admin Panel</h1>
