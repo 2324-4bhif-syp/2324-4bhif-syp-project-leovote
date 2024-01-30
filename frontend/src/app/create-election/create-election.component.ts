@@ -49,6 +49,9 @@ export class CreateElectionComponent implements OnInit{
     }
   }
 
+  checkMoreThanOneCandidate(){
+    return this.selectedCandidates.length > 1;
+  }
   createElection() {
     this.election.participatingCandidates = this.selectedCandidates;
     this.electionService.add(this.election).subscribe(
