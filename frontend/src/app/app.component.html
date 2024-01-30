@@ -1,13 +1,19 @@
 <h1>Leovote</h1>
+
 <ul *ngIf="!voteService.isLoggedIn" class="nav nav-tabs">
   <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="/">Login</a></li>
-  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="/admin">Admin</a></li>
+    <a routerLink="login">Login</a>
+  </li>
+  <li routerLinkActive="active">
+    <a routerLink="admin">Admin</a>
+  </li>
+</ul>
 
-</ul>
 <ul *ngIf="voteService.isLoggedIn" class="nav nav-tabs">
-  <li routerLinkActive="active"><a routerLink="votes">Vote</a></li>
+  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <a routerLink="votes">Vote</a>
+  </li>
 </ul>
+
 <hr>
 <router-outlet></router-outlet>

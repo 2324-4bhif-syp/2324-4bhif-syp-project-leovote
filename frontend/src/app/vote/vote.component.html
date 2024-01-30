@@ -9,19 +9,22 @@
   </div>
 
   <p>Candidates:</p>
-  <div *ngFor="let candidate of election?.participatingCandidates; let index ">
-    <div class="card-columns">
-      <div class="card">
-        <img class="card-img-top" [src]="'assets/images/' + candidate.pathOfImage"
-             alt="{{candidate.firstName}} {{candidate.lastName}}"
-             style="max-width: 30%; max-height: 30%"/>
-        <div class="card-body">
-          <h3>{{ candidate.firstName }} {{ candidate.lastName }}</h3>
-          <input type="radio" [(ngModel)]="selecedCandidate" [value]="candidate"/>
+  <div class="cards">
+    <div *ngFor="let candidate of election?.participatingCandidates; let index ">
+      <div class="card-columns">
+        <div class="card">
+          <img class="card-img-top" [src]="'assets/images/' + candidate.pathOfImage"
+               alt="{{candidate.firstName}} {{candidate.lastName}}"
+               style="max-width: 30%; max-height: 30%"/>
+          <div class="card-body">
+            <h3>{{ candidate.firstName }} {{ candidate.lastName }}</h3>
+            <input type="radio" [(ngModel)]="selecedCandidate" [value]="candidate"/>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
   <button [disabled]="!selecedCandidate" (click)="voting()">Vote</button>
 </div>
 
