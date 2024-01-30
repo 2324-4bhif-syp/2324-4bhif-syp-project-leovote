@@ -26,4 +26,4 @@
     </label>
   </div>
 </div>
-<button (click)="createElection()">Create Election</button>
+<button [disabled]="!checkMoreThanOneCandidate()" (click)="createElection()">Create Election</button>
