@@ -14,11 +14,11 @@ export class VoteComponent {
   isVoted: boolean = false;
   voter: Vote | undefined = this.voteService.vote;
   election: Election | undefined = undefined;
-  selecedCandidate: Candidate | undefined;
+  selectedCandidate: Candidate | undefined;
 
   voting() {
-    if(this.selecedCandidate?.id != undefined && this.election?.id != undefined){
-      this.voteService.voteCall(this.selecedCandidate.id, this.election.id);
+    if (this.selectedCandidate?.id != undefined && this.election?.id != undefined) {
+      this.voteService.voteCall(this.selectedCandidate.id, this.election.id);
       this.voteService.isLoggedIn = false;
       this.isVoted = true;
     }
