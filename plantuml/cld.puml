@@ -40,7 +40,7 @@ class Email {
 
 class Voter {
   - generatedId: Long
-  - election: List<Election>
+  - election: Election
 }
 
 Election "1"--"1" Blockchain
