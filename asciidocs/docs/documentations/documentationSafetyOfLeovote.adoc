@@ -2,7 +2,6 @@
 
 
 == What can happen?
-=== Where could that happen?
 
 * Somebody has the password to the voters Mail-Account.
 ** this is unfortunate, but we as Leo-Vote cant do much about it.
