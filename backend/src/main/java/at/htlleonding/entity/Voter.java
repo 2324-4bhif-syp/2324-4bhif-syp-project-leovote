@@ -2,6 +2,8 @@ package at.htlleonding.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.UUID;
 
@@ -12,6 +14,7 @@ public class Voter extends PanacheEntityBase {
     @Column(unique = true)
     private UUID generatedId;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Election election;
     //</editor-fold>
 
