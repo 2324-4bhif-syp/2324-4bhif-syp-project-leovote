@@ -37,6 +37,9 @@
             <p>Not a valid Email</p>
           </div>
           <button (click)="addEmail()">Add Email</button>
+          <h3>Upload Emails</h3>
+          <input type="file" (change)="onFileChange($event)">
+          <button [disabled]="!isCsvUploaded" (click)="parseCSV()">Einlesen</button>
         </div>
       </th>
     </tr>

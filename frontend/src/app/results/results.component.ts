@@ -17,7 +17,8 @@ export class ResultsComponent {
   emails: EmailModel[] | undefined;
   emailError: boolean = false;
   resultError: boolean = false;
-
+  isCsvUploaded: boolean = false;
+  csvData: string = "";
   constructor(
     public electionService: ElectionService,
   ) {
@@ -26,6 +27,27 @@ export class ResultsComponent {
     });
   }
 
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const fileType = file.name.split('.').pop()?.toLowerCase();
+      if (fileType !== 'csv') {
+        console.error('Not an CSV type');
+        event.target.value = '';
+        return;
+      }
+      this.isCsvUploaded = true;
+      this.csvData = reader.result?.toString() || '';
+    };
+    reader.readAsText(file);
+  }
+  parseCSV() {
+    const rows = this.csvData.split('\n');
+    // Entferne Leerzeichen und leere Zeilen
+    const data = rows.map(row => row.trim()).filter(row => row);
+    console.log(data)
+  }
   getResult() {
     if (this.selectedElection !== undefined && this.selectedElection.id !== undefined && this.selectedElection.id !== null) {
       this.electionService.result(this.selectedElection.id.toString()).subscribe((value) => {
