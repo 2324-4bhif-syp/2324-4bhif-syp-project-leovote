@@ -63,23 +63,4 @@ public class EmailResource {
 
         return Response.ok(emailDTOS).build();
     }
-
-    @POST
-    @Path("/multiples/{electionId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Response addMultipleEmails(@PathParam("electionId") Long electionId, List<String> emails) {
-        Optional<Election> election = Election.findByIdOptional(electionId);
-
-        if (election.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        emails.forEach(email -> {
-            Email e = new Email(email, election.get());
-            em.persist(e);
-        });
-
-        return Response.ok().build();
-    }
 }
