@@ -12,7 +12,7 @@ import { ElectionService } from "../shared/control/election.service";
 export class CreateElectionComponent implements OnInit{
   selectedCandidates: Candidate[] = [];
   availableCandidates: Candidate[] = [];
-
+  elections: Election[] = [];
   election: Election = new Election(
     null,
     "",
@@ -35,9 +35,11 @@ export class CreateElectionComponent implements OnInit{
   }
   constructor(
     protected candidateService: CandidateService,
-    private electionService: ElectionService
+    protected electionService: ElectionService
   ) {
-    console.log(this.candidateService.getList())
+    electionService.getList().forEach(value => {
+      this.elections = value;
+    });
   }
 
   toggleCandidateSelection(candidate: Candidate) {
@@ -57,6 +59,7 @@ export class CreateElectionComponent implements OnInit{
     this.electionService.add(this.election).subscribe(
       (response) => {
         console.log('Election created successfully:', response);
+        this.elections.push(response);
         this.selectedCandidates = [];
       },
       (error) => {
@@ -73,5 +76,18 @@ export class CreateElectionComponent implements OnInit{
   }
   isSelected(candidate: Candidate): boolean {
     return this.selectedCandidates.some(selected => selected.id === candidate.id);
+  }
+  deleteElection(election: Election): void {
+    if (election.id !== null) {
+      this.electionService.delete(election.id.toString()).subscribe(
+        () => {
+          console.log('Election deleted successfully');
+          this.elections = this.elections.filter(e => e.id !== election.id);
+        },
+        error => {
+          console.error('Error deleting election:', error);
+        }
+      );
+    }
   }
 }

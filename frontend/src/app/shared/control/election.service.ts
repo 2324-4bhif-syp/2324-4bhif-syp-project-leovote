@@ -17,6 +17,9 @@ export class ElectionService {
     return this.apiClient.addElection(election);
   }
 
+  delete(electionId: string) {
+    return this.apiClient.deleteElection(electionId);
+  }
   addEmail(email: string, electionId: string) {
     return this.apiClient.addEmail(email, electionId).pipe(
       catchError((error) => {

@@ -26,6 +26,8 @@ export class LeovoteWebApiService {
   private removeMailUrl: string = 'elections/removeEmail/${id}';
   private sendCodesUrl: string = 'email/election/${electionId}';
   private removeCandidate: string = 'candidates/${id}';
+  private removeElection: string = 'elections/${id}';
+
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
     return this.http.get<Candidate[]>(this.baseUrl + this.candidates, {headers: this.headers});
@@ -45,6 +47,9 @@ export class LeovoteWebApiService {
   }
   public addElection(election: Election){
     return this.http.post(this.baseUrl + this.addElectionUrl, election, {headers: this.headers});
+  }
+  public deleteElection(electionId: string) {
+    return this.http.delete(this.baseUrl + this.removeElection.replace('${id}', electionId), {headers: this.headers});
   }
   public getVoteByCode(code: string) {
     return this.http.get<Vote>(this.baseUrl + this.voters.replace('${id}', code),
