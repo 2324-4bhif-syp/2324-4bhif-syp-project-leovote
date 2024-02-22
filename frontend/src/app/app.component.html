@@ -1,21 +1,25 @@
-<h1>Leovote</h1>
-
 <ul *ngIf="!voteService.isLoggedIn" class="nav nav-tabs">
-  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="login">Login</a>
+  <li class="logo" routerLink="login">
+      <img src="assets/img-frontend/htl-leonding.png" style="width: 8vw; height: 5%; padding: 10px" alt="HTBLA Leonding">
   </li>
   <li routerLinkActive="active">
-      <div *ngIf="!adminService.isLoggedIn">
-        <div class="dropdown">
-          <button class="dropbtn">Admin Panel</button>
-          <div class="dropdown-content">
-            <a routerLink="admin">Log In</a>
-          </div>
+    <div *ngIf="!adminService.isLoggedIn">
+      <div class="dropdown">
+        <button class="dropbtn">
+          <span>Admin Panel</span>
+          <img src="assets/img-frontend/dropdown.png" alt="Dropdown" height="10%" width="10%">
+        </button>
+        <div class="dropdown-content">
+          <a routerLink="admin">Log In</a>
         </div>
       </div>
+    </div>
     <div *ngIf="adminService.isLoggedIn">
       <div class="dropdown">
-        <button class="dropbtn">Admin Panel</button>
+        <button class="dropbtn">
+          <span>Admin Panel</span>
+          <img src="assets/img-frontend/dropdown.png" alt="Dropdown" height="10%" width="10%">
+        </button>
         <div class="dropdown-content">
           <a routerLink="admin/results">Results</a>
           <a routerLink="admin/create-candidate">Candidates</a>

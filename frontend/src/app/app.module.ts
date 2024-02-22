@@ -12,6 +12,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ResultsComponent } from './results/results.component';
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import { CreateElectionComponent } from './create-election/create-election.component';
+import {NgOptimizedImage} from "@angular/common";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -34,12 +35,13 @@ const appRoutes: Routes = [
     CreateCandidateComponent,
     CreateElectionComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes),
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(appRoutes),
+        NgOptimizedImage,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
