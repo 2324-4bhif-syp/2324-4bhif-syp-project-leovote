@@ -68,7 +68,30 @@ export class CreateCandidateComponent {
     );
     this.candidate = new Candidate();
   }
-  deleteCandidates(){
-
+  deleteCandidate(candidate: Candidate): void {
+    if (candidate.id !== null) {
+      this.candidateService.isCandidateInAnyElection(candidate.id).subscribe(
+        isInAnyElection => {
+          if (isInAnyElection) {
+            console.error('Candidate is in one or more elections!');
+          } else {
+            if (candidate.id !== null) {
+              this.candidateService.delete(candidate.id.toString()).subscribe(
+                () => {
+                  console.log('Candidate deleted successfully');
+                  this.candidates = this.candidates.filter(c => c.id !== candidate.id);
+                },
+                error => {
+                  console.error('Error deleting candidate:', error);
+                }
+              );
+            }
+          }
+        },
+        error => {
+          console.error('Error checking candidate in any election:', error);
+        }
+      );
+    }
   }
 }
