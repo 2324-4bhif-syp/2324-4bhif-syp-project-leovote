@@ -5,7 +5,24 @@
     <a routerLink="login">Login</a>
   </li>
   <li routerLinkActive="active">
-    <a routerLink="admin">Admin</a>
+    <div *ngIf="!adminService.isLoggedIn">
+      <div class="dropdown">
+        <button class="dropbtn">Admin Panel</button>
+        <div class="dropdown-content">
+          <a routerLink="admin">Log In</a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="adminService.isLoggedIn">
+      <div class="dropdown">
+        <button class="dropbtn">Admin Panel</button>
+        <div class="dropdown-content">
+          <a routerLink="admin/results">Results</a>
+          <a routerLink="admin/create-candidate">Candidates</a>
+          <a routerLink="admin/create-election">Elections</a>
+        </div>
+      </div>
+    </div>
   </li>
 </ul>
 

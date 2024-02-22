@@ -1,9 +1,9 @@
-<div class="background" *ngIf="!isLoggedIn;">
+<div class="background" *ngIf="!adminService.isLoggedIn;">
   <div class="shape"></div>
   <div class="shape"></div>
 </div>
 
-<div class="form" *ngIf="!isLoggedIn;">
+<div class="form" *ngIf="!adminService.isLoggedIn;">
   <div class="login">
 
     <h2>Login</h2>
@@ -19,13 +19,7 @@
 </div>
 
 
-<div *ngIf="isLoggedIn">
+<div *ngIf="adminService.isLoggedIn">
   <h1>Admin Panel</h1>
-
-  <ul class="nav nav-tabs">
-    <li routerLinkActive="active" [routerLink]="['results']"><a>Results</a></li>
-    <li routerLinkActive="active" [routerLink]="['create-candidate']"><a>Create Candidate</a></li>
-    <li routerLinkActive="active" [routerLink]="['create-election']"><a>Create Election</a></li>
-  </ul>
   <router-outlet></router-outlet>
 </div>
