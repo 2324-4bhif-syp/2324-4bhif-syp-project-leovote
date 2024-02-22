@@ -71,6 +71,7 @@ export class LeovoteWebApiService {
   public addMultipleEmails(email: string[], electionId: string) {
     console.log(email);
     console.log(electionId);
-    return this.http.post(this.baseUrl + this.addMultipleEmailsUrl.replace('${electionId}', electionId), {headers: this.headers});
+    console.log(this.baseUrl + this.addMultipleEmailsUrl.replace('${electionId}', electionId));
+    return this.http.post(this.baseUrl + this.addMultipleEmailsUrl.replace('${electionId}', electionId), email, {headers: this.headers});
   }
 }
