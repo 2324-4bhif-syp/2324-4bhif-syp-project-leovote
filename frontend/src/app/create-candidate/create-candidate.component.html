@@ -24,3 +24,8 @@
 <div class="input">
   <button (click)="createCandidate()">Create Candidate</button>
 </div>
+<div class="input">
+  <input type="file" (change)="onFileChange($event)">
+  <button [disabled]="!isCsvUploaded" (click)="parseCSV()">Einlesen</button>
+</div>
+
