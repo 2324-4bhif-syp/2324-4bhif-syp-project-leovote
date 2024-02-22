@@ -72,7 +72,7 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
     @POST
     @Path("/addEmail/multiples/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     default Response addMultipleEmails(@PathParam("electionId") Long electionId, List<String> emails) {
         Optional<Election> election = Election.findByIdOptional(electionId);
