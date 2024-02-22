@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+  import { Component, Input } from '@angular/core';
 import { LeovoteWebApiService } from '../shared/api/leovote-web-api.service';
 import { VoteService } from '../shared/control/vote.service';
 import { Vote } from '../shared/entity/vote';
@@ -41,6 +41,7 @@ export class LoginComponent {
       }
     } catch (error) {
       console.error('Fehler bei der Überprüfung des Codes:', error);
+      this.alreadyVotedOrIncorrect = true;
     }
   }
 }

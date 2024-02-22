@@ -26,6 +26,18 @@
 </div>
 <div class="input">
   <input type="file" (change)="onFileChange($event)">
-  <button [disabled]="!isCsvUploaded" (click)="parseCSV()">Einlesen</button>
+  <button [disabled]="!isCsvUploaded" (click)="parseCSV()">Upload</button>
 </div>
-
+<div class="container">
+  <div class="row">
+    <div *ngFor="let candidate of candidates; let index" class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top" [src]="'assets/images/' + candidate.pathOfImage" alt="{{ candidate.firstName }} {{ candidate.lastName }}">
+        <div class="card-body">
+          <h3 class="card-title">{{ candidate.firstName }} {{ candidate.lastName }}</h3>
+          <button (click)="deleteCandidates()"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

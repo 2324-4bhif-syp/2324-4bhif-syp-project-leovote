@@ -12,7 +12,12 @@ export class CreateCandidateComponent {
   candidate: Candidate = new Candidate();
   isCsvUploaded: boolean = false;
   csvData: string = "";
-  constructor(protected candidateService: CandidateService) { }
+  candidates: Candidate[] = [];
+  constructor(protected candidateService: CandidateService) {
+    candidateService.getList().forEach(value => {
+      this.candidates = value;
+    });
+  }
 
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -54,11 +59,16 @@ export class CreateCandidateComponent {
     this.candidateService.add(this.candidate).subscribe(
       (response) => {
         console.log('Candidate created successfully:', response);
+        // Füge den neu hinzugefügten Kandidaten zur Liste hinzu
+        this.candidates.push(response); // Annahme: response enthält den neu hinzugefügten Kandidaten
       },
       (error) => {
         console.error('Error creating candidate:', error);
       }
     );
     this.candidate = new Candidate();
+  }
+  deleteCandidates(){
+
   }
 }
