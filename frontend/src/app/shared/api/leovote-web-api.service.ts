@@ -21,6 +21,7 @@ export class LeovoteWebApiService {
   private vote: string = 'voters/vote/${electionId}/${candidateId}';
   private electionResult: string = 'elections/results/${id}';
   private addEmailUrl: string = 'elections/addEmail/${id}/${email}';
+  private addMultipleEmailsUrl: string = 'elections/addEmail/multiples/${electionId}';
   private allMails: string = 'email/${electionId}';
   private removeMailUrl: string = 'elections/removeEmail/${id}';
   private sendCodesUrl: string = 'email/election/${electionId}'
@@ -66,5 +67,10 @@ export class LeovoteWebApiService {
 
   public sendCodes(electionId: string){
     return this.http.post(this.baseUrl + this.sendCodesUrl.replace('${electionId}', electionId), {headers: this.headers});
+  }
+  public addMultipleEmails(email: string[], electionId: string) {
+    console.log(email);
+    console.log(electionId);
+    return this.http.post(this.baseUrl + this.addMultipleEmailsUrl.replace('${electionId}', electionId), {headers: this.headers});
   }
 }

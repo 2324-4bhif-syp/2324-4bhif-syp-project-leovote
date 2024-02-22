@@ -25,7 +25,14 @@ export class ElectionService {
       })
     );
   }
-
+  addMultipleEmails(email: string[], electionId: string) {
+    return this.apiClient.addMultipleEmails(email, electionId).pipe(
+      catchError((error) => {
+        console.error("Wrong emails");
+        return error;
+      })
+    );
+  }
   getMails(electionId: string): Observable<EmailModel[]> {
     return this.apiClient.getAllMails(electionId);
   }

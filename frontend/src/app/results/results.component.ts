@@ -47,6 +47,17 @@ export class ResultsComponent {
     // Entferne Leerzeichen und leere Zeilen
     const data = rows.map(row => row.trim()).filter(row => row);
     console.log(data)
+    if (this.selectedElection !== undefined &&
+      this.selectedElection.id !== null) {
+      this.electionService.addMultipleEmails(data, this.selectedElection.id.toString()).subscribe((value) => {
+          console.log(value);
+          this.loadEmails();
+          this.emailError = false;
+        },
+        (error) => {
+          this.emailError = true;
+        })
+    }
   }
   getResult() {
     if (this.selectedElection !== undefined && this.selectedElection.id !== undefined && this.selectedElection.id !== null) {
