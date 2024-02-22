@@ -13,6 +13,7 @@ export class CreateCandidateComponent {
   isCsvUploaded: boolean = false;
   csvData: string = "";
   candidates: Candidate[] = [];
+  errorMessage: string = '';
   constructor(protected candidateService: CandidateService) {
     candidateService.getList().forEach(value => {
       this.candidates = value;
@@ -59,8 +60,7 @@ export class CreateCandidateComponent {
     this.candidateService.add(this.candidate).subscribe(
       (response) => {
         console.log('Candidate created successfully:', response);
-        // Füge den neu hinzugefügten Kandidaten zur Liste hinzu
-        this.candidates.push(response); // Annahme: response enthält den neu hinzugefügten Kandidaten
+        this.candidates.push(response); // push response to update candidate
       },
       (error) => {
         console.error('Error creating candidate:', error);
@@ -74,11 +74,13 @@ export class CreateCandidateComponent {
         isInAnyElection => {
           if (isInAnyElection) {
             console.error('Candidate is in one or more elections!');
+            this.errorMessage = `Candidate ${candidate.firstName} ${candidate.lastName} is in one or more elections!`
           } else {
             if (candidate.id !== null) {
               this.candidateService.delete(candidate.id.toString()).subscribe(
                 () => {
                   console.log('Candidate deleted successfully');
+                  this.errorMessage = '';
                   this.candidates = this.candidates.filter(c => c.id !== candidate.id);
                 },
                 error => {
