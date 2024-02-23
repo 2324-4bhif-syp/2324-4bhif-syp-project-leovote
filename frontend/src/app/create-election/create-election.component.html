@@ -27,9 +27,9 @@
         <div class="table-wrapper">
           <table class="second-table">
             <tr class="header-line">
-              <th></th>
-              <th></th>
-              <th><input type="text" (input)="filterCandidates()" [(ngModel)]="searchText" placeholder="Search">
+              <th style="width: 150px;"></th>
+              <th style="width: 50px"></th>
+              <th style="width: 50px"><input style="width: 150px;" type="text" (input)="filterCandidates()" [(ngModel)]="searchText" placeholder="Search">
               </th>
             </tr>
             <tr *ngFor="let candidate of filteredCandidates; let i = index" [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
@@ -56,13 +56,13 @@
       <th>Election Name</th>
       <th>Start</th>
       <th>End</th>
-      <th>Slector</th>
+      <th></th>
     </tr>
     <tr *ngFor="let election of elections; let i = index" [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
       <td>{{election.id}}</td>
       <td>{{election.name}}</td>
-      <td>{{election.electionStart.toDateString()}}</td>
-      <td>{{election.electionEnd.toDateString()}}</td>
+      <td>{{election.electionStart.toLocaleString()}}</td>
+      <td>{{election.electionEnd.toLocaleString()}}</td>
       <td>
         <button (click)="deleteElection(election)" class="btn">
           <i class="fa fa-minus"></i>

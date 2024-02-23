@@ -33,23 +33,7 @@ body {
   width: 250px;
 }
 
-.email-upload-container {
-  background-color: #E9EFF2;
-  border-style: dotted;
-  border-color: #8A8A8A;
-  border-width: 1px;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Optionally set a height to vertically center within the container */
-  max-height: 200px;
-  min-height: 150px;
-  min-width: 200px;
-}
-
-.email-upload-container img {
+.upload-container img {
   padding-bottom: 10px;
 }
 
@@ -59,12 +43,12 @@ body {
   align-items: center;
 }
 
-.email-upload-container input {
+.upload-container input {
   outline: none;
   border: none;
 }
 
-.email-upload-container button{
+.upload-container button{
   outline: none;
   border: none;
   border-radius: 10px;
