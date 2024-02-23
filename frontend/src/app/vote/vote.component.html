@@ -8,7 +8,9 @@
     <div class="row">
       <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-4">
         <div (click)="selectedCandidate = candidate" class="card mb-4 box-shadow text-center h-100">
-          <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + candidate.pathOfImage" alt="{{ candidate.firstName }} {{ candidate.lastName }}">
+          <div class="container-for-image">
+            <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + candidate.pathOfImage" alt="{{ candidate.firstName }} {{ candidate.lastName }}">
+          </div>
           <div class="card-body">
             <h3 class="card-title">{{ candidate.firstName }} {{ candidate.lastName }}</h3>
             <input class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="candidate" id="{{ 'candidate' + index }}">
