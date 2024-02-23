@@ -1,42 +1,72 @@
-<h2>Select Election:</h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h2>Emails</h2>
 <div class="input">
-
-  <select [(ngModel)]="selectedElection">
-    <option (click)="loadEmails()" *ngFor="let election of elections"
-            [ngValue]="election">{{ election.name }}
-    </option>
-  </select>
-  <hr>
   <table>
     <tr>
+      <th>
+        <div class="election-selector">
+          <h3>Select Election</h3>
+          <select [(ngModel)]="selectedElection" required (change)="loadEmails()">
+            <option [defaultSelected]="true" value="" disabled selected hidden>Select Election</option>
+            <option (click)="loadEmails()" *ngFor="let election of elections"
+                    [ngValue]="election">{{ election.name }}
+            </option>
+          </select>
+        </div>
+      </th>
+      <th>
+        <div class="email-upload-container">
+          <div class="centered-elements">
+            <img src="./assets/img-frontend/upload.png" height=20% width=20%>
+            <input type="file" (change)="onFileChange($event)">
+            <button [disabled]="!isCsvUploaded" (click)="parseCSV()">Upload</button>
+          </div>
+        </div>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <div *ngIf="selectedElection !== undefined">
+          <div *ngIf="emailError">
+            <p>Not a valid Email</p>
+          </div>
+        </div>
+      </th>
       <th>
         <div *ngIf="selectedElection === undefined">
           <p>Please select election</p>
         </div>
-        <div *ngIf="selectedElection !== undefined">
-          <h3>Add Emails to {{ selectedElection.name }}</h3>
-          <input type="email" [(ngModel)]="emailInput">
-          <div *ngIf="emailError">
-            <p>Not a valid Email</p>
-          </div>
-          <button (click)="addEmail()">Add Email</button>
-          <h3>Upload Emails</h3>
-          <input type="file" (change)="onFileChange($event)">
-          <button [disabled]="!isCsvUploaded" (click)="parseCSV()">Upload</button>
-        </div>
-      </th>
-    </tr>
-    <tr>
-      <th>
-        <div *ngIf="selectedElection !== undefined">
-          <h3>Emails in Election</h3>
-          <div *ngFor="let email of emails">
-            {{ email.email }}
-            <button (click)="deleteEmail(email.id)"> Remove</button>
-          </div>
-          <button (click)="sendCodes()">Send Codes</button>
-        </div>
       </th>
     </tr>
   </table>
+  <div class="email-table-container" *ngIf="selectedElection !== undefined">
+    <table class="email-table">
+      <tr class='header-line'>
+        <th>ID</th>
+        <th>E-Mail</th>
+        <th>
+          <div class="input-email-container">
+            <input placeholder="Insert E-Mail" type="Add Email" [(ngModel)]="emailInput">
+            <button (click)="addEmail()" class="btn">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </th>
+      </tr>
+      <tr *ngFor="let email of emails; let i = index" [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
+        <td>{{i}}</td>
+        <td>
+          {{ email.email }}
+        </td>
+        <td>
+          <button (click)="deleteEmail(email.id)" class="btn">
+            <i class="fa fa-minus"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="send-button-container" *ngIf="selectedElection !== undefined && emailCount > 0">
+    <button class="send-button" (click)="sendCodes()">Send Codes</button>
+  </div>
 </div>

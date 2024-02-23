@@ -4,6 +4,10 @@ h2 {
   font-size: xxx-large;
 }
 
+body {
+  background-color: #ECF0F5;
+}
+
 .election-selector {
   border-radius: 10px;
   text-align: center;
@@ -24,6 +28,7 @@ h2 {
   padding: 20px;
   background-color: #DAE3EB;
   border-radius: 0 0 10px 10px;
+  cursor: pointer;
 }
 
 .result-box {

@@ -13,6 +13,7 @@ export class EmailsComponent {
   selectedElection: Election | undefined = undefined;
   emailInput: string = "";
   emails: EmailModel[] | undefined;
+  emailCount: number = 0;
   emailError: boolean = false;
   isCsvUploaded: boolean = false;
   csvData: string = "";
@@ -76,6 +77,7 @@ export class EmailsComponent {
       this.selectedElection.id !== null) {
       this.electionService.getMails(this.selectedElection.id.toString()).forEach(value => {
         this.emails = value;
+        this.emailCount = value.length;
       })
     }
   }

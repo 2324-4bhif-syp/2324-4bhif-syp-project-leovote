@@ -1,0 +1,153 @@
+h2 {
+  text-align: center;
+  font-weight: bolder;
+  font-size: xxx-large;
+}
+
+body {
+  background-color: #ECF0F5;
+  background-image: none;
+}
+
+.election-selector {
+  border-radius: 10px;
+  text-align: center;
+  margin-right: 10vw;
+}
+
+.election-selector h3 {
+  background-color: #A2B2C0;
+  margin-bottom: 0;
+  padding: 15px;
+  font-weight: bold;
+  border-radius: 10px 10px 0 0;
+}
+
+.election-selector select {
+  outline: none;
+  border: none;
+  padding: 20px;
+  background-color: #DAE3EB;
+  border-radius: 0 0 10px 10px;
+  cursor: pointer;
+}
+
+.email-upload-container {
+  background-color: #E9EFF2;
+  border-style: dotted;
+  border-color: #8A8A8A;
+  border-width: 1px;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Optionally set a height to vertically center within the container */
+  max-height: 200px;
+  min-height: 150px;
+  min-width: 200px;
+}
+
+.email-upload-container img {
+  padding-bottom: 10px;
+}
+
+.centered-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.email-upload-container input {
+  outline: none;
+  border: none;
+}
+
+.email-upload-container button{
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #DAE3EB;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.email-table-container {
+  padding-top: 5vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  width: 100%;
+  display: flex;
+  align-items: center; /* Changed from align-content to align-items */
+  justify-content: center;
+}
+
+.email-table {
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 10px;
+  table-layout: auto;
+}
+
+.email-table th {
+  min-width: 50px;
+  padding-left: 15px;
+}
+
+.email-table td {
+  padding-left: 15px;
+}
+
+.send-button-container{
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.send-button {
+  margin-top: 10px;
+  width: 75%;
+  outline: none;
+  padding: 10px;
+  background-color: #DAE3EB;
+  border-radius: 5px;
+  border: none;
+}
+
+.email-table tr.grey-row {
+  background-color: #ECF6FF;
+}
+
+.email-table tr.white-row {
+  background-color: #DAE3EB;
+}
+
+.email-table tr.header-line {
+  background-color: #A2B2C0;
+  padding: 10px;
+  border-radius: 10px 10px 0 0 ;
+}
+
+.btn {
+  background-color: rgba(0, 123, 255, 0); /* Blue background */
+  border: none; /* Remove borders */
+  color: black; /* White text */
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+
+.input-email-container {
+  margin: 5px;
+  padding-left: 10px;
+  width: 35%;
+  border-radius: 10px;
+  background-color: #DAE3EB;
+}
+
+.input-email-container input {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
+}

@@ -102,3 +102,7 @@ hr {
   background-color: white;
   color: black;
 }
+
+.logo{
+  cursor: pointer;
+}
