@@ -1,42 +1,73 @@
-<h2>Create Election</h2>
-<div class="input">
-  <label for="electionName">Election Name:</label>
-  <input id="electionName" [(ngModel)]="election.name" placeholder="Election Name"/>
-</div>
-<div class="input">
-  <label for="electionType">Election Type:</label>
-  <input id="electionType" [(ngModel)]="election.electionType" placeholder="Election Type"/>
-</div>
-<div class="input">
-  <label for="electionStart">Election Start:</label>
-  <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>
-</div>
-<div class="input">
-  <label for="electionEnd">Election End:</label>
-  <input id="electionEnd" type="datetime-local" [(ngModel)]="election.electionEnd"/>
-</div>
-
-<div class="input">
-  <h3>Select Participating Candidates:</h3>
-  <div class="candidates" *ngFor="let candidate of availableCandidates">
-    <h3>
-      {{ candidate.firstName }} {{ candidate.lastName }}
-    </h3>
-    <input type="checkbox" [checked]="isSelected(candidate)" (change)="toggleCandidateSelection(candidate)"/>
-  </div>
-</div>
-<div class="input">
-  <button [disabled]="!checkMoreThanOneCandidate()" (click)="createElection()">Create Election</button>
-</div>
-<div class="container">
-  <div class="row">
-    <div *ngFor="let election of elections; let index" class="col-md-4">
-      <div class="card mb-4 box-shadow">
-        <div class="card-body">
-          <h3 class="card-title">{{ election.name }} {{ election.electionType }}</h3>
-          <button (click)="deleteElection(election)">Delete</button>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h2>Elections</h2>
+<table class="top-table">
+  <tr>
+    <th>
+      <div class="election-creation-container">
+        <h3>Create Election</h3>
+        <div class="input">
+          <input id="electionName" [(ngModel)]="election.name" placeholder="Election Name"/>
+        </div>
+        <div class="input">
+          <input id="electionType" [(ngModel)]="election.electionType" placeholder="Election Type"/>
+        </div>
+        <div class="input">
+          <label for="electionStart">Election Start:</label>
+          <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>
+        </div>
+        <div class="input">
+          <label for="electionEnd">Election End:</label>
+          <input id="electionEnd" type="datetime-local" [(ngModel)]="election.electionEnd"/>
         </div>
       </div>
-    </div>
-  </div>
+    </th>
+    <th>
+      <div class="participating-candidates-container">
+        <h3>Participating Candidates</h3>
+        <div class="table-wrapper">
+          <table class="second-table">
+            <tr class="header-line">
+              <th></th>
+              <th></th>
+              <th><input type="text" (input)="filterCandidates()" [(ngModel)]="searchText" placeholder="Search">
+              </th>
+            </tr>
+            <tr *ngFor="let candidate of filteredCandidates; let i = index" [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
+              <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
+              <td>{{ candidate.grade }}</td>
+              <td><input type="checkbox" [checked]="isSelected(candidate)" (change)="toggleCandidateSelection(candidate)"/>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </th>
+  </tr>
+</table>
+
+<div class="add-button-container">
+  <button class="add-button" [disabled]="!checkMoreThanOneCandidate()" (click)="createElection()">Create</button>
+</div>
+
+<div class="election-table-container">
+  <table class="election-table">
+    <tr class='header-line'>
+      <th>ID</th>
+      <th>Election Name</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Slector</th>
+    </tr>
+    <tr *ngFor="let election of elections; let i = index" [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
+      <td>{{election.id}}</td>
+      <td>{{election.name}}</td>
+      <td>{{election.electionStart.toDateString()}}</td>
+      <td>{{election.electionEnd.toDateString()}}</td>
+      <td>
+        <button (click)="deleteElection(election)" class="btn">
+          <i class="fa fa-minus"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
 </div>

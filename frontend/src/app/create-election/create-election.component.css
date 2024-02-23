@@ -1,37 +1,160 @@
-.container {
-  margin: 20px auto;
-}
-
-.card {
-  border: none;
-  transition: transform 0.2s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card-body {
+h2 {
   text-align: center;
+  font-weight: bolder;
+  font-size: xxx-large;
 }
 
-.btn-primary {
-  background-color: #007bff;
-  color: #fff;
+.top-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.participating-candidates-container {
+  margin-left: 10vw;
+  background-color: #A2B2C0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+.election-creation-container {
+  background-color: #A2B2C0;
+  width: 100%;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
+  outline: none;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1000px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Optionally set a height to vertically center within the container */
+  max-height: 300px;
+  min-height: 150px;
+  min-width: 200px;
+  /* Center the container horizontally */
+  margin: 0 auto;
+}
+
+.second-table {
+  max-height: 10px;
+  overflow: auto;
+}
+
+.second-table tr.header-line {
+  background-color: #DAE3EB;
+  padding: 10px;
+  border-radius: 10px 10px 0 0 ;
+}
+
+.second-table tr.grey-row {
+  background-color: #ECF6FF;
+}
+
+.second-table tr.white-row {
+  background-color: #DAE3EB;
+}
+
+.election-creation-th,
+.participating-candidates-th {
+  vertical-align: top; /* Ensure vertical alignment of th elements */
+}
+
+.election-creation-container input {
+  margin-bottom: 10px; /* Add spacing between input fields */
+}
+
+.election-creation-container label {
+  display: inline-block; /* Ensure labels and inputs are displayed in-line */
+  width: 120px; /* Adjust the width of the labels as needed */
+}
+
+
+.add-button-container{
+  display: flex;
+  justify-content: center;
+}
+
+.add-button{
+  margin-top: 10px;
+  padding: 5px;
+  font-weight: bold;
+  background-color: #DAE3EB;
+  border-radius: 10px;
+  border: none;
+  outline: none;
   cursor: pointer;
 }
 
-.btn-primary:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.table-wrapper {
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.input input {
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding: 5px;
+  background-color: #DAE3EB;
+  width: 450px;
+}
+
+@media screen and (max-width: 1000px) {
+  .input input {
+    width: 200px; /* Adjust as needed */
+  }
+}
+
+.election-table-container {
+  padding-top: 5vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  width: 100%;
+  display: flex;
+  align-items: center; /* Changed from align-content to align-items */
+  justify-content: center;
+}
+
+.election-table {
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 10px;
+  table-layout: auto;
+}
+
+.election-table th {
+  min-width: 50px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.election-table td {
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.election-table tr.grey-row {
+  background-color: #ECF6FF;
+}
+
+.election-table tr.white-row {
+  background-color: #DAE3EB;
+}
+
+.election-table tr.header-line {
+  background-color: #A2B2C0;
+  padding: 10px;
+  border-radius: 10px 10px 0 0 ;
+}
+
+.btn {
+  background-color: rgba(0, 123, 255, 0); /* Blue background */
+  border: none; /* Remove borders */
+  color: black; /* White text */
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
 }

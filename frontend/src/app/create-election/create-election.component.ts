@@ -13,6 +13,8 @@ export class CreateElectionComponent implements OnInit{
   selectedCandidates: Candidate[] = [];
   availableCandidates: Candidate[] = [];
   elections: Election[] = [];
+  filteredCandidates: Candidate[] = [];
+  searchText: string = '';
   election: Election = new Election(
     null,
     "",
@@ -25,10 +27,24 @@ export class CreateElectionComponent implements OnInit{
     this.loadAvailableCandidates();
   }
 
-  loadAvailableCandidates(): void {
+  filterCandidates() {
+    if (this.searchText.trim() === '') {
+      // If search text is empty, show all candidates
+      this.filteredCandidates = this.availableCandidates;
+    } else {
+      // If search text is not empty, filter candidates based on it
+      this.filteredCandidates = this.availableCandidates.filter(candidate =>
+        candidate.firstName.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        candidate.lastName.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+  }
+
+  loadAvailableCandidates(): void{
     this.candidateService.getList().subscribe(
       candidates => {
         this.availableCandidates = candidates;
+        this.filteredCandidates = this.availableCandidates;
       },
       error => console.error('Error loading candidates:', error)
     );
