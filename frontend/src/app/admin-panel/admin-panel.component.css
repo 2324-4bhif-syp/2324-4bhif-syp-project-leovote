@@ -4,6 +4,7 @@
 
 button {
   width: 100%;
+  height: 35%;
   background-color: #ffffff;
   color: #080710;
   padding: 15px 0;
@@ -38,14 +39,8 @@ input {
   font-weight: 300;
 }
 
-.background .shape {
-  height: 200px;
-  width: 200px;
-  position: absolute;
-  border-radius: 50%;
-}
-
 .form {
+  min-height: 300px;
   height: 35%;
   width: 40%;
   background-color: rgba(215, 215, 215, 0.09);
@@ -77,4 +72,8 @@ input {
 
 ::placeholder{
   color: black;
+}
+
+.login h2 {
+  text-align: center;
 }
