@@ -30,29 +30,6 @@
         <div *ngIf="selectedElection === undefined">
           <p>Please select election</p>
         </div>
-        <div *ngIf="selectedElection !== undefined">
-          <h3>Add Emails to {{ selectedElection.name }}</h3>
-          <input type="email" [(ngModel)]="emailInput">
-          <div *ngIf="emailError">
-            <p>Not a valid Email</p>
-          </div>
-          <button (click)="addEmail()">Add Email</button>
-          <h3>Upload Emails</h3>
-          <input type="file" (change)="onFileChange($event)">
-          <button [disabled]="!isCsvUploaded" (click)="parseCSV()">Upload</button>
-        </div>
-      </th>
-    </tr>
-    <tr>
-      <th>
-        <div *ngIf="selectedElection !== undefined">
-          <h3>Emails in Election</h3>
-          <div *ngFor="let email of emails">
-            {{ email.email }}
-            <button (click)="deleteEmail(email.id)"> Remove</button>
-          </div>
-          <button (click)="sendCodes()">Send Codes</button>
-        </div>
       </th>
     </tr>
   </table>

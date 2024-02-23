@@ -13,6 +13,7 @@ import { ResultsComponent } from './results/results.component';
 import { CreateCandidateComponent } from './create-candidate/create-candidate.component';
 import { CreateElectionComponent } from './create-election/create-election.component';
 import {NgOptimizedImage} from "@angular/common";
+import { EmailsComponent } from './emails/emails.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminPanelComponent, children: [
       { path: 'results', component: ResultsComponent },
       { path: 'create-candidate', component: CreateCandidateComponent },
-      { path: 'create-election', component: CreateElectionComponent }
+      { path: 'create-election', component: CreateElectionComponent },
+      { path: 'emails', component: EmailsComponent}
     ]}
 ]
 @NgModule({
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     AdminPanelComponent,
     ResultsComponent,
     CreateCandidateComponent,
-    CreateElectionComponent
+    CreateElectionComponent,
+    EmailsComponent
   ],
     imports: [
         BrowserModule,
