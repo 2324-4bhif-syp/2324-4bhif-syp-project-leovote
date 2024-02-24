@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="author" content="david lehner">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Besprechungsprotokoll 17.10.2023</title>
+<title>Documentation about the Safety of Leo-vote (13.02.24)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,133 +437,88 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Besprechungsprotokoll 17.10.2023</h1>
-<div class="details">
-<span id="author" class="author">david lehner</span><br>
-<span id="revnumber">version 1.0,</span>
-<span id="revdate">2023-10-17</span>
-<br><span id="revremark">Some notes</span>
-</div>
+<h1>Documentation about the Safety of Leo-vote (13.02.24)</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_besprochene_themen">1. Besprochene Themen</a></li>
-<li><a href="#_vereinbarungen_und_entscheidungen">2. Vereinbarungen und Entscheidungen</a></li>
+<li><a href="#_what_can_happen">1. What can happen?</a></li>
+<li><a href="#_what_can_we_do_about_it">2. What can we do about it?</a></li>
+<li><a href="#_where_could_you_use_our_project_with_our_current_security">3. Where could you use our Project with our current security?</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p><span class="icon"><a class="image" href="https://raw.githubusercontent.com/htl-leonding-college/asciidoctor-docker-template/master/asciidocs/mom-171023.adoc"><i class="fa fa-file-text-o"></i></a></span> ‏ ‏ ‎
-<span class="icon"><a class="image" href="https://github.com/htl-leonding-college/asciidoctor-docker-template"><i class="fa fa-github-square"></i></a></span> ‏ ‏ ‎
-<span class="icon"><a class="image" href="https://htl-leonding.github.io/"><i class="fa fa-home"></i></a></span></p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Teilnehmer</caption>
-<colgroup>
-<col style="width: 100%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">anwesend</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">David Lehner</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Anton Cao</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Alexander Nikolaus</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fröller Felix</p></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Ort und Zeit</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ort</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HTBLA Leonding (Unterricht)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">von-bis</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Di. 17.10.2023, 5. EH</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Dauer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">15 min</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <div class="sect1">
-<h2 id="_besprochene_themen"><a class="anchor" href="#_besprochene_themen"></a>1. Besprochene Themen</h2>
+<h2 id="_what_can_happen"><a class="anchor" href="#_what_can_happen"></a>1. What can happen?</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Wie kann man Fälschungssicherheit in Wahlsituationen herstellen (Blockchain)</p>
+<p>Somebody has the password to the voters Mail-Account.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>this is unfortunate, but we as Leo-Vote cant do much about it.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Proof of Concept erstellen: können Wahlen online sicher ablaufen?
-Ist die Verwendung von Blockchain sinnvoll? Gibt es andere Technologien</p>
-</li>
+<p>Somebody starts a "Man in the middle" attack on the Voters.</p>
+<div class="ulist">
+<ul>
 <li>
-<p>MVP ausgemacht. List von Wahlkandidaten eingeben und auslesen.</p>
+<p>The "Vote" is intercepted and exchanged with the Vote of the Attacker.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vereinbarungen_und_entscheidungen"><a class="anchor" href="#_vereinbarungen_und_entscheidungen"></a>2. Vereinbarungen und Entscheidungen</h2>
+<h2 id="_what_can_we_do_about_it"><a class="anchor" href="#_what_can_we_do_about_it"></a>2. What can we do about it?</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all fit-content">
-<caption class="title">Table 3. Was wurde vereinbart?</caption>
-<colgroup>
-<col>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">wer</th>
-<th class="tableblock halign-left valign-top">macht was</th>
-<th class="tableblock halign-left valign-top">bis wann</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">leovote-Team</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Einarbeitung in Blockchain technologie.
-Daten in Blockchain speichern (minimal).
-Ist sie verwendbar in unserem Bereich? (Doku erstellen)
-Eine Liste der Wahlteilnehmer soll eingegeben und ausgelesen werden.
-Datenmodell dazu erstellen (Wahl + Wahlteilnehmer)</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">07.11.23</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>We could add a "Two-Factor" authentication:</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>use the Name of the Voter</p>
+</li>
+<li>
+<p>use the SchoolID of the Voter</p>
+</li>
+<li>
+<p>use the BirthDay of the Voter</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_where_could_you_use_our_project_with_our_current_security"><a class="anchor" href="#_where_could_you_use_our_project_with_our_current_security"></a>3. Where could you use our Project with our current security?</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Class representative Votes</p>
+</li>
+<li>
+<p>"Klassenordner" Votes</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0<br>
 Last updated 2024-02-24 15:25:11 UTC
 </div>
 </div>
