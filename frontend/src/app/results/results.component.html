@@ -1,50 +1,33 @@
-<h2>Select Election:</h2>
-<select [(ngModel)]="selectedElection">
-  <option (click)="loadEmails()" *ngFor="let election of elections"
-          [ngValue]="election">{{election.name}}</option>
-</select>
-<hr>
-<table style="width:100%; align-items: center">
+<h2>Results</h2>
+<table class="table-result">
   <tr>
     <th>
-      <div *ngIf="result !== undefined">
-        <h2>Results:</h2>
-        <div *ngIf="!resultError">
-          <div *ngFor="let res of result">
-            {{res.firstname}}
-            {{res.lastname}}
-            {{res.grade}}
-            percentage: {{res.percentage}}
+      <div class="election-selector">
+        <h3>Select Election</h3>
+        <select [(ngModel)]="selectedElection" required (change)="getResult()">
+          <option [defaultSelected]="true" value="" disabled selected hidden>Select Election</option>
+          <option (click)="loadEmails()" *ngFor="let election of elections"
+                  [ngValue]="election">{{ election.name }}
+          </option>
+        </select>
+      </div>
+    </th>
+    <th>
+      <div class="result-box">
+        <div *ngIf="result !== undefined">
+          <div class="inside-text" *ngIf="!resultError">
+            <div *ngFor="let res of result">
+              {{ res.firstname }}
+              {{ res.lastname }}: {{ res.percentage }}%
+            </div>
+          </div>
+          <div *ngIf="resultError">
+            <p>Error validating Blockchain. Could've been manipulated</p>
           </div>
         </div>
-        <div *ngIf="resultError">
-          <p>Error validating Blockchain. Could've been manipulated</p>
+        <div *ngIf="selectedElection === undefined">
+          <p>Please select election</p>
         </div>
-      </div>
-      <button (click)="getResult()">Get Result</button>
-    </th>
-    <th>
-      <div *ngIf="selectedElection === undefined">
-        <p>Please select election</p>
-      </div>
-      <div *ngIf="selectedElection !== undefined">
-        <h3>Add Emails to {{selectedElection.name}}</h3>
-        <input type="email" [(ngModel)]="emailInput">
-        <div *ngIf="emailError">
-          <p>Not a valid Email</p>
-        </div>
-        <button (click)="addEmail()">Add Email</button>
-      </div>
-    </th>
-  </tr>
-  <tr>
-    <th>
-      <div *ngIf="selectedElection !== undefined">
-        <h3>Emails in Election</h3>
-        <div *ngFor="let email of emails">
-          {{email.email}} <button (click)="deleteEmail(email.id)"> Remove </button>
-        </div>
-        <button (click)="sendCodes()">Send Codes</button>
       </div>
     </th>
   </tr>

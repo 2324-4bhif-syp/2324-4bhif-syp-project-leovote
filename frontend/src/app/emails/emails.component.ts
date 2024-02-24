@@ -1,22 +1,20 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {Election} from "../shared/entity/election-model";
-import {Result} from "../shared/entity/result";
 import {EmailModel} from "../shared/entity/email-model";
 import {ElectionService} from "../shared/control/election.service";
 
 @Component({
-  selector: 'app-results',
-  templateUrl: './results.component.html',
-  styleUrls: ['./results.component.css']
+  selector: 'app-emails',
+  templateUrl: './emails.component.html',
+  styleUrls: ['./emails.component.css']
 })
-export class ResultsComponent {
+export class EmailsComponent {
   elections: Election[] | undefined = undefined;
   selectedElection: Election | undefined = undefined;
-  result: Result[] | undefined = undefined;
   emailInput: string = "";
   emails: EmailModel[] | undefined;
+  emailCount: number = 0;
   emailError: boolean = false;
-  resultError: boolean = false;
   isCsvUploaded: boolean = false;
   csvData: string = "";
   constructor(
@@ -59,36 +57,6 @@ export class ResultsComponent {
         })
     }
   }
-  getResult() {
-    if (this.selectedElection !== undefined && this.selectedElection.id !== undefined && this.selectedElection.id !== null) {
-      this.electionService.result(this.selectedElection.id.toString()).subscribe((value) => {
-        const candidateResults: Result[] = [];
-        if (value instanceof Object) {
-          this.resultError = false;
-          Object.keys(value).forEach(key => {
-            console.log(key);
-            console.log(value);
-            const match = key.match(/Firstname: (\w+) Lastname: (\w+) Grade: (\w+)/);
-            if (match) {
-              let percentage: number = (value as { [key: string]: number })[key];
-              const [, firstname, lastname, grade] = match;
-              const candidateResult: Result = {
-                firstname,
-                lastname,
-                grade,
-                percentage
-              };
-              candidateResult.percentage = Math.round(candidateResult.percentage * 100) / 100;
-              candidateResults.push(candidateResult);
-            }
-          });
-        }
-        this.result = candidateResults;
-      }, (error) => {
-        this.resultError = true;
-      });
-    }
-  }
 
   addEmail() {
     if (this.selectedElection !== undefined &&
@@ -109,6 +77,7 @@ export class ResultsComponent {
       this.selectedElection.id !== null) {
       this.electionService.getMails(this.selectedElection.id.toString()).forEach(value => {
         this.emails = value;
+        this.emailCount = value.length;
       })
     }
   }
@@ -125,7 +94,7 @@ export class ResultsComponent {
     if (this.selectedElection !== undefined &&
       this.selectedElection.id !== null) {
       this.electionService.sendCodes(this.selectedElection.id.toString()).subscribe( (value) => {
-          console.log("emails sent");
+        console.log("emails sent");
       }, (error) => {
         console.log("error while sending mail");
       });

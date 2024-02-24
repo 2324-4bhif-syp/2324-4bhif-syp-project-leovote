@@ -8,6 +8,7 @@ import at.htlleonding.entity.dto.EmailDTO;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
 import jakarta.enterprise.inject.spi.CDI;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -66,6 +67,26 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
             return Response.accepted(emailDTO).build();
         }
         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+    }
+
+    @POST
+    @Path("/addEmail/multiples/{electionId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    default Response addMultipleEmails(@PathParam("electionId") Long electionId, List<String> emails) {
+        Optional<Election> election = Election.findByIdOptional(electionId);
+
+        if (election.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        emails.forEach(email -> {
+            Email e = new Email(email, election.get());
+            CDI.current().select(EntityManager.class).get().persist(e);
+        });
+
+        return Response.ok().build();
     }
 
     @POST

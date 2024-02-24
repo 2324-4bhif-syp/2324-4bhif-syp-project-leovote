@@ -1,0 +1,25 @@
+= Documentation about the Safety of Leo-vote (13.02.24)
+
+
+== What can happen?
+
+* Somebody has the password to the voters Mail-Account.
+** this is unfortunate, but we as Leo-Vote cant do much about it.
+* Somebody starts a "Man in the middle" attack on the Voters.
+** The "Vote" is intercepted and exchanged with the Vote of the Attacker.
+
+== What can we do about it?
+We could add a "Two-Factor" authentication:
+
+For example:
+
+* use the Name of the Voter
+* use the SchoolID of the Voter
+* use the BirthDay of the Voter
+
+
+== Where could you use our Project with our current security?
+
+* Class representative Votes
+
+* "Klassenordner" Votes

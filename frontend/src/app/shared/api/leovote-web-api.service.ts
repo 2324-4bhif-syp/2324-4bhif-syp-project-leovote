@@ -21,9 +21,12 @@ export class LeovoteWebApiService {
   private vote: string = 'voters/vote/${electionId}/${candidateId}';
   private electionResult: string = 'elections/results/${id}';
   private addEmailUrl: string = 'elections/addEmail/${id}/${email}';
+  private addMultipleEmailsUrl: string = 'elections/addEmail/multiples/${electionId}';
   private allMails: string = 'email/${electionId}';
   private removeMailUrl: string = 'elections/removeEmail/${id}';
-  private sendCodesUrl: string = 'email/election/${electionId}'
+  private sendCodesUrl: string = 'email/election/${electionId}';
+  private removeCandidate: string = 'candidates/${id}';
+  private removeElection: string = 'elections/${id}';
 
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
@@ -37,12 +40,16 @@ export class LeovoteWebApiService {
       .replace('${candidateId}', candidateId.toString()), voter, {headers: this.headers});
   }
   public addCandidate(candidate: Candidate){
-    console.log(candidate);
-    console.log(this.baseUrl + this.candidates)
     return this.http.post(this.baseUrl + this.candidates, candidate, {headers: this.headers});
+  }
+  public deleteCandidate(candidateId: string) {
+    return this.http.delete(this.baseUrl + this.removeCandidate.replace('${id}', candidateId), {headers: this.headers});
   }
   public addElection(election: Election){
     return this.http.post(this.baseUrl + this.addElectionUrl, election, {headers: this.headers});
+  }
+  public deleteElection(electionId: string) {
+    return this.http.delete(this.baseUrl + this.removeElection.replace('${id}', electionId), {headers: this.headers});
   }
   public getVoteByCode(code: string) {
     return this.http.get<Vote>(this.baseUrl + this.voters.replace('${id}', code),
@@ -66,5 +73,8 @@ export class LeovoteWebApiService {
 
   public sendCodes(electionId: string){
     return this.http.post(this.baseUrl + this.sendCodesUrl.replace('${electionId}', electionId), {headers: this.headers});
+  }
+  public addMultipleEmails(email: string[], electionId: string) {
+    return this.http.post(this.baseUrl + this.addMultipleEmailsUrl.replace('${electionId}', electionId), email, {headers: this.headers});
   }
 }

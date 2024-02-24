@@ -3,12 +3,15 @@ package at.htlleonding.entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Email extends PanacheEntity {
 
     private String email;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Election election;
 
     public Email(String email, Election election) {

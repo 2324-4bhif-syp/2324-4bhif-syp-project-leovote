@@ -1,24 +1,60 @@
-<h2>Create Candidate</h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h2>Candidates</h2>
 
-<div>
-  <label>School ID:</label>
-  <input [(ngModel)]="candidate.schoolId" placeholder="School ID" />
+<table>
+  <tr>
+    <th>
+      <div class="candidate-creation-container">
+        <div class="input">
+          <input [(ngModel)]="candidate.schoolId" placeholder="School ID"/>
+        </div>
+        <div class="input">
+          <input [(ngModel)]="candidate.firstName" placeholder="First Name"/>
+        </div>
+        <div class="input">
+          <input [(ngModel)]="candidate.lastName" placeholder="Last Name"/>
+        </div>
+        <div class="input">
+          <input [(ngModel)]="candidate.grade" placeholder="Class"/>
+        </div>
+        <div class="input">
+          <button (click)="createCandidate()">Create Candidate</button>
+        </div>
+      </div>
+    </th>
+    <th>
+      <div class="upload-container">
+        <div class="centered-elements">
+          <img src="./assets/img-frontend/upload.png" height=20% width=20%>
+          <input type="file" (change)="onFileChange($event)">
+          <button [disabled]="!isCsvUploaded" (click)="parseCSV()">Upload</button>
+        </div>
+      </div>
+    </th>
+  </tr>
+</table>
+
+
+<div class="candidate-table-container">
+  <table class="candidate-table">
+    <tr class='header-line'>
+      <th>SchoolID</th>
+      <th>Name</th>
+      <th>Class</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let candidate of candidates; let i = index" [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
+      <td>{{candidate.id}}</td>
+      <td>{{candidate.firstName}} {{candidate.lastName}}</td>
+      <td>{{candidate.grade}}</td>
+      <td>
+        <button style="background-color: rgba(255,0,0,0)" (click)="deleteCandidate(candidate)" class="btn">
+          <i class="fa fa-minus"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
 </div>
-<div>
-  <label>First Name:</label>
-  <input [(ngModel)]="candidate.firstName" placeholder="First Name" />
+<div style="color: red" *ngIf="errorMessage">
+  {{ errorMessage }}
 </div>
-<div>
-  <label>Last Name:</label>
-  <input [(ngModel)]="candidate.lastName" placeholder="Last Name" />
-</div>
-<div>
-  <label>Grade:</label>
-  <input [(ngModel)]="candidate.grade" placeholder="Grade" />
-</div>
-<!--
-<div>
-  <label>Image:</label>
-  <input type="file" (change)="onImageChange($event)" />
-</div>-->
-<button (click)="createCandidate()">Create Candidate</button>

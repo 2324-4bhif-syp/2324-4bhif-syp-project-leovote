@@ -16,13 +16,23 @@ export class CandidateService {
     return this.apiClient.addCandidate(candidate);
   }
 
-
+  delete(candidateId: string) {
+    return this.apiClient.deleteCandidate(candidateId);
+  }
   getList(): Observable<Candidate[]> {
     return this.apiClient.getAllCandidates().pipe(
       map(candidates => {
         return candidates.map(candidate => {
           return candidate;
         });
+      })
+    );
+  }
+  isCandidateInAnyElection(candidateId: number): Observable<boolean> {
+    return this.apiClient.getAllElections().pipe(
+      map(elections => {
+        return elections.some(election =>
+          election.participatingCandidates.some(candidate => candidate.id === candidateId));
       })
     );
   }

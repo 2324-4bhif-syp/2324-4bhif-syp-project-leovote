@@ -1,0 +1,134 @@
+h2 {
+  text-align: center;
+  font-weight: bolder;
+  font-size: xxx-large;
+}
+
+.upload-container img {
+  padding-bottom: 10px;
+}
+
+.centered-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-container input {
+  outline: none;
+  border: none;
+}
+
+.input button{
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #DAE3EB;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.input input {
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding: 5px;
+  background-color: #DAE3EB;
+  width: 450px;
+}
+
+@media screen and (max-width: 1000px) {
+  .input input {
+    width: 200px; /* Adjust as needed */
+  }
+}
+
+.candidate-creation-container {
+  background-color: #A2B2C0;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1000px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Optionally set a height to vertically center within the container */
+  max-height: 250px;
+  min-height: 150px;
+  min-width: 200px;
+  /* Center the container horizontally */
+  margin: 0 auto;
+}
+
+.candidate-creation-container input {
+  margin-bottom: 10px; /* Add spacing between input fields */
+}
+
+.candidate-creation-container label {
+  display: inline-block; /* Ensure labels and inputs are displayed in-line */
+  width: 120px; /* Adjust the width of the labels as needed */
+}
+
+.candidate-table-container {
+  padding-top: 5vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  width: 100%;
+  display: flex;
+  align-items: center; /* Changed from align-content to align-items */
+  justify-content: center;
+}
+
+.candidate-table {
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 10px;
+  table-layout: auto;
+}
+
+.candidate-table tr.header-line {
+  background-color: #A2B2C0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.candidate-table tr.grey-row {
+  background-color: #ECF6FF;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.candidate-table tr.white-row {
+  background-color: #DAE3EB;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.candidate-table tr.header-line.candidate-table-container {
+  padding-top: 5vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  width: 100%;
+  display: flex;
+  align-items: center; /* Changed from align-content to align-items */
+  justify-content: center;
+}
+
+.candidate-table {
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 10px;
+  table-layout: auto;
+}
+
+.candidate-table th {
+  min-width: 50px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.candidate-table td {
+  padding-left: 15px;
+}

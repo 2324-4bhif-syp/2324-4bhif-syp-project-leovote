@@ -17,7 +17,9 @@ public class Block {
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
-    public Block(@JsonProperty("index") int index, @JsonProperty("timestamp") Long timestamp, @JsonProperty("vote") Candidate voted, @JsonProperty("previousHash") String previousHash, @JsonProperty("voterUUID") UUID voterUUID) {
+    public Block(@JsonProperty("index") int index, @JsonProperty("timestamp") Long timestamp,
+                 @JsonProperty("voted") Candidate voted, @JsonProperty("previousHash") String previousHash,
+                 @JsonProperty("voterUUID") UUID voterUUID) {
         this.index = index;
         this.timestamp = timestamp;
         this.voted = voted;
@@ -35,10 +37,6 @@ public class Block {
 
     public String getHash() {
         return hash;
-    }
-
-    public Candidate getVote() {
-        return voted;
     }
 
     public int getIndex() {

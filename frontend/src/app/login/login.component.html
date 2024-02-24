@@ -1,26 +1,13 @@
-<div class="background">
-  <div class="shape"></div>
-  <div class="shape"></div>
-</div>
-
-<div class="form">
+<div class="login-form">
   <div class="login">
-    <h3>Login Here</h3>
-
-    <label for="code">Code</label>
-    <input type="text" [(ngModel)]="code" placeholder="Code" id="code">
-
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <button type="button" (click)="isCodeNotUsedOrIncorrect()">Enter</button>
+    <span>
+      <input type="text" [(ngModel)]="code" placeholder="Voter Code" id="code">
+      <button id="loginbtn" type="button" (click)="isCodeNotUsedOrIncorrect()">Confirm</button>
+    </span>
   </div>
-
-
   <div *ngIf="alreadyVotedOrIncorrect" class="error-message">
     <p>Mit diesem Code wurde bereits gewählt oder ist nicht verfügbar!</p>
   </div>
+
 </div>
 

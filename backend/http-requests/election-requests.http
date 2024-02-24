@@ -59,4 +59,4 @@ Content-Type: application/json
 
 
 ### Delete election by ID
-DELETE http://localhost:8080/elections/2
+DELETE http://localhost:8080/elections/1

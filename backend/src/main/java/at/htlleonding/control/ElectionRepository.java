@@ -42,7 +42,7 @@ public class ElectionRepository implements PanacheRepository<Election> {
 
         // Assuming the Candidate class has proper equals() and hashCode() implementations
         for (int i = 1; i < chain.size(); i++) {
-            Candidate votedCandidate = chain.get(i).getVote();
+            Candidate votedCandidate = chain.get(i).getVoted();
             System.out.println((votedCandidate.getFirstName() + " " + votedCandidate.getSchoolId()));
 
             // Update vote count for the candidate
@@ -68,7 +68,7 @@ public class ElectionRepository implements PanacheRepository<Election> {
     }
 
     private String calculateHash(Block block) {
-        String data = block.getIndex() + block.getTimestamp() + block.getVote().toString() + block.getPreviousHash() + block.getVoterUUID();
+        String data = block.getIndex() + block.getTimestamp() + block.getVoted().toString() + block.getPreviousHash() + block.getVoterUUID();
         return hashService.calculateSHA256Hash(data);
     }
 

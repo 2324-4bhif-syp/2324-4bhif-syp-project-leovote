@@ -12,7 +12,9 @@ import { ElectionService } from "../shared/control/election.service";
 export class CreateElectionComponent implements OnInit{
   selectedCandidates: Candidate[] = [];
   availableCandidates: Candidate[] = [];
-
+  elections: Election[] = [];
+  filteredCandidates: Candidate[] = [];
+  searchText: string = '';
   election: Election = new Election(
     null,
     "",
@@ -25,19 +27,35 @@ export class CreateElectionComponent implements OnInit{
     this.loadAvailableCandidates();
   }
 
-  loadAvailableCandidates(): void {
+  filterCandidates() {
+    if (this.searchText.trim() === '') {
+      // If search text is empty, show all candidates
+      this.filteredCandidates = this.availableCandidates;
+    } else {
+      // If search text is not empty, filter candidates based on it
+      this.filteredCandidates = this.availableCandidates.filter(candidate =>
+        candidate.firstName.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        candidate.lastName.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+  }
+
+  loadAvailableCandidates(): void{
     this.candidateService.getList().subscribe(
       candidates => {
         this.availableCandidates = candidates;
+        this.filteredCandidates = this.availableCandidates;
       },
       error => console.error('Error loading candidates:', error)
     );
   }
   constructor(
     protected candidateService: CandidateService,
-    private electionService: ElectionService
+    protected electionService: ElectionService
   ) {
-    console.log(this.candidateService.getList())
+    electionService.getList().forEach(value => {
+      this.elections = value;
+    });
   }
 
   toggleCandidateSelection(candidate: Candidate) {
@@ -49,11 +67,15 @@ export class CreateElectionComponent implements OnInit{
     }
   }
 
+  checkMoreThanOneCandidate(){
+    return this.selectedCandidates.length > 1;
+  }
   createElection() {
     this.election.participatingCandidates = this.selectedCandidates;
     this.electionService.add(this.election).subscribe(
       (response) => {
         console.log('Election created successfully:', response);
+        this.elections.push(response);
         this.selectedCandidates = [];
       },
       (error) => {
@@ -70,5 +92,18 @@ export class CreateElectionComponent implements OnInit{
   }
   isSelected(candidate: Candidate): boolean {
     return this.selectedCandidates.some(selected => selected.id === candidate.id);
+  }
+  deleteElection(election: Election): void {
+    if (election.id !== null) {
+      this.electionService.delete(election.id.toString()).subscribe(
+        () => {
+          console.log('Election deleted successfully');
+          this.elections = this.elections.filter(e => e.id !== election.id);
+        },
+        error => {
+          console.error('Error deleting election:', error);
+        }
+      );
+    }
   }
 }
