@@ -7,7 +7,8 @@
 .card {
   border: none;
   transition: transform 0.2s;
-  margin: 50px;
+  font-weight: bolder;
+  margin: 100px;
   height: 600px;
   width: 320px;
   border-radius: 20px;
@@ -16,6 +17,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.title-card {
+  max-width: 320px; /* Set maximum width */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide any content that overflows */
+  text-overflow: fade; /* Display ellipsis (...) for overflowed text */
+  margin: 0;
+  padding: 0;
+}
+
+.title-card h3 {
+  font-weight: bolder;
+  margin: 0;
+  padding: 0;
 }
 
 .container-for-image {
