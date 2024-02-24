@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Documentation about the Safety of Leo-vote (13.02.24)</title>
+<title>Possible Threats for Leo-vote</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,82 +437,112 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Documentation about the Safety of Leo-vote (13.02.24)</h1>
+<h1>Possible Threats for Leo-vote</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_what_can_happen">1. What can happen?</a></li>
-<li><a href="#_what_can_we_do_about_it">2. What can we do about it?</a></li>
-<li><a href="#_where_could_you_use_our_project_with_our_current_security">3. Where could you use our Project with our current security?</a></li>
+<li><a href="#_man_in_the_middle_attacks">1. Man-in-the-Middle Attacks</a>
+<ul class="sectlevel2">
+<li><a href="#_mitigation">1.1. Mitigation</a></li>
+</ul>
+</li>
+<li><a href="#_injection_attacks">2. Injection Attacks</a>
+<ul class="sectlevel2">
+<li><a href="#_mitigation_2">2.1. Mitigation</a></li>
+</ul>
+</li>
+<li><a href="#_unauthorized_access_admin">3. Unauthorized Access (Admin)</a>
+<ul class="sectlevel2">
+<li><a href="#_mitigation_3">3.1. Mitigation</a></li>
+</ul>
+</li>
+<li><a href="#_51_attack">4. 51% Attack</a>
+<ul class="sectlevel2">
+<li><a href="#_mitigation_4">4.1. Mitigation</a></li>
+</ul>
+</li>
+<li><a href="#_social_engineering">5. Social Engineering</a>
+<ul class="sectlevel2">
+<li><a href="#_mitigation_5">5.1. Mitigation</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_what_can_happen"><a class="anchor" href="#_what_can_happen"></a>1. What can happen?</h2>
+<h2 id="_man_in_the_middle_attacks"><a class="anchor" href="#_man_in_the_middle_attacks"></a>1. Man-in-the-Middle Attacks</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Somebody has the password to the voters Mail-Account.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>this is unfortunate, but we as Leo-Vote cant do much about it.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Man-in-the-Middle (MitM) attacks occurs when an attacker intercepts communication between the client and server, allowing them to modify the data being sent.</p>
 </div>
-</li>
-<li>
-<p>Somebody starts a "Man in the middle" attack on the Voters.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The "Vote" is intercepted and exchanged with the Vote of the Attacker.</p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="_mitigation"><a class="anchor" href="#_mitigation"></a>1.1. Mitigation</h3>
+<div class="paragraph">
+<p>Implement HTTPS to encrypt communication.</p>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p>Use secure authentication mechanisms that are provided separately from the “vote” data.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_can_we_do_about_it"><a class="anchor" href="#_what_can_we_do_about_it"></a>2. What can we do about it?</h2>
+<h2 id="_injection_attacks"><a class="anchor" href="#_injection_attacks"></a>2. Injection Attacks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We could add a "Two-Factor" authentication:</p>
+<p>Injection attacks involve injecting malicious code or SQL queries into the system to manipulate data.</p>
+</div>
+<div class="sect2">
+<h3 id="_mitigation_2"><a class="anchor" href="#_mitigation_2"></a>2.1. Mitigation</h3>
+<div class="paragraph">
+<p>Utilize parameterized queries or prepared statements.</p>
 </div>
 <div class="paragraph">
-<p>For example:</p>
+<p>Implement input validation and sanitization.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>use the Name of the Voter</p>
-</li>
-<li>
-<p>use the SchoolID of the Voter</p>
-</li>
-<li>
-<p>use the BirthDay of the Voter</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_where_could_you_use_our_project_with_our_current_security"><a class="anchor" href="#_where_could_you_use_our_project_with_our_current_security"></a>3. Where could you use our Project with our current security?</h2>
+<h2 id="_unauthorized_access_admin"><a class="anchor" href="#_unauthorized_access_admin"></a>3. Unauthorized Access (Admin)</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Class representative Votes</p>
-</li>
-<li>
-<p>"Klassenordner" Votes</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Unauthorized access occurs when attackers gain access to the system and manipulate vote data directly.</p>
+</div>
+<div class="sect2">
+<h3 id="_mitigation_3"><a class="anchor" href="#_mitigation_3"></a>3.1. Mitigation</h3>
+<div class="paragraph">
+<p>Implement strong authentication mechanisms for the Admin Login, such as multi-factor authentication and self-changing passwords.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_51_attack"><a class="anchor" href="#_51_attack"></a>4. 51% Attack</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A 51% attack occurs when an attacker controls the majority of the computing power in the network, allowing them to manipulate the blockchain.</p>
+</div>
+<div class="sect2">
+<h3 id="_mitigation_4"><a class="anchor" href="#_mitigation_4"></a>4.1. Mitigation</h3>
+<div class="paragraph">
+<p>Implement mechanisms such as proof-of-work or proof-of-stake to make it economically infeasible for attackers to control the majority of the network.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_social_engineering"><a class="anchor" href="#_social_engineering"></a>5. Social Engineering</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Social engineering tactics, such as phishing or social manipulation to gain the Voter-Code could be used to gain unauthorized access to the system or manipulate the voting process.</p>
+</div>
+<div class="sect2">
+<h3 id="_mitigation_5"><a class="anchor" href="#_mitigation_5"></a>5.1. Mitigation</h3>
+<div class="paragraph">
+<p>Educate users about common social engineering tactics and how to recognize and avoid them. Use the school website as the only way to get to the voting page.</p>
+</div>
 </div>
 </div>
 </div>
