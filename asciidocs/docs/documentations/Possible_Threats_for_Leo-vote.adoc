@@ -1,0 +1,45 @@
+= Possible Threats for Leo-vote
+
+== Man-in-the-Middle Attacks
+
+Man-in-the-Middle (MitM) attacks occurs when an attacker intercepts communication between the client and server, allowing them to modify the data being sent.
+
+=== Mitigation
+
+Implement HTTPS to encrypt communication.
+
+Use secure authentication mechanisms that are provided separately from the “vote” data.
+
+== Injection Attacks
+
+Injection attacks involve injecting malicious code or SQL queries into the system to manipulate data.
+
+=== Mitigation
+
+Utilize parameterized queries or prepared statements.
+
+Implement input validation and sanitization.
+
+== Unauthorized Access (Admin)
+
+Unauthorized access occurs when attackers gain access to the system and manipulate vote data directly.
+
+=== Mitigation
+
+Implement strong authentication mechanisms for the Admin Login, such as multi-factor authentication and self-changing passwords.
+
+== 51% Attack
+
+A 51% attack occurs when an attacker controls the majority of the computing power in the network, allowing them to manipulate the blockchain.
+
+=== Mitigation
+
+Implement mechanisms such as proof-of-work or proof-of-stake to make it economically infeasible for attackers to control the majority of the network.
+
+== Social Engineering
+
+Social engineering tactics, such as phishing or social manipulation to gain the Voter-Code could be used to gain unauthorized access to the system or manipulate the voting process.
+
+=== Mitigation
+
+Educate users about common social engineering tactics and how to recognize and avoid them. Use the school website as the only way to get to the voting page.
