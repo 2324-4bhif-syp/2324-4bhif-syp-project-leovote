@@ -1,6 +1,6 @@
 = Leovote
 
-Sprint 5
+Sprint 6
 
 :revdate: {docdate}
 :encoding: utf-8
@@ -39,13 +39,13 @@ image::papier.jpg[background]
 * Der Wahlaufwand
 ** Zeit
 ** Auszählen der Wahlen
-* hoher Verbrauch von Papier
+* Verbrauch von Papier
 
 [.lightbg,background-opacity="0.2"]
 == Warum Leovote?
 image::prove.jpg[background]
 
-* Leovote ermöglicht eine fälschungssichere Wahldurchführung mit Blockchain
+* Leovote versucht, eine fälschungssichere Wahldurchführung mit Blockchain
 * Sparsamkeit
 ** Zeit
 ** Papier
@@ -54,9 +54,8 @@ image::prove.jpg[background]
 === Sprintvereinbarung
 image::handshake.jpg[background]
 
-* Bilder zu jeweiligen Kandidaten anzeigen
-* Link zum Wählen per E-Mail versenden
-* Ergebnis einer Wahl auslesen und anzeigen
+* Frontend-Design mit Figma
+* Risikoszenarien
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
@@ -68,13 +67,5 @@ image::ziele.jpg[background]
 
 == Wahlprozess
 image::process.png[]
-
-== CLD / ERD
-
-=== Datenbank
-image::erd.png[height=50%, width=50%]
-
-=== Klassendiagramm
-image::cld.png[]
 
 === Live Demo
