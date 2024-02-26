@@ -45,7 +45,10 @@ image::papier.jpg[background]
 == Warum Leovote?
 image::prove.jpg[background]
 
-* Leovote versucht, eine fälschungssichere Wahldurchführung mit Blockchain
+* Leovote versucht, eine fälschungssichere Wahldurchführung zu ermöglichen
+* Empfehlung:
+** kleinere Wahlen (mit weniger öffentlichem Interesse)
+** kontrollierte Umgebung
 * Sparsamkeit
 ** Zeit
 ** Papier
@@ -55,7 +58,16 @@ image::prove.jpg[background]
 image::handshake.jpg[background]
 
 * Frontend-Design mit Figma
+* Frontend Implementation
 * Risikoszenarien
+
+[.lightbg,background-opacity="0.2"]
+== Risikoszenarien
+image::risk.jpg[background]
+
+* Man-in-the-Middle Attacks
+* Unauthorized Access (Admin)
+* Social manipulation
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
