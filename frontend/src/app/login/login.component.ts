@@ -1,7 +1,5 @@
   import { Component, Input } from '@angular/core';
-import { LeovoteWebApiService } from '../shared/api/leovote-web-api.service';
 import { VoteService } from '../shared/control/vote.service';
-import { Vote } from '../shared/entity/vote';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -28,8 +26,7 @@ export class LoginComponent {
     });
   }
 
-  async isCodeNotUsedOrIncorrect() {
-    console.log('HELLO');
+  async checkCode() {
     try {
       const success = await this.voteService.checkCode(this.code);
       if (success) {

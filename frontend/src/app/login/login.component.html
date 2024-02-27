@@ -2,7 +2,7 @@
   <div class="login">
     <span>
       <input type="text" [(ngModel)]="code" placeholder="Voter Code" id="code">
-      <button id="loginbtn" type="button" (click)="isCodeNotUsedOrIncorrect()">Confirm</button>
+      <button id="loginbtn" type="button" (click)="checkCode()">Confirm</button>
     </span>
   </div>
   <div *ngIf="alreadyVotedOrIncorrect" class="error-message">
