@@ -1,0 +1,74 @@
+= Besprechungsprotokoll 27.02.2024
+1.0, 2024-03-27: mom
+ifndef::imagesdir[:imagesdir: images]
+:icons: font
+//:sectnums:    // Nummerierung der Überschriften / section numbering
+//:toc: left
+
+//Need this blank line after ifdef, don't know why...
+ifdef::backend-html5[]
+
+// https://fontawesome.com/v4.7.0/icons/
+icon:file-text-o[link=https://raw.githubusercontent.com/htl-leonding-college/asciidoctor-docker-template/master/asciidocs/{docname}.adoc] ‏ ‏ ‎
+icon:github-square[link=https://github.com/htl-leonding-college/asciidoctor-docker-template] ‏ ‏ ‎
+icon:home[link=https://htl-leonding.github.io/]
+endif::backend-html5[]
+
+
+.Teilnehmer
+|===
+|anwesend
+
+| David Lehner
+
+
+| Anton Cao
+
+
+| Alexander Nikolaus
+
+|===
+
+|===
+|nicht anwesend
+
+| Fröller Felix
+
+|===
+.Ort und Zeit
+[cols=2*]
+|===
+|Ort
+|HTBLA Leonding (Unterricht)
+
+|von-bis
+|Di. 27.02.2024
+|Dauer
+| 20min
+|===
+
+== Besprochene Themen
+
+* Bilder aus dem Internet nehmen-> aufpassen
+* Keycloak mit Token
+* einen Login (Schuldaten) -> der Code muss mit der E-Mail übereinstimmen -> Authentifikation
+* Wenn wer gewählt wird, sollte der ausgewählte Kandidaten größer dargestellt-> alle anderen Kandidaten kleiner machen
+* Übersicht, ob der Kandidat wirklich gewählt werden soll
+
+== Vereinbarungen und Entscheidungen
+
+.Was wurde vereinbart?
+[%autowidth]
+|===
+|wer |macht was |bis wann
+
+| leovote-Team
+a|
+* Keycloak mit Login, dann kommt nur die Code-Eingabe, wenn es mit der E-Mail mit dem Hash übereinstimmt (falls keine E-Mail
+gibt, den Username nehmen)
+* 2FA -> Verschlüsseln
+* Übersicht der Kandidaten wie ein Warenkorb darstellen, bevor man eine Stimme abgeben will
+* Anstatt der Name Code -> Transaktioncode
+* Anstatt Confirm -> Vote now
+| 11.03.2024
+|===
