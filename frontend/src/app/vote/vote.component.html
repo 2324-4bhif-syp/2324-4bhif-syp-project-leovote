@@ -6,7 +6,7 @@
 
   <div class="container">
     <div class="row">
-      <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-5">
+      <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-6">
         <div (click)="selectedCandidate = candidate" class="card mb-4 box-shadow text-center h-100">
           <div class="container-for-image">
             <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + candidate.pathOfImage" alt="{{ candidate.firstName }} {{ candidate.lastName }}">
