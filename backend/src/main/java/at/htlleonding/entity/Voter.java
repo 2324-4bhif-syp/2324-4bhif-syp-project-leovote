@@ -1,15 +1,16 @@
 package at.htlleonding.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.UUID;
 
+@Table(
+        uniqueConstraints =
+        @UniqueConstraint(columnNames = {"election", "emailHash"})
+)
 @Entity
 public class Voter extends PanacheEntityBase {
     //<editor-fold desc="Fields">
