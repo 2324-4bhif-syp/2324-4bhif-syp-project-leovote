@@ -14,14 +14,15 @@ import jakarta.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @ApplicationScoped
 public class EmailService {
-    private static final String LINK_BASE = "http://89.168.107.125/login";
+    private static final String LINK_BASE = "http://leovote.ddns.net/login";
     @Inject
     ReactiveMailer reactiveMailer;
+    @Inject
+    HashService hashService;
     @Inject
     VoterRepository voterRepository;
     @Inject
@@ -68,17 +69,22 @@ public class EmailService {
                     List<Mail> mails = batch.stream()
                             .map(email -> {
                                 Voter voter = voterEmailMap.get(email);
-                                String link = generateLink(voter);
+                                String link = generateLink(voter, email);
                                 String html = InviteTemplate.invite(link).data("link", link).render();
                                 return Mail.withHtml(email, subject, html);
                             })
-                            .collect(Collectors.toList());
+                            .toList();
 
                     return reactiveMailer.send(mails.toArray(new Mail[0]));
                 });
     }
 
-    private String generateLink(Voter voter) {
-        return String.format("%s?token=%s", LINK_BASE, voter.getGeneratedId());
+    private String generateLink(Voter voter, String email) {
+        return String.format(
+                "%s?token=%s%s",
+                LINK_BASE,
+                voter.getGeneratedId(),
+                hashService.calculateSHA256Hash(email)
+        );
     }
 }

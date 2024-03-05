@@ -28,16 +28,17 @@ public class Voter extends PanacheEntityBase {
         this.election = election;
         this.generatedId = UUID.randomUUID().toString();
     }
+
+    public Voter(Election election, String generatedId) {
+        this.election = election;
+        this.generatedId = generatedId;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
 
     public String getGeneratedId() {
         return generatedId;
-    }
-
-    public void appendToCode(String part) {
-        this.generatedId += part;
     }
 
     public Election getElection() {
