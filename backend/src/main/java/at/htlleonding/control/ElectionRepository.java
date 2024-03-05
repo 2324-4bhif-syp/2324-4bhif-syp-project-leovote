@@ -7,6 +7,7 @@ import at.htlleonding.entity.Email;
 import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.TypedQuery;
 
 import java.util.HashMap;
@@ -15,7 +16,8 @@ import java.util.Optional;
 
 @ApplicationScoped
 public class ElectionRepository implements PanacheRepository<Election> {
-    private final HashService hashService = new HashService();
+    @Inject
+    HashService hashService;
 
     public HashMap<Candidate, Double> reviewResults(Election election) throws Exception {
         HashMap<Candidate, Integer> voteCounts = new HashMap<>();

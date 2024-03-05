@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 
 @ApplicationScoped
 public class HashService {
-
     public String calculateSHA256Hash(String data) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
