@@ -50,10 +50,11 @@ public class EmailService {
                             .boxed()
                             .collect(HashMap::new, (map, i) -> map.put(emails.get(i), voters.get(i)), HashMap::putAll);
 
-                    // Set the emailHash for each voter
-                    for (Voter voter : voters) {
-                        voter.setEmailHash(hashService.calculateSHA256Hash(voter.getGeneratedId().toString()));
-                    }
+                    // set the voter emailHash to the email which is the key in the hashmap
+                    voterEmailMap.forEach((email, voter) -> {
+                        voter.setEmailHash(hashService.calculateSHA256Hash(email));
+                        voterRepository.persist(voter);
+                    });
 
                     // Send emails asynchronously in batches
                     int batchSize = 10;
