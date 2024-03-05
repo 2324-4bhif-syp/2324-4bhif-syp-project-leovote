@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Table(
         uniqueConstraints =
-        @UniqueConstraint(columnNames = {"election", "emailHash"})
+        @UniqueConstraint(columnNames = {"election_id", "emailHash"})
 )
 @Entity
 public class Voter extends PanacheEntityBase {
