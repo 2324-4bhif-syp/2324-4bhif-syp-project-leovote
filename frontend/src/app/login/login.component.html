@@ -1,5 +1,6 @@
 <div class="login-form">
   <div class="login">
+    <h3>Input for Voter Data</h3>
     <span>
       <input placeholder="Username" type="text" [(ngModel)]="username" name="username" required>
     </span>
@@ -8,7 +9,6 @@
     </span>
     <span>
       <input type="text" [(ngModel)]="code" placeholder="Transactional Code" id="code" required>
-
       <button id="loginbtn" type="button" (click)="checkLogin()">Vote now</button>
     </span>
   </div>
