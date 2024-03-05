@@ -1,13 +1,18 @@
 <div class="login-form">
   <div class="login">
     <span>
-      <input type="text" [(ngModel)]="code" placeholder="Transactional Code" id="code">
-      <button id="loginbtn" type="button" (click)="checkCode()">Vote now</button>
+      <input placeholder="Username" type="text" [(ngModel)]="username" name="username" required>
+    </span>
+    <span>
+      <input placeholder="Password" type="password" [(ngModel)]="password" name="password" required>
+    </span>
+    <span>
+      <input type="text" [(ngModel)]="code" placeholder="Transactional Code" id="code" required>
+
+      <button id="loginbtn" type="button" (click)="checkLogin()">Vote now</button>
     </span>
   </div>
   <div *ngIf="alreadyVotedOrIncorrect" class="error-message">
     <p>With this code, voting has already been done or is not available!</p>
   </div>
-
 </div>
-
