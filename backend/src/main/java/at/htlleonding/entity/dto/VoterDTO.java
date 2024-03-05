@@ -2,5 +2,5 @@ package at.htlleonding.entity.dto;
 
 import java.util.UUID;
 
-public record VoterDTO(String generatedId, Long participatingIn, boolean voted) {
+public record VoterDTO(UUID generatedId, Long participatingIn, boolean voted) {
 }

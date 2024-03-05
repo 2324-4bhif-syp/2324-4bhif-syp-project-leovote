@@ -30,16 +30,16 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     @Path("voter/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response getByUUID(@PathParam("id") String uuid) {
+    default Response getByUUID(@PathParam("id") UUID uuid) {
         TypedQuery<Voter> query = em.createQuery("select v FROM Voter v where generatedId = ?1", Voter.class)
                 .setParameter(1, uuid);
-        try{
+        try {
             Voter voter = query.getSingleResult();
             Election election = Election.findById(voter.getElection().id);
             Blockchain blockchain = new Blockchain(election.getBlockchainFileName());
             VoterDTO voterDTO = new VoterDTO(voter.getGeneratedId(), voter.getElection().id, voterRepository.hasAlreadyVoted(blockchain, voter));
             return Response.status(Response.Status.OK).entity(voterDTO).build();
-        } catch(NoResultException e){
+        } catch (NoResultException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -52,9 +52,9 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     default Response vote(
             @PathParam("electionId") Long electionId,
             @PathParam("candidateId") Long candidateId,
-            Map<String, String> requestBody
+            Map<String, UUID> requestBody
     ) {
-        String voterId = requestBody.get("voterId");
+        UUID voterId = requestBody.get("voterId");
         Election election = Election.findById(electionId);
         Candidate candidate = Candidate.findById(candidateId);
         boolean voteIsValid;

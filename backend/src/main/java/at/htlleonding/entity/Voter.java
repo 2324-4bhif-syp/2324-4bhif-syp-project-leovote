@@ -12,32 +12,34 @@ public class Voter extends PanacheEntityBase {
     //<editor-fold desc="Fields">
     @Id
     @Column(unique = true)
-    private String generatedId;
+    private UUID generatedId;
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Election election;
+    private String emailHash;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     public Voter() {
         election = null;
-        this.generatedId = UUID.randomUUID().toString();
+        this.generatedId = UUID.randomUUID();
     }
 
     public Voter(Election election) {
         this.election = election;
-        this.generatedId = UUID.randomUUID().toString();
+        this.generatedId = UUID.randomUUID();
     }
 
-    public Voter(Election election, String generatedId) {
+    public Voter(Election election, String emailHash) {
         this.election = election;
-        this.generatedId = generatedId;
+        this.emailHash = emailHash;
+        this.generatedId = UUID.randomUUID();
     }
+
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
-
-    public String getGeneratedId() {
+    public UUID getGeneratedId() {
         return generatedId;
     }
 
@@ -45,5 +47,12 @@ public class Voter extends PanacheEntityBase {
         return election;
     }
 
+    public String getEmailHash() {
+        return emailHash;
+    }
+
+    public void setEmailHash(String emailHash) {
+        this.emailHash = emailHash;
+    }
     //</editor-fold>
 }

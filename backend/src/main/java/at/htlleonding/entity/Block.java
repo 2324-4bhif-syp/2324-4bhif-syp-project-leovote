@@ -13,13 +13,13 @@ public class Block {
     private final Candidate voted;
     private final String previousHash;
     private final String hash;
-    private final String voterUUID;
+    private final UUID voterUUID;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     public Block(@JsonProperty("index") int index, @JsonProperty("timestamp") Long timestamp,
                  @JsonProperty("voted") Candidate voted, @JsonProperty("previousHash") String previousHash,
-                 @JsonProperty("voterUUID") String voterUUID) {
+                 @JsonProperty("voterUUID") UUID voterUUID) {
         this.index = index;
         this.timestamp = timestamp;
         this.voted = voted;
@@ -31,7 +31,7 @@ public class Block {
 
     //<editor-fold desc="Methods">
     private String calculateHash() {
-        String data = index + timestamp + voted.toString() + previousHash + voterUUID;
+        String data = index + timestamp + voted.toString() + previousHash + voterUUID.toString();
         return hashService.calculateSHA256Hash(data);
     }
 
@@ -55,7 +55,7 @@ public class Block {
         return voted;
     }
 
-    public String getVoterUUID() {
+    public UUID getVoterUUID() {
         return voterUUID;
     }
 
