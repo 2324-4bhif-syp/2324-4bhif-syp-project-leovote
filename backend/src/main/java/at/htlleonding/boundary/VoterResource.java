@@ -30,7 +30,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     @Path("voter/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response getByUUID(@PathParam("id") UUID uuid) {
+    default Response getByUUID(@PathParam("id") String uuid) {
         TypedQuery<Voter> query = em.createQuery("select v FROM Voter v where generatedId = ?1", Voter.class)
                 .setParameter(1, uuid);
         try{
@@ -52,9 +52,9 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     default Response vote(
             @PathParam("electionId") Long electionId,
             @PathParam("candidateId") Long candidateId,
-            Map<String, UUID> requestBody
+            Map<String, String> requestBody
     ) {
-        UUID voterId = requestBody.get("voterId");
+        String voterId = requestBody.get("voterId");
         Election election = Election.findById(electionId);
         Candidate candidate = Candidate.findById(candidateId);
         boolean voteIsValid;

@@ -12,7 +12,7 @@ public class Voter extends PanacheEntityBase {
     //<editor-fold desc="Fields">
     @Id
     @Column(unique = true)
-    private UUID generatedId;
+    private String generatedId;
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Election election;
@@ -21,19 +21,23 @@ public class Voter extends PanacheEntityBase {
     //<editor-fold desc="Constructors">
     public Voter() {
         election = null;
-        this.generatedId = UUID.randomUUID();
+        this.generatedId = UUID.randomUUID().toString();
     }
 
     public Voter(Election election) {
         this.election = election;
-        this.generatedId = UUID.randomUUID();
+        this.generatedId = UUID.randomUUID().toString();
     }
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">
 
-    public UUID getGeneratedId() {
+    public String getGeneratedId() {
         return generatedId;
+    }
+
+    public void appendToCode(String part) {
+        this.generatedId += part;
     }
 
     public Election getElection() {

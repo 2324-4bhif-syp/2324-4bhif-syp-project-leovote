@@ -42,7 +42,7 @@ public class Blockchain {
                 "imagePath"
         );
 
-        return new Block(0, System.currentTimeMillis(), candidate1, "0", UUID.randomUUID());
+        return new Block(0, System.currentTimeMillis(), candidate1, "0", UUID.randomUUID().toString());
     }
 
     public synchronized void addBlock(Candidate voted, Voter voter) {
