@@ -6,8 +6,10 @@
 
   <div class="container" *ngIf="!isSelected">
     <div class="row">
-      <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-6" style="width: 0; padding-right: 340px; padding-bottom: 20px">
-        <div (click)="selectedCandidate = candidate" class="card mb-4 box-shadow text-center h-100" style="align-content: center">
+      <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-6"
+           style="width: 0; padding-right: 340px; padding-bottom: 20px">
+        <div (click)="selectedCandidate = candidate" class="card mb-4 box-shadow text-center h-100"
+             style="align-content: center">
           <div class="container-for-image">
             <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + candidate.pathOfImage"
                  alt="{{ candidate.firstName }} {{ candidate.lastName }}">
@@ -26,10 +28,10 @@
     </div>
   </div>
 
-  <h2 *ngIf="isSelected" style="align-items: center; padding-right: 340px; padding-bottom: 20px">Do you want to vote for {{selectedCandidate?.firstName}} {{selectedCandidate?.lastName}}</h2>
+  <h2 *ngIf="isSelected">Do you want to vote for <br><br> {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
   <div class="container" *ngIf="isSelected">
-    <div class="col-md-6" style="width: 0;">
-      <div class="card mb-4 box-shadow text-center h-100">
+    <div class="col-md-6" style="width: 0; padding-right: 340px; padding-bottom: 20px">
+      <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
         <div class="container-for-image">
           <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + selectedCandidate?.pathOfImage"
                alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
