@@ -7,6 +7,10 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.UUID;
 
+@Table(
+        uniqueConstraints =
+        @UniqueConstraint(columnNames = {"election_id", "emailHash"})
+)
 @Entity
 public class Voter extends PanacheEntityBase {
     //<editor-fold desc="Fields">

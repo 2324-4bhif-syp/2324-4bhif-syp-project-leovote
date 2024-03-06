@@ -50,8 +50,14 @@ public class EmailService {
                             .boxed()
                             .collect(HashMap::new, (map, i) -> map.put(emails.get(i), voters.get(i)), HashMap::putAll);
 
+                    // set the voter emailHash to the email which is the key in the hashmap
+                    voterEmailMap.forEach((email, voter) -> {
+                        voter.setEmailHash(hashService.calculateSHA256Hash(email));
+                        voterRepository.persist(voter);
+                    });
+
                     // Send emails asynchronously in batches
-                    int batchSize = 10; // Set an appropriate batch size
+                    int batchSize = 10;
                     List<List<String>> emailBatches = new ArrayList<>();
 
                     for (int i = 0; i < emails.size(); i += batchSize) {
@@ -81,10 +87,9 @@ public class EmailService {
 
     private String generateLink(Voter voter, String email) {
         return String.format(
-                "%s?token=%s%s",
+                "%s?token=%s",
                 LINK_BASE,
-                voter.getGeneratedId(),
-                hashService.calculateSHA256Hash(email)
+                voter.getGeneratedId()
         );
     }
 }

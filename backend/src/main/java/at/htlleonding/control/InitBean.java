@@ -16,10 +16,8 @@ import java.util.List;
 public class InitBean {
     @Inject
     EntityManager entityManager;
-
     @Inject
     VoterRepository voterRepository;
-
     @Inject
     ElectionRepository electionRepository;
 
@@ -80,6 +78,5 @@ public class InitBean {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 }

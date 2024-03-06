@@ -21,7 +21,6 @@ import java.util.Optional;
 public class EmailResource {
     @Inject
     EmailService emailService;
-
     @Inject
     EntityManager em;
 
