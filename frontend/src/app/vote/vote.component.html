@@ -4,27 +4,50 @@
     <p>Code: {{ voter?.generatedId }}</p>
   </div>
 
-  <div class="container">
+  <div class="container" *ngIf="!isSelected">
     <div class="row">
-      <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-6">
-        <div (click)="selectedCandidate = candidate" class="card mb-4 box-shadow text-center h-100">
+      <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-6" style="width: 0; padding-right: 340px; padding-bottom: 20px">
+        <div (click)="selectedCandidate = candidate" class="card mb-4 box-shadow text-center h-100" style="align-content: center">
           <div class="container-for-image">
-            <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + candidate.pathOfImage" alt="{{ candidate.firstName }} {{ candidate.lastName }}">
+            <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + candidate.pathOfImage"
+                 alt="{{ candidate.firstName }} {{ candidate.lastName }}">
           </div>
           <div class="card-body">
             <div class="title-card">
               <h3 class="card-title">{{ candidate.firstName }}</h3>
               <h3 class="card-title"> {{ candidate.lastName }} </h3>
-              <h4>{{candidate.grade}}</h4>
+              <h4>{{ candidate.grade }}</h4>
             </div>
-            <input class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="candidate" id="{{ 'candidate' + index }}">
+            <input class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="candidate"
+                   id="{{ 'candidate' + index }}">
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container">
-    <button [disabled]="!selectedCandidate" (click)="voting()" class="vote-btn">Vote</button>
+
+  <h2 *ngIf="isSelected" style="align-items: center; padding-right: 340px; padding-bottom: 20px">Do you want to vote for {{selectedCandidate?.firstName}} {{selectedCandidate?.lastName}}</h2>
+  <div class="container" *ngIf="isSelected">
+    <div class="col-md-6" style="width: 0;">
+      <div class="card mb-4 box-shadow text-center h-100">
+        <div class="container-for-image">
+          <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + selectedCandidate?.pathOfImage"
+               alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
+        </div>
+        <div class="card-body">
+          <div class="title-card">
+            <h3 class="card-title">{{ selectedCandidate?.firstName }}</h3>
+            <h3 class="card-title"> {{ selectedCandidate?.lastName }} </h3>
+            <h4>{{ selectedCandidate?.grade }}</h4>
+          </div>
+          <input class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="selectedCandidate">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" *ngIf="!isSelected">
+    <button [disabled]="!selectedCandidate" (click)="select()" class="vote-btn">Vote</button>
   </div>
 </div>
 

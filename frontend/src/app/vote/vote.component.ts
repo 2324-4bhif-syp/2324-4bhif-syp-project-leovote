@@ -12,6 +12,8 @@ import {Candidate} from "../shared/entity/candidate-model";
 })
 export class VoteComponent {
   isVoted: boolean = false;
+  isSelected: boolean = false;
+
   voter: Vote | undefined = this.voteService.vote;
   election: Election | undefined = undefined;
   selectedCandidate: Candidate | undefined;
@@ -22,6 +24,10 @@ export class VoteComponent {
       this.voteService.isLoggedIn = false;
       this.isVoted = true;
     }
+  }
+
+  select(){
+    this.isSelected = true;
   }
 
   constructor(
