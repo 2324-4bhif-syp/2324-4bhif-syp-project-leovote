@@ -15,4 +15,7 @@
   <div *ngIf="alreadyVotedOrIncorrect" class="error-message">
     <p>With this code, voting has already been done or is not available!</p>
   </div>
+  <div *ngIf="authFail" class="error-message">
+    <p>Authentication failed. Check your login data</p>
+  </div>
 </div>

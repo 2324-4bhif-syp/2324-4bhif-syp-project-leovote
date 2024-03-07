@@ -5,6 +5,7 @@ import {Election} from "../entity/election-model";
 import {Vote} from "../entity/vote";
 import {VoteCandidate} from "../entity/vote-candidate-model";
 import {EmailModel} from "../entity/email-model";
+import {LoginModel} from "../entity/login-model";
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +28,7 @@ export class LeovoteWebApiService {
   private sendCodesUrl: string = 'email/election/${electionId}';
   private removeCandidate: string = 'candidates/${id}';
   private removeElection: string = 'elections/${id}';
+  private checkLoginDataUrl: string = 'token';
 
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
@@ -76,5 +78,14 @@ export class LeovoteWebApiService {
   }
   public addMultipleEmails(email: string[], electionId: string) {
     return this.http.post(this.baseUrl + this.addMultipleEmailsUrl.replace('${electionId}', electionId), email, {headers: this.headers});
+  }
+
+  public checkLoginData(schoolId: string, password: string){
+    const body = {
+      username: schoolId,
+      password: password
+    };
+
+    return this.http.post<LoginModel>(this.baseUrl + this.checkLoginDataUrl, body, {headers: this.headers});
   }
 }

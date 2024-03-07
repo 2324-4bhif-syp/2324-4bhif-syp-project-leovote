@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { LeovoteWebApiService } from "../api/leovote-web-api.service";
-import { Vote } from "../entity/vote";
+import {Injectable} from '@angular/core';
+import {LeovoteWebApiService} from "../api/leovote-web-api.service";
+import {Vote} from "../entity/vote";
 import {VoteCandidate} from "../entity/vote-candidate-model";
 import {Router} from "@angular/router";
+import {LoginModel} from "../entity/login-model";
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,13 @@ import {Router} from "@angular/router";
 export class VoteService {
   public vote: Vote | undefined;
   isLoggedIn: boolean = false;
+  public user: LoginModel | undefined;
 
   constructor(private apiClient: LeovoteWebApiService,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   checkCode(code: string): Promise<boolean> {
-    console.log(code);
-
     return new Promise<boolean>((resolve, reject) => {
       this.apiClient.getVoteByCode(code).subscribe(
         (v: Vote) => {
@@ -36,8 +37,8 @@ export class VoteService {
     });
   }
 
-  voteCall(candidateId: number, electionId: number){
-    if(this.vote?.generatedId != undefined){
+  voteCall(candidateId: number, electionId: number) {
+    if (this.vote?.generatedId != undefined) {
       let voteCandidate: VoteCandidate = new VoteCandidate(this.vote.generatedId)
       console.log(voteCandidate);
       this.apiClient.voteForCandidate(voteCandidate, candidateId, electionId).subscribe(
@@ -52,5 +53,27 @@ export class VoteService {
     } else {
       console.log("No Id given");
     }
+  }
+
+  checkLoginData(schoolId: string, password: string): Promise<LoginModel | undefined> {
+    return new Promise<LoginModel | undefined>((resolve, reject) => {
+      if (schoolId != undefined && password != undefined) {
+        this.apiClient.checkLoginData(schoolId, password).subscribe(
+          (u: LoginModel) => {
+            let user = u;
+            this.user = u;
+            if (user !== undefined) {
+              console.log(user);
+              resolve(user);
+            }
+          }, (error) => {
+            console.log('Authentication could not be completed');
+            resolve(undefined);
+          }
+        )
+      } else {
+        resolve(Promise.resolve(undefined));
+      }
+    })
   }
 }

@@ -1,7 +1,7 @@
 <div *ngIf="!isVoted">
   <div class="headliner-container">
     <h2>{{ election?.name }}</h2>
-    <p>Code: {{ voter?.generatedId }}</p>
+    <p>Logged in as: {{voteService.user?.name}}</p>
   </div>
 
   <div class="container" *ngIf="!isSelected">
