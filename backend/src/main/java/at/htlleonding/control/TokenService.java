@@ -1,10 +1,10 @@
 package at.htlleonding.control;
 
+import at.htlleonding.entity.UserInfoResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@Path("/tokens")
 @RegisterRestClient(configKey = "token-api")
 public interface TokenService {
 
@@ -18,4 +18,8 @@ public interface TokenService {
                  @FormParam("username") String username,
                  @FormParam("password") String password,
                  @FormParam("scope") String scope);
+
+    @GET
+    @Path("userinfo")
+    UserInfoResponse getUserInfo(@HeaderParam("Authorization") String authorizationHeader);
 }
