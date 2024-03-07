@@ -27,29 +27,39 @@
       </div>
     </div>
   </div>
+  <div class="headliner-container">
+    <h2 *ngIf="isSelected" style="align-content: center; justify-content: center">Do you want to vote for {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
+  </div>
 
-  <h2 *ngIf="isSelected">Do you want to vote for <br><br> {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
-  <div class="container" *ngIf="isSelected">
-    <div class="col-md-6" style="width: 0; padding-right: 340px; padding-bottom: 20px">
-      <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
-        <div class="container-for-image">
-          <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + selectedCandidate?.pathOfImage"
-               alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
-        </div>
-        <div class="card-body">
-          <div class="title-card">
-            <h3 class="card-title">{{ selectedCandidate?.firstName }}</h3>
-            <h3 class="card-title"> {{ selectedCandidate?.lastName }} </h3>
-            <h4>{{ selectedCandidate?.grade }}</h4>
+
+    <div class="container" *ngIf="isSelected">
+      <button (click)="deselect()" class="vote-btn" style="background-color: #c70000">BACK</button>
+    </div>
+
+    <div class="container" *ngIf="isSelected">
+      <div class="col-md-6" style="width: 0; padding-right: 340px; padding-bottom: 20px; padding-top: 20px">
+        <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
+          <div class="container-for-image">
+            <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + selectedCandidate?.pathOfImage"
+                 alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
           </div>
-          <input class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="selectedCandidate">
+          <div class="card-body">
+            <div class="title-card">
+              <h3 class="card-title">{{ selectedCandidate?.firstName }}</h3>
+              <h3 class="card-title"> {{ selectedCandidate?.lastName }} </h3>
+              <h4>{{ selectedCandidate?.grade }}</h4>
+            </div>
+            <input *ngIf="!isSelected" class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="selectedCandidate ">
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <div class="container" *ngIf="isSelected">
+      <button (click)="voting()" class="vote-btn">VOTE</button>
+    </div>
   <div class="container" *ngIf="!isSelected">
-    <button [disabled]="!selectedCandidate" (click)="select()" class="vote-btn">Vote</button>
+    <button [disabled]="!selectedCandidate" (click)="select()" class="vote-btn">SELECT</button>
   </div>
 </div>
 

@@ -39,7 +39,7 @@ h2 {
 
 @media screen and (max-width: 1000px) {
   .input input {
-    width: 200px; /* Adjust as needed */
+    width: 200px;
   }
 }
 
@@ -53,21 +53,20 @@ h2 {
   max-width: 1000px;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Optionally set a height to vertically center within the container */
+  height: 100vh;
   max-height: 250px;
   min-height: 150px;
   min-width: 200px;
-  /* Center the container horizontally */
   margin: 0 auto;
 }
 
 .candidate-creation-container input {
-  margin-bottom: 10px; /* Add spacing between input fields */
+  margin-bottom: 10px;
 }
 
 .candidate-creation-container label {
-  display: inline-block; /* Ensure labels and inputs are displayed in-line */
-  width: 120px; /* Adjust the width of the labels as needed */
+  display: inline-block;
+  width: 120px;
 }
 
 .candidate-table-container {
@@ -76,7 +75,7 @@ h2 {
   padding-right: 10vw;
   width: 100%;
   display: flex;
-  align-items: center; /* Changed from align-content to align-items */
+  align-items: center;
   justify-content: center;
 }
 
@@ -111,7 +110,7 @@ h2 {
   padding-right: 10vw;
   width: 100%;
   display: flex;
-  align-items: center; /* Changed from align-content to align-items */
+  align-items: center;
   justify-content: center;
 }
 

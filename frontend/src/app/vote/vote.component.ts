@@ -42,4 +42,8 @@ export class VoteComponent {
       })
     })
   }
+
+  deselect() {
+    this.isSelected = false;
+  }
 }

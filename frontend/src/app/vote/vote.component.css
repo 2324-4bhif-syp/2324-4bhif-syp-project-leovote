@@ -1,5 +1,4 @@
 .container {
-  /*margin: 20px auto;*/
   display: flex;
   align-items: center;
 }
@@ -19,12 +18,11 @@
   align-items: center;
 }
 
-
 .title-card {
-  max-width: 320px; /* Set maximum width */
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden; /* Hide any content that overflows */
-  text-overflow: fade; /* Display ellipsis (...) for overflowed text */
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: fade;
   margin: 0;
   padding: 0;
 }
@@ -70,6 +68,7 @@
 .btn-primary:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  color: red;
 }
 
 .vote-btn {
@@ -96,13 +95,13 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 20px; /* Width of the rectangular box */
-  height: 20px; /* Height of the rectangular box */
-  border: 2px solid #999; /* Border color */
-  border-radius: 5px; /* Border radius */
+  width: 20px;
+  height: 20px;
+  border: 2px solid green;
+  border-radius: 5px;
   outline: none;
 }
 
 .rectangular-radio:checked {
-  background-color: #999; /* Background color when checked */
+  background-color: green;
 }
