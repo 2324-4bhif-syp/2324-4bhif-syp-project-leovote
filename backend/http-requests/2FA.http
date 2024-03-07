@@ -8,8 +8,6 @@ client_secret = AkIRaaboJ23Q64jSjtN9gkmfMumUybD8 &
 grant_type = password &
 username = {{username}} &
 password = {{password}} &
-  #username = student &
-  #password = passme &
 scope = openid
 
 > {%
