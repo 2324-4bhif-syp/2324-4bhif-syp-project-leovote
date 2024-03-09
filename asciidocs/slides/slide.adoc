@@ -25,7 +25,7 @@ endif::[]
 
 [.lightbg,background-opacity="0.3"]
 == Team
-image::wahl2.jpg[background]
+image::wahl2.jpeg[background]
 * Cao Anton
 * Lehner David
 * Fröller Felix
@@ -57,17 +57,8 @@ image::prove.jpg[background]
 === Sprintvereinbarung
 image::handshake.jpg[background]
 
-* Frontend-Design mit Figma
-* Frontend Implementation
-* Risikoszenarien
-
-[.lightbg,background-opacity="0.2"]
-== Risikoszenarien
-image::risk.jpg[background]
-
-* Man-in-the-Middle Attacks
-* Unauthorized Access (Admin)
-* Social manipulation
+* Warenkorb- / Bestätigungssystem
+* Authentifikation mit Keycloak
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
