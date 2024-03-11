@@ -1,6 +1,6 @@
 = Leovote
 
-Sprint 6
+Sprint 7
 
 :revdate: {docdate}
 :encoding: utf-8
