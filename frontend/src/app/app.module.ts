@@ -14,11 +14,12 @@ import { CreateCandidateComponent } from './create-candidate/create-candidate.co
 import { CreateElectionComponent } from './create-election/create-election.component';
 import {NgOptimizedImage} from "@angular/common";
 import { EmailsComponent } from './emails/emails.component';
+import {AuthGuard} from "./util/app.guard";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
   {path: 'login', component: LoginComponent},
-  {path: 'votes', component: VoteComponent},
+  {path: 'votes', component: VoteComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminPanelComponent, children: [
       { path: 'results', component: ResultsComponent },
       { path: 'create-candidate', component: CreateCandidateComponent },

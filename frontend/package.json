@@ -20,6 +20,8 @@
     "@angular/router": "^16.2.12",
     "bootstrap": "^3.4.1",
     "cors": "^2.8.5",
+    "keycloak-angular": "^14.3.0",
+    "keycloak-js": "^24.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.3"
