@@ -4,6 +4,7 @@ import at.htlleonding.control.EmailService;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Email;
 import at.htlleonding.entity.dto.EmailDTO;
+import io.quarkus.rest.data.panache.ResourceProperties;
 import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
@@ -17,7 +18,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
-@Path("/email")
+@ResourceProperties(path="/email", rolesAllowed = "teacher")
 public class EmailResource {
     @Inject
     EmailService emailService;

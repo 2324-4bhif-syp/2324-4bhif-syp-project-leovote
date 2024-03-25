@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-@ResourceProperties(path = "elections")
+@ResourceProperties(path = "elections", rolesAllowed = "teacher")
 public interface ElectionResource extends PanacheRepositoryResource<ElectionRepository, Election, Long> {
     ElectionRepository electionRepository = CDI.current().select(ElectionRepository.class).get();
 
