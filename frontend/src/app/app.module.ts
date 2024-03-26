@@ -24,7 +24,6 @@ const appRoutes: Routes = [
   {path: 'votes', component: VoteComponent},
   {
     path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], children: [
-      {path: '', redirectTo: 'results', pathMatch: "full"},
       {path: 'results', component: ResultsComponent},
       {path: 'create-candidate', component: CreateCandidateComponent},
       {path: 'create-election', component: CreateElectionComponent},
