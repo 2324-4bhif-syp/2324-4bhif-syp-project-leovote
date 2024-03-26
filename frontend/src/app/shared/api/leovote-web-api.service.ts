@@ -13,7 +13,7 @@ export class LeovoteWebApiService {
 
   headers = new HttpHeaders().set('Accept', 'application/json');
   //baseUrl = 'http://89.168.107.125/api/';   it's here for the server. This is used at server
-  private baseUrl = 'http://localhost:9000/'; // should be changed afterwards
+  private baseUrl = 'http://localhost:8080/'; // should be changed afterwards
   private candidates = 'candidates';
   private elections: string = 'elections';
   private addElectionUrl: string = 'elections/election';
