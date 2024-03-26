@@ -4,17 +4,6 @@
               min-height: auto; min-width: 150px" alt="HTBLA Leonding">
   </li>
   <li routerLinkActive="active">
-    <div *ngIf="!adminService.isLoggedIn">
-      <div class="dropdown">
-        <button class="dropbtn">
-          <span>Admin Panel</span>
-          <img src="assets/img-frontend/dropdown.png" alt="Dropdown" height="10%" width="10%">
-        </button>
-        <div class="dropdown-content">
-          <a routerLink="admin">Log In</a>
-        </div>
-      </div>
-    </div>
     <div *ngIf="adminService.isLoggedIn">
       <div class="dropdown">
         <button class="dropbtn">

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AdminService} from "../shared/control/admin.service";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-admin-panel',
@@ -10,13 +11,9 @@ export class AdminPanelComponent {
   username: string = '';
   password: string = '';
 
-  login() {
-    if (this.username === 'admin' && this.password === 'admin') {
-      this.adminService.isLoggedIn = true;
-    } else {
-      alert('Invalid username or password');
-    }
+  ngOnInit(){
+    this.adminService.isLoggedIn = this.keycloakService.getUserRoles().includes('admin')
   }
-
-  constructor(protected adminService: AdminService) { }
+  constructor(protected adminService: AdminService, private keycloakService: KeycloakService) {
+  }
 }
