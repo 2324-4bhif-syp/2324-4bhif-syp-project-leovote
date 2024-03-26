@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@ResourceProperties(path = "voters", rolesAllowed = "student")
+@ResourceProperties(path = "voters")
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
     VoterRepository voterRepository = CDI.current().select(VoterRepository.class).get();
     EntityManager em = voterRepository.getEntityManager();

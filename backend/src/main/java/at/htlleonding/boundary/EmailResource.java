@@ -18,7 +18,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
-@ResourceProperties(path="/email", rolesAllowed = "teacher")
+@ResourceProperties(path="/email")
 public class EmailResource {
     @Inject
     EmailService emailService;
