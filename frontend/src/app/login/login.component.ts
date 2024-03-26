@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {VoteService} from '../shared/control/vote.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModel} from "../shared/entity/login-model";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
   constructor(
     public voteService: VoteService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private keycloakService: KeycloakService
   ) {
   }
 
@@ -34,15 +36,10 @@ export class LoginComponent {
 
   async checkLogin() {
     try {
+      const roleTrue = this.keycloakService.getUserRoles().includes('voter',0);
       const success = await this.voteService.checkCode(this.code);
-      this.user = await this.voteService.checkLoginData(this.username, this.password);
-      if(this.user == undefined){
-        this.authFail = true;
-      }
-      if (success) {
-        if(this.user !== undefined){
-          await this.router.navigate(['/votes']);
-        }
+      if (success && roleTrue) {
+        await this.router.navigate(['/votes']);
       } else {
         //console.log("alreadyVotedOrIncorrect is TRUE")
         this.alreadyVotedOrIncorrect = true;

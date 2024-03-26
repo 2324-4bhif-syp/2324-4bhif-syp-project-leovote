@@ -4,6 +4,7 @@ import {Vote} from "../shared/entity/vote";
 import {Election} from "../shared/entity/election-model";
 import {ElectionService} from "../shared/control/election.service";
 import {Candidate} from "../shared/entity/candidate-model";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-vote',
@@ -33,6 +34,7 @@ export class VoteComponent {
   constructor(
     public voteService: VoteService,
     public electionService: ElectionService,
+    public keycloakService: KeycloakService
   ) {
     electionService.getList().forEach(value => {
       value.forEach(election => {
