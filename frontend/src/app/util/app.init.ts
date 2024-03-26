@@ -4,13 +4,13 @@ export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boo
   return () =>
     keycloak.init({
       config: {
-        url: 'https://auth.htl-leonding.ac.at', // htlleonding not working at the moment
-        realm: 'htl-leonding',
-        clientId: 'token'
+        url: 'http://localhost:9000', // htlleonding not working at the moment, should be changed
+        realm: 'master',
+        clientId: 'angular-web-client'
       },
       initOptions: {
         checkLoginIframe: true,
-        checkLoginIframeInterval: 25
+        checkLoginIframeInterval: 20
       },
       loadUserProfileAtStartUp: true
     });
