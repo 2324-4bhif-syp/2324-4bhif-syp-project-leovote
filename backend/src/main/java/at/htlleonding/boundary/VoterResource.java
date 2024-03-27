@@ -91,4 +91,19 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         }
         return Response.ok(voters).build();
     }
+    @GET
+    @Path("/voter/{email}/{code}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    default Response checkEmailAndCode(
+            @PathParam("email") String email,
+            @PathParam("code") UUID uuid
+    ) {
+        if (voterRepository.checkEmailAndCode(email, uuid)) {
+            return Response.accepted().entity(true).build();
+        }
+        return Response.status(Response.Status.NOT_ACCEPTABLE).entity(false).build();
+
+    }
 }

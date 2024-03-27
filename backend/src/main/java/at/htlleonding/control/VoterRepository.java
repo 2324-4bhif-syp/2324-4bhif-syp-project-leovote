@@ -1,22 +1,22 @@
 package at.htlleonding.control;
 
-import at.htlleonding.entity.Block;
-import at.htlleonding.entity.Candidate;
-import at.htlleonding.entity.Election;
-import at.htlleonding.entity.Voter;
+import at.htlleonding.entity.*;
 import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @ApplicationScoped
 public class VoterRepository implements PanacheRepository<Voter> {
     EntityManager entityManager = Panache.getEntityManager();
+    @Inject
+    HashService hashService;
 
     // Creates voters, which are able to vote in elections contained in the election List
     public List<Voter> createVotersForElection(int count, Election election) {
@@ -61,6 +61,16 @@ public class VoterRepository implements PanacheRepository<Voter> {
         return false;
     }
 
+    public boolean checkEmailAndCode(String email, UUID uuid) {
+        TypedQuery<Voter> query = entityManager.createQuery("select v FROM Voter v where generatedId = ?1", Voter.class)
+                .setParameter(1, uuid);
+        String expectedEmailHash = query.getSingleResult().getEmailHash();
+        String actualEmailHash =  hashService.calculateSHA256Hash(email);
+        UUID expectedCode = query.getSingleResult().getGeneratedId();
+        Log.info("Actual: " + actualEmailHash);
+        Log.info("Expected: " + expectedEmailHash);
+        return Objects.equals(actualEmailHash, expectedEmailHash) && Objects.equals(expectedCode, uuid);
+    }
     public List<Voter> getVoteCodesByElection(Long electionId) {
         return list("election.id", electionId);
     }
