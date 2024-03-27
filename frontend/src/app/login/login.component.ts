@@ -39,7 +39,15 @@ export class LoginComponent {
       const roleTrue = this.keycloakService.getUserRoles().includes('default-roles-master',0);
       console.log(this.keycloakService.getUserRoles());
       const success = await this.voteService.checkCode(this.code);
-      if (success && roleTrue) {
+      const keycloakInstance = this.keycloakService.getKeycloakInstance();
+      let email = '';
+      if (keycloakInstance !== undefined
+        && keycloakInstance.profile !== undefined
+        && keycloakInstance.profile.email !== undefined) {
+        email = keycloakInstance.profile.email;
+      }
+      const checkEmailAndCode = await this.voteService.checkEmailAndCode(email, this.code);
+      if (success && roleTrue && checkEmailAndCode) {
         await this.router.navigate(['/votes']);
       } else {
         //console.log("alreadyVotedOrIncorrect is TRUE")
