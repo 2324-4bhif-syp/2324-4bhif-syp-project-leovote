@@ -8,6 +8,7 @@ export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boo
         url: 'https://auth.htl-leonding.ac.at',
         realm: 'htl-leonding',
         clientId: 'leovotetest',
+        //clientId: 'leovote' set it like that for server usage, comment other clientId
       },
       initOptions: {
         checkLoginIframe: true,
