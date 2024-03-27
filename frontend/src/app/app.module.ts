@@ -20,10 +20,10 @@ import {initializeKeycloak} from "./util/app.init";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
-  {path: 'login', component: LoginComponent},
-  {path: 'votes', component: VoteComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
+  {path: 'votes', component: VoteComponent},
   {
-    path: 'admin', component: AdminPanelComponent, children: [
+    path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], children: [
       {path: 'results', component: ResultsComponent},
       {path: 'create-candidate', component: CreateCandidateComponent},
       {path: 'create-election', component: CreateElectionComponent},

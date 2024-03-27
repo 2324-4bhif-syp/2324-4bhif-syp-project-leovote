@@ -37,6 +37,23 @@ export class VoteService {
     });
   }
 
+  checkEmailAndCode(email: string, code: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.apiClient.checkEmailAndCode(email, code).subscribe(
+        (b: boolean) => {
+          if (b) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        (error) => {
+          console.error('Error checking email and code:', error);
+          reject(error);
+        }
+      );
+    });
+  }
   voteCall(candidateId: number, electionId: number) {
     if (this.vote?.generatedId != undefined) {
       let voteCandidate: VoteCandidate = new VoteCandidate(this.vote.generatedId)

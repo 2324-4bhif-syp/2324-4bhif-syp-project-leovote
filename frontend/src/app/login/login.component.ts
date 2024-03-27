@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {VoteService} from '../shared/control/vote.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModel} from "../shared/entity/login-model";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
   constructor(
     public voteService: VoteService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private keycloakService: KeycloakService
   ) {
   }
 
@@ -34,15 +36,19 @@ export class LoginComponent {
 
   async checkLogin() {
     try {
+      const roleTrue = this.keycloakService.getUserRoles().includes('default-roles-master',0);
+      console.log(this.keycloakService.getUserRoles());
       const success = await this.voteService.checkCode(this.code);
-      this.user = await this.voteService.checkLoginData(this.username, this.password);
-      if(this.user == undefined){
-        this.authFail = true;
+      const keycloakInstance = this.keycloakService.getKeycloakInstance();
+      let email = '';
+      if (keycloakInstance !== undefined
+        && keycloakInstance.profile !== undefined
+        && keycloakInstance.profile.email !== undefined) {
+        email = keycloakInstance.profile.email;
       }
-      if (success) {
-        if(this.user !== undefined){
-          await this.router.navigate(['/votes']);
-        }
+      const checkEmailAndCode = await this.voteService.checkEmailAndCode(email, this.code);
+      if (success && roleTrue && checkEmailAndCode) {
+        await this.router.navigate(['/votes']);
       } else {
         //console.log("alreadyVotedOrIncorrect is TRUE")
         this.alreadyVotedOrIncorrect = true;

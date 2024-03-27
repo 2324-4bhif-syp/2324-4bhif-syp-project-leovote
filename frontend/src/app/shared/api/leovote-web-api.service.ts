@@ -12,7 +12,7 @@ import {LoginModel} from "../entity/login-model";
 export class LeovoteWebApiService {
 
   headers = new HttpHeaders().set('Accept', 'application/json');
-  //baseUrl = 'http://89.168.107.125/api/';   it's here for the server. This is used at server
+  //baseUrl = 'http://89.168.107.125/api/';   //set it like that for server usage. comment oder baseUrl
   private baseUrl = 'http://localhost:8080/';
   private candidates = 'candidates';
   private elections: string = 'elections';
@@ -29,6 +29,7 @@ export class LeovoteWebApiService {
   private removeCandidate: string = 'candidates/${id}';
   private removeElection: string = 'elections/${id}';
   private checkLoginDataUrl: string = 'token';
+  private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}';
 
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
@@ -87,5 +88,11 @@ export class LeovoteWebApiService {
     };
 
     return this.http.post<LoginModel>(this.baseUrl + this.checkLoginDataUrl, body, {headers: this.headers});
+  }
+
+  public checkEmailAndCode(email: string, code: string) {
+    return this.http.get<boolean>(this.baseUrl + this.checkEmailAndCodeUrl
+      .replace('${email}', email)
+      .replace('${code}', code), {headers: this.headers});
   }
 }

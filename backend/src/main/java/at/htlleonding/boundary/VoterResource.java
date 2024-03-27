@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@ResourceProperties(path = "voters", rolesAllowed = "student")
+@ResourceProperties(path = "voters")
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
     VoterRepository voterRepository = CDI.current().select(VoterRepository.class).get();
     EntityManager em = voterRepository.getEntityManager();
@@ -90,5 +90,20 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
         return Response.ok(voters).build();
+    }
+    @GET
+    @Path("/voter/{email}/{code}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    default Response checkEmailAndCode(
+            @PathParam("email") String email,
+            @PathParam("code") UUID uuid
+    ) {
+        if (voterRepository.checkEmailAndCode(email, uuid)) {
+            return Response.accepted().entity(true).build();
+        }
+        return Response.status(Response.Status.NOT_ACCEPTABLE).entity(false).build();
+
     }
 }
