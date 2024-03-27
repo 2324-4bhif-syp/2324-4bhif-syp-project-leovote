@@ -64,6 +64,9 @@ public class VoterRepository implements PanacheRepository<Voter> {
     public boolean checkEmailAndCode(String email, UUID uuid) {
         TypedQuery<Voter> query = entityManager.createQuery("select v FROM Voter v where generatedId = ?1", Voter.class)
                 .setParameter(1, uuid);
+        if (query.getSingleResult().getEmailHash() == null) {
+            return true;
+        }
         String expectedEmailHash = query.getSingleResult().getEmailHash();
         String actualEmailHash =  hashService.calculateSHA256Hash(email);
         UUID expectedCode = query.getSingleResult().getGeneratedId();
