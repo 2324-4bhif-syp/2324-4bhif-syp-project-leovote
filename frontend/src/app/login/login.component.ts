@@ -36,7 +36,8 @@ export class LoginComponent {
 
   async checkLogin() {
     try {
-      const roleTrue = this.keycloakService.getUserRoles().includes('voter',0);
+      const roleTrue = this.keycloakService.getUserRoles().includes('default-roles-master',0);
+      console.log(this.keycloakService.getUserRoles());
       const success = await this.voteService.checkCode(this.code);
       if (success && roleTrue) {
         await this.router.navigate(['/votes']);

@@ -1,12 +1,13 @@
 import {KeycloakService} from "keycloak-angular";
+import Keycloak from "keycloak-js";
 
 export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boolean> {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:9000', // htlleonding not working at the moment, should be changed
-        realm: 'master',
-        clientId: 'angular-web-client'
+        url: 'https://auth.htl-leonding.ac.at',
+        realm: 'htl-leonding',
+        clientId: 'leovotetest',
       },
       initOptions: {
         checkLoginIframe: true,

@@ -5,7 +5,7 @@ import {KeycloakService} from "keycloak-angular";
   providedIn: 'root'
 })
 export class AdminService {
-  isLoggedIn: boolean = this.keycloakService.getUserRoles().includes('admin');
+  isLoggedIn: boolean = this.keycloakService.getUserRoles().includes('default-roles-master');
 
   constructor(private keycloakService: KeycloakService) {
   }

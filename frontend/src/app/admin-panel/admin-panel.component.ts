@@ -10,10 +10,6 @@ import {KeycloakService} from "keycloak-angular";
 export class AdminPanelComponent {
   username: string = '';
   password: string = '';
-
-  ngOnInit(){
-    this.adminService.isLoggedIn = this.keycloakService.getUserRoles().includes('admin')
-  }
   constructor(protected adminService: AdminService, private keycloakService: KeycloakService) {
   }
 }
