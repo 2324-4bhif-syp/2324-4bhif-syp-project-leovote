@@ -1,6 +1,6 @@
 = Leovote
 
-Sprint 7
+Sprint 8
 
 :revdate: {docdate}
 :encoding: utf-8
@@ -57,8 +57,8 @@ image::prove.jpg[background]
 === Sprintvereinbarung
 image::handshake.jpg[background]
 
-* Warenkorb- / Bestätigungssystem
-* Authentifikation mit Keycloak
+* Authentifikation mit Keycloak der HTL-Leonding
+* E-Mail Überprüfung zur Verhinderung der Code Weitergabe.
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
