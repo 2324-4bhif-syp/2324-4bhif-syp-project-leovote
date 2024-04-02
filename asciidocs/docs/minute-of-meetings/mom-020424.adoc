@@ -68,5 +68,6 @@ a|
 * Frontend verbessern
 * Bilder der Kandidaten uploaden
 * Meldungen je nach Error schreiben
+* Rollen
 | 16.04.2024
 |===
