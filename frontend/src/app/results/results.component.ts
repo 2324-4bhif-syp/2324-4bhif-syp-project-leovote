@@ -4,6 +4,8 @@ import {Result} from "../shared/entity/result";
 import {EmailModel} from "../shared/entity/email-model";
 import {ElectionService} from "../shared/control/election.service";
 
+declare var google: any;
+
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
@@ -19,6 +21,8 @@ export class ResultsComponent {
   resultError: boolean = false;
   isCsvUploaded: boolean = false;
   csvData: string = "";
+  myChart: any;
+
   constructor(
     public electionService: ElectionService,
   ) {
@@ -26,6 +30,35 @@ export class ResultsComponent {
       this.elections = value;
     });
   }
+
+  ngOnInit(): void {
+    google.charts.load("current", {packages: ["corechart"]});
+    google.charts.setOnLoadCallback(this.drawChart);
+    console.log("DRAW CHART");
+  }
+
+  drawChart() {
+    var dataArray = [['Language', 'Speakers (in millions)'],
+      ['German',  5.85],
+      ['French',  1.66],
+      ['Italian', 0.316],
+      ['Romansh', 0.0791]];
+    if(this.result !== undefined) {
+      for (var i = 0; i < this.result.length; i++) {
+        // Extract lastname and percent values from the current object
+        var lastname = this.result[i].lastname;
+        var percent = this.result[i].percentage;
+
+        // Push an array containing lastname and percent into the data array
+        dataArray.push([lastname, percent]);
+      }
+    }
+    var data = google.visualization.arrayToDataTable(dataArray);
+
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+    chart.draw(data, null)
+  }
+
 
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -42,6 +75,7 @@ export class ResultsComponent {
     };
     reader.readAsText(file);
   }
+
   parseCSV() {
     const rows = this.csvData.split('\n');
     // Entferne Leerzeichen und leere Zeilen
@@ -59,6 +93,7 @@ export class ResultsComponent {
         })
     }
   }
+
   getResult() {
     if (this.selectedElection !== undefined && this.selectedElection.id !== undefined && this.selectedElection.id !== null) {
       this.electionService.result(this.selectedElection.id.toString()).subscribe((value) => {
@@ -84,6 +119,8 @@ export class ResultsComponent {
           });
         }
         this.result = candidateResults;
+
+
       }, (error) => {
         this.resultError = true;
       });
@@ -124,8 +161,8 @@ export class ResultsComponent {
   sendCodes() {
     if (this.selectedElection !== undefined &&
       this.selectedElection.id !== null) {
-      this.electionService.sendCodes(this.selectedElection.id.toString()).subscribe( (value) => {
-          console.log("emails sent");
+      this.electionService.sendCodes(this.selectedElection.id.toString()).subscribe((value) => {
+        console.log("emails sent");
       }, (error) => {
         console.log("error while sending mail");
       });
