@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h2>Election Overview</h2>
+<div class="container-lg">
+  <table class="table">
+    <thead class="thead-black">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let election of elections; let i = index">
+    <tr>
+      <th scope="row">{{ i }}</th>
+      <td>{{ election.name }}</td>
+      <td>{{ election.electionType }}</td>
+      <td>
+        <button type="button" class="btn btn-secondary" routerLink="emails" (click)="selectElection(election)">Upload
+          Emails
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-success" routerLink="results" (click)="selectElection(election)">Results
+        </button>
+      </td>
+      <td>
+        <button (click)="deleteElection(election.id)" class="btn">
+          <i class="fa fa-minus"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
