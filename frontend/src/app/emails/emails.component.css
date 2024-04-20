@@ -75,12 +75,16 @@ body {
 }
 
 .email-table th {
-  min-width: 50px;
+  max-width: 33.33%;
+  min-width: 100px;
   padding-left: 15px;
+  word-wrap: break-word;
 }
 
 .email-table td {
   padding-left: 15px;
+  max-width: 33.33%;
+  word-wrap: break-word;
 }
 
 .send-button-container{
@@ -126,7 +130,7 @@ body {
 .input-email-container {
   margin: 5px;
   padding-left: 10px;
-  width: 35%;
+  width: 80%;
   border-radius: 10px;
   background-color: #DAE3EB;
 }
@@ -135,4 +139,5 @@ body {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   outline: none;
+  width: 90%;
 }

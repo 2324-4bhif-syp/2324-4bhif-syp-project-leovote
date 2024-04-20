@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModel} from "../shared/entity/login-model";
 import {KeycloakService} from "keycloak-angular";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {AdminService} from "../shared/control/admin.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,6 +23,7 @@ export class LoginComponent {
     private router: Router,
     private route: ActivatedRoute,
     private keycloakService: KeycloakService,
+    public adminService: AdminService
   ) {
   }
 
@@ -33,12 +35,11 @@ export class LoginComponent {
       }
     });
     const helper = new JwtHelperService();
-    console.log(this.keycloakService.getToken())
-    console.log(helper.decodeToken(this.keycloakService.getToken()))
     const val = helper.decodeToken(this.keycloakService.getToken())
     val.then(value => {
-
-    })
+      const ldap = value['LDAP_ENTRY_DN'];
+      //this.adminService.isLoggedIn = !ldap.includes("Students");
+    });
   }
 
   async checkLogin() {
