@@ -3,7 +3,7 @@ import {VoteService} from '../shared/control/vote.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModel} from "../shared/entity/login-model";
 import {KeycloakService} from "keycloak-angular";
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +21,7 @@ export class LoginComponent {
     public voteService: VoteService,
     private router: Router,
     private route: ActivatedRoute,
-    private keycloakService: KeycloakService
+    private keycloakService: KeycloakService,
   ) {
   }
 
@@ -32,6 +32,13 @@ export class LoginComponent {
         this.code = token;
       }
     });
+    const helper = new JwtHelperService();
+    console.log(this.keycloakService.getToken())
+    console.log(helper.decodeToken(this.keycloakService.getToken()))
+    const val = helper.decodeToken(this.keycloakService.getToken())
+    val.then(value => {
+
+    })
   }
 
   async checkLogin() {

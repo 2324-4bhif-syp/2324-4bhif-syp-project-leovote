@@ -1,30 +1,28 @@
-<ul class="nav nav-tabs">
-  <li class="logo" routerLink="login">
-      <img src="assets/img-frontend/htl-leonding.png" style="width: 8vw; height: 5%; padding: 10px;
-              min-height: auto; min-width: 150px" alt="HTBLA Leonding">
-  </li>
-  <li>
-    <button class="logoutbtn" (click)="logout()">
-      <p>Logout</p>
-    </button>
-  </li>
-  <li routerLinkActive="active">
-    <div *ngIf="adminService.isLoggedIn">
-      <div class="dropdown">
-        <button class="dropbtn">
-          <span>Admin Panel</span>
-          <img src="assets/img-frontend/dropdown.png" alt="Dropdown" height="10%" width="10%">
-        </button>
-        <div class="dropdown-content">
-          <a routerLink="admin/results">Results</a>
-          <a routerLink="admin/create-candidate">Candidates</a>
-          <a routerLink="admin/create-election">Elections</a>
-          <a routerLink="admin/emails">Emails</a>
-        </div>
-      </div>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="login">
+      <img src="assets/img-frontend/htl-leonding.png" alt="Bootstrap" width="150vw">
+    </a>
+    <div class="navbar-collapse" id="navbarSupportedContent" *ngIf="adminService.isLoggedIn">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Admin Panel
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="admin/create-candidate">Candidate</a></li>
+            <li><a class="dropdown-item" routerLink="admin/create-election">Elections</a></li>
+            <li><a class="dropdown-item" routerLink="admin/emails">Emails</a></li>
+            <li><a class="dropdown-item" routerLink="admin/results">Results</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </li>
-</ul>
+    <form class="d-flex" role="search">
+      <button class="btn btn-outline-success" (click)="logout()">Logout</button>
+    </form>
+  </div>
+</nav>
 
 <hr>
 <router-outlet></router-outlet>
