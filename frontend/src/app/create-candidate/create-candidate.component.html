@@ -18,6 +18,9 @@
           <input [(ngModel)]="candidate.grade" placeholder="Class"/>
         </div>
         <div class="input">
+          <input type="file" id="imageInput" (change)="onImageChange($event)">
+        </div>
+        <div class="input">
           <button (click)="createCandidate()">Create Candidate</button>
         </div>
       </div>

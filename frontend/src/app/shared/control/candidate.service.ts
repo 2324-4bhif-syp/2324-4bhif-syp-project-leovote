@@ -43,4 +43,8 @@ export class CandidateService {
   onListRefresh(): Observable<void> {
     return this.refreshListSubject.asObservable();
   }
+
+  uploadImage(image: File) {
+    return this.apiClient.uploadImage(image);
+  }
 }

@@ -30,6 +30,7 @@ export class LeovoteWebApiService {
   private removeElection: string = 'elections/${id}';
   private checkLoginDataUrl: string = 'token';
   private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}';
+  private uploadImageUrl: string = 'candidates/uploadImage'
 
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
@@ -94,5 +95,11 @@ export class LeovoteWebApiService {
     return this.http.get<boolean>(this.baseUrl + this.checkEmailAndCodeUrl
       .replace('${email}', email)
       .replace('${code}', code), {headers: this.headers});
+  }
+  public uploadImage(image: File) {
+    const formData: FormData = new FormData();
+    formData.append('image', image, image.name);
+    console.log(this.baseUrl + this.uploadImageUrl);
+    return this.http.post(this.baseUrl + this.uploadImageUrl, formData, { responseType: 'text' });
   }
 }
