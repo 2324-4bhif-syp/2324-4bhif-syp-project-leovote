@@ -5,13 +5,8 @@
     <tr>
       <th>
         <div class="election-selector">
-          <h3>Select Election</h3>
-          <select [(ngModel)]="selectedElection" required (change)="loadEmails()">
-            <option [defaultSelected]="true" value="" disabled selected hidden>Select Election</option>
-            <option (click)="loadEmails()" *ngFor="let election of elections"
-                    [ngValue]="election">{{ election.name }}
-            </option>
-          </select>
+          <h3>Election</h3>
+          <p>Selected: {{selectedElection?.name}}</p>
         </div>
       </th>
       <th>

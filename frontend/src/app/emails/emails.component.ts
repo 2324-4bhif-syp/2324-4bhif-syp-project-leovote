@@ -10,7 +10,7 @@ import {ElectionService} from "../shared/control/election.service";
 })
 export class EmailsComponent {
   elections: Election[] | undefined = undefined;
-  selectedElection: Election | undefined = undefined;
+  selectedElection: Election | undefined = this.electionService.selectedElection;
   emailInput: string = "";
   emails: EmailModel[] | undefined;
   emailCount: number = 0;
@@ -26,6 +26,7 @@ export class EmailsComponent {
     electionService.getList().forEach(value => {
       this.elections = value;
     });
+    this.loadEmails()
   }
 
   onFileChange(event: any) {

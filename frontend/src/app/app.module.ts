@@ -17,6 +17,7 @@ import {EmailsComponent} from './emails/emails.component';
 import {AuthGuard} from "./util/app.guard";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializeKeycloak} from "./util/app.init";
+import { AdminElectionListComponent } from './admin-election-list/admin-election-list.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -24,10 +25,11 @@ const appRoutes: Routes = [
   {path: 'votes', component: VoteComponent},
   {
     path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], children: [
-      {path: 'results', component: ResultsComponent},
+      {path: 'overview', component: AdminElectionListComponent},
+      {path: 'overview/results', component: ResultsComponent},
       {path: 'create-candidate', component: CreateCandidateComponent},
       {path: 'create-election', component: CreateElectionComponent},
-      {path: 'emails', component: EmailsComponent}
+      {path: 'overview/emails', component: EmailsComponent}
     ]
   }
 ]
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     ResultsComponent,
     CreateCandidateComponent,
     CreateElectionComponent,
-    EmailsComponent
+    EmailsComponent,
+    AdminElectionListComponent
   ],
   imports: [
     BrowserModule,

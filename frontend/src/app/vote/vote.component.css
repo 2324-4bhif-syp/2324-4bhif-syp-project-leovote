@@ -34,6 +34,7 @@
 }
 
 .container-for-image {
+  padding-top: 20px;
   flex: 1;
   display: flex;
   justify-content: center;

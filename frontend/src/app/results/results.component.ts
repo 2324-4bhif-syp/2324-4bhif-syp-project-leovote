@@ -13,7 +13,7 @@ declare var google: any;
 })
 export class ResultsComponent {
   elections: Election[] | undefined = undefined;
-  selectedElection: Election | undefined = undefined;
+  selectedElection: Election | undefined = this.electionService.selectedElection;
   result: Result[] | undefined = undefined;
   emailInput: string = "";
   emails: EmailModel[] | undefined;
@@ -29,6 +29,7 @@ export class ResultsComponent {
     electionService.getList().forEach(value => {
       this.elections = value;
     });
+    this.getResult();
   }
 
   ngOnInit(): void {
