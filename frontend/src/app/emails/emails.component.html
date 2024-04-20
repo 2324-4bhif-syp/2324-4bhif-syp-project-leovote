@@ -69,4 +69,11 @@
   <div class="send-button-container" *ngIf="selectedElection !== undefined && emailCount > 0">
     <button class="send-button" (click)="sendCodes()">Send Codes</button>
   </div>
+  <div *ngIf="sendingError">
+    <p>Email could not be sent. Maybe you already sent codes to some E-Mail addresses</p>
+  </div>
+
+  <div *ngIf="sent">
+    <p>Emails sent successfully!</p>
+  </div>
 </div>
