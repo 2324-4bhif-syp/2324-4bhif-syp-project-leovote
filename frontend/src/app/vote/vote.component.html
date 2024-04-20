@@ -11,7 +11,7 @@
         <div (click)="selectedCandidate = candidate" class="card mb-4 box-shadow text-center h-100"
              style="align-content: center">
           <div class="container-for-image">
-            <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + candidate.pathOfImage"
+            <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
                  alt="{{ candidate.firstName }} {{ candidate.lastName }}">
           </div>
           <div class="card-body">
@@ -40,7 +40,7 @@
       <div class="col-md-6" style="width: 0; padding-right: 340px; padding-bottom: 20px; padding-top: 20px">
         <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
           <div class="container-for-image">
-            <img class="card-img-top mx-auto my-auto" [src]="'assets/images/' + selectedCandidate?.pathOfImage"
+            <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(selectedCandidate?.pathOfImage)"
                  alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
           </div>
           <div class="card-body">
@@ -66,3 +66,9 @@
 <div *ngIf="isVoted" class="container">
   <h2>Thank you for voting in {{ election?.name }}</h2>
 </div>
+
+<!--
+<div *ngFor="let candidate of candidates">
+  <div>{{ candidate.candidateId }}</div>
+  <img [src]="getBase64Image(candidate.imagePath)" alt="Candidate Image">
+</div>-->

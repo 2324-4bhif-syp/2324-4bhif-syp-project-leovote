@@ -25,8 +25,6 @@
       this.imageFile = event.target.files[0];
     }
 
-
-
     onFileChange(event: any) {
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -64,6 +62,7 @@
       if (imageInput) {
         imageInput.value = '';
       }
+      this.imageFile = null;
     }
 
     createCandidate() {

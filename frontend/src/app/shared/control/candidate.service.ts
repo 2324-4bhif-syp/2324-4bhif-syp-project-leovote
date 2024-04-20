@@ -47,4 +47,8 @@ export class CandidateService {
   uploadImage(image: File) {
     return this.apiClient.uploadImage(image);
   }
+
+  candidateImage() {
+    return this.apiClient.getImagesAndCandidates();
+  }
 }
