@@ -25,6 +25,16 @@ export class AdminElectionListComponent {
     });
   }
 
+  isDateBeforeNow(date: Date): boolean {
+    const now = new Date();
+    return date < now;
+  }
+
+  isDateAfterNow(date: Date): boolean {
+    const now = new Date();
+    return date > now;
+  }
+
   deleteElection(id: number | null) {
     if(id != null){
       this.electionService.delete(id.toString()).subscribe(() => {
@@ -34,4 +44,6 @@ export class AdminElectionListComponent {
       console.log("Election could not be deleted")
     }
   }
+
+    protected readonly Date = Date;
 }
