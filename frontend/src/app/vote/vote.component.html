@@ -1,4 +1,4 @@
-<div *ngIf="!isVoted">
+<div *ngIf="!isVoted && electionInFuture">
   <div class="headliner-container">
     <h2>{{ election?.name }}</h2>
     <p>Logged in as: {{keycloakService.getUsername()}}</p>
@@ -65,6 +65,12 @@
 
 <div *ngIf="isVoted" class="container">
   <h2>Thank you for voting in {{ election?.name }}</h2>
+</div>
+
+<div *ngIf="!electionInFuture" class="container">
+  <h2>Election {{election?.name}} has already ended</h2>
+  <br>
+  <p>We're sorry!</p>
 </div>
 
 <!--

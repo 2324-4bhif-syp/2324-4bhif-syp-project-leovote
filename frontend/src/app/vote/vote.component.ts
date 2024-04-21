@@ -21,6 +21,7 @@ export class VoteComponent implements OnInit{
   election: Election | undefined = undefined;
   selectedCandidate: Candidate | undefined;
   candidates: CandidateImage[] = []
+  electionInFuture: boolean = true;
 
   voting() {
     if (this.selectedCandidate?.id != undefined && this.election?.id != undefined) {
@@ -49,6 +50,7 @@ export class VoteComponent implements OnInit{
       this.electionService.getList().subscribe((elections) => {
         this.election = elections.find((e) => e.id === this.voter?.participatingIn);
         this.linkCandidatesToElection();
+        this.checkDate();
       });
     });
   }
@@ -61,6 +63,18 @@ export class VoteComponent implements OnInit{
           candidate.pathOfImage = matchingImage.imagePath;
         }
       });
+    }
+  }
+
+  checkDate(){
+    const now = new Date();
+    if(this.election == undefined){
+      console.log("undefined");
+    }
+    if (this.election != undefined && this.election.electionEnd > now){
+      this.electionInFuture = true;
+    } else {
+      this.electionInFuture = false;
     }
   }
 
