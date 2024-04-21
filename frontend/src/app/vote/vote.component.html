@@ -1,10 +1,12 @@
 <div *ngIf="!isVoted && electionInFuture">
   <div class="headliner-container">
     <h2>{{ election?.name }}</h2>
-    <p>Logged in as: {{keycloakService.getUsername()}}</p>
+    <p>Logged in as: {{ keycloakService.getUsername() }}</p>
+    <h2 *ngIf="isSelected" style="align-content: center; justify-content: center">Do you want to vote
+      for {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
   </div>
 
-  <div class="container" *ngIf="!isSelected">
+  <div class="container-lg" *ngIf="!isSelected">
     <div class="row">
       <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-6"
            style="width: 0; padding-right: 340px; padding-bottom: 20px">
@@ -26,49 +28,71 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="headliner-container">
-    <h2 *ngIf="isSelected" style="align-content: center; justify-content: center">Do you want to vote for {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
-  </div>
-
-
-    <div class="container" *ngIf="isSelected">
-      <button (click)="deselect()" class="vote-btn" style="background-color: #c70000">BACK</button>
+    <div class="containerBtn" *ngIf="selectedCandidate == undefined">
+      <a class="button type--B">
+        <div class="button__line"></div>
+        <div class="button__line"></div>
+        <span class="button__text">Select</span>
+        <div class="button__drow1"></div>
+        <div class="button__drow2"></div>
+      </a>
     </div>
-
-    <div class="container" *ngIf="isSelected">
-      <div class="col-md-6" style="width: 0; padding-right: 340px; padding-bottom: 20px; padding-top: 20px">
-        <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
-          <div class="container-for-image">
-            <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(selectedCandidate?.pathOfImage)"
-                 alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
-          </div>
-          <div class="card-body">
-            <div class="title-card">
-              <h3 class="card-title">{{ selectedCandidate?.firstName }}</h3>
-              <h3 class="card-title"> {{ selectedCandidate?.lastName }} </h3>
-              <h4>{{ selectedCandidate?.grade }}</h4>
-            </div>
-            <input *ngIf="!isSelected" class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="selectedCandidate ">
-          </div>
-        </div>
-      </div>
+    <div class="containerBtn" *ngIf="selectedCandidate != undefined">
+      <a (click)="select()" class="button type--B">
+        <div class="button__line"></div>
+        <div class="button__line"></div>
+        <span class="button__text">Select</span>
+        <div class="button__drow1"></div>
+        <div class="button__drow2"></div>
+      </a>
     </div>
-
-    <div class="container" *ngIf="isSelected">
-      <button (click)="voting()" class="vote-btn">VOTE</button>
-    </div>
-  <div class="container" *ngIf="!isSelected">
-    <button [disabled]="!selectedCandidate" (click)="select()" class="vote-btn">SELECT</button>
   </div>
 </div>
+
+<div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
+  <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
+    <div class="container-for-image">
+      <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(selectedCandidate?.pathOfImage)"
+           alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
+    </div>
+    <div class="card-body">
+      <div class="title-card">
+        <h3 class="card-title">{{ selectedCandidate?.firstName }}</h3>
+        <h3 class="card-title"> {{ selectedCandidate?.lastName }} </h3>
+        <h4>{{ selectedCandidate?.grade }}</h4>
+      </div>
+      <input *ngIf="!isSelected" class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate"
+             [value]="selectedCandidate ">
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
+  <div class="d-grid gap-2 d-md-block" (click)="deselect()">
+    <button class="button-82-pushable" role="button">
+      <span class="button-82-shadow"></span>
+      <span class="button-82-edge"></span>
+      <span class="button-82-front text">
+        CANCEL
+      </span>
+    </button>
+    <button class="button-83-pushable" (click)="voting()" role="button">
+      <span class="button-83-shadow"></span>
+      <span class="button-83-edge"></span>
+      <span class="button-83-front text">
+        VOTE
+      </span>
+    </button>
+  </div>
+</div>
+
 
 <div *ngIf="isVoted" class="container">
   <h2>Thank you for voting in {{ election?.name }}</h2>
 </div>
 
 <div *ngIf="!electionInFuture" class="container">
-  <h2>Election {{election?.name}} has already ended</h2>
+  <h2>Election {{ election?.name }} has already ended</h2>
   <br>
   <p>We're sorry!</p>
 </div>

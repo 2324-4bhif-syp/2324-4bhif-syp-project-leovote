@@ -19,7 +19,7 @@ export class VoteComponent implements OnInit{
 
   voter: Vote | undefined = this.voteService.vote;
   election: Election | undefined = undefined;
-  selectedCandidate: Candidate | undefined;
+  selectedCandidate: Candidate | undefined = undefined;
   candidates: CandidateImage[] = []
   electionInFuture: boolean = true;
 

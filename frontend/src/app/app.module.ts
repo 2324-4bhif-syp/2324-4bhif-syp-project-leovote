@@ -27,8 +27,8 @@ const appRoutes: Routes = [
     path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], children: [
       {path: 'overview', component: AdminElectionListComponent},
       {path: 'overview/results', component: ResultsComponent},
-      {path: 'create-candidate', component: CreateCandidateComponent},
-      {path: 'create-election', component: CreateElectionComponent},
+      {path: 'overview/create-candidate', component: CreateCandidateComponent},
+      {path: 'overview/create-election', component: CreateElectionComponent},
       {path: 'overview/emails', component: EmailsComponent}
     ]
   }
