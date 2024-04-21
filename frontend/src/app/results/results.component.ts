@@ -3,6 +3,9 @@ import {Election} from "../shared/entity/election-model";
 import {Result} from "../shared/entity/result";
 import {EmailModel} from "../shared/entity/email-model";
 import {ElectionService} from "../shared/control/election.service";
+import {Chart, registerables} from "chart.js";
+
+Chart.register(...registerables);
 
 declare var google: any;
 
@@ -30,36 +33,42 @@ export class ResultsComponent {
       this.elections = value;
     });
     this.getResult();
+    console.log("Result in Constructor ", this.result?.length);
   }
+
 
   ngOnInit(): void {
-    google.charts.load("current", {packages: ["corechart"]});
-    google.charts.setOnLoadCallback(this.drawChart);
-    console.log("DRAW CHART");
+    this.RenderChart();
   }
 
-  drawChart() {
-    var dataArray = [['Language', 'Speakers (in millions)'],
-      ['German',  5.85],
-      ['French',  1.66],
-      ['Italian', 0.316],
-      ['Romansh', 0.0791]];
-    if(this.result !== undefined) {
-      for (var i = 0; i < this.result.length; i++) {
-        // Extract lastname and percent values from the current object
-        var lastname = this.result[i].lastname;
-        var percent = this.result[i].percentage;
-
-        // Push an array containing lastname and percent into the data array
-        dataArray.push([lastname, percent]);
+  RenderChart() {
+    let candidates: string[] = [];
+    this.getResult();
+    if (this.result != undefined) {
+      console.log("Result in RenderChart ", this.result?.length);
+      for (let i = 0; i < this.result.length; i++) {
+        candidates.push(this.result[i].lastname);
       }
     }
-    var data = google.visualization.arrayToDataTable(dataArray);
-
-    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-    chart.draw(data, null)
+    new Chart("piechart", {
+      type: 'bar',
+      data: {
+        labels: candidates,
+        datasets: [{
+          label: 'Number of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   }
-
 
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -119,7 +128,9 @@ export class ResultsComponent {
             }
           });
         }
+        console.log("GetResults candidates: ", candidateResults.forEach(value => value.lastname));
         this.result = candidateResults;
+        console.log("GetResults this.result: ", this.result.forEach(value => value));
 
 
       }, (error) => {
