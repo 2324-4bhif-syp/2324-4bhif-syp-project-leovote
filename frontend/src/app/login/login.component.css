@@ -12,8 +12,8 @@ body{
   display: inline;
 
 
-  min-height: 200px;
-  height: 20%;
+  min-height: 180px;
+  height: 18%;
   width: 40%;
   background-color: rgba(215, 215, 215, 0.09);
   position: absolute;
@@ -25,6 +25,7 @@ body{
 @media screen and (max-width: 1000px) {
   .login-form {
     width: 80%;
+    min-height: 150px;
   }
 }
 
