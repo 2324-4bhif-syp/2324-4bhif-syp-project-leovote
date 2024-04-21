@@ -3,8 +3,12 @@ import {VoteService} from '../shared/control/vote.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModel} from "../shared/entity/login-model";
 import {KeycloakService} from "keycloak-angular";
-import { JwtHelperService } from '@auth0/angular-jwt';
+import {JwtHelperService} from '@auth0/angular-jwt';
 import {AdminService} from "../shared/control/admin.service";
+import {ElectionService} from "../shared/control/election.service";
+import {Election} from "../shared/entity/election-model";
+import {Vote} from "../shared/entity/vote";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,8 +26,7 @@ export class LoginComponent {
     public voteService: VoteService,
     private router: Router,
     private route: ActivatedRoute,
-    private keycloakService: KeycloakService,
-    public adminService: AdminService
+    private keycloakService: KeycloakService
   ) {
   }
 
@@ -34,18 +37,19 @@ export class LoginComponent {
         this.code = token;
       }
     });
-    const helper = new JwtHelperService();
-    const val = helper.decodeToken(this.keycloakService.getToken())
-    val.then(value => {
-      const ldap = value['LDAP_ENTRY_DN'];
-      //this.adminService.isLoggedIn = !ldap.includes("Students");
-    });
   }
+  election: Election | undefined = undefined;
 
   async checkLogin() {
     try {
-      const roleTrue = this.keycloakService.getUserRoles().includes('default-roles-master',0);
-      console.log(this.keycloakService.getUserRoles());
+      // Check code and user
+      let roleTrue: boolean = false;
+      const helper = new JwtHelperService();
+      const val = helper.decodeToken(this.keycloakService.getToken())
+      val.then(value => {
+        const ldap = value['LDAP_ENTRY_DN'];
+        roleTrue = ldap.includes("Students");
+      });
       const success = await this.voteService.checkCode(this.code);
       const keycloakInstance = this.keycloakService.getKeycloakInstance();
       let email = '';
@@ -66,5 +70,4 @@ export class LoginComponent {
       this.alreadyVotedOrIncorrect = true;
     }
   }
-
 }
