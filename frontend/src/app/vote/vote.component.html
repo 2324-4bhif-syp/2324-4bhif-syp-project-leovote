@@ -28,8 +28,23 @@
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-center" *ngIf="!isSelected">
-      <button [disabled]="!selectedCandidate" (click)="select()" class="vote-btn">SELECT</button>
+    <div class="containerBtn" *ngIf="selectedCandidate == undefined">
+      <a class="button type--B">
+        <div class="button__line"></div>
+        <div class="button__line"></div>
+        <span class="button__text">Select</span>
+        <div class="button__drow1"></div>
+        <div class="button__drow2"></div>
+      </a>
+    </div>
+    <div class="containerBtn" *ngIf="selectedCandidate != undefined">
+      <a (click)="select()" class="button type--B">
+        <div class="button__line"></div>
+        <div class="button__line"></div>
+        <span class="button__text">Select</span>
+        <div class="button__drow1"></div>
+        <div class="button__drow2"></div>
+      </a>
     </div>
   </div>
 </div>
@@ -53,9 +68,21 @@
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
-  <div class="d-grid gap-2 d-md-block">
-    <button type="button" class="btn btn-danger btn-lg" (click)="deselect()">No</button>
-    <button type="button" class="btn btn-success btn-lg" (click)="voting()">Yes</button>
+  <div class="d-grid gap-2 d-md-block" (click)="deselect()">
+    <button class="button-82-pushable" role="button">
+      <span class="button-82-shadow"></span>
+      <span class="button-82-edge"></span>
+      <span class="button-82-front text">
+        CANCEL
+      </span>
+    </button>
+    <button class="button-83-pushable" (click)="voting()" role="button">
+      <span class="button-83-shadow"></span>
+      <span class="button-83-edge"></span>
+      <span class="button-83-front text">
+        VOTE
+      </span>
+    </button>
   </div>
 </div>
 
