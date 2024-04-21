@@ -8,8 +8,6 @@ import {KeycloakService} from "keycloak-angular";
   styleUrls: ['./admin-panel.component.css']
 })
 export class AdminPanelComponent {
-  username: string = '';
-  password: string = '';
   constructor(protected adminService: AdminService, private keycloakService: KeycloakService) {
   }
 }

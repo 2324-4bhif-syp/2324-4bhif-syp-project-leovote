@@ -1,30 +1,20 @@
-<ul class="nav nav-tabs">
-  <li class="logo" routerLink="login">
-      <img src="assets/img-frontend/htl-leonding.png" style="width: 8vw; height: 5%; padding: 10px;
-              min-height: auto; min-width: 150px" alt="HTBLA Leonding">
-  </li>
-  <li>
-    <button class="logoutbtn" (click)="logout()">
-      <p>Logout</p>
-    </button>
-  </li>
-  <li routerLinkActive="active">
-    <div *ngIf="adminService.isLoggedIn">
-      <div class="dropdown">
-        <button class="dropbtn">
-          <span>Admin Panel</span>
-          <img src="assets/img-frontend/dropdown.png" alt="Dropdown" height="10%" width="10%">
-        </button>
-        <div class="dropdown-content">
-          <a routerLink="admin/results">Results</a>
-          <a routerLink="admin/create-candidate">Candidates</a>
-          <a routerLink="admin/create-election">Elections</a>
-          <a routerLink="admin/emails">Emails</a>
-        </div>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar" id="navbarNav">
+      <a class="navbar-brand" routerLink="login">
+        <img src="assets/img-frontend/htl-leonding.png" alt="Bootstrap" width="150vw">
+      </a>
+      <ul class="navbar-nav" *ngIf="adminService.isLoggedIn">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="admin/overview">Admin Panel</a>
+        </li>
+      </ul>
     </div>
-  </li>
-</ul>
+    <form class="d-flex" role="search">
+      <button class="btn btn-outline-success" (click)="logout()">Logout</button>
+    </form>
+  </div>
+</nav>
 
 <hr>
 <router-outlet></router-outlet>

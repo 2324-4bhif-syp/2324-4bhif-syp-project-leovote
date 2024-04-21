@@ -6,6 +6,7 @@ import {Vote} from "../entity/vote";
 import {VoteCandidate} from "../entity/vote-candidate-model";
 import {EmailModel} from "../entity/email-model";
 import {LoginModel} from "../entity/login-model";
+import {CandidateImage} from "../entity/candidate-image";
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +31,8 @@ export class LeovoteWebApiService {
   private removeElection: string = 'elections/${id}';
   private checkLoginDataUrl: string = 'token';
   private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}';
+  private uploadImageUrl: string = 'candidates/uploadImage'
+  private getCandidatesAndImages: string = 'candidates/images'
 
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
@@ -86,7 +89,6 @@ export class LeovoteWebApiService {
       username: schoolId,
       password: password
     };
-
     return this.http.post<LoginModel>(this.baseUrl + this.checkLoginDataUrl, body, {headers: this.headers});
   }
 
@@ -94,5 +96,16 @@ export class LeovoteWebApiService {
     return this.http.get<boolean>(this.baseUrl + this.checkEmailAndCodeUrl
       .replace('${email}', email)
       .replace('${code}', code), {headers: this.headers});
+  }
+  public uploadImage(image: File) {
+    const formData: FormData = new FormData();
+    formData.append('image', image, image.name);
+    console.log(this.baseUrl + this.uploadImageUrl);
+    return this.http.post(this.baseUrl + this.uploadImageUrl, formData, { responseType: 'text' });
+  }
+
+  public getImagesAndCandidates() {
+    console.log(this.http.get<CandidateImage[]>(this.baseUrl + this.getCandidatesAndImages))
+    return this.http.get<CandidateImage[]>(this.baseUrl + this.getCandidatesAndImages);
   }
 }

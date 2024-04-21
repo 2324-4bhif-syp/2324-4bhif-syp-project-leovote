@@ -5,13 +5,8 @@
     <tr>
       <th>
         <div class="election-selector">
-          <h3>Select Election</h3>
-          <select [(ngModel)]="selectedElection" required (change)="loadEmails()">
-            <option [defaultSelected]="true" value="" disabled selected hidden>Select Election</option>
-            <option (click)="loadEmails()" *ngFor="let election of elections"
-                    [ngValue]="election">{{ election.name }}
-            </option>
-          </select>
+          <h3>Election</h3>
+          <p>Selected: {{selectedElection?.name}}</p>
         </div>
       </th>
       <th>
@@ -68,5 +63,12 @@
   </div>
   <div class="send-button-container" *ngIf="selectedElection !== undefined && emailCount > 0">
     <button class="send-button" (click)="sendCodes()">Send Codes</button>
+  </div>
+  <div *ngIf="sendingError">
+    <p>Email could not be sent. Maybe you already sent codes to some E-Mail addresses</p>
+  </div>
+
+  <div *ngIf="sent">
+    <p>Emails sent successfully!</p>
   </div>
 </div>

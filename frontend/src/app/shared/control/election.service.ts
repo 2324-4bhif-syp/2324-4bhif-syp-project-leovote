@@ -8,6 +8,8 @@ import {EmailModel} from "../entity/email-model";
   providedIn: 'root'
 })
 export class ElectionService {
+  public selectedElection: Election | undefined = undefined;
+
   constructor(private apiClient: LeovoteWebApiService) {
   }
 

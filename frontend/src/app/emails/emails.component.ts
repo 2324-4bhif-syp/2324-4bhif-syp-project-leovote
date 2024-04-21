@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Election} from "../shared/entity/election-model";
 import {EmailModel} from "../shared/entity/email-model";
 import {ElectionService} from "../shared/control/election.service";
@@ -10,19 +10,23 @@ import {ElectionService} from "../shared/control/election.service";
 })
 export class EmailsComponent {
   elections: Election[] | undefined = undefined;
-  selectedElection: Election | undefined = undefined;
+  selectedElection: Election | undefined = this.electionService.selectedElection;
   emailInput: string = "";
   emails: EmailModel[] | undefined;
   emailCount: number = 0;
   emailError: boolean = false;
   isCsvUploaded: boolean = false;
   csvData: string = "";
+  sendingError: boolean = false;
+  sent: boolean = false;
+
   constructor(
     public electionService: ElectionService,
   ) {
     electionService.getList().forEach(value => {
       this.elections = value;
     });
+    this.loadEmails()
   }
 
   onFileChange(event: any) {
@@ -40,6 +44,7 @@ export class EmailsComponent {
     };
     reader.readAsText(file);
   }
+
   parseCSV() {
     const rows = this.csvData.split('\n');
     // Entferne Leerzeichen und leere Zeilen
@@ -93,10 +98,14 @@ export class EmailsComponent {
   sendCodes() {
     if (this.selectedElection !== undefined &&
       this.selectedElection.id !== null) {
-      this.electionService.sendCodes(this.selectedElection.id.toString()).subscribe( (value) => {
+      this.electionService.sendCodes(this.selectedElection.id.toString()).subscribe((value) => {
         console.log("emails sent");
+        this.sendingError = false;
+        this.sent = true;
       }, (error) => {
         console.log("error while sending mail");
+        this.sendingError = true;
+        this.sent = false;
       });
     }
   }

@@ -1,15 +1,14 @@
 <h2>Results</h2>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
 <table class="table-result">
   <tr>
     <th>
       <div class="election-selector">
-        <h3>Select Election</h3>
-        <select [(ngModel)]="selectedElection" required (change)="getResult()">
-          <option [defaultSelected]="true" value="" disabled selected hidden>Select Election</option>
-          <option (click)="loadEmails()" *ngFor="let election of elections"
-                  [ngValue]="election">{{ election.name }}
-          </option>
-        </select>
+        <h3>Election</h3>
+        <p>Selected: {{selectedElection?.name}}</p>
       </div>
     </th>
     <th>
@@ -32,3 +31,7 @@
     </th>
   </tr>
 </table>
+
+<div class="chart-container">
+  <canvas  id="Results" >{{ chart }}</canvas>
+</div>
