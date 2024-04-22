@@ -60,3 +60,7 @@ body {
   padding: 20px;
   border-radius: 10px;
 }
+
+.chart-container {
+  padding-top: 5%;
+}

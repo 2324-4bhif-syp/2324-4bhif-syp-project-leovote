@@ -3,6 +3,7 @@ import {Election} from "../shared/entity/election-model";
 import {Result} from "../shared/entity/result";
 import {ElectionService} from "../shared/control/election.service";
 import {Chart, registerables} from "chart.js";
+import _default from "chart.js/dist/plugins/plugin.tooltip";
 
 Chart.register(...registerables);
 
@@ -33,12 +34,12 @@ export class ResultsComponent implements OnInit{
     const data = results.map((r) => r.percentage);
 
     this.chart = new Chart("Results", {
-      type: 'doughnut',
+      type: 'pie',
       data: {
         labels,
         datasets: [{ label: 'Results', data }],
       },
-      options: { aspectRatio: 2.5 },
+      options: { aspectRatio: 1 },
     });
   }
   getResult() {
