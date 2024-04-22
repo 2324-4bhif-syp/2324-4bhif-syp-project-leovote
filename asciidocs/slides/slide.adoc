@@ -1,6 +1,6 @@
 = Leovote
 
-Sprint 8
+Sprint 9
 
 :revdate: {docdate}
 :encoding: utf-8
@@ -57,8 +57,10 @@ image::prove.jpg[background]
 === Sprintvereinbarung
 image::handshake.jpg[background]
 
-* Authentifikation mit Keycloak der HTL-Leonding
-* E-Mail Überprüfung zur Verhinderung der Code Weitergabe.
+* Bild-Upload für Kandidaten
+* Verbesserung des Designs (UI/UX)
+** Chart für Ergebnisse der Wahlen
+** Struktur des Admin-Panels
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
