@@ -6,7 +6,7 @@
       <button id="loginbtn" type="button" (click)="checkLogin()">Vote now</button>
     </span>
   </div>
-  <div *ngIf="alreadyVotedOrIncorrect" class="error-message">
+  <div *ngIf="DeniedToVote" class="error-message">
     <p>Code has already been used, or you got no permission to vote!</p>
   </div>
 </div>

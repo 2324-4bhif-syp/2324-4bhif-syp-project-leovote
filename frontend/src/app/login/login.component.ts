@@ -16,7 +16,7 @@ import {Vote} from "../shared/entity/vote";
 })
 export class LoginComponent {
   @Input() code: string = "";
-  alreadyVotedOrIncorrect: boolean = false;
+  DeniedToVote: boolean = false;
   authFail: boolean = false;
   username: string = "";
   password: string = "";
@@ -61,13 +61,14 @@ export class LoginComponent {
       const checkEmailAndCode = await this.voteService.checkEmailAndCode(email, this.code);
       if (success && roleTrue && checkEmailAndCode) {
         await this.router.navigate(['/votes']);
+
       } else {
         //console.log("alreadyVotedOrIncorrect is TRUE")
-        this.alreadyVotedOrIncorrect = true;
+        this.DeniedToVote = true;
       }
     } catch (error) {
       console.error('Error while checking code:', error);
-      this.alreadyVotedOrIncorrect = true;
+      this.DeniedToVote = true;
     }
   }
 }

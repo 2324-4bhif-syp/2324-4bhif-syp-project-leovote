@@ -54,6 +54,7 @@ export class VoteService {
       );
     });
   }
+
   voteCall(candidateId: number, electionId: number) {
     if (this.vote?.generatedId != undefined) {
       let voteCandidate: VoteCandidate = new VoteCandidate(this.vote.generatedId)

@@ -12,14 +12,15 @@ Chart.register(...registerables);
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
-export class ResultsComponent implements OnInit{
+export class ResultsComponent implements OnInit {
   elections: Election[] | undefined = undefined;
   selectedElection: Election | undefined = this.electionService.selectedElection;
   result: Result[] | undefined = undefined;
   resultError: boolean = false;
   public chart: any;
 
-  constructor(public electionService: ElectionService) {}
+  constructor(public electionService: ElectionService) {
+  }
 
   ngOnInit(): void {
     this.electionService.getList().forEach((value) => {
@@ -36,11 +37,20 @@ export class ResultsComponent implements OnInit{
       type: 'doughnut',
       data: {
         labels,
-        datasets: [{ label: 'Results', data }],
+        datasets: [{label: 'Results', data}],
       },
-      options: { aspectRatio: 2.5 },
+      options: {
+        aspectRatio: 2.5,
+        plugins: {
+          legend: {
+            maxHeight: 3000,
+            // display:false
+          },
+        }
+      },
     });
   }
+
   getResult() {
     if (this.selectedElection !== undefined && this.selectedElection.id !== undefined && this.selectedElection.id !== null) {
       this.electionService.result(this.selectedElection.id.toString()).subscribe((value) => {
