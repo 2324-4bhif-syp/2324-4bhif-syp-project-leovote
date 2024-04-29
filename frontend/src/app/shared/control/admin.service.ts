@@ -13,7 +13,7 @@ export class AdminService {
     const val = helper.decodeToken(this.keycloakService.getToken())
     val.then(value => {
       const ldap = value['LDAP_ENTRY_DN'];
-      //this.isLoggedIn = !ldap.includes("Students");
+      //this.isLoggedIn = ldap.includes("Teachers");
     });
   }
 }
