@@ -38,16 +38,21 @@ export class ResultsComponent implements OnInit {
       data: {
         labels,
         datasets: [{
-          label: 'Results',
+          label: 'Percent',
           data
         }],
       },
       options: {
-        aspectRatio: 0.5,
+        responsive:true,
+        layout: {
+          autoPadding:true
+        },
+        aspectRatio: 0.6,
         plugins: {
           legend: {
-            display:true
-          },
+            position:"top",
+            display:true,
+          }
         }
       },
     });
