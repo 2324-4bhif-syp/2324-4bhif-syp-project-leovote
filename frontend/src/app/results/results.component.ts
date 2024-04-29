@@ -34,17 +34,19 @@ export class ResultsComponent implements OnInit {
     const data = results.map((r) => r.percentage);
 
     this.chart = new Chart("Results", {
-      type: 'doughnut',
+      type: 'pie',
       data: {
         labels,
-        datasets: [{label: 'Results', data}],
+        datasets: [{
+          label: 'Results',
+          data
+        }],
       },
       options: {
-        aspectRatio: 2.5,
+        aspectRatio: 0.5,
         plugins: {
           legend: {
-            maxHeight: 3000,
-            // display:false
+            display:true
           },
         }
       },

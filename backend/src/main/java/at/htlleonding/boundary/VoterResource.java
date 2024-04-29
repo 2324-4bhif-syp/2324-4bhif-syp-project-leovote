@@ -40,7 +40,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
             VoterDTO voterDTO = new VoterDTO(voter.getGeneratedId(), voter.getElection().id, voterRepository.hasAlreadyVoted(blockchain, voter));
             return Response.status(Response.Status.OK).entity(voterDTO).build();
         } catch (NoResultException e) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).entity("TEst").build();
         }
     }
 
