@@ -8,18 +8,15 @@
     <th>
       <div class="election-selector">
         <h3>Election</h3>
-        <p>Selected: {{selectedElection?.name}}</p>
+        <p>Selected: {{ selectedElection?.name }}</p>
       </div>
     </th>
     <th>
+      <div class="chart-container">
+        <canvas id="Results">{{ chart }}</canvas>
+      </div>
       <div class="result-box">
         <div *ngIf="result !== undefined">
-          <div class="inside-text" *ngIf="!resultError">
-            <div *ngFor="let res of result">
-              {{ res.firstname }}
-              {{ res.lastname }}: {{ res.percentage }}%
-            </div>
-          </div>
           <div *ngIf="resultError">
             <p>Error validating Blockchain. Could've been manipulated</p>
           </div>
@@ -32,6 +29,3 @@
   </tr>
 </table>
 
-<div class="chart-container">
-  <canvas  id="Results" >{{ chart }}</canvas>
-</div>

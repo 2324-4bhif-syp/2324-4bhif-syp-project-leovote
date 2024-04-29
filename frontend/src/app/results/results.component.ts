@@ -3,7 +3,6 @@ import {Election} from "../shared/entity/election-model";
 import {Result} from "../shared/entity/result";
 import {ElectionService} from "../shared/control/election.service";
 import {Chart, registerables} from "chart.js";
-import _default from "chart.js/dist/plugins/plugin.tooltip";
 
 Chart.register(...registerables);
 
@@ -13,14 +12,15 @@ Chart.register(...registerables);
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
-export class ResultsComponent implements OnInit{
+export class ResultsComponent implements OnInit {
   elections: Election[] | undefined = undefined;
   selectedElection: Election | undefined = this.electionService.selectedElection;
   result: Result[] | undefined = undefined;
   resultError: boolean = false;
   public chart: any;
 
-  constructor(public electionService: ElectionService) {}
+  constructor(public electionService: ElectionService) {
+  }
 
   ngOnInit(): void {
     this.electionService.getList().forEach((value) => {
@@ -37,11 +37,27 @@ export class ResultsComponent implements OnInit{
       type: 'pie',
       data: {
         labels,
-        datasets: [{ label: 'Results', data }],
+        datasets: [{
+          label: 'Percent',
+          data
+        }],
       },
-      options: { aspectRatio: 1 },
+      options: {
+        responsive:true,
+        layout: {
+          autoPadding:true
+        },
+        aspectRatio: 0.6,
+        plugins: {
+          legend: {
+            position:"top",
+            display:true,
+          }
+        }
+      },
     });
   }
+
   getResult() {
     if (this.selectedElection !== undefined && this.selectedElection.id !== undefined && this.selectedElection.id !== null) {
       this.electionService.result(this.selectedElection.id.toString()).subscribe((value) => {

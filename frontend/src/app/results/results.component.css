@@ -61,6 +61,6 @@ body {
   border-radius: 10px;
 }
 
-.chart-container {
-  padding-top: 5%;
+.canvas {
+  /*width: 400px;*/
 }

@@ -4,10 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoginModel} from "../shared/entity/login-model";
 import {KeycloakService} from "keycloak-angular";
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {AdminService} from "../shared/control/admin.service";
-import {ElectionService} from "../shared/control/election.service";
 import {Election} from "../shared/entity/election-model";
-import {Vote} from "../shared/entity/vote";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +13,7 @@ import {Vote} from "../shared/entity/vote";
 })
 export class LoginComponent {
   @Input() code: string = "";
-  alreadyVotedOrIncorrect: boolean = false;
+  DeniedToVote: boolean = false;
   authFail: boolean = false;
   username: string = "";
   password: string = "";
@@ -61,13 +58,14 @@ export class LoginComponent {
       const checkEmailAndCode = await this.voteService.checkEmailAndCode(email, this.code);
       if (success && roleTrue && checkEmailAndCode) {
         await this.router.navigate(['/votes']);
+
       } else {
         //console.log("alreadyVotedOrIncorrect is TRUE")
-        this.alreadyVotedOrIncorrect = true;
+        this.DeniedToVote = true;
       }
     } catch (error) {
       console.error('Error while checking code:', error);
-      this.alreadyVotedOrIncorrect = true;
+      this.DeniedToVote = true;
     }
   }
 }
