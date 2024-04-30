@@ -86,10 +86,25 @@
   </div>
 </div>
 
-
 <div *ngIf="isVoted" class="container">
-  <h2>Thank you for voting in {{ election?.name }}</h2>
+  <div class="d-flex flex-column align-items-center">
+    <h2>Thank you for voting in {{ election?.name }}</h2>
+    <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
+      <div class="container-for-image">
+        <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(selectedCandidate?.pathOfImage)"
+             alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
+      </div>
+      <div class="card-body">
+        <div class="title-card">
+          <h3 class="card-title">{{ selectedCandidate?.firstName }}</h3>
+          <h3 class="card-title"> {{ selectedCandidate?.lastName }} </h3>
+          <h4>{{ selectedCandidate?.grade }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 <div *ngIf="!electionInFuture" class="container">
   <h2>Election {{ election?.name }} has already ended</h2>
