@@ -43,12 +43,17 @@
 
     parseCSV() {
       const rows = this.csvData.split('\n');
-      const header = rows.shift();
+      rows.shift();
       for (const row of rows) {
-        const [schoolId, firstName, lastName, grade] = row.split(';');
+        const [schoolId, firstName, lastName, grade, pathOfImage] = row.split(',');
         if (schoolId && firstName && lastName && grade) {
-          const candidate = new Candidate(schoolId, firstName, lastName, grade);
-          candidate.pathOfImage = "default.jpg";
+          console.log(pathOfImage)
+          const candidate = new Candidate(schoolId, firstName, lastName, grade, pathOfImage);
+          console.log("KAndidaten: ", candidate)
+          if (!pathOfImage) {
+            console.log("WARUMMMM")
+            candidate.pathOfImage = "default.jpg";
+          }
           this.candidate = candidate;
           this.createCandidate();
           console.log(this.candidate);
@@ -80,11 +85,15 @@
           this.candidate.pathOfImage = this.imageFile.name;
           console.log(this.imageFile.name)
         } else {
-          this.candidate.pathOfImage = 'default.jpg'
+          if (this.candidate.pathOfImage === '') {
+            this.candidate.pathOfImage = 'default.jpg';
+          }
         }
         this.addCandidate();
       } else {
-        this.candidate.pathOfImage = "default.jpg";
+        if (this.candidate.pathOfImage === '') {
+          this.candidate.pathOfImage = 'default.jpg';
+        }
         this.addCandidate();
       }
       this.candidate = new Candidate();
