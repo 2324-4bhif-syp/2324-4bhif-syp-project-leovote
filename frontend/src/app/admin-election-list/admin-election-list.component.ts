@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {ElectionService} from "../shared/control/election.service";
 import {Election} from "../shared/entity/election-model";
-import {AdminService} from "../shared/control/admin.service";
 
 @Component({
   selector: 'app-admin-election-list',
@@ -33,6 +32,11 @@ export class AdminElectionListComponent {
   isDateAfterNow(date: Date): boolean {
     const now = new Date();
     return date > now;
+  }
+  confirmDelete(id: number | null) {
+    if (confirm("Are you sure you want to delete this election?")) {
+      this.deleteElection(id);
+    }
   }
 
   deleteElection(id: number | null) {
