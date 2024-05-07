@@ -19,7 +19,7 @@ public class Email extends PanacheEntity {
         this.election = election;
     }
 
-    public Email(){
+    public Email() {
 
     }
 

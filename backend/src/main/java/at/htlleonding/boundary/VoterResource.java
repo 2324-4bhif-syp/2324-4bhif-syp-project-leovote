@@ -37,7 +37,12 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
             Voter voter = query.getSingleResult();
             Election election = Election.findById(voter.getElection().id);
             Blockchain blockchain = new Blockchain(election.getBlockchainFileName());
-            VoterDTO voterDTO = new VoterDTO(voter.getGeneratedId(), voter.getElection().id, voterRepository.hasAlreadyVoted(blockchain, voter));
+            VoterDTO voterDTO = new VoterDTO(
+                    voter.getGeneratedId(),
+                    voter.getElection().id,
+                    voterRepository.hasAlreadyVoted(blockchain, voter)
+            );
+
             return Response.status(Response.Status.OK).entity(voterDTO).build();
         } catch (NoResultException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -45,7 +50,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     }
 
     @POST
-    @Path("/vote/{electionId}/{candidateId}")
+    @Path("vote/{electionId}/{candidateId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
@@ -73,7 +78,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     }
 
     @POST
-    @Path("/election/{electionId}")
+    @Path("election/{electionId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
@@ -91,8 +96,9 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         }
         return Response.ok(voters).build();
     }
+
     @GET
-    @Path("/voter/{email}/{code}")
+    @Path("voter/{email}/{code}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional

@@ -9,7 +9,12 @@ import java.util.UUID;
 
 @Table(
         uniqueConstraints =
-        @UniqueConstraint(columnNames = {"election_id", "emailHash"})
+        @UniqueConstraint(
+                columnNames = {
+                        "election_id",
+                        "emailHash"
+                }
+        )
 )
 @Entity
 public class Voter extends PanacheEntityBase {
@@ -39,7 +44,6 @@ public class Voter extends PanacheEntityBase {
         this.emailHash = emailHash;
         this.generatedId = UUID.randomUUID();
     }
-
     //</editor-fold>
 
     //<editor-fold desc="Getter and Setter">

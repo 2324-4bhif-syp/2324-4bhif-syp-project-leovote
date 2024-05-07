@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.json.JSONObject;
 
-@Path("/token")
+@Path("token")
 public class TokenResource {
     @Inject
     @RestClient
@@ -18,7 +18,7 @@ public class TokenResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response getToken(LoginDataDTO loginDataDTO){
+    public Response getToken(LoginDataDTO loginDataDTO) {
         String clientId = "htlleonding-service";
         String clientSecret = "AkIRaaboJ23Q64jSjtN9gkmfMumUybD8"; // Should be asked Prof. how to handle that
         String grantType = "password";
@@ -40,9 +40,8 @@ public class TokenResource {
         return Response.accepted(userInfo).build();
     }
 
-    private UserInfoResponse getUserInfo(String accessToken){
+    private UserInfoResponse getUserInfo(String accessToken) {
         String tokenToUse = "Bearer " + accessToken;
-        UserInfoResponse jsonResponse = tokenService.getUserInfo(tokenToUse);
-        return jsonResponse;
+        return tokenService.getUserInfo(tokenToUse);
     }
 }

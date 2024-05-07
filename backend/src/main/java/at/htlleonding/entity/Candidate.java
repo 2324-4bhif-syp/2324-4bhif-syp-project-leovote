@@ -28,7 +28,7 @@ public class Candidate extends PanacheEntity {
                      @JsonProperty("firstName") String firstName,
                      @JsonProperty("lastName") String lastName,
                      @JsonProperty("grade") String grade,
-                     @JsonProperty("pathOfImage") String pathOfImage){
+                     @JsonProperty("pathOfImage") String pathOfImage) {
         this.schoolId = schoolId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,7 +39,7 @@ public class Candidate extends PanacheEntity {
     public Candidate(@JsonProperty("schoolId") String schoolId,
                      @JsonProperty("firstName") String firstName,
                      @JsonProperty("lastName") String lastName,
-                     @JsonProperty("grade") String grade){
+                     @JsonProperty("grade") String grade) {
         this.schoolId = schoolId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -80,9 +80,11 @@ public class Candidate extends PanacheEntity {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+
     public String getPathOfImage() {
         return pathOfImage;
     }
+
     public void setPathOfImage(String pathToImage) {
         this.pathOfImage = pathToImage;
     }
@@ -100,6 +102,7 @@ public class Candidate extends PanacheEntity {
     public int hashCode() {
         return Objects.hash(schoolId, firstName, lastName, grade, pathOfImage);
     }
+
     @Override
     public String toString() {
         return "Candidate: " +
