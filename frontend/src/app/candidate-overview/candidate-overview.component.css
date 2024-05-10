@@ -356,7 +356,6 @@ h2 {
   border-radius: 100px;
   justify-content: center;
   align-items: center;
-  /* Move it up the exact amount of px of the height of the <p> AND the margin*/
 }
 
 

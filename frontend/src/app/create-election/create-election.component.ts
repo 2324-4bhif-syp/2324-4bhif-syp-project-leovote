@@ -94,6 +94,7 @@ export class CreateElectionComponent implements OnInit{
     return this.selectedCandidates.some(selected => selected.id === candidate.id);
   }
   deleteElection(election: Election): void {
+    if(confirm(`Do you want to delete election ${election.name}?`))
     if (election.id !== null) {
       this.electionService.delete(election.id.toString()).subscribe(
         () => {

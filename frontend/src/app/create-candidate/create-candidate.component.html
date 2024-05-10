@@ -61,3 +61,9 @@
 <div style="color: red" *ngIf="errorMessage">
   {{ errorMessage }}
 </div>
+
+<div id="container-floating">
+  <div [routerLink]="['/admin', 'overview' ,'candidate-overview']" id="floating-button">
+    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="picture of candidate"/>
+  </div>
+</div>
