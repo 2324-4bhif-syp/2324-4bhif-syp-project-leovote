@@ -35,7 +35,7 @@ endif::backend-html5[]
 
 | Alexander Nikolaus
 
-| Thomas Stütz
+| Herr Prof. Thomas Stütz
 
 |===
 .Ort und Zeit
