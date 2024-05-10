@@ -1,11 +1,23 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <h2>Candidates</h2>
+
+<div class="centered">
+  <div class="field">
+    <input type="text" placeholder="Search" (input)="filterCandidates()" [(ngModel)]="searchText"/>
+    <div class="line"></div>
+  </div>
+</div>
 
 <div class="container-lg">
   <div class="row">
-    <div *ngFor="let candidate of candidates; let index" class="col-md-6"
+    <div *ngFor="let candidate of filteredCandidates; let index" class="col-md-6"
          style="width: 0; padding-right: 340px; padding-bottom: 20px">
       <div class="card mb-4 box-shadow text-center h-100"
            style="align-content: center">
+        <button class="delete-btn" (click)="deleteCandidate(candidate)">
+          <i class="fa fa-trash fa-2x"></i>
+        </button>
         <div class="container-for-image">
           <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
                alt="{{ candidate.firstName }} {{ candidate.lastName }}">
