@@ -6,5 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CandidateRepository implements PanacheRepository<Candidate> {
-
+    public Candidate findBySchoolId(String schoolId) {
+        return find("schoolId", schoolId).firstResult();
+    }
 }
