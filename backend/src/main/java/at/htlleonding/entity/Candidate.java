@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
+import java.io.File;
 import java.util.Objects;
 
 @Entity
@@ -90,6 +91,19 @@ public class Candidate extends PanacheEntity {
         this.pathOfImage = pathToImage;
     }
     //</editor-fold>
+
+    @Override
+    public void delete() {
+        super.delete();
+
+        String[] extensions = new String[]{"jpg", "jpeg", "png"};
+        for (String extension : extensions) {
+            File imageFile = new File("src/main/resources/images/" + getSchoolId() + "." + extension);
+            if (imageFile.exists()) {
+                imageFile.delete();
+            }
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
