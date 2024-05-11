@@ -75,7 +75,7 @@ export class CreateCandidateComponent {
   createCandidate() {
     console.log(this.candidate)
     if (this.imageFile) {
-      this.candidateService.uploadImage(this.imageFile).subscribe(
+      this.candidateService.uploadImage(this.imageFile,this.candidate.id).subscribe(
         (response: string) => {
           console.log('Bild erfolgreich hochgeladen:', response);
         },

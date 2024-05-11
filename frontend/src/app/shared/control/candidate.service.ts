@@ -45,8 +45,13 @@ export class CandidateService {
     return this.refreshListSubject.asObservable();
   }
 
-  uploadImage(image: File) {
-    return this.apiClient.uploadImage(image);
+  uploadImage(image: File, id: number | null): Observable<any> {
+    if(id === null) {
+      console.error("Upload Image: Candidate ID INVALID")
+      return new Observable<any>(observer => {})
+    }
+    return this.apiClient.uploadImage(image, id);
+
   }
 
   candidateImage() {

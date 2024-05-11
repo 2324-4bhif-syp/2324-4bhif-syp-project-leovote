@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Candidate} from "../entity/candidate-model";
 import {Election} from "../entity/election-model";
 import {Vote} from "../entity/vote";
@@ -7,6 +7,7 @@ import {VoteCandidate} from "../entity/vote-candidate-model";
 import {EmailModel} from "../entity/email-model";
 import {LoginModel} from "../entity/login-model";
 import {CandidateImage} from "../entity/candidate-image";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,63 +32,74 @@ export class LeovoteWebApiService {
   private removeElection: string = 'elections/${id}';
   private checkLoginDataUrl: string = 'token';
   private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}';
-  private uploadImageUrl: string = 'candidates/images';
+  private uploadImageUrl: string = 'candidates/images/${id}';
   private getCandidatesAndImages: string = 'candidates/images';
   private getCandidateByIdUrl: string = 'candidates/${id}';
   private getImageByIdUrl: string = 'candidates/images/${id}';
   private updateCandidateUrl: string = 'candidates/${id}';
 
-  constructor(private http: HttpClient) { }
-  public getAllCandidates(){
+  constructor(private http: HttpClient) {
+  }
+
+  public getAllCandidates() {
     return this.http.get<Candidate[]>(this.baseUrl + this.candidates, {headers: this.headers});
   }
-  public getAllElections(){
+
+  public getAllElections() {
     return this.http.get<Election[]>(this.baseUrl + this.elections, {headers: this.headers});
   }
-  public voteForCandidate(voter: VoteCandidate, candidateId: number, electionId: number){
+
+  public voteForCandidate(voter: VoteCandidate, candidateId: number, electionId: number) {
     return this.http.post(this.baseUrl + this.vote.replace('${electionId}', electionId.toString())
       .replace('${candidateId}', candidateId.toString()), voter, {headers: this.headers});
   }
-  public addCandidate(candidate: Candidate){
+
+  public addCandidate(candidate: Candidate) {
     return this.http.post(this.baseUrl + this.candidates, candidate, {headers: this.headers});
   }
+
   public deleteCandidate(candidateId: string) {
     return this.http.delete(this.baseUrl + this.removeCandidate.replace('${id}', candidateId), {headers: this.headers});
   }
-  public addElection(election: Election){
+
+  public addElection(election: Election) {
     return this.http.post(this.baseUrl + this.addElectionUrl, election, {headers: this.headers});
   }
+
   public deleteElection(electionId: string) {
     return this.http.delete(this.baseUrl + this.removeElection.replace('${id}', electionId), {headers: this.headers});
   }
+
   public getVoteByCode(code: string) {
     return this.http.get<Vote>(this.baseUrl + this.voters.replace('${id}', code),
       {headers: this.headers});
   }
-  public getResultByElection(electionId: string){
+
+  public getResultByElection(electionId: string) {
     return this.http.get<Object>(this.baseUrl + this.electionResult.replace('${id}', electionId), {headers: this.headers});
   }
 
-  public addEmail(email: string, electionId: string){
+  public addEmail(email: string, electionId: string) {
     return this.http.post(this.baseUrl + this.addEmailUrl.replace('${id}', electionId).replace('${email}', email), {headers: this.headers});
   }
 
-  public getAllMails(electionId: string){
+  public getAllMails(electionId: string) {
     return this.http.get<EmailModel[]>(this.baseUrl + this.allMails.replace('${electionId}', electionId), {headers: this.headers});
   }
 
-  public removeMail(mailId: string){
+  public removeMail(mailId: string) {
     return this.http.delete(this.baseUrl + this.removeMailUrl.replace('${id}', mailId), {headers: this.headers});
   }
 
-  public sendCodes(electionId: string){
+  public sendCodes(electionId: string) {
     return this.http.post(this.baseUrl + this.sendCodesUrl.replace('${electionId}', electionId), {headers: this.headers});
   }
+
   public addMultipleEmails(email: string[], electionId: string) {
     return this.http.post(this.baseUrl + this.addMultipleEmailsUrl.replace('${electionId}', electionId), email, {headers: this.headers});
   }
 
-  public checkLoginData(schoolId: string, password: string){
+  public checkLoginData(schoolId: string, password: string) {
     const body = {
       username: schoolId,
       password: password
@@ -100,11 +112,14 @@ export class LeovoteWebApiService {
       .replace('${email}', email)
       .replace('${code}', code), {headers: this.headers});
   }
-  public uploadImage(image: File) {
+
+  public uploadImage(image: File, id: number) {
     const formData: FormData = new FormData();
     formData.append('image', image, image.name);
     console.log(this.baseUrl + this.uploadImageUrl);
-    return this.http.post(this.baseUrl + this.uploadImageUrl, formData, { responseType: 'text' });
+    return this.http.post(
+      this.baseUrl + this.uploadImageUrl.replace('${id}', id.toString()),formData, {responseType: 'text'}
+    );
   }
 
   public getImagesAndCandidates() {
