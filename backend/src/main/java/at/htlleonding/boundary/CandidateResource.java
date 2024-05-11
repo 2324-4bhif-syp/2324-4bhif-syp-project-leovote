@@ -5,6 +5,7 @@ import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.dto.CandidateImageDTO;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
+import jakarta.enterprise.inject.spi.CDI;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.MultivaluedMap;
@@ -22,6 +23,8 @@ import java.util.*;
 
 @ResourceProperties(path = "candidates")
 public interface CandidateResource extends PanacheRepositoryResource<CandidateRepository, Candidate, Long> {
+    CandidateRepository candidateRepository = CDI.current().select(CandidateRepository.class).get();
+
     @GET
     @Path("images/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -101,6 +104,12 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
     default Response uploadImage(@PathParam("id") String schoolId, MultipartFormDataInput input) {
+        // Get candidate by SchoolId
+        Candidate candidate = candidateRepository.findBySchoolId(schoolId);
+        if (candidate == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Candidate with ID " + schoolId + " not found.").build();
+        }
 
         // Validate file type
         String fileName;

@@ -40,16 +40,11 @@
           <input [(ngModel)]="updatedCandidate.grade" placeholder="Class"/>
         </div>
         <p>Image: </p>
-<!--        Bruder Anton bitte mach das mit image hahahha
         <div class="input">
           <input type="file" id="imageInput" (change)="onImageChange($event)">
-        </div>-->
-<!--        Kann gelöscht werden, wenn image update implementiert is. is nur dummy jz-->
-        <div class="input">
-          <input [(ngModel)]="updatedCandidate.pathOfImage" placeholder="Image Path"/>
         </div>
         <div class="input">
-          <button (click)="updateCandidate()">Create Candidate</button>
+          <button (click)="updateCandidate()">Update Candidate</button>
         </div>
       </div>
     </th>
