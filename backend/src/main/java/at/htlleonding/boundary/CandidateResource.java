@@ -100,13 +100,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Path("images/{id}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
-    default Response uploadImage(@PathParam("id") Long id, MultipartFormDataInput input) {
-        // Get candidate by ID
-        Candidate candidate = Candidate.findById(id);
-        if (candidate == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Candidate with ID " + id + " not found.").build();
-        }
+    default Response uploadImage(@PathParam("id") String schoolId, MultipartFormDataInput input) {
 
         // Validate file type
         String fileName;
@@ -117,7 +111,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
 
         for (InputPart inputPart : inputParts) {
             try {
-                fileName = candidate.getSchoolId() + ".jpg"; // Use school ID as file name
+                fileName = schoolId + ".jpg"; // Use school ID as file name
 
                 // Check file extension
                 String fileExtension = FilenameUtils.getExtension(fileName);
