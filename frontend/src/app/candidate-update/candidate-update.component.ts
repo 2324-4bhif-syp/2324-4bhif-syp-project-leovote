@@ -73,7 +73,7 @@ export class CandidateUpdateComponent implements OnInit{
             console.error('Error updating candidate:', error);
           }
         );
-        this.candidateService.uploadImage(this.imageFile, this.candidate.id).subscribe(
+        this.candidateService.uploadImage(this.imageFile, this.candidate.schoolId).subscribe(
           (response: string) => {
             console.log('Bild erfolgreich hochgeladen:', response);
           },
