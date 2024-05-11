@@ -104,6 +104,7 @@ export class CreateElectionComponent implements OnInit {
   }
 
   deleteElection(election: Election): void {
+    if(confirm(`Do you want to delete election ${election.name}?`))
     if (election.id !== null) {
       this.electionService.delete(election.id.toString()).subscribe(
         () => {

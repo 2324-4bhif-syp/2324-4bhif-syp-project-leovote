@@ -13,11 +13,11 @@ public interface TokenService {
     @Produces(MediaType.TEXT_HTML)
     @Path("/token")
     String getToken(@FormParam("client_id") String clientId,
-                 @FormParam("client_secret") String clientSecret,
-                 @FormParam("grant_type") String grantType,
-                 @FormParam("username") String username,
-                 @FormParam("password") String password,
-                 @FormParam("scope") String scope);
+                    @FormParam("client_secret") String clientSecret,
+                    @FormParam("grant_type") String grantType,
+                    @FormParam("username") String username,
+                    @FormParam("password") String password,
+                    @FormParam("scope") String scope);
 
     @GET
     @Path("userinfo")

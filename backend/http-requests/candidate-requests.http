@@ -1,6 +1,9 @@
 ### Get images
 GET http://localhost:8080/candidates/images
 
+### Get image by ID
+GET http://localhost:8080/candidates/images/1
+
 
 ### Get all candidates
 GET http://localhost:8080/candidates

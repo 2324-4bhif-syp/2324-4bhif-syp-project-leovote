@@ -23,7 +23,7 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
     ElectionRepository electionRepository = CDI.current().select(ElectionRepository.class).get();
 
     @GET
-    @Path("/results/{electionId}")
+    @Path("results/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     default Response resultsById(
             @PathParam("electionId") Long electionId
@@ -45,22 +45,21 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
     }
 
     @GET
-    @Path("/emails/{electionId}")
+    @Path("emails/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
-    default Response getEmailPerElection(@PathParam("electionId") Long electionId){
+    default Response getEmailPerElection(@PathParam("electionId") Long electionId) {
         List<String> mails = electionRepository.getVotersEmails(electionId);
         return Response.ok(mails).build();
     }
 
     @POST
-    @Path("/addEmail/{electionId}/{email}")
+    @Path("addEmail/{electionId}/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response addEmailToElection(@PathParam("electionId") Long electionId,
-                                        @PathParam("email") String email){
+    default Response addEmailToElection(@PathParam("electionId") Long electionId, @PathParam("email") String email) {
         Optional<Email> returnedMail = electionRepository.addEmailtoElection(electionId, email);
-        if(returnedMail.isPresent()){
-            EmailDTO  emailDTO = new EmailDTO(returnedMail.get().getEmail(),
+        if (returnedMail.isPresent()) {
+            EmailDTO emailDTO = new EmailDTO(returnedMail.get().getEmail(),
                     returnedMail.get().id,
                     returnedMail.get().getElection().id);
 
@@ -70,7 +69,7 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
     }
 
     @POST
-    @Path("/addEmail/multiples/{electionId}")
+    @Path("addEmail/multiples/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
@@ -90,18 +89,18 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
     }
 
     @POST
-    @Path("/election")
+    @Path("election")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response addElection(Election election){
+    default Response addElection(Election election) {
         Election got = electionRepository.createNewElection(election);
         return Response.accepted(got).build();
     }
 
     @DELETE
-    @Path("/removeEmail/{emailId}")
+    @Path("removeEmail/{emailId}")
     @Transactional
-    default Response removeEmailFromElection(@PathParam("emailId") Long email){
+    default Response removeEmailFromElection(@PathParam("emailId") Long email) {
         electionRepository.removeEmailFromElection(email);
         return Response.noContent().build();
     }

@@ -38,19 +38,23 @@ public class VoterRepository implements PanacheRepository<Voter> {
                 .stream()
                 .filter(candidate2 -> candidate2 == candidate)
                 .findFirst();
+
         Blockchain blockchain = new Blockchain(election1.getBlockchainFileName());
-        if (candidate1.isPresent() && election1 != null
-                && voter.getElection() == election1 &&
+
+        boolean voteIsValid = candidate1.isPresent() &&
+                voter.getElection() == election1 &&
                 election1.getElectionStart().isBefore(LocalDateTime.now()) &&
                 election1.getElectionEnd().isAfter(LocalDateTime.now()) &&
-                !hasAlreadyVoted(blockchain, voter)
-        ) {
+                !hasAlreadyVoted(blockchain, voter);
+
+        if (voteIsValid) {
             entityManager.merge(voter);
             blockchain.addBlock(candidate, voter);
             return true;
         }
         return false;
     }
+
 
     public boolean hasAlreadyVoted(Blockchain blockchain, Voter voter) {
         for (Block block : blockchain.getBlocks()) {
@@ -68,12 +72,13 @@ public class VoterRepository implements PanacheRepository<Voter> {
             return true;
         }
         String expectedEmailHash = query.getSingleResult().getEmailHash();
-        String actualEmailHash =  hashService.calculateSHA256Hash(email);
+        String actualEmailHash = hashService.calculateSHA256Hash(email);
         UUID expectedCode = query.getSingleResult().getGeneratedId();
         Log.info("Actual: " + actualEmailHash);
         Log.info("Expected: " + expectedEmailHash);
         return Objects.equals(actualEmailHash, expectedEmailHash) && Objects.equals(expectedCode, uuid);
     }
+
     public List<Voter> getVoteCodesByElection(Long electionId) {
         return list("election.id", electionId);
     }

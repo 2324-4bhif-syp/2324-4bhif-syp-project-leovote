@@ -4,7 +4,6 @@ import at.htlleonding.control.EmailService;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Email;
 import at.htlleonding.entity.dto.EmailDTO;
-import io.quarkus.rest.data.panache.ResourceProperties;
 import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
@@ -18,7 +17,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
-@Path("/email")
+@Path("email")
 public class EmailResource {
     @Inject
     EmailService emailService;
@@ -28,7 +27,7 @@ public class EmailResource {
     @POST
     @Blocking
     @Transactional
-    @Path("/election/{electionId}")
+    @Path("election/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> sendInvite(@PathParam("electionId") Long electionId) {
         Optional<Election> election = Election.findByIdOptional(electionId);
@@ -47,7 +46,7 @@ public class EmailResource {
     }
 
     @GET
-    @Path("/{electionId}")
+    @Path("{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response emailsByElection(@PathParam("electionId") Long electionId) {

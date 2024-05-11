@@ -1,3 +1,8 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
 h2 {
   text-align: center;
   font-weight: bolder;
@@ -6,160 +11,109 @@ h2 {
   padding-top: 2%;
 }
 
-.top-table {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.participating-candidates-container {
-  margin-left: 10vw;
-  background-color: #A2B2C0;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-
-.election-creation-container {
-  background-color: #A2B2C0;
-  width: 100%;
+.card {
   border: none;
-  outline: none;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 1000px;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  max-height: 300px;
-  min-height: 150px;
-  min-width: 200px;
-  margin: 0 auto;
-}
-
-.second-table {
-  max-height: 10px;
-  overflow: auto;
-}
-
-.second-table tr.header-line {
-  background-color: #DAE3EB;
-  padding: 10px;
-  border-radius: 10px 10px 0 0 ;
-}
-
-.second-table tr.grey-row {
-  background-color: #ECF6FF;
-}
-
-.second-table tr.white-row {
-  background-color: #DAE3EB;
-}
-
-.election-creation-th,
-.participating-candidates-th {
-  vertical-align: top;
-}
-
-.election-creation-container input {
-  margin-bottom: 10px;
-}
-
-.election-creation-container label {
-  display: inline-block;
-  width: 120px;
-}
-
-
-.add-button-container{
+  transition: transform 0.2s;
+  font-weight: bolder;
+  margin: 0;
+  height: 600px;
+  width: 320px;
+  border-radius: 20px;
+  background-color: #6D7E8D;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-}
-
-.add-button{
-  margin-top: 10px;
-  padding: 5px;
-  font-weight: bold;
-  background-color: #DAE3EB;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.table-wrapper {
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.input input {
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  padding: 5px;
-  background-color: #DAE3EB;
-  width: 450px;
-}
-
-@media screen and (max-width: 1000px) {
-  .input input {
-    width: 200px;
-  }
-}
-
-.election-table-container {
-  padding-top: 5vw;
-  padding-left: 10vw;
-  padding-right: 10vw;
-  width: 100%;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.election-table {
-  margin: 0 auto;
-  width: 100%;
-  padding-left: 10px;
-  table-layout: auto;
+.title-card {
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: fade;
+  margin: 0;
+  padding: 0;
 }
 
-.election-table th {
-  min-width: 50px;
-  padding-left: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.title-card h3 {
+  font-weight: bolder;
+  margin: 0;
+  padding: 0;
 }
 
-.election-table td {
-  padding-left: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.container-for-image {
+  padding-top: 20px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.election-table tr.grey-row {
-  background-color: #ECF6FF;
+.card img {
+  max-height: 450px;
+  max-width: 320px;
+  object-fit: contain;
+  border-radius: 20px;
 }
 
-.election-table tr.white-row {
-  background-color: #DAE3EB;
+.card:hover {
+  transform: scale(1.05);
 }
 
-.election-table tr.header-line {
-  background-color: #A2B2C0;
-  padding: 10px;
-  border-radius: 10px 10px 0 0 ;
+.card-body {
+  text-align: center;
 }
 
-.btn {
-  background-color: rgba(0, 123, 255, 0);
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: red;
+}
+
+.vote-btn {
+  width: 336px;
+  height: 120px;
+  font-weight: bolder;
+  font-size: xxx-large;
+  padding: 10px;
+  background-color: #87B5D7;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+}
+
+.headliner-container {
+  margin-left: 20vw;
+  padding-bottom: 2%;
+}
+
+.headliner-container h2 {
+  font-weight: bold;
+}
+
+.rectangular-radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid green;
+  border-radius: 5px;
+  outline: none;
+}
+
+.rectangular-radio:checked {
+  background-color: green;
 }
 
 #presentation {
@@ -386,4 +340,72 @@ h2 {
   bottom: 0;
   margin: auto;
   right: 20px;
+}
+
+
+/*Button*/
+
+.delete-btn {
+  cursor: pointer;
+  background-color: red;
+  position:relative;
+  top: -12px;
+  right: -160px;
+  height: 50px;
+  width: 50px;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*Input*/
+
+body {
+  background: #efefef;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  background: 0;
+  border: 0;
+  outline: none;
+  width: 100%;
+  font-size: 1.5em;
+  transition: padding 0.3s 0.2s ease;
+}
+input:focus {
+  padding-bottom: 5px;
+}
+input:focus + .line:after {
+  transform: scaleX(1);
+}
+.field {
+  position: relative;
+}
+.field .line {
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: -8px;
+  background: #bdc3c7;
+}
+.field .line:after {
+  content: " ";
+  position: absolute;
+  float: right;
+  width: 100%;
+  height: 3px;
+  transform: scalex(0);
+  transition: transform 0.3s ease;
+  background: #1abc9c;
+}
+
+.centered{
+  align-items: center;
+  padding-bottom: 3vw;
+  width: 50%;
 }

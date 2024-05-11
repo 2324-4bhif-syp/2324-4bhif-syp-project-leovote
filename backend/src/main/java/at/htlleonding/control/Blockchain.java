@@ -86,11 +86,12 @@ public class Blockchain {
     private synchronized void writeJsonArray(List<Block> blocks) {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(filePath);
+        File dirChecker = new File(fileDir);
         Path dirPath = Paths.get(fileDir);
 
         try {
-            if (!Files.exists(dirPath)) {
-                Files.createDirectory(dirPath);
+            if (!dirChecker.exists()) {
+                dirChecker.mkdirs();
             }
 
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, blocks);

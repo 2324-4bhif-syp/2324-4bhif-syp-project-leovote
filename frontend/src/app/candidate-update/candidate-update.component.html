@@ -1,0 +1,63 @@
+<h2>Update Candidate {{candidate.firstName}} {{candidate.lastName}}</h2>
+
+<table class="table-candidate-update">
+  <tr>
+    <th>
+      <div class="container-lg">
+        <div class="row">
+          <div class="col-md-6"
+               style="width: 0; padding-right: 340px; padding-bottom: 20px">
+            <div class="card mb-4 box-shadow text-center h-100"
+                 style="align-content: center">
+              <div class="container-for-image">
+                <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
+                     alt="{{ candidate.firstName }} {{ candidate.lastName }}">
+              </div>
+              <div class="card-body">
+                <div class="title-card">
+                  <h3 class="card-title">{{ candidate.firstName }}</h3>
+                  <h3 class="card-title"> {{ candidate.lastName }} </h3>
+                  <h4>{{ candidate.grade }}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </th>
+    <th class="input-th">
+      <div class="candidate-creation-container">
+        <div class="input">
+          <input [(ngModel)]="updatedCandidate.schoolId" placeholder="School ID"/>
+        </div>
+        <div class="input">
+          <input [(ngModel)]="updatedCandidate.firstName" placeholder="First Name"/>
+        </div>
+        <div class="input">
+          <input [(ngModel)]="updatedCandidate.lastName" placeholder="Last Name"/>
+        </div>
+        <div class="input">
+          <input [(ngModel)]="updatedCandidate.grade" placeholder="Class"/>
+        </div>
+        <p>Image: </p>
+<!--        Bruder Anton bitte mach das mit image hahahha
+        <div class="input">
+          <input type="file" id="imageInput" (change)="onImageChange($event)">
+        </div>-->
+<!--        Kann gelöscht werden, wenn image update implementiert is. is nur dummy jz-->
+        <div class="input">
+          <input [(ngModel)]="updatedCandidate.pathOfImage" placeholder="Image Path"/>
+        </div>
+        <div class="input">
+          <button (click)="updateCandidate()">Create Candidate</button>
+        </div>
+      </div>
+    </th>
+  </tr>
+</table>
+
+<div id="container-floating">
+  <div [routerLink]="['/admin', 'overview' ,'candidate-overview']" id="floating-button">
+    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="picture of candidate"/>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Candidate } from "../entity/candidate-model";
 import { LeovoteWebApiService } from "../api/leovote-web-api.service";
 import { map, Observable, Subject } from "rxjs";
+import {CandidateImage} from "../entity/candidate-image";
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,17 @@ export class CandidateService {
 
   candidateImage() {
     return this.apiClient.getImagesAndCandidates();
+  }
+
+  getById(id: number): Observable<Candidate> {
+    return this.apiClient.getCandidateById(id);
+  }
+
+  getImageById(id: number): Observable<CandidateImage> {
+    return this.apiClient.getImageById(id);
+  }
+
+  update(candidate: Candidate, id: number): Observable<Object> {
+    return this.apiClient.updateCandidate(candidate, id);
   }
 }

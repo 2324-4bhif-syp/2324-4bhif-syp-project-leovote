@@ -18,6 +18,8 @@ import {AuthGuard} from "./util/app.guard";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializeKeycloak} from "./util/app.init";
 import { AdminElectionListComponent } from './admin-election-list/admin-election-list.component';
+import { CandidateOverviewComponent } from './candidate-overview/candidate-overview.component';
+import { CandidateUpdateComponent } from './candidate-update/candidate-update.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -29,7 +31,9 @@ const appRoutes: Routes = [
       {path: 'overview/results', component: ResultsComponent},
       {path: 'overview/create-candidate', component: CreateCandidateComponent},
       {path: 'overview/create-election', component: CreateElectionComponent},
-      {path: 'overview/emails', component: EmailsComponent}
+      {path: 'overview/emails', component: EmailsComponent},
+      {path: 'overview/candidate-update', component: CandidateUpdateComponent},
+      {path: 'overview/candidate-overview', component: CandidateOverviewComponent}
     ]
   }
 ]
@@ -45,7 +49,9 @@ const appRoutes: Routes = [
     CreateCandidateComponent,
     CreateElectionComponent,
     EmailsComponent,
-    AdminElectionListComponent
+    AdminElectionListComponent,
+    CandidateOverviewComponent,
+    CandidateUpdateComponent
   ],
   imports: [
     BrowserModule,

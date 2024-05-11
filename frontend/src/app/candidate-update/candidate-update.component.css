@@ -1,3 +1,24 @@
+.table-candidate-update {
+  margin: 0 auto;
+  padding-left: 10px;
+  table-layout: auto;
+}
+
+.table-candidate-update {
+  margin-top: 3vw;
+}
+
+.input-th {
+  padding-left: 10vw;
+  text-align: center;
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
 h2 {
   text-align: center;
   font-weight: bolder;
@@ -6,93 +27,77 @@ h2 {
   padding-top: 2%;
 }
 
-.top-table {
+.card {
+  border: none;
+  transition: transform 0.2s;
+  font-weight: bolder;
+  margin: 0;
+  height: 600px;
+  width: 320px;
+  border-radius: 20px;
+  background-color: #6D7E8D;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-card {
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: fade;
+  margin: 0;
+  padding: 0;
+}
+
+.title-card h3 {
+  font-weight: bolder;
+  margin: 0;
+  padding: 0;
+}
+
+.container-for-image {
+  padding-top: 20px;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.participating-candidates-container {
-  margin-left: 10vw;
-  background-color: #A2B2C0;
-  padding: 20px;
-  border-radius: 10px;
+.card img {
+  max-height: 450px;
+  max-width: 320px;
+  object-fit: contain;
+  border-radius: 20px;
 }
 
+.card:hover {
+  transform: scale(1.05);
+}
 
-.election-creation-container {
-  background-color: #A2B2C0;
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 1000px;
-  justify-content: center;
+.card-body {
+  text-align: center;
+}
+
+.centered-elements {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  max-height: 300px;
-  min-height: 150px;
-  min-width: 200px;
-  margin: 0 auto;
 }
 
-.second-table {
-  max-height: 10px;
-  overflow: auto;
+.upload-container input {
+  outline: none;
+  border: none;
 }
 
-.second-table tr.header-line {
+.input button {
+  outline: none;
+  border: none;
+  border-radius: 10px;
   background-color: #DAE3EB;
   padding: 10px;
-  border-radius: 10px 10px 0 0 ;
-}
-
-.second-table tr.grey-row {
-  background-color: #ECF6FF;
-}
-
-.second-table tr.white-row {
-  background-color: #DAE3EB;
-}
-
-.election-creation-th,
-.participating-candidates-th {
-  vertical-align: top;
-}
-
-.election-creation-container input {
-  margin-bottom: 10px;
-}
-
-.election-creation-container label {
-  display: inline-block;
-  width: 120px;
-}
-
-
-.add-button-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.add-button{
-  margin-top: 10px;
-  padding: 5px;
-  font-weight: bold;
-  background-color: #DAE3EB;
-  border-radius: 10px;
-  border: none;
-  outline: none;
   cursor: pointer;
-}
-
-.table-wrapper {
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
 }
 
 .input input {
@@ -110,7 +115,33 @@ h2 {
   }
 }
 
-.election-table-container {
+.candidate-creation-container {
+  background-color: #A2B2C0;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1000px;
+  justify-content: center;
+  align-items: center;
+  height: 120vh;
+  max-height: 350px;
+  min-height: 150px;
+  min-width: 200px;
+  margin: 0 auto;
+}
+
+.candidate-creation-container input {
+  margin-bottom: 10px;
+}
+
+.candidate-creation-container label {
+  display: inline-block;
+  width: 120px;
+}
+
+.candidate-table-container {
   padding-top: 5vw;
   padding-left: 10vw;
   padding-right: 10vw;
@@ -118,48 +149,6 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.election-table {
-  margin: 0 auto;
-  width: 100%;
-  padding-left: 10px;
-  table-layout: auto;
-}
-
-.election-table th {
-  min-width: 50px;
-  padding-left: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.election-table td {
-  padding-left: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.election-table tr.grey-row {
-  background-color: #ECF6FF;
-}
-
-.election-table tr.white-row {
-  background-color: #DAE3EB;
-}
-
-.election-table tr.header-line {
-  background-color: #A2B2C0;
-  padding: 10px;
-  border-radius: 10px 10px 0 0 ;
-}
-
-.btn {
-  background-color: rgba(0, 123, 255, 0);
-  border: none;
-  color: black;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 #presentation {
@@ -173,18 +162,22 @@ h2 {
   transition: all 0.3s;
   border-radius: 10px;
 }
+
 #presentation h1 {
   font-weight: 400;
 }
+
 #presentation h3 {
   font-weight: 400;
   color: #666;
 }
+
 #presentation:hover {
   box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.13);
   transition: all 0.3s;
   transform: translateZ(10px);
 }
+
 #floating-button {
   width: 55px;
   height: 55px;
@@ -196,6 +189,7 @@ h2 {
   cursor: pointer;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
+
 .plus {
   color: white;
   position: absolute;
@@ -214,6 +208,7 @@ h2 {
   animation: plus-out 0.3s;
   transition: all 0.3s;
 }
+
 #container-floating {
   position: fixed;
   width: 70px;
@@ -221,15 +216,18 @@ h2 {
   bottom: 30px;
   right: 30px;
 }
+
 #container-floating:hover {
   height: 400px;
   width: 90px;
   padding: 30px;
 }
+
 #container-floating:hover .plus {
   animation: plus-in 0.15s linear;
   animation-fill-mode: forwards;
 }
+
 .edit {
   position: absolute;
   top: 0;
@@ -246,11 +244,13 @@ h2 {
   transition: all 0.3s;
   animation: edit-out 0.3s;
 }
+
 #container-floating:hover .edit {
   animation: edit-in 0.2s;
   animation-delay: 0.1s;
   animation-fill-mode: forwards;
 }
+
 @keyframes edit-in {
   from {
     opacity: 0;
@@ -261,6 +261,7 @@ h2 {
     transform: rotateZ(0deg);
   }
 }
+
 @keyframes edit-out {
   from {
     opacity: 1;
@@ -271,6 +272,7 @@ h2 {
     transform: rotateZ(-70deg);
   }
 }
+
 @keyframes plus-in {
   from {
     opacity: 1;
@@ -281,6 +283,7 @@ h2 {
     transform: rotateZ(180deg);
   }
 }
+
 @keyframes plus-out {
   from {
     opacity: 0;
@@ -291,6 +294,7 @@ h2 {
     transform: rotateZ(0deg);
   }
 }
+
 .nds {
   width: 40px;
   height: 40px;
@@ -300,6 +304,7 @@ h2 {
   transform: scale(0);
   cursor: pointer;
 }
+
 .nd1 {
   background: #d3a411;
   right: 40px;
@@ -308,6 +313,7 @@ h2 {
   animation: bounce-out-nds 0.3s linear;
   animation-fill-mode: forwards;
 }
+
 .nd3 {
   background: #3c80f6;
   right: 40px;
@@ -316,6 +322,7 @@ h2 {
   animation: bounce-out-nds 0.15s linear;
   animation-fill-mode: forwards;
 }
+
 .nd4 {
   background: #ba68c8;
   right: 40px;
@@ -324,6 +331,7 @@ h2 {
   animation: bounce-out-nds 0.1s linear;
   animation-fill-mode: forwards;
 }
+
 @keyframes bounce-nds {
   from {
     opacity: 0;
@@ -333,6 +341,7 @@ h2 {
     transform: scale(1);
   }
 }
+
 @keyframes bounce-out-nds {
   from {
     opacity: 1;
@@ -343,19 +352,24 @@ h2 {
     transform: scale(0);
   }
 }
+
 #container-floating:hover .nds {
   animation: bounce-nds 0.1s linear;
   animation-fill-mode: forwards;
 }
+
 #container-floating:hover .nd3 {
   animation-delay: 0.08s;
 }
+
 #container-floating:hover .nd4 {
   animation-delay: 0.15s;
 }
+
 #container-floating:hover .nd5 {
   animation-delay: 0.2s;
 }
+
 .letter {
   font-size: 30px;
   font-family: 'Roboto';
@@ -369,6 +383,7 @@ h2 {
   text-align: center;
   line-height: 40px;
 }
+
 .reminder {
   position: absolute;
   left: 0;
@@ -378,6 +393,7 @@ h2 {
   bottom: 0;
   line-height: 40px;
 }
+
 .profile {
   border-radius: 50%;
   width: 40px;
