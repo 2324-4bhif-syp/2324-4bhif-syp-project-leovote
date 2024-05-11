@@ -106,6 +106,22 @@ public class Candidate extends PanacheEntity {
     }
 
     @Override
+    public void persistAndFlush() {
+        super.persistAndFlush();
+
+        // Check if school ID has changed
+        Candidate oldCandidate = Candidate.findById(id);
+        if (oldCandidate != null && !Objects.equals(this.schoolId, oldCandidate.schoolId)) {
+            // Update image name
+            File oldImageFile = new File("src/main/resources/images/" + oldCandidate.schoolId + ".jpg");
+            File newImageFile = new File("src/main/resources/images/" + this.schoolId + ".jpg");
+            if (oldImageFile.exists() && !newImageFile.exists()) {
+                oldImageFile.renameTo(newImageFile);
+            }
+        }
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
