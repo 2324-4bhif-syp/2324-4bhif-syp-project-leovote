@@ -33,18 +33,21 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
         }
 
         String imagePath = "src/main/resources/images/" + candidate.getPathOfImage();
+        System.out.println(imagePath);
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(imagePath)) {
-            if (inputStream == null) {
-                return Response.noContent().build();
-            }
+        File imageFile = new File(imagePath);
 
-            byte[] imageBytes = inputStream.readAllBytes();
+        if (!imageFile.exists() || !imageFile.isFile()) {
+            return Response.noContent().build();
+        }
+
+        try {
+            byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
             CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
             return Response.ok(imageDTO).build();
         } catch (IOException e) {
-            e.printStackTrace(); // Handle or log the exception appropriately
+            e.printStackTrace();
             return Response.serverError().build();
         }
     }
