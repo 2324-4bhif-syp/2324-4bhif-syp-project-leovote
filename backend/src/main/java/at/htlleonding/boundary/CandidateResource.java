@@ -9,6 +9,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
+import org.apache.commons.io.FilenameUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -93,18 +94,34 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     }
 
     @POST
-    @Path("images")
+    @Path("images/{id}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
-    default Response uploadImage(MultipartFormDataInput input) {
+    default Response uploadImage(@PathParam("id") Long id, MultipartFormDataInput input) {
+        // Get candidate by ID
+        Candidate candidate = Candidate.findById(id);
+        if (candidate == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Candidate with ID " + id + " not found.").build();
+        }
+
+        // Validate file type
         String fileName;
+        String[] allowedExtensions = new String[]{"jpg", "jpeg", "png"};
 
         Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
         List<InputPart> inputParts = uploadForm.get("image");
 
         for (InputPart inputPart : inputParts) {
             try {
-                fileName = getFileName(inputPart.getHeaders());
+                fileName = candidate.getSchoolId() + ".jpg"; // Use school ID as file name
+
+                // Check file extension
+                String fileExtension = FilenameUtils.getExtension(fileName);
+                if (!Arrays.asList(allowedExtensions).contains(fileExtension.toLowerCase())) {
+                    return Response.status(Response.Status.BAD_REQUEST)
+                            .entity("Only JPG, JPEG, and PNG files are allowed.").build();
+                }
 
                 InputStream inputStream = inputPart.getBody(InputStream.class, null);
 
@@ -122,6 +139,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
         return Response.status(Response.Status.BAD_REQUEST)
                 .entity("Keine Datei hochgeladen.").build();
     }
+
 
     private String getFileName(MultivaluedMap<String, String> headers) {
         String[] contentDisposition = headers.getFirst("Content-Disposition").split(";");
