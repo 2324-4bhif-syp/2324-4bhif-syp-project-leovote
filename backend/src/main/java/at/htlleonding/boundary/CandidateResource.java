@@ -17,10 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ResourceProperties(path = "candidates")
 public interface CandidateResource extends PanacheRepositoryResource<CandidateRepository, Candidate, Long> {
@@ -54,8 +51,13 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @GET
     @Path("images")
     @Produces(MediaType.APPLICATION_JSON)
-    default Response getAllCandidateImages() throws IOException {
+    default Response getAllCandidateImages() {
         List<Candidate> candidates = Candidate.listAll();
+        Map<String, Candidate> candidateImageMap = new HashMap<>();
+
+        for (Candidate candidate : candidates) {
+            candidateImageMap.put(candidate.getPathOfImage(), candidate);
+        }
 
         List<CandidateImageDTO> imageDTOList = new ArrayList<>();
         File folder = new File("src/main/resources/images");
@@ -70,13 +72,19 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
             return Response.noContent().build();
         }
 
-        for (Candidate candidate : candidates) {
-            for (File file : files) {
-                if (file.isFile() && candidate.getPathOfImage().equals(file.getName())) {
-                    byte[] imageBytes = Files.readAllBytes(file.toPath());
-                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-                    CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
-                    imageDTOList.add(imageDTO);
+        for (File file : files) {
+            if (file.isFile()) {
+                Candidate candidate = candidateImageMap.get(file.getName());
+                if (candidate != null) {
+                    try {
+                        byte[] imageBytes = Files.readAllBytes(file.toPath());
+                        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                        CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
+                        imageDTOList.add(imageDTO);
+                    } catch (IOException e) {
+                        e.printStackTrace(); // Handle or log the exception appropriately
+                        return Response.serverError().build();
+                    }
                 }
             }
         }
