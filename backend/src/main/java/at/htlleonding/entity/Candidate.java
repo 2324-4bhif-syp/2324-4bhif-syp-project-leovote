@@ -28,7 +28,8 @@ public class Candidate extends PanacheEntity {
                      @JsonProperty("firstName") String firstName,
                      @JsonProperty("lastName") String lastName,
                      @JsonProperty("grade") String grade,
-                     @JsonProperty("pathOfImage") String pathOfImage) {
+                     @JsonProperty("pathOfImage") String pathOfImage
+    ) {
         this.schoolId = schoolId;
         this.firstName = firstName;
         this.lastName = lastName;

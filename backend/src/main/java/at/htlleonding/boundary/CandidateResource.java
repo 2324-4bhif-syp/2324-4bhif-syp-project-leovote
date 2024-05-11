@@ -27,36 +27,30 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @GET
     @Path("images/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    default Response getCandidateImageById(@PathParam("id") Long id) throws IOException {
+    default Response getCandidateImageById(@PathParam("id") Long id) {
         Candidate candidate = Candidate.findById(id);
 
         if (candidate == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        File folder = new File("src/main/resources/images");
+        String imagePath = "src/main/resources/images/" + candidate.getPathOfImage();
 
-        if (!folder.exists() || !folder.isDirectory()) {
-            return Response.noContent().build();
-        }
-
-        File[] files = folder.listFiles();
-
-        if (files == null) {
-            return Response.noContent().build();
-        }
-
-        for (File file : files) {
-            if (file.isFile() && candidate.getPathOfImage().equals(file.getName())) {
-                byte[] imageBytes = Files.readAllBytes(file.toPath());
-                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-                CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
-                return Response.ok(imageDTO).build();
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(imagePath)) {
+            if (inputStream == null) {
+                return Response.noContent().build();
             }
-        }
 
-        return Response.noContent().build();
+            byte[] imageBytes = inputStream.readAllBytes();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
+            return Response.ok(imageDTO).build();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle or log the exception appropriately
+            return Response.serverError().build();
+        }
     }
+
     @GET
     @Path("images")
     @Produces(MediaType.APPLICATION_JSON)
@@ -91,7 +85,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     }
 
     @POST
-    @Path("uploadImage")
+    @Path("images")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
     default Response uploadImage(MultipartFormDataInput input) {
