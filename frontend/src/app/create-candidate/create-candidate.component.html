@@ -46,12 +46,13 @@
       <th>Class</th>
       <th></th>
     </tr>
-    <tr *ngFor="let candidate of candidates; let i = index" [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
-      <td>{{candidate.id}}</td>
-      <td>{{candidate.firstName}} {{candidate.lastName}}</td>
-      <td>{{candidate.grade}}</td>
+    <tr *ngFor="let candidate of candidates; let i = index"
+        [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
+      <td>{{ candidate.id }}</td>
+      <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
+      <td>{{ candidate.grade }}</td>
       <td>
-        <button style="background-color: rgba(255,0,0,0)" (click)="deleteCandidate(candidate)" class="btn">
+        <button style="background-color: rgba(255,0,0,0)" (click)="confirmDelete(candidate)" class="btn">
           <i class="fa fa-minus"></i>
         </button>
       </td>

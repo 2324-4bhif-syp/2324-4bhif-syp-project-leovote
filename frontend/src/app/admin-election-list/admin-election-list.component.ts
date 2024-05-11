@@ -18,7 +18,7 @@ export class AdminElectionListComponent {
     this.electionService.selectedElection = election;
   }
 
-  loadElections(){
+  loadElections() {
     this.electionService.getList().forEach(value => {
       this.elections = value;
     });
@@ -33,14 +33,15 @@ export class AdminElectionListComponent {
     const now = new Date();
     return date > now;
   }
+
   confirmDelete(id: number | null) {
-    if (confirm("Are you sure you want to delete this election?")) {
+    if (confirm("Are you sure you want to delete this Election?")) {
       this.deleteElection(id);
     }
   }
 
   deleteElection(id: number | null) {
-    if(id != null){
+    if (id != null) {
       this.electionService.delete(id.toString()).subscribe(() => {
         this.loadElections()
       });
@@ -49,5 +50,5 @@ export class AdminElectionListComponent {
     }
   }
 
-    protected readonly Date = Date;
+  protected readonly Date = Date;
 }
