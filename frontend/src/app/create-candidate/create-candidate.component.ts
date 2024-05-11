@@ -46,13 +46,11 @@ export class CreateCandidateComponent {
     const rows = this.csvData.split('\n');
     rows.shift();
     for (const row of rows) {
-      const [schoolId, firstName, lastName, grade, pathOfImage] = row.split(',');
+      const [schoolId, firstName, lastName, grade, pathOfImage] = row.split(';');
       if (schoolId && firstName && lastName && grade) {
         console.log(pathOfImage)
         const candidate = new Candidate(schoolId, firstName, lastName, grade, pathOfImage);
-        console.log("KAndidaten: ", candidate)
         if (!pathOfImage) {
-          console.log("WARUMMMM")
           candidate.pathOfImage = "default.jpg";
         }
         this.candidate = candidate;
@@ -73,9 +71,8 @@ export class CreateCandidateComponent {
   }
 
   createCandidate() {
-    console.log(this.candidate)
     if (this.imageFile) {
-      this.candidateService.uploadImage(this.imageFile,this.candidate.id).subscribe(
+      this.candidateService.uploadImage(this.imageFile,this.candidate.schoolId).subscribe(
         (response: string) => {
           console.log('Bild erfolgreich hochgeladen:', response);
         },
@@ -84,8 +81,7 @@ export class CreateCandidateComponent {
         }
       );
       if (this.imageFile != null) {
-        this.candidate.pathOfImage = this.imageFile.name;
-        console.log(this.imageFile.name)
+        this.candidate.pathOfImage = this.candidate.schoolId + ".jpg";
       } else {
         if (this.candidate.pathOfImage === '') {
           this.candidate.pathOfImage = 'default.jpg';

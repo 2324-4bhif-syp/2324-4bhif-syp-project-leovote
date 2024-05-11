@@ -45,7 +45,7 @@ export class CandidateService {
     return this.refreshListSubject.asObservable();
   }
 
-  uploadImage(image: File, id: number | null): Observable<any> {
+  uploadImage(image: File, id: string): Observable<any> {
     if(id === null) {
       console.error("Upload Image: Candidate ID INVALID")
       return new Observable<any>(observer => {})

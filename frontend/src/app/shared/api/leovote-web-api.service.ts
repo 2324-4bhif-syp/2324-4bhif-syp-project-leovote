@@ -113,7 +113,7 @@ export class LeovoteWebApiService {
       .replace('${code}', code), {headers: this.headers});
   }
 
-  public uploadImage(image: File, id: number) {
+  public uploadImage(image: File, id: string) {
     const formData: FormData = new FormData();
     formData.append('image', image, image.name);
     console.log(this.baseUrl + this.uploadImageUrl);
