@@ -25,6 +25,39 @@ import java.util.Map;
 @ResourceProperties(path = "candidates")
 public interface CandidateResource extends PanacheRepositoryResource<CandidateRepository, Candidate, Long> {
     @GET
+    @Path("images/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    default Response getCandidateImageById(@PathParam("id") Long id) throws IOException {
+        Candidate candidate = Candidate.findById(id);
+
+        if (candidate == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        File folder = new File("src/main/resources/images");
+
+        if (!folder.exists() || !folder.isDirectory()) {
+            return Response.noContent().build();
+        }
+
+        File[] files = folder.listFiles();
+
+        if (files == null) {
+            return Response.noContent().build();
+        }
+
+        for (File file : files) {
+            if (file.isFile() && candidate.getPathOfImage().equals(file.getName())) {
+                byte[] imageBytes = Files.readAllBytes(file.toPath());
+                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
+                return Response.ok(imageDTO).build();
+            }
+        }
+
+        return Response.noContent().build();
+    }
+    @GET
     @Path("images")
     @Produces(MediaType.APPLICATION_JSON)
     default Response getAllCandidateImages() throws IOException {

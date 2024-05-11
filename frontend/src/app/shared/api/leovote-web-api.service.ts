@@ -35,6 +35,7 @@ export class LeovoteWebApiService {
   private getCandidatesAndImages: string = 'candidates/images';
   private getCandidateByIdUrl: string = 'candidates/${id}';
   private getImageByIdUrl: string = 'candidates/images/${id}';
+  private updateCandidateUrl: string = 'candidates/${id}';
 
   constructor(private http: HttpClient) { }
   public getAllCandidates(){
@@ -117,5 +118,9 @@ export class LeovoteWebApiService {
 
   public getImageById(id: number) {
     return this.http.get<CandidateImage>(this.baseUrl + this.getImageByIdUrl.replace('${id}', id.toString()), {headers: this.headers});
+  }
+
+  public updateCandidate(candidate: Candidate, id: number) {
+    return this.http.put(this.baseUrl + this.updateCandidateUrl.replace('${id}', id.toString()), candidate, {headers: this.headers});
   }
 }

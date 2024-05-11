@@ -60,4 +60,8 @@ export class CandidateService {
   getImageById(id: number): Observable<CandidateImage> {
     return this.apiClient.getImageById(id);
   }
+
+  update(candidate: Candidate, id: number): Observable<Object> {
+    return this.apiClient.updateCandidate(candidate, id);
+  }
 }

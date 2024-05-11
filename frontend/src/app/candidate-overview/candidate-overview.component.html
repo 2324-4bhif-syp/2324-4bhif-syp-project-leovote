@@ -16,7 +16,7 @@
       <div class="card mb-4 box-shadow text-center h-100"
            style="align-content: center" [routerLink]="['/admin', 'overview' ,'candidate-update']"
            [queryParams]="{candidate: candidate.id}">
-        <button class="delete-btn" (click)="deleteCandidate(candidate)">
+        <button class="delete-btn" (click)="deleteCandidate(candidate); $event.stopPropagation()">
           <i class="fa fa-trash fa-2x"></i>
         </button>
         <div class="container-for-image">

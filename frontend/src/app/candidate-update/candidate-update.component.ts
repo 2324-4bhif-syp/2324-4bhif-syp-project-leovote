@@ -14,10 +14,12 @@ export class CandidateUpdateComponent {
   candidateId: number | null = null;
   candidate: Candidate = new Candidate();
   candidateImage: CandidateImage | null = null;
+  updatedCandidate: Candidate = new Candidate();
 
   constructor(
     private candidateService: CandidateService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
     this.route.queryParamMap.subscribe(params => {
       const id = params.get('candidate');
       if (id != null && Number(id)) {
@@ -50,6 +52,10 @@ export class CandidateUpdateComponent {
   }
 
   updateCandidate() {
-
+    if (this.candidateId != null) {
+      this.candidateService.update(this.updatedCandidate, this.candidateId).subscribe(() => {
+        this.router.navigate(['/admin', "overview", "candidate-overview"]);
+      });
+    }
   }
 }
