@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Election} from "../shared/entity/election-model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Candidate} from "../shared/entity/candidate-model";
+import {CandidateService} from "../shared/control/candidate.service";
+import {CandidateImage} from "../shared/entity/candidate-image";
 
 @Component({
   selector: 'app-candidate-update',
@@ -9,16 +12,44 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class CandidateUpdateComponent {
   candidateId: number | null = null;
+  candidate: Candidate = new Candidate();
+  candidateImage: CandidateImage | null = null;
 
   constructor(
+    private candidateService: CandidateService,
     private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe(params => {
       const id = params.get('candidate');
       if (id != null && Number(id)) {
         this.candidateId = Number(id);
+        candidateService.getById(this.candidateId).subscribe(candidate => {
+          this.candidate = candidate;
+          if (this.candidateId != null) {
+            this.candidateService.getImageById(this.candidateId).subscribe(candidateImage => {
+              this.candidateImage = candidateImage;
+              this.linkCandidateImages();
+            });
+          }
+        });
       }
     });
   }
 
-  election: Election | undefined = undefined;
+  linkCandidateImages() {
+    if (this.candidateImage != null && this.candidate != null) {
+      this.candidate.pathOfImage = this.candidateImage.imagePath;
+    }
+  }
+
+  getBase64Image(base64String: string | undefined): string {
+    return `data:image/jpeg;base64,${base64String}`;
+  }
+
+  onImageChange($event: Event) {
+
+  }
+
+  updateCandidate() {
+
+  }
 }
