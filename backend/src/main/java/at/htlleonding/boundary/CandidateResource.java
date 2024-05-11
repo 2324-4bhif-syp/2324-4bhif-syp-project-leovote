@@ -60,12 +60,6 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Produces(MediaType.APPLICATION_JSON)
     default Response getAllCandidateImages() {
         List<Candidate> candidates = Candidate.listAll();
-        Map<String, Candidate> candidateImageMap = new HashMap<>();
-
-        for (Candidate candidate : candidates) {
-            candidateImageMap.put(candidate.getPathOfImage(), candidate);
-        }
-
         List<CandidateImageDTO> imageDTOList = new ArrayList<>();
         File folder = new File("src/main/resources/images");
 
@@ -79,20 +73,23 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
             return Response.noContent().build();
         }
 
-        for (File file : files) {
-            if (file.isFile()) {
-                Candidate candidate = candidateImageMap.get(file.getName());
-                if (candidate != null) {
-                    try {
-                        byte[] imageBytes = Files.readAllBytes(file.toPath());
-                        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-                        CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
-                        imageDTOList.add(imageDTO);
-                    } catch (IOException e) {
-                        e.printStackTrace(); // Handle or log the exception appropriately
-                        return Response.serverError().build();
-                    }
-                }
+        // Map images to candidates
+
+        for (Candidate candidate : candidates) {
+            File imageFile = new File("src/main/resources/images/" + candidate.getPathOfImage());
+
+            if (!imageFile.exists() || !imageFile.isFile()) {
+                imageFile = new File("src/main/resources/images/default.jpg");
+            }
+
+            try {
+                byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
+                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
+                imageDTOList.add(imageDTO);
+            } catch (IOException e) {
+                e.printStackTrace(); // Handle or log the exception appropriately
+                return Response.serverError().build();
             }
         }
 
