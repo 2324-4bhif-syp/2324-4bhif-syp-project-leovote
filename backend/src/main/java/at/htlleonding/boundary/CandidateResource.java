@@ -51,6 +51,40 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
         return Response.ok().build();
     }
 
+    // Overide the default panache endpoint of put
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    default Response updateCandidate(@PathParam("id") Long id, Candidate candidate) {
+        Candidate candidateToUpdate = Candidate.findById(id);
+
+        if (candidateToUpdate == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        // Rename old image to new school ID
+
+        File oldImageFile = new File("src/main/resources/images/" + candidateToUpdate.getSchoolId() + ".jpg");
+        File newImageFile = new File("src/main/resources/images/" + candidate.getSchoolId() + ".jpg");
+
+        if (oldImageFile.exists() && !newImageFile.exists()) {
+            oldImageFile.renameTo(newImageFile);
+        }
+
+        candidateToUpdate.setSchoolId(candidate.getSchoolId());
+        candidateToUpdate.setFirstName(candidate.getFirstName());
+        candidateToUpdate.setLastName(candidate.getLastName());
+        candidateToUpdate.setGrade(candidate.getGrade());
+        candidateToUpdate.setPathOfImage(newImageFile.getName());
+
+        candidateToUpdate.persist();
+
+        return Response.ok(candidateToUpdate).build();
+    }
+
     @GET
     @Path("images/{id}")
     @Produces(MediaType.APPLICATION_JSON)
