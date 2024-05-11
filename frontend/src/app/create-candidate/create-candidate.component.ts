@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Candidate} from "../shared/entity/candidate-model";
 import {CandidateService} from "../shared/control/candidate.service";
+import {throwError} from "rxjs";
 
 @Component({
   selector: 'app-create-candidate',
@@ -45,10 +46,13 @@ export class CreateCandidateComponent {
     const rows = this.csvData.split('\n');
     rows.shift();
     for (const row of rows) {
-      const [schoolId, firstName, lastName, grade, pathOfImage] = row.split(';');
+      const [schoolId, firstName, lastName, grade, pathOfImage] = row.split(',');
       if (schoolId && firstName && lastName && grade) {
+        console.log(pathOfImage)
         const candidate = new Candidate(schoolId, firstName, lastName, grade, pathOfImage);
+        console.log("KAndidaten: ", candidate)
         if (!pathOfImage) {
+          console.log("WARUMMMM")
           candidate.pathOfImage = "default.jpg";
         }
         this.candidate = candidate;
@@ -110,8 +114,13 @@ export class CreateCandidateComponent {
     );
   }
 
+  confirmDelete(candidate: Candidate) {
+    if (confirm("Are you sure you want to delete this Candidate?")) {
+      this.deleteCandidate(candidate);
+    }
+  }
+
   deleteCandidate(candidate: Candidate): void {
-    if(confirm(`Do you want to delete ${candidate.firstName} ${candidate.lastName}`))
     if (candidate.id !== null) {
       this.candidateService.isCandidateInAnyElection(candidate.id).subscribe(
         isInAnyElection => {

@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import { Candidate } from "../shared/entity/candidate-model";
-import { Election } from "../shared/entity/election-model";
-import { CandidateService } from "../shared/control/candidate.service";
-import { ElectionService } from "../shared/control/election.service";
+import {Candidate} from "../shared/entity/candidate-model";
+import {Election} from "../shared/entity/election-model";
+import {CandidateService} from "../shared/control/candidate.service";
+import {ElectionService} from "../shared/control/election.service";
 
 @Component({
   selector: 'app-create-election',
   templateUrl: './create-election.component.html',
   styleUrls: ['./create-election.component.css']
 })
-export class CreateElectionComponent implements OnInit{
+export class CreateElectionComponent implements OnInit {
   selectedCandidates: Candidate[] = [];
   availableCandidates: Candidate[] = [];
   elections: Election[] = [];
@@ -40,7 +40,7 @@ export class CreateElectionComponent implements OnInit{
     }
   }
 
-  loadAvailableCandidates(): void{
+  loadAvailableCandidates(): void {
     this.candidateService.getList().subscribe(
       candidates => {
         this.availableCandidates = candidates;
@@ -49,6 +49,7 @@ export class CreateElectionComponent implements OnInit{
       error => console.error('Error loading candidates:', error)
     );
   }
+
   constructor(
     protected candidateService: CandidateService,
     protected electionService: ElectionService
@@ -67,9 +68,10 @@ export class CreateElectionComponent implements OnInit{
     }
   }
 
-  checkMoreThanOneCandidate(){
+  checkMoreThanOneCandidate() {
     return this.selectedCandidates.length > 1;
   }
+
   createElection() {
     this.election.participatingCandidates = this.selectedCandidates;
     this.electionService.add(this.election).subscribe(
@@ -90,9 +92,17 @@ export class CreateElectionComponent implements OnInit{
       "",
       "", [])
   }
+
   isSelected(candidate: Candidate): boolean {
     return this.selectedCandidates.some(selected => selected.id === candidate.id);
   }
+
+  confirmDelete(election: Election) {
+    if (confirm("Are you sure you want to delete this Election?")) {
+      this.deleteElection(election);
+    }
+  }
+
   deleteElection(election: Election): void {
     if(confirm(`Do you want to delete election ${election.name}?`))
     if (election.id !== null) {
