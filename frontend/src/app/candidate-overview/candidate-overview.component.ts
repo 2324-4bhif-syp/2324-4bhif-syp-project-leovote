@@ -3,6 +3,7 @@ import {Candidate} from "../shared/entity/candidate-model";
 import {ElectionService} from "../shared/control/election.service";
 import {CandidateService} from "../shared/control/candidate.service";
 import {CandidateImage} from "../shared/entity/candidate-image";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-candidate-overview',
   templateUrl: './candidate-overview.component.html',
@@ -14,7 +15,8 @@ export class CandidateOverviewComponent implements OnInit {
   searchText: string = "";
   filteredCandidates: Candidate[] = [];
 
-  constructor(public candidateService: CandidateService) {
+  constructor(public candidateService: CandidateService,
+              private router: Router) {
   }
 
   ngOnInit() {

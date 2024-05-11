@@ -14,7 +14,8 @@
     <div *ngFor="let candidate of filteredCandidates; let index" class="col-md-6"
          style="width: 0; padding-right: 340px; padding-bottom: 20px">
       <div class="card mb-4 box-shadow text-center h-100"
-           style="align-content: center">
+           style="align-content: center" [routerLink]="['/admin', 'overview' ,'candidate-update']"
+           [queryParams]="{candidate: candidate.id}">
         <button class="delete-btn" (click)="deleteCandidate(candidate)">
           <i class="fa fa-trash fa-2x"></i>
         </button>
