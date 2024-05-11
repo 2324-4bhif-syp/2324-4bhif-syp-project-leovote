@@ -6,6 +6,7 @@ import at.htlleonding.entity.dto.CandidateImageDTO;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
 import jakarta.enterprise.inject.spi.CDI;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.MultivaluedMap;
@@ -24,6 +25,31 @@ import java.util.*;
 @ResourceProperties(path = "candidates")
 public interface CandidateResource extends PanacheRepositoryResource<CandidateRepository, Candidate, Long> {
     CandidateRepository candidateRepository = CDI.current().select(CandidateRepository.class).get();
+
+    @DELETE
+    @Transactional
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    default Response deleteCandidate(@PathParam("id") Long id) {
+        Candidate candidate = Candidate
+                .findById(id);
+
+        if (candidate == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        // Delete image file
+        String imagePath = "src/main/resources/images/" + candidate.getPathOfImage();
+        File imageFile = new File(imagePath);
+
+        if (imageFile.exists() && imageFile.isFile()) {
+            imageFile.delete();
+        }
+
+        candidate.delete();
+
+        return Response.ok().build();
+    }
 
     @GET
     @Path("images/{id}")

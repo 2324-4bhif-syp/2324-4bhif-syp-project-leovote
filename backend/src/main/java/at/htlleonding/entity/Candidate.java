@@ -93,19 +93,6 @@ public class Candidate extends PanacheEntity {
     //</editor-fold>
 
     @Override
-    public void delete() {
-        super.delete();
-
-        String[] extensions = new String[]{"jpg", "jpeg", "png"};
-        for (String extension : extensions) {
-            File imageFile = new File("src/main/resources/images/" + getSchoolId() + "." + extension);
-            if (imageFile.exists()) {
-                imageFile.delete();
-            }
-        }
-    }
-
-    @Override
     public void persistAndFlush() {
         super.persistAndFlush();
 
