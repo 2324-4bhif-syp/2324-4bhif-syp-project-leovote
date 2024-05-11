@@ -31,7 +31,7 @@ export class LeovoteWebApiService {
   private removeElection: string = 'elections/${id}';
   private checkLoginDataUrl: string = 'token';
   private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}';
-  private uploadImageUrl: string = 'candidates/uploadImage';
+  private uploadImageUrl: string = 'candidates/images';
   private getCandidatesAndImages: string = 'candidates/images';
   private getCandidateByIdUrl: string = 'candidates/${id}';
   private getImageByIdUrl: string = 'candidates/images/${id}';
