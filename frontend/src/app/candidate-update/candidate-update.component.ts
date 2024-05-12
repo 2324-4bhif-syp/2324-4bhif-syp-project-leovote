@@ -64,7 +64,11 @@ export class CandidateUpdateComponent implements OnInit{
   updateCandidate() {
     if (this.candidateId != null) {
       if (this.imageFile) {
-        this.candidate.pathOfImage = this.imageFile.name;
+        let fileExtension: string = this.imageFile.name.split(".").pop()!;
+        // Erstelle den neuen Dateinamen durch Verknüpfen von schoolId und Dateiendung
+        let newFileName: string = `${this.updatedCandidate.schoolId}.${fileExtension}`;
+        this.candidate.pathOfImage = newFileName;
+        console.log("HIER: " + newFileName)
         this.candidateService.update(this.updatedCandidate, this.candidateId).subscribe(
           (response) => {
             console.log('Candidate updated successfully:', response);
@@ -81,7 +85,8 @@ export class CandidateUpdateComponent implements OnInit{
             console.error('Fehler beim Hochladen des Bildes:', error);
           }
         );
-        //this.router.navigate(['/admin', "overview", "candidate-overview"]);
+        this.resetImageInput();
+        this.router.navigate(['/admin', "overview", "candidate-overview"]);
       } else {
 
       }
