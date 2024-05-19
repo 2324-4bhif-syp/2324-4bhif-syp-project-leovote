@@ -73,7 +73,6 @@ a|
 * Praktische Umsetzung: eine Wahldemo -> Klassenordner
 * Warnung vor kritischen Situationen z.B. Wahl löschen, Stimmabgabe
 * Bilder löschen -> wenn Kandidaten gelöscht werden
-* Blockchain löschen -> wenn Wahl gelöscht wird
 * Am Ende einer Stimmabgabe die gewählte Person anzeigen
 * Editier-Funktionen bei Kandidaten
 * Vorschau bei Kandidaten
