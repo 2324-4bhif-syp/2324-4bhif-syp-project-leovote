@@ -9,7 +9,7 @@ import {CandidateImage} from "../shared/entity/candidate-image";
   templateUrl: './candidate-update.component.html',
   styleUrls: ['./candidate-update.component.css']
 })
-export class CandidateUpdateComponent implements OnInit{
+export class CandidateUpdateComponent implements OnInit {
   candidateId: number | null = null;
   candidate: Candidate = new Candidate();
   candidateImage: CandidateImage | null = null;
@@ -29,6 +29,7 @@ export class CandidateUpdateComponent implements OnInit{
         this.candidateId = Number(id);
         this.candidateService.getById(this.candidateId).subscribe(candidate => {
           this.candidate = candidate;
+          this.updatedCandidate.schoolId = this.candidate.schoolId;
           if (this.candidateId != null) {
             this.candidateService.getImageById(this.candidateId).subscribe(candidateImage => {
               this.candidateImage = candidateImage;
@@ -39,6 +40,7 @@ export class CandidateUpdateComponent implements OnInit{
       }
     });
   }
+
   onImageChange(event: any) {
     this.imageFile = event.target.files[0];
   }
@@ -69,6 +71,7 @@ export class CandidateUpdateComponent implements OnInit{
         let newFileName: string = `${this.updatedCandidate.schoolId}.${fileExtension}`;
         this.candidate.pathOfImage = newFileName;
         console.log("HIER: " + newFileName)
+        console.log(this.updatedCandidate.schoolId);
         this.candidateService.update(this.updatedCandidate, this.candidateId).subscribe(
           (response) => {
             console.log('Candidate updated successfully:', response);
