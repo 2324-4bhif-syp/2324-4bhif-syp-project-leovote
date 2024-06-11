@@ -14,7 +14,7 @@ import {CandidateImage} from "../entity/candidate-image";
 export class LeovoteWebApiService {
 
   headers = new HttpHeaders().set('Accept', 'application/json');
-  //baseUrl = 'http://89.168.107.125/api/';   //set it like that for server usage. comment oder baseUrl
+  //baseUrl = 'http://leovote.htl-leonding.ac.at/api/';   //set it like that for server usage. comment oder baseUrl
   private baseUrl = 'http://localhost:8080/';
   private candidates = 'candidates';
   private elections: string = 'elections';
