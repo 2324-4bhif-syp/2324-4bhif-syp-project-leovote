@@ -49,7 +49,7 @@ export class CandidateOverviewComponent implements OnInit {
         const matchingImage = this.candidatesImage.find((c) => c.candidateId === candidate.id);
         if (matchingImage) {
           candidate.pathOfImage = matchingImage.imagePath;
-          console.log(candidate.pathOfImage);
+          //console.log(candidate.pathOfImage);
         }
       });
     }

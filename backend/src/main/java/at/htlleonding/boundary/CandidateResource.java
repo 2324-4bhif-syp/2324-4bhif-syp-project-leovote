@@ -45,17 +45,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
         if (candidate == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-
-        // Delete image file
-        String imagePath = "src/main/resources/images/" + candidate.getPathOfImage();
-        File imageFile = new File(imagePath);
-
-        if (imageFile.exists() && imageFile.isFile()) {
-            imageFile.delete();
-        }
-
-        candidate.delete();
-
+        candidateRepository.deleteFile(candidate);
         return Response.ok().build();
     }
 
@@ -72,24 +62,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
         if (candidateToUpdate == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-
-        // Rename old image to new school ID
-
-        File oldImageFile = new File("src/main/resources/images/" + candidateToUpdate.getSchoolId() + ".jpg");
-        File newImageFile = new File("src/main/resources/images/" + candidate.getSchoolId() + ".jpg");
-
-        if (oldImageFile.exists() && !newImageFile.exists()) {
-            oldImageFile.renameTo(newImageFile);
-        }
-
-        candidateToUpdate.setSchoolId(candidate.getSchoolId());
-        candidateToUpdate.setFirstName(candidate.getFirstName());
-        candidateToUpdate.setLastName(candidate.getLastName());
-        candidateToUpdate.setGrade(candidate.getGrade());
-        candidateToUpdate.setPathOfImage(newImageFile.getName());
-
-        candidateToUpdate.persist();
-
+        candidateRepository.updateFile(candidate, candidateToUpdate);
         return Response.ok(candidateToUpdate).build();
     }
 
@@ -169,13 +142,6 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
     default Response uploadImage(@PathParam("id") String schoolId, MultipartFormDataInput input) {
-        // Get candidate by SchoolId
-        Candidate candidate = candidateRepository.findBySchoolId(schoolId);
-        if (candidate == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Candidate with ID " + schoolId + " not found.").build();
-        }
-
         // Validate file type
         String fileName;
         String[] allowedExtensions = new String[]{"jpg", "jpeg", "png"};
