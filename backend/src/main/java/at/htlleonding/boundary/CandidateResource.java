@@ -26,6 +26,14 @@ import java.util.*;
 public interface CandidateResource extends PanacheRepositoryResource<CandidateRepository, Candidate, Long> {
     CandidateRepository candidateRepository = CDI.current().select(CandidateRepository.class).get();
 
+    @GET
+    @Path("/all")
+    @Produces(MediaType.APPLICATION_JSON)
+    default Response getAllCandidates() {
+        List<Candidate> candidates = Candidate.listAll();
+        return Response.ok(candidates).build();
+    }
+
     @DELETE
     @Transactional
     @Path("{id}")
