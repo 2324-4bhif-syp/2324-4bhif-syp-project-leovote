@@ -50,8 +50,9 @@ export class ResultsComponent implements OnInit {
         aspectRatio: 0.6,
         plugins: {
           legend: {
-            position:"top",
+            position:"right",
             display:true,
+
           }
         }
       },
