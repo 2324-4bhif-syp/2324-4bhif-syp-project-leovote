@@ -9,17 +9,9 @@ import jakarta.enterprise.inject.spi.CDI;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
-import org.apache.commons.io.FilenameUtils;
-import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.*;
 
 @ResourceProperties(path = "candidates")
@@ -70,25 +62,14 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Path("images/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     default Response getCandidateImageById(@PathParam("id") Long id) {
-        Candidate candidate = Candidate.findById(id);
-
-        if (candidate == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        String imagePath = "src/main/resources/images/" + candidate.getPathOfImage();
-        System.out.println(imagePath);
-
-        File imageFile = new File(imagePath);
-
-        if (!imageFile.exists() || !imageFile.isFile()) {
-            return Response.noContent().build();
-        }
-
         try {
-            byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
+            CandidateImageDTO imageDTO = candidateRepository.getImageByCandidateId(id);
+            if(imageDTO == null) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+            if (imageDTO.imagePath() == null) {
+                return Response.noContent().build();
+            }
             return Response.ok(imageDTO).build();
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,41 +81,12 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Path("images")
     @Produces(MediaType.APPLICATION_JSON)
     default Response getAllCandidateImages() {
-        List<Candidate> candidates = Candidate.listAll();
-        List<CandidateImageDTO> imageDTOList = new ArrayList<>();
-        File folder = new File("src/main/resources/images");
-
-        if (!folder.exists() || !folder.isDirectory()) {
-            return Response.noContent().build();
+        try{
+            return Response.ok(candidateRepository.getImagesForCandidates()).build();
+        }  catch (IOException e) {
+            e.printStackTrace();
+            return Response.serverError().build();
         }
-
-        File[] files = folder.listFiles();
-
-        if (files == null) {
-            return Response.noContent().build();
-        }
-
-        // Map images to candidates
-
-        for (Candidate candidate : candidates) {
-            File imageFile = new File("src/main/resources/images/" + candidate.getPathOfImage());
-
-            if (!imageFile.exists() || !imageFile.isFile()) {
-                imageFile = new File("src/main/resources/images/default.jpg");
-            }
-
-            try {
-                byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
-                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-                CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
-                imageDTOList.add(imageDTO);
-            } catch (IOException e) {
-                e.printStackTrace(); // Handle or log the exception appropriately
-                return Response.serverError().build();
-            }
-        }
-
-        return Response.ok(imageDTOList).build();
     }
 
     @POST
@@ -142,62 +94,17 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
     default Response uploadImage(@PathParam("id") String schoolId, MultipartFormDataInput input) {
-        // Validate file type
-        String fileName;
-        String[] allowedExtensions = new String[]{"jpg", "jpeg", "png"};
-
-        Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
-        List<InputPart> inputParts = uploadForm.get("image");
-
-        for (InputPart inputPart : inputParts) {
-            try {
-                fileName = schoolId + ".jpg"; // Use school ID as file name
-
-                // Check file extension
-                String fileExtension = FilenameUtils.getExtension(fileName);
-                if (!Arrays.asList(allowedExtensions).contains(fileExtension.toLowerCase())) {
-                    return Response.status(Response.Status.BAD_REQUEST)
-                            .entity("Only JPG, JPEG, and PNG files are allowed.").build();
-                }
-
-                InputStream inputStream = inputPart.getBody(InputStream.class, null);
-
-                String uploadDirectory = "src/main/resources/images";
-                String filePath = uploadDirectory + File.separator + fileName;
-                writeFile(inputStream, filePath);
-                return Response.ok().entity("Bild erfolgreich hochgeladen: " + filePath).build();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                        .entity("Fehler beim Hochladen des Bildes: " + e.getMessage()).build();
+        try {
+            String message = candidateRepository.createImage(schoolId, input);
+            if (message.contains("Bild erfolgreich hochgeladen:")) {
+                return Response.ok().entity(message).build();
             }
-        }
-
-        return Response.status(Response.Status.BAD_REQUEST)
-                .entity("Keine Datei hochgeladen.").build();
-    }
-
-
-    private String getFileName(MultivaluedMap<String, String> headers) {
-        String[] contentDisposition = headers.getFirst("Content-Disposition").split(";");
-        for (String filename : contentDisposition) {
-            if (filename.trim().startsWith("filename")) {
-                return filename.substring(filename.indexOf("=") + 1).trim().replaceAll("\"", "");
-            }
-        }
-        return "unknown";
-    }
-
-    private void writeFile(InputStream inputStream, String filePath) throws IOException {
-        File file = new File(filePath);
-        file.getParentFile().mkdirs();
-
-        try (FileOutputStream outputStream = new FileOutputStream(file)) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(message).build();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Fehler beim Hochladen des Bildes: " + exception.getMessage()).build();
         }
     }
 }
