@@ -16,7 +16,7 @@ export class LeovoteWebApiService {
   headers = new HttpHeaders().set('Accept', 'application/json');
   //baseUrl = 'http://leovote.htl-leonding.ac.at/api/';   //set it like that for server usage. comment oder baseUrl
   private baseUrl = 'http://localhost:8080/';
-  private candidates = 'candidates';
+  private candidates = 'candidates/all';
   private elections: string = 'elections';
   private addElectionUrl: string = 'elections/election';
   private electionById: string = 'elections/${id}'
