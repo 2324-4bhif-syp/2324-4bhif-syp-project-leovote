@@ -90,7 +90,7 @@ export class CreateCandidateComponent {
       this.addCandidate();
     } else {
       if (this.candidate.pathOfImage === '') {
-        this.candidate.pathOfImage = 'default.jpg';
+        this.candidate.pathOfImage = '';
       }
       this.addCandidate();
     }
@@ -143,5 +143,9 @@ export class CreateCandidateComponent {
         }
       );
     }
+  }
+
+  checkFields() {
+    return this.candidate.schoolId === '' || this.candidate.firstName === '' || this.candidate.lastName === '' || this.candidate.grade === '';
   }
 }

@@ -16,7 +16,8 @@ export class LeovoteWebApiService {
   headers = new HttpHeaders().set('Accept', 'application/json');
   //baseUrl = 'http://leovote.htl-leonding.ac.at/api/';   //set it like that for server usage. comment oder baseUrl
   private baseUrl = 'http://localhost:8080/';
-  private candidates = 'candidates/all';
+  private candidates = 'candidates';
+  private candidatesAll = 'candidates/all';
   private elections: string = 'elections';
   private addElectionUrl: string = 'elections/election';
   private electionById: string = 'elections/${id}'
@@ -42,7 +43,7 @@ export class LeovoteWebApiService {
   }
 
   public getAllCandidates() {
-    return this.http.get<Candidate[]>(this.baseUrl + this.candidates, {headers: this.headers});
+    return this.http.get<Candidate[]>(this.baseUrl + this.candidatesAll, {headers: this.headers});
   }
 
   public getAllElections() {
