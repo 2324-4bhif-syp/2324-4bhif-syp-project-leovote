@@ -34,8 +34,8 @@ export class AdminElectionListComponent {
     return date > now;
   }
 
-  confirmDelete(id: number | null) {
-    if (confirm("Are you sure you want to delete this Election?")) {
+  confirmDelete(id: number | null, election: Election) {
+    if (confirm(`Are you sure you want to delete Election: ${election.name} ?`)) {
       this.deleteElection(id);
     }
   }

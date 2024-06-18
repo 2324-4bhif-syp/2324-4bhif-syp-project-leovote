@@ -111,8 +111,8 @@ export class CreateCandidateComponent {
   }
 
   confirmDelete(candidate: Candidate) {
-    if (confirm("Are you sure you want to delete this Candidate?")) {
-      this.deleteCandidate(candidate);
+    if (confirm(`Are you sure you want to delete Candidate: ${candidate.firstName} ${candidate.lastName}?`)) {
+      this.deleteCandidate(candidate);``
     }
   }
 

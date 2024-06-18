@@ -60,7 +60,7 @@ export class CandidateOverviewComponent implements OnInit {
 
   deleteCandidate(candidate: Candidate): void {
     if (candidate.id !== null) {
-      if(confirm(`Do you want to delete ${candidate.firstName} ${candidate.lastName}`))
+      if(confirm(`Do you want to delete ${candidate.firstName} ${candidate.lastName}?`))
       this.candidateService.isCandidateInAnyElection(candidate.id).subscribe(
         isInAnyElection => {
           if (isInAnyElection) {
