@@ -93,7 +93,11 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
         File imageFile = new File(imagePath);
 
         if (!imageFile.exists() || !imageFile.isFile()) {
-            return new CandidateImageDTO(id, null);
+            String imagePathDefault = PATH_IMAGES + DEFAULT_IMAGE;
+            File imageFileDefault = new File(imagePathDefault);
+            byte[] imageBytes = Files.readAllBytes(imageFileDefault.toPath());
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            return new CandidateImageDTO(candidate.id, base64Image);
         }
 
         byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
