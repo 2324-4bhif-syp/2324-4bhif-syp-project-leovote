@@ -37,7 +37,7 @@ export class LeovoteWebApiService {
   private getCandidatesAndImages: string = 'candidates/images';
   private getCandidateByIdUrl: string = 'candidates/${id}';
   private getImageByIdUrl: string = 'candidates/images/${id}';
-  private updateCandidateUrl: string = 'candidates/${id}';
+  private updateCandidateUrl: string = 'candidates/update/${id}';
 
   constructor(private http: HttpClient) {
   }
