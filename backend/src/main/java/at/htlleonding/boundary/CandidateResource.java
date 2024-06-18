@@ -44,7 +44,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     // Overide the default panache endpoint of put
 
     @PUT
-    @Path("{id}")
+    @Path("update/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
@@ -52,7 +52,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
         Candidate candidateToUpdate = Candidate.findById(id);
 
         if (candidateToUpdate == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).entity("Entity with id " + id + " not found").build();
         }
         candidateRepository.updateFile(candidate, candidateToUpdate);
         return Response.ok(candidateToUpdate).build();
