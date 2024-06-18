@@ -51,7 +51,7 @@ export class CreateCandidateComponent {
         console.log(pathOfImage)
         const candidate = new Candidate(schoolId, firstName, lastName, grade, pathOfImage);
         if (!pathOfImage) {
-          candidate.pathOfImage = "default.jpg";
+          candidate.pathOfImage = "";
         }
         this.candidate = candidate;
         this.createCandidate();
@@ -84,7 +84,7 @@ export class CreateCandidateComponent {
         this.candidate.pathOfImage = this.candidate.schoolId + ".jpg";
       } else {
         if (this.candidate.pathOfImage === '') {
-          this.candidate.pathOfImage = 'default.jpg';
+          this.candidate.pathOfImage = '';
         }
       }
       this.addCandidate();
