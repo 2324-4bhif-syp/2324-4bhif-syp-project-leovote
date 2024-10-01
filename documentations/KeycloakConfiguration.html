@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Documentations</title>
+<title>Configuration for Keycloak (01.10.24)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,19 +437,136 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Documentations</h1>
+<h1>Configuration for Keycloak (01.10.24)</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_documentation_about_encryption_03_11_23">1. Documentation about Encryption 03-11-23</a></li>
+<li><a href="#_frontend">1. Frontend</a></li>
+<li><a href="#_backend">2. Backend</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_documentation_about_encryption_03_11_23"><a class="anchor" href="#_documentation_about_encryption_03_11_23"></a>1. <a href="https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/documentations/documentationEncryption">Documentation about Encryption 03-11-23</a></h2>
+<h2 id="_frontend"><a class="anchor" href="#_frontend"></a>1. Frontend</h2>
 <div class="sectionbody">
-
+<div class="ulist">
+<ul>
+<li>
+<p>The whole configuration for out Keycloak is found in those two ts files found in out util directory.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/folder.png" alt="folder">
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>app.init.ts</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Configurations made in this file:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The URL where the keycloak is found.</p>
+</li>
+<li>
+<p>The realm for our project, which is set in the keycloak.</p>
+</li>
+<li>
+<p>The clientID, which is the "name" of our project in the keycloak.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>We have two configurations. One for the deployed application on the server, and one for local testing.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>We also set the iframe from the keycloak to be shown (the login mask)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/appInit.png" alt="appInit">
+</div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>app.guard.ts</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Configurations made in this file:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Set the keycloak login redirectURL.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Where the browser has to go, to show the login mask</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The roles, which are needed to successfully login are set.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This configuration however is blank. The roles are empty and not a single role is needed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/appGuard.png" alt="appGuard">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_backend"><a class="anchor" href="#_backend"></a>2. Backend</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>WIP</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
