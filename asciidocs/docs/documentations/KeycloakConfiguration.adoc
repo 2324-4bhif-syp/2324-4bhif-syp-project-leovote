@@ -28,5 +28,7 @@ image::images/appInit.png[]
 image::images/appGuard.png[]
 ****
 
+IMPORTANT:: There is no Client-Secret needed for the frontend configuration, since there is no safe way to save those.
+
 == Backend
 * WIP
