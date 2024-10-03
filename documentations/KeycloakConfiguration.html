@@ -434,6 +434,120 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge, pre.rouge .w {
+  color: #24292f;
+  background-color: #f6f8fa;
+}
+pre.rouge .k, pre.rouge .kd, pre.rouge .kn, pre.rouge .kp, pre.rouge .kr, pre.rouge .kt, pre.rouge .kv {
+  color: #cf222e;
+}
+pre.rouge .gr {
+  color: #f6f8fa;
+}
+pre.rouge .gd {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+pre.rouge .nb {
+  color: #953800;
+}
+pre.rouge .nc {
+  color: #953800;
+}
+pre.rouge .no {
+  color: #953800;
+}
+pre.rouge .nn {
+  color: #953800;
+}
+pre.rouge .sr {
+  color: #116329;
+}
+pre.rouge .na {
+  color: #116329;
+}
+pre.rouge .nt {
+  color: #116329;
+}
+pre.rouge .gi {
+  color: #116329;
+  background-color: #dafbe1;
+}
+pre.rouge .kc {
+  color: #0550ae;
+}
+pre.rouge .l, pre.rouge .ld, pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #0550ae;
+}
+pre.rouge .sb {
+  color: #0550ae;
+}
+pre.rouge .bp {
+  color: #0550ae;
+}
+pre.rouge .ne {
+  color: #0550ae;
+}
+pre.rouge .nl {
+  color: #0550ae;
+}
+pre.rouge .py {
+  color: #0550ae;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #0550ae;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #0550ae;
+}
+pre.rouge .gh {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .s, pre.rouge .sa, pre.rouge .sc, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .se, pre.rouge .sh, pre.rouge .sx, pre.rouge .s1, pre.rouge .ss {
+  color: #0a3069;
+}
+pre.rouge .nd {
+  color: #8250df;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #8250df;
+}
+pre.rouge .err {
+  color: #f6f8fa;
+  background-color: #82071e;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cp, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6e7781;
+}
+pre.rouge .gl {
+  color: #6e7781;
+}
+pre.rouge .gt {
+  color: #6e7781;
+}
+pre.rouge .ni {
+  color: #24292f;
+}
+pre.rouge .si {
+  color: #24292f;
+}
+pre.rouge .ge {
+  color: #24292f;
+  font-style: italic;
+}
+pre.rouge .gs {
+  color: #24292f;
+  font-weight: bold;
+}
+</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -453,13 +567,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>The whole configuration for out Keycloak is found in those two ts files found in out util directory.</p>
+<p>Found in:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>app.guard.ts in src/app/utils</p>
+</li>
+<li>
+<p>app.init.ts in src/app/utils</p>
+</li>
+<li>
+<p>environment.development.ts in src/environments (local development configuration)</p>
+</li>
+<li>
+<p>environment.ts in src/environments (production configuration)</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/images/folder.png" alt="folder">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/folderEnv.png" alt="folderEnv">
 </div>
 </div>
 <div class="sidebarblock">
@@ -475,23 +610,36 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>The URL where the keycloak is found.</p>
+<p>url: The URL where the keycloak is found. <strong>(<a href="https://auth.htl-leonding.ac.at" class="bare">https://auth.htl-leonding.ac.at</a>)</strong></p>
 </li>
 <li>
-<p>The realm for our project, which is set in the keycloak.</p>
+<p>realm: The realm for our project, which is set in the keycloak. <strong>(htl-leonding)</strong></p>
 </li>
 <li>
-<p>The clientID, which is the "name" of our project in the keycloak.</p>
+<p>clientId: The clientID is the "name" of our project in the realm 'htl-leonding' in the keycloak.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>We have two configurations. One for the deployed application on the server, and one for local testing.</p>
+<p>We have two configurations. One for the deployed application on the server, and one for local development.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>leovote (deployed)</p>
+</li>
+<li>
+<p>leovotetest (local development)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>We also set the iframe from the keycloak to be shown (the login mask)</p>
+<p>These are set in the environment files</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>initOptions: the checkLoginIframe option is a iframe that is used to detect if a Single-Sign Out has occurred.</p>
 </li>
 </ul>
 </div>
@@ -501,9 +649,57 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="images/images/appInit.png" alt="appInit">
+<pre class="rouge highlight"><code data-lang="javascript"><span class="k">export</span> <span class="kd">function</span> <span class="nf">initializeKeycloak</span><span class="p">(</span><span class="nx">keycloak</span><span class="p">:</span> <span class="nx">KeycloakService</span><span class="p">):</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">boolean</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return </span><span class="p">()</span> <span class="o">=&gt;</span>
+    <span class="nx">keycloak</span><span class="p">.</span><span class="nf">init</span><span class="p">({</span>
+      <span class="na">config</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://auth.htl-leonding.ac.at</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">realm</span><span class="p">:</span> <span class="dl">'</span><span class="s1">htl-leonding</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">clientId</span><span class="p">:</span> <span class="nx">environment</span><span class="p">.</span><span class="nx">clientId</span><span class="p">,</span>
+        <span class="c1">//clientId: 'leovote' for production</span>
+        <span class="c1">//clientId: 'leovotetest' for local development</span>
+      <span class="p">},</span>
+      <span class="na">initOptions</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">checkLoginIframe</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">checkLoginIframeInterval</span><span class="p">:</span> <span class="mi">20</span>
+      <span class="p">},</span>
+      <span class="na">loadUserProfileAtStartUp</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">});</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>environment.ts</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="javascript"><span class="k">export</span> <span class="kd">const</span> <span class="nx">environment</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">production</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">apiUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://leovote.htl-leonding.ac.at/api/</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">clientId</span><span class="p">:</span> <span class="dl">'</span><span class="s1">leovote</span><span class="dl">'</span>
+<span class="p">};</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>environment.development.ts</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="javascript"><span class="k">export</span> <span class="kd">const</span> <span class="nx">environment</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">production</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">apiUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://localhost:8080/</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">clientId</span><span class="p">:</span> <span class="dl">'</span><span class="s1">leovotetest</span><span class="dl">'</span>
+<span class="p">};</span></code></pre>
 </div>
 </div>
 </div>
@@ -514,10 +710,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul>
 <li>
 <p>app.guard.ts</p>
-<div class="ulist">
-<ul>
+</li>
 <li>
-<p>Configurations made in this file:</p>
+<p>Configurations:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -525,7 +720,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Where the browser has to go, to show the login mask</p>
+<p>This Setting forces the user to stay on login page, if currently unauthenticated.</p>
 </li>
 </ul>
 </div>
@@ -535,7 +730,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>This configuration however is blank. The roles are empty and not a single role is needed.</p>
+<p>This configuration loads the needed roles out of the route and checks if the user contains them. If so,
+the user is allowed to proceed.</p>
 </li>
 </ul>
 </div>
@@ -545,12 +741,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="images/images/appGuard.png" alt="appGuard">
+<pre class="rouge highlight"><code data-lang="javascript"><span class="k">export</span> <span class="kd">class</span> <span class="nc">AuthGuard</span> <span class="kd">extends</span> <span class="nc">KeycloakAuthGuard</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">(</span>
+    <span class="kr">protected</span> <span class="nx">override</span> <span class="nx">readonly</span> <span class="nx">router</span><span class="p">:</span> <span class="nx">Router</span><span class="p">,</span>
+    <span class="kr">protected</span> <span class="nx">readonly</span> <span class="nx">keycloak</span><span class="p">:</span> <span class="nx">KeycloakService</span>
+  <span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">router</span><span class="p">,</span> <span class="nx">keycloak</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">public</span> <span class="k">async</span> <span class="nf">isAccessAllowed</span><span class="p">(</span>
+    <span class="nx">route</span><span class="p">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span>
+    <span class="nx">state</span><span class="p">:</span> <span class="nx">RouterStateSnapshot</span>
+  <span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">boolean</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Force the user to log in if currently unauthenticated.</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">authenticated</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">keycloak</span><span class="p">.</span><span class="nf">login</span><span class="p">({</span>
+        <span class="na">redirectUri</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="nx">state</span><span class="p">.</span><span class="nx">url</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Get the roles required from the route.</span>
+    <span class="kd">const</span> <span class="nx">requiredRoles</span> <span class="o">=</span> <span class="nx">route</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="dl">"</span><span class="s2">roles</span><span class="dl">"</span><span class="p">];</span>
+
+    <span class="c1">// Allow the user to proceed if no additional roles are required to access the route.</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nb">Array</span><span class="p">.</span><span class="nf">isArray</span><span class="p">(</span><span class="nx">requiredRoles</span><span class="p">)</span> <span class="o">||</span> <span class="nx">requiredRoles</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Allow the user to proceed if all the required roles are present.</span>
+    <span class="k">return</span> <span class="nx">requiredRoles</span><span class="p">.</span><span class="nf">every</span><span class="p">((</span><span class="nx">role</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">roles</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="nx">role</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </div>
@@ -580,7 +803,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-01 14:10:52 UTC
+Last updated 2024-10-03 18:09:03 UTC
 </div>
 </div>
 </body>
