@@ -7,6 +7,7 @@ import {VoteCandidate} from "../entity/vote-candidate-model";
 import {EmailModel} from "../entity/email-model";
 import {LoginModel} from "../entity/login-model";
 import {CandidateImage} from "../entity/candidate-image";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,9 @@ import {CandidateImage} from "../entity/candidate-image";
 export class LeovoteWebApiService {
 
   headers = new HttpHeaders().set('Accept', 'application/json');
-  //baseUrl = 'http://leovote.htl-leonding.ac.at/api/';   //set it like that for server usage. comment oder baseUrl
-  private baseUrl = 'http://localhost:8080/';
+  //baseUrl = 'http://leovote.htl-leonding.ac.at/api/'; for production
+  //baseUrl = 'http://localhost:8080/'; for local development
+  private baseUrl = environment.apiUrl;
   private candidates = 'candidates';
   private elections: string = 'elections';
   private addElectionUrl: string = 'elections/election';
