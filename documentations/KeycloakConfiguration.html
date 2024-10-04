@@ -555,14 +555,196 @@ pre.rouge .gs {
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_frontend">1. Frontend</a></li>
-<li><a href="#_backend">2. Backend</a></li>
+<li><a href="#_keycloak_setup">1. Keycloak setup</a>
+<ul class="sectlevel2">
+<li><a href="#_admin_panel">1.1. Admin Panel</a></li>
+</ul>
+</li>
+<li><a href="#_frontend">2. Frontend</a></li>
+<li><a href="#_backend">3. Backend</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_frontend"><a class="anchor" href="#_frontend"></a>1. Frontend</h2>
+<h2 id="_keycloak_setup"><a class="anchor" href="#_keycloak_setup"></a>1. Keycloak setup</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Guide for local setup: <a href="https://www.keycloak.org/getting-started/getting-started-zip" class="bare">www.keycloak.org/getting-started/getting-started-zip</a></p>
+</li>
+<li>
+<p>Download Keycloak from given website.</p>
+</li>
+<li>
+<p>Go into the downloaded keycloak folder and use these commands:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/setup.png" alt="setup">
+</div>
+<div class="title">Figure 1. After running these commands, keycloak will start, reachable via localhost:8080.</div>
+</div>
+<div class="sect2">
+<h3 id="_admin_panel"><a class="anchor" href="#_admin_panel"></a>1.1. Admin Panel</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new realm at the dropdown in the top left (Figure 2)</p>
+</li>
+<li>
+<p>Set the name for the realm (htl-leonding in our case) and switch the slider to enabled, to activate the realm. (Figure 3)
+Hit the create button afterward.</p>
+</li>
+<li>
+<p>Switch to the created realm at the dropdown in the top left, and create a client. (Figure 4)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Switch to the Clients tab and hit the Create client button.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>When you are in the Create client window, you have to set the ClientID and the Name (Figure 5)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The ClientID is important, since this is registered in the identity provider.</p>
+</li>
+<li>
+<p>If you want to create a connection to the keycloak. You will need this aswell</p>
+</li>
+<li>
+<p>We set the ClientID to <strong>leovote</strong> for production and <strong>leovotetest</strong> for local development</p>
+</li>
+<li>
+<p>The Name field is only the displayed name in the admin panel</p>
+</li>
+<li>
+<p>The description contains some extra info you might need in your admin panel.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>When you hit next, you will get to some further configurations for the client. (Figure 6)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In the capability config tab you can set the client authentication/authorization</p>
+</li>
+<li>
+<p>You can enable some login flows.</p>
+</li>
+<li>
+<p>We&#8217;ve only enabled the standard flow and the Direct access grants</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Standard flow: Standard OpenId login flow</p>
+</li>
+<li>
+<p>Direct access grants: The client has access to username/password and exchange it directly with
+Keycloak server for access token.</p>
+</li>
+<li>
+<p>Client Authentication is not needed, because we can&#8217;t securely store the secret in the frontend.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Click next, to get to the Login settings (Figure 7 / Figure 8)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Root URL: Default Route to Client</p>
+</li>
+<li>
+<p>Home URL: The URL the Keycloak uses, when Keycloak needs to redirect to the Client.</p>
+</li>
+<li>
+<p>Valid redirect URIs: You can specify a URI pattern, where the browser can redirect to, after a successful login.</p>
+</li>
+<li>
+<p>Valid post logout redirect URIs: Valid URI pattern a browser can redirect to after a successful logout.</p>
+</li>
+<li>
+<p>Web origins: Allowed CORS origins. To permit all origins use a wildcard (*).</p>
+</li>
+<li>
+<p>Admin URL: URL to the admin interface of the client.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>We have 2 configurations, one for local development, one for production.</p>
+</li>
+<li>
+<p>See the configurations at the screenshot below. (Figure 7 / Figure 8)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/realm.png" alt="realm">
+</div>
+<div class="title">Figure 2. realm dropdown</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/realmSetup.png" alt="realmSetup">
+</div>
+<div class="title">Figure 3. realm settings</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/client.png" alt="client">
+</div>
+<div class="title">Figure 4. client overview</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/clientSetup.png" alt="clientSetup">
+</div>
+<div class="title">Figure 5. client settings</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/clientSetupAuth.png" alt="clientSetupAuth">
+</div>
+<div class="title">Figure 6. capability config</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/loginSettings.png" alt="loginSettings">
+</div>
+<div class="title">Figure 7. leovotetest client config</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/images/loginSettingsLeovote.png" alt="loginSettingsLeovote">
+</div>
+<div class="title">Figure 8. leovote client config</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_frontend"><a class="anchor" href="#_frontend"></a>2. Frontend</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -610,7 +792,7 @@ pre.rouge .gs {
 <div class="ulist">
 <ul>
 <li>
-<p>url: The URL where the keycloak is found. <strong>(<a href="https://auth.htl-leonding.ac.at" class="bare">https://auth.htl-leonding.ac.at</a>)</strong></p>
+<p>url: The URL where the keycloak is found. <strong>(<a href="https://auth.htl-leonding.ac.at" class="bare">auth.htl-leonding.ac.at</a>)</strong></p>
 </li>
 <li>
 <p>realm: The realm for our project, which is set in the keycloak. <strong>(htl-leonding)</strong></p>
@@ -789,7 +971,7 @@ the user is allowed to proceed.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_backend"><a class="anchor" href="#_backend"></a>2. Backend</h2>
+<h2 id="_backend"><a class="anchor" href="#_backend"></a>3. Backend</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -803,7 +985,7 @@ the user is allowed to proceed.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-03 18:09:03 UTC
+Last updated 2024-10-04 14:31:02 UTC
 </div>
 </div>
 </body>
