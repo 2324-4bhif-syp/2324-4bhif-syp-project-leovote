@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>LeoVote Backend Documentation</title>
+<title>LeoVote Getting-Started Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -551,12 +551,18 @@ pre.rouge .gs {
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>LeoVote Backend Documentation</h1>
+<h1>LeoVote Getting-Started Documentation</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_prerequisites">1. Prerequisites</a></li>
 <li><a href="#_start_the_backend">2. Start the backend</a></li>
+<li><a href="#_start_the_frontend">3. Start the frontend</a>
+<ul class="sectlevel2">
+<li><a href="#_setup_keycloak">3.1. Setup Keycloak</a></li>
+<li><a href="#_start_angular">3.2. Start Angular</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -564,8 +570,9 @@ pre.rouge .gs {
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is the documentation for the backend of the LeoVote project.
-The backend is written in Java and uses Quarkus as the framework.</p>
+<p>This is the documentation how to start the LeoVote project.
+The backend is written in Java and uses Quarkus as the framework.
+The frontend is using Angular</p>
 </div>
 </div>
 </div>
@@ -585,6 +592,9 @@ The backend is written in Java and uses Quarkus as the framework.</p>
 </li>
 <li>
 <p>Docker</p>
+</li>
+<li>
+<p>NodeJs</p>
 </li>
 </ul>
 </div>
@@ -680,10 +690,74 @@ The backend is written in Java and uses Quarkus as the framework.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_start_the_frontend"><a class="anchor" href="#_start_the_frontend"></a>3. Start the frontend</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_setup_keycloak"><a class="anchor" href="#_setup_keycloak"></a>3.1. Setup Keycloak</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Set up your local keycloak: <a href="https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/documentations/KeycloakConfiguration">Setup Keycloak</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_start_angular"><a class="anchor" href="#_start_angular"></a>3.2. Start Angular</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a new terminal and go to frontend folder</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cd frontend</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Install node_modules</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>npm install</pre>
+</div>
+</div>
+<details>
+<summary class="title">Install Angular</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">npm <span class="nb">install</span> <span class="nt">-g</span> @angular/cli</code></pre>
+</div>
+</div>
+</div>
+</details>
+<div class="ulist">
+<ul>
+<li>
+<p>Start angular app</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ng serve</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-08 10:43:49 UTC
+Last updated 2024-10-08 11:12:50 UTC
 </div>
 </div>
 </body>
