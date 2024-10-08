@@ -11,7 +11,7 @@
 * Go into the downloaded keycloak folder and use these commands:
 
 .After running these commands, keycloak will start, reachable via localhost:8080.
-image::images/setup.png[]
+image::setup.png[]
 
 
 === Admin Panel
@@ -46,25 +46,25 @@ Keycloak server for access token.
 *** See the configurations at the screenshot below. (Figure 7 / Figure 8)
 
 .realm dropdown
-image::images/realm.png[]
+image::realm.png[]
 
 .realm settings
-image::images/realmSetup.png[]
+image::realmSetup.png[]
 
 .client overview
-image::images/client.png[]
+image::client.png[]
 
 .client settings
-image::images/clientSetup.png[]
+image::clientSetup.png[]
 
 .capability config
-image::images/clientSetupAuth.png[]
+image::clientSetupAuth.png[]
 
 .leovotetest client config
-image::images/loginSettings.png[]
+image::loginSettings.png[]
 
 .leovote client config
-image::images/loginSettingsLeovote.png[]
+image::loginSettingsLeovote.png[]
 
 == Frontend
 * Found in:
@@ -73,8 +73,8 @@ image::images/loginSettingsLeovote.png[]
 ** environment.development.ts in src/environments (local development configuration)
 ** environment.ts in src/environments (production configuration)
 
-image::images/folder.png[]
-image::images/folderEnv.png[]
+image::folder.png[]
+image::folderEnv.png[]
 ****
 * app.init.ts
 ** Configurations made in this file:
