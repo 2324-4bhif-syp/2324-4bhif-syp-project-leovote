@@ -57,11 +57,8 @@ image::prove.jpg[background]
 === Sprintvereinbarung
 image::handshake.jpg[background]
 
-* Warnungen vor kritischen Handlungen
-* Editier Funktionen für Kandidaten
-* Vorschau Seite der Kandidaten
-* Überarbeitung der Stimmabgabe
-* Vermeidung von Leichen der Kandidatenbilder
+* Projekt wieder lauffähig machen
+* Dokumentation über Keycloak schreiben
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
