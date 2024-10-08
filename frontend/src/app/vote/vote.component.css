@@ -69,7 +69,7 @@
 .btn-primary:disabled {
   background-color: #ccc;
   cursor: not-allowed;
-  color: red;
+  color: #FF9999;
 }
 
 .vote-btn {
@@ -99,7 +99,7 @@
   appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid green;
+  border: 2px solid #99FFA3;
   border-radius: 5px;
   outline: none;
 }
