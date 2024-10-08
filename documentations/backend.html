@@ -583,6 +583,9 @@ The backend is written in Java and uses Quarkus as the framework.</p>
 <li>
 <p>Quarkus CLI (optional)</p>
 </li>
+<li>
+<p>Docker</p>
+</li>
 </ul>
 </div>
 </div>
@@ -590,6 +593,72 @@ The backend is written in Java and uses Quarkus as the framework.</p>
 <div class="sect1">
 <h2 id="_start_the_backend"><a class="anchor" href="#_start_the_backend"></a>2. Start the backend</h2>
 <div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Open your terminal and go to backend folder</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cd backend</pre>
+</div>
+</div>
+<details>
+<summary class="title">Set up Postgres-DB</summary>
+<div class="content">
+<div class="paragraph">
+<p>Terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nb">cd </span>backend</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create and start database:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">postgres-download-scripts-16.3.sh
+./postgres-create-db.sh
+./postgres-start.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Datasource in IntelliJ IDEA:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open datasource.txt</p>
+</li>
+<li>
+<p>Copy datasource.txt</p>
+</li>
+<li>
+<p>On <code>database</code> option &#8594; <code>&#43;</code></p>
+</li>
+<li>
+<p>Import from Clipboard</p>
+</li>
+<li>
+<p>Download latest driver</p>
+</li>
+<li>
+<p>Password: app</p>
+</li>
+<li>
+<p>Test connection</p>
+</li>
+<li>
+<p>Click ok</p>
+</li>
+</ol>
+</div>
+</div>
+</details>
 <div class="paragraph">
 <p>To start the backend, run the following command in the root directory of the backend project:</p>
 </div>
@@ -614,7 +683,7 @@ The backend is written in Java and uses Quarkus as the framework.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-08 08:41:06 UTC
+Last updated 2024-10-08 10:43:49 UTC
 </div>
 </div>
 </body>
