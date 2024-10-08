@@ -29,3 +29,7 @@ If you don't have the Quarkus CLI installed:
 ----
 ./mvnw compile quarkus:dev
 ----
+
+== Architecture
+
+image::images/cld.png[Class Diagram]
