@@ -59,6 +59,7 @@ image::handshake.jpg[background]
 
 * Projekt wieder lauffähig machen
 * Dokumentation über Keycloak schreiben
+* Funktionalität herzeigen
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
