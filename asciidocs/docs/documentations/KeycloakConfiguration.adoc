@@ -1,6 +1,8 @@
 = Configuration for Keycloak (01.10.24)
 :toc:
 :hide-uri-scheme:
+//ifndef::imagesdir[:imagesdir: images]
+:imagesdir: images
 
 == Keycloak setup
 
