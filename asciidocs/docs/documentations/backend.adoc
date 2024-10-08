@@ -33,3 +33,11 @@ If you don't have the Quarkus CLI installed:
 == Architecture
 
 image::images/cld.png[Class Diagram]
+
+An Election defines the period during which votes can be cast, by whom, and for whom.
+The Election contains the candidates available for selection and the email addresses of eligible voters.
+
+Emails with a link to the vote can be sent through an email service.
+After logging in via Keycloak, users can register for the election using their token.
+
+Afterward, a vote can be cast, which will be added to the blockchain.
