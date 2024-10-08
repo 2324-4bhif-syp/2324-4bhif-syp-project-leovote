@@ -11,8 +11,43 @@ Before starting, ensure you have the following installed:
 
 * JDK 21
 * Quarkus CLI (optional)
+* Docker
 
 == Start the backend
+
+* Open your terminal and go to backend folder
+[source, bash]
+----
+cd backend
+----
+.Set up Postgres-DB
+
+[%collapsible]
+====
+Terminal:
+[source, bash]
+----
+cd backend
+----
+Create and start database:
+
+[source, bash]
+----
+postgres-download-scripts-16.3.sh
+./postgres-create-db.sh
+./postgres-start.sh
+----
+Datasource in IntelliJ IDEA:
+
+1. Open datasource.txt
+2. Copy datasource.txt
+3. On `database` option -> `{plus}`
+4. Import from Clipboard
+5. Download latest driver
+6. Password: app
+7. Test connection
+8. Click ok
+====
 
 To start the backend, run the following command in the root directory of the backend project:
 
