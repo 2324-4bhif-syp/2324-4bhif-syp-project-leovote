@@ -2,10 +2,10 @@
 :sectnums:
 :toc: left
 
+== https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/documentations/getting-started[Getting started with Leovote]
+
 == https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/documentations/documentationEncryption[Documentation about Encryption 03-11-23]
 
 == https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/documentations/documentationSafetyOfLeovote[Documentation about Safety of Leovote 13-02-24]
 
 == https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/documentations/KeycloakConfiguration[Documentation about Keycloak Configuration 01-10-24]
-
-== https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/documentations/backend[Backend Documentation 08-10-24]
