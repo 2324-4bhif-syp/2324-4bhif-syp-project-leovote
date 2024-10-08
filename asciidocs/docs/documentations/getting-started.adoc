@@ -1,9 +1,10 @@
-= LeoVote Backend Documentation
+= LeoVote Getting-Started Documentation
 :toc:
 :icons: font
 
-This is the documentation for the backend of the LeoVote project.
+This is the documentation how to start the LeoVote project.
 The backend is written in Java and uses Quarkus as the framework.
+The frontend is using Angular
 
 == Prerequisites
 
@@ -12,6 +13,7 @@ Before starting, ensure you have the following installed:
 * JDK 21
 * Quarkus CLI (optional)
 * Docker
+* NodeJs
 
 == Start the backend
 
@@ -63,4 +65,44 @@ If you don't have the Quarkus CLI installed:
 [source,shell]
 ----
 ./mvnw compile quarkus:dev
+----
+
+== Start the frontend
+
+=== Setup Keycloak
+
+* Set up your local keycloak: https://2324-4bhif-syp.github.io/2324-4bhif-syp-project-leovote/documentations/KeycloakConfiguration[Setup Keycloak]
+
+
+=== Start Angular
+
+* Open a new terminal and go to frontend folder
+[source, bash]
+----
+cd frontend
+----
+
+* Install node_modules
+[source, bash]
+----
+npm install
+----
+
+.Install Angular
+
+[%collapsible]
+====
+
+[source, bash]
+----
+npm install -g @angular/cli
+----
+
+====
+
+
+* Start angular app
+[source, bash]
+----
+ng serve
 ----
