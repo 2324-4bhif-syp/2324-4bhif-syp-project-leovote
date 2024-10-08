@@ -1,4 +1,70 @@
 = Configuration for Keycloak (01.10.24)
+:toc:
+:hide-uri-scheme:
+//ifndef::imagesdir[:imagesdir: images]
+:imagesdir: images
+
+== Keycloak setup
+
+* Guide for local setup: https://www.keycloak.org/getting-started/getting-started-zip
+* Download Keycloak from given website.
+* Go into the downloaded keycloak folder and use these commands:
+
+.After running these commands, keycloak will start, reachable via localhost:8080.
+image::setup.png[]
+
+
+=== Admin Panel
+
+. Create a new realm at the dropdown in the top left (Figure 2)
+. Set the name for the realm (htl-leonding in our case) and switch the slider to enabled, to activate the realm. (Figure 3)
+Hit the create button afterward.
+. Switch to the created realm at the dropdown in the top left, and create a client. (Figure 4)
+** Switch to the Clients tab and hit the Create client button.
+. When you are in the Create client window, you have to set the ClientID and the Name (Figure 5)
+** The ClientID is important, since this is registered in the identity provider.
+** If you want to create a connection to the keycloak. You will need this aswell
+** We set the ClientID to *leovote* for production and *leovotetest* for local development
+** The Name field is only the displayed name in the admin panel
+** The description contains some extra info you might need in your admin panel.
+. When you hit next, you will get to some further configurations for the client. (Figure 6)
+** In the capability config tab you can set the client authentication/authorization
+** You can enable some login flows.
+** We've only enabled the standard flow and the Direct access grants
+*** Standard flow: Standard OpenId login flow
+*** Direct access grants: The client has access to username/password and exchange it directly with
+Keycloak server for access token.
+*** Client Authentication is not needed, because we can't securely store the secret in the frontend.
+. Click next, to get to the Login settings (Figure 7 / Figure 8)
+** Root URL: Default Route to Client
+** Home URL: The URL the Keycloak uses, when Keycloak needs to redirect to the Client.
+** Valid redirect URIs: You can specify a URI pattern, where the browser can redirect to, after a successful login.
+** Valid post logout redirect URIs: Valid URI pattern a browser can redirect to after a successful logout.
+** Web origins: Allowed CORS origins. To permit all origins use a wildcard (*).
+** Admin URL: URL to the admin interface of the client.
+*** We have 2 configurations, one for local development, one for production.
+*** See the configurations at the screenshot below. (Figure 7 / Figure 8)
+
+.realm dropdown
+image::realm.png[]
+
+.realm settings
+image::realmSetup.png[]
+
+.client overview
+image::client.png[]
+
+.client settings
+image::clientSetup.png[]
+
+.capability config
+image::clientSetupAuth.png[]
+
+.leovotetest client config
+image::loginSettings.png[]
+
+.leovote client config
+image::loginSettingsLeovote.png[]
 
 == Frontend
 * Found in:
@@ -7,8 +73,8 @@
 ** environment.development.ts in src/environments (local development configuration)
 ** environment.ts in src/environments (production configuration)
 
-image::images/folder.png[]
-image::images/folderEnv.png[]
+image::folder.png[]
+image::folderEnv.png[]
 ****
 * app.init.ts
 ** Configurations made in this file:
