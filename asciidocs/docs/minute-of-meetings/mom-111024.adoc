@@ -67,8 +67,6 @@ endif::backend-html5[]
 
 | Leovote-Team
 a|
-* Backend-Endpoints sichern
-* CI/CD-Pipeline
 * Punkte-System integrieren
 | 25.10.2024 bzw. so viel wie möglich, sonst noch ein Sprint
 |===
