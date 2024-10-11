@@ -442,8 +442,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_current_state">1. Current State</a></li>
-<li><a href="#_problems">2. Problems</a></li>
-<li><a href="#_future_plans">3. Future Plans</a></li>
+<li><a href="#_architecture">2. Architecture</a></li>
+<li><a href="#_problems">3. Problems</a></li>
+<li><a href="#_future_plans">4. Future Plans</a></li>
 </ul>
 </div>
 </div>
@@ -451,6 +452,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_current_state"><a class="anchor" href="#_current_state"></a>1. Current State</h2>
 <div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">WARNING</dt>
+<dd>
+<p>The CLD could change since Leovote is under development.</p>
+</dd>
+</dl>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/cld.png" alt="Class Diagram">
@@ -474,12 +483,58 @@ The candidate selection view contains the participating candidates name, class a
 </div>
 </div>
 <div class="sect1">
-<h2 id="_problems"><a class="anchor" href="#_problems"></a>2. Problems</h2>
+<h2 id="_architecture"><a class="anchor" href="#_architecture"></a>2. Architecture</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>CI/CD Pipeline WIP</p>
+<p>Backend</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Programmed in Java with Quarkus</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Responsible for saving participants, emails, voter tokens.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The tokens are associated with the emails, to provoke people giving the code to other people</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Frontend</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Admin View: Create Candidates, Elections and add candidate to elections</p>
+</li>
+<li>
+<p>Voter View: Select between participating candidates after token input</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_problems"><a class="anchor" href="#_problems"></a>3. Problems</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>CI/CD Pipeline (WIP)</p>
 </li>
 <li>
 <p>At the moment we only support to vote for a single person in one election.</p>
@@ -492,7 +547,7 @@ The candidate selection view contains the participating candidates name, class a
 </div>
 </div>
 <div class="sect1">
-<h2 id="_future_plans"><a class="anchor" href="#_future_plans"></a>3. Future Plans</h2>
+<h2 id="_future_plans"><a class="anchor" href="#_future_plans"></a>4. Future Plans</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -512,7 +567,7 @@ The candidate selection view contains the participating candidates name, class a
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-10-11 06:28:26 UTC
+Last updated 2024-10-11 06:48:08 UTC
 </div>
 </div>
 </body>
