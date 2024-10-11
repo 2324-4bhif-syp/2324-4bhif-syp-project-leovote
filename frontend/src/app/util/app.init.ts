@@ -6,7 +6,7 @@ export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boo
     keycloak.init({
       config: {
         url: 'https://auth.htl-leonding.ac.at',
-        realm: 'htl-leonding',
+        realm: 'htlleonding',
         clientId: environment.clientId,
         //clientId: 'leovote' for production
         //clientId: 'leovotetest' for local development
