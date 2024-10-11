@@ -3,10 +3,11 @@
 :hide-uri-scheme:
 //ifndef::imagesdir[:imagesdir: images]
 :imagesdir: images
+:icons: font
 
 == Current State
 
-WARNING:: The CLD could change since Leovote is under development.
+WARNING: The CLD could change since 'Leovote' and the documentation is under development.
 
 image::cld.png[Class Diagram]
 
