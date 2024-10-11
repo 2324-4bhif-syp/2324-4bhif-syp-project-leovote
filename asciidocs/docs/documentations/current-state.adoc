@@ -28,10 +28,19 @@ The candidate selection view contains the participating candidates name, class a
 ** Programmed in Java with Quarkus
 *** Responsible for saving participants, emails, voter tokens.
 **** The tokens are associated with the emails, to provoke people giving the code to other people
+*** Saves Results and Votes from participants.
+*** Checks if given code is associated with email.
 
 * Frontend
-** Admin View: Create Candidates, Elections and add candidate to elections
-** Voter View: Select between participating candidates after token input
+** Admin View:
+*** Create Candidates
+**** Image Upload supported
+*** Create Elections
+*** Add Candidates to Elections
+*** See results from elections
+** Voter View:
+*** Enter code sent via E-Mail
+*** Select one of the participating candidates
 
 == Problems
 
