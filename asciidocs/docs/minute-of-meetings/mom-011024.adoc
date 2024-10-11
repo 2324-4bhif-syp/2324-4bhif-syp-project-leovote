@@ -1,5 +1,5 @@
-= Besprechungsprotokoll 30.04.2024
-1.0, 2024-04-30: mom
+= Besprechungsprotokoll 01.10.2024
+1.0, 2024-10-01: mom
 ifndef::imagesdir[:imagesdir: images]
 :icons: font
 //:sectnums:    // Nummerierung der Überschriften / section numbering
