@@ -27,6 +27,10 @@ The candidate selection view contains the participating candidates name, class a
 ** Programmed in Java with Quarkus
 *** Responsible for saving participants, emails, voter tokens.
 **** The tokens are associated with the emails, to provoke people giving the code to other people
+** See all endpoints: http://localhost:8080/q/swagger-ui/[Swagger]
+
+IMPORTANT: Your backend must be running!
+
 * Frontend
 ** Admin View: Create Candidates, Elections and add candidate to elections
 ** Voter View: Select between participating candidates after token input
