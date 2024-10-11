@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Leovote</title>
+<title>Setup TLS Server Certificate</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -434,202 +434,219 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge, pre.rouge .w {
+  color: #24292f;
+  background-color: #f6f8fa;
+}
+pre.rouge .k, pre.rouge .kd, pre.rouge .kn, pre.rouge .kp, pre.rouge .kr, pre.rouge .kt, pre.rouge .kv {
+  color: #cf222e;
+}
+pre.rouge .gr {
+  color: #f6f8fa;
+}
+pre.rouge .gd {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+pre.rouge .nb {
+  color: #953800;
+}
+pre.rouge .nc {
+  color: #953800;
+}
+pre.rouge .no {
+  color: #953800;
+}
+pre.rouge .nn {
+  color: #953800;
+}
+pre.rouge .sr {
+  color: #116329;
+}
+pre.rouge .na {
+  color: #116329;
+}
+pre.rouge .nt {
+  color: #116329;
+}
+pre.rouge .gi {
+  color: #116329;
+  background-color: #dafbe1;
+}
+pre.rouge .kc {
+  color: #0550ae;
+}
+pre.rouge .l, pre.rouge .ld, pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #0550ae;
+}
+pre.rouge .sb {
+  color: #0550ae;
+}
+pre.rouge .bp {
+  color: #0550ae;
+}
+pre.rouge .ne {
+  color: #0550ae;
+}
+pre.rouge .nl {
+  color: #0550ae;
+}
+pre.rouge .py {
+  color: #0550ae;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #0550ae;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #0550ae;
+}
+pre.rouge .gh {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .s, pre.rouge .sa, pre.rouge .sc, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .se, pre.rouge .sh, pre.rouge .sx, pre.rouge .s1, pre.rouge .ss {
+  color: #0a3069;
+}
+pre.rouge .nd {
+  color: #8250df;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #8250df;
+}
+pre.rouge .err {
+  color: #f6f8fa;
+  background-color: #82071e;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cp, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6e7781;
+}
+pre.rouge .gl {
+  color: #6e7781;
+}
+pre.rouge .gt {
+  color: #6e7781;
+}
+pre.rouge .ni {
+  color: #24292f;
+}
+pre.rouge .si {
+  color: #24292f;
+}
+pre.rouge .ge {
+  color: #24292f;
+  font-style: italic;
+}
+pre.rouge .gs {
+  color: #24292f;
+  font-weight: bold;
+}
+</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Leovote</h1>
+<h1>Setup TLS Server Certificate</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_team">1. Team</a></li>
-<li><a href="#_problemstellung">2. Problemstellung</a></li>
-<li><a href="#_warum_leovote">3. Warum Leovote?</a>
-<ul class="sectlevel2">
-<li><a href="#_anforderungen">3.1. Anforderungen</a></li>
-</ul>
-</li>
-<li><a href="#_ist_zustand">4. Ist-Zustand</a>
-<ul class="sectlevel2">
-<li><a href="#_datenbank">4.1. Datenbank</a></li>
-<li><a href="#_klassendiagramm">4.2. Klassendiagramm</a></li>
-</ul>
-</li>
-<li><a href="#_ziele">5. Ziele</a>
-<ul class="sectlevel2">
-<li><a href="#_live_demo">5.1. Live Demo</a></li>
-<li><a href="#_blockchain">5.2. <span class="margin-b-10">Blockchain</span></a></li>
-</ul>
-</li>
-<li><a href="#_ideen_für_den_nächsten_sprint">6. Ideen für den nächsten Sprint:</a></li>
+<li><a href="#_edit_sites_available">1. Edit sites-available</a></li>
+<li><a href="#_save_verify_reload">2. Save, verify, reload</a></li>
+<li><a href="#_certbot">3. Certbot</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This configuration is specifically designed for nginx servers
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_edit_sites_available"><a class="anchor" href="#_edit_sites_available"></a>1. Edit sites-available</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Sprint 3</p>
+<p>Edit file /etc/nginx/sites-available/default</p>
 </div>
-</div>
-</div>
-<div class="sect1 lightbg">
-<h2 id="_team"><a class="anchor" href="#_team"></a>1. Team</h2>
-<div class="sectionbody">
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="images/wahl2.jpg" alt="background">
+<pre class="rouge highlight"><code data-lang="text">server_name example.com www.example.com</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Cao Anton</p>
-</li>
-<li>
-<p>Lehner David</p>
-</li>
-<li>
-<p>Fröller Felix</p>
-</li>
-<li>
-<p>Nikolaus Alexander</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Replace with domain name</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_problemstellung"><a class="anchor" href="#_problemstellung"></a>2. Problemstellung</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Der Wahlaufwand</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Zeit</p>
-</li>
-<li>
-<p>Auszählen der Wahlen</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>unnötige Papierverschwendung</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1 lightbg">
-<h2 id="_warum_leovote"><a class="anchor" href="#_warum_leovote"></a>3. Warum Leovote?</h2>
-<div class="sectionbody">
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="images/prove.jpg" alt="background">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Leovote ermöglicht eine fälschungssichere Wahldurchführung</p>
-</li>
-<li>
-<p>Blockchain</p>
-</li>
-<li>
-<p>Verhinderung von Unsicherheiten</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_anforderungen"><a class="anchor" href="#_anforderungen"></a>3.1. Anforderungen</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Implementation der Blockchain</p>
-</li>
-<li>
-<p>Wahlsimulation in der Konsole</p>
-</li>
-<li>
-<p>Zugriff via REST</p>
-</li>
-</ul>
+<pre class="rouge highlight"><code data-lang="text">server_name leovote.htl-leonding.ac.at</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ist_zustand"><a class="anchor" href="#_ist_zustand"></a>4. Ist-Zustand</h2>
+<h2 id="_save_verify_reload"><a class="anchor" href="#_save_verify_reload"></a>2. Save, verify, reload</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_datenbank"><a class="anchor" href="#_datenbank"></a>4.1. Datenbank</h3>
-<div class="imageblock">
+<div class="paragraph">
+<p>Verify the config:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="images/ERD.png" alt="ERD" width="80%" height="80%">
+<pre class="rouge highlight"><code data-lang="text">sudo nginx -t</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Reload nginx</p>
 </div>
-<div class="sect2">
-<h3 id="_klassendiagramm"><a class="anchor" href="#_klassendiagramm"></a>4.2. Klassendiagramm</h3>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="images/CLD.png" alt="CLD" width="50%" height="50%">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1 lightbg">
-<h2 id="_ziele"><a class="anchor" href="#_ziele"></a>5. Ziele</h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="images/ziele.jpg" alt="background">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Digitalisierung</p>
-</li>
-<li>
-<p>Vereinfachung</p>
-</li>
-<li>
-<p>Fälschungssicherheit</p>
-</li>
-<li>
-<p>Schnelle Auswertung</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_live_demo"><a class="anchor" href="#_live_demo"></a>5.1. Live Demo</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_blockchain"><a class="anchor" href="#_blockchain"></a>5.2. <span class="margin-b-10">Blockchain</span></h3>
-<div class="imageblock">
-<div class="content">
-<img src="images/blockchain.png" alt="blockchain" width="80%" height="80%">
-</div>
+<pre class="rouge highlight"><code data-lang="text">sudo systemctl reload nginx</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ideen_für_den_nächsten_sprint"><a class="anchor" href="#_ideen_für_den_nächsten_sprint"></a>6. Ideen für den nächsten Sprint:</h2>
+<h2 id="_certbot"><a class="anchor" href="#_certbot"></a>3. Certbot</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Frontend</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Install certbot and python3-certbot-nginx</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="text">sudo apt update
+sudo apt install -y certbot python3-certbot-nginx</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Generate TLS certificate</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="text">sudo certbot --nginx -d example.com -d www.example.com</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replace with correct uri</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="text">sudo certbot --nginx -d leovote.htl-leonding.ac.at</code></pre>
+</div>
 </div>
 </div>
 </div>
