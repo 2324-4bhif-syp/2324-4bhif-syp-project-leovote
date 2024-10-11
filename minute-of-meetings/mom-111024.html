@@ -5,8 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="author" content="1.0, 2024-10-11: mom">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Current State - Leovote - 08.10.2024</title>
+<title>Besprechungsprotokoll 11.10.2024</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,132 +438,110 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Current State - Leovote - 08.10.2024</h1>
+<h1>Besprechungsprotokoll 11.10.2024</h1>
+<div class="details">
+<span id="author" class="author">1.0, 2024-10-11: mom</span><br>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_current_state">1. Current State</a></li>
-<li><a href="#_architecture">2. Architecture</a></li>
-<li><a href="#_problems">3. Problems</a></li>
-<li><a href="#_future_plans">4. Future Plans</a></li>
+<li><a href="#_besprochene_themen">1. Besprochene Themen</a></li>
+<li><a href="#_vereinbarungen_und_entscheidungen">2. Vereinbarungen und Entscheidungen</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_current_state"><a class="anchor" href="#_current_state"></a>1. Current State</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
+<div class="paragraph">
+<p><span class="icon"><a class="image" href="https://raw.githubusercontent.com/htl-leonding-college/asciidoctor-docker-template/master/asciidocs/mom-111024.adoc"><i class="fa fa-file-text-o"></i></a></span> ‏ ‏ ‎
+<span class="icon"><a class="image" href="https://github.com/htl-leonding-college/asciidoctor-docker-template"><i class="fa fa-github-square"></i></a></span> ‏ ‏ ‎
+<span class="icon"><a class="image" href="https://htl-leonding.github.io/"><i class="fa fa-home"></i></a></span></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Teilnehmer</caption>
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-The CLD could change since 'Leovote' and the documentation is under development.
-</td>
+<th class="tableblock halign-left valign-top">anwesend</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nikolaus Alexander</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fröller Felix</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anton Cao</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">David Lehner</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Herr Prof. Thomas Stütz</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Herr Prof. Christian Aberger</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">nicht anwesend</th>
+</tr>
+</thead>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Ort und Zeit</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTBLA Leonding (Unterricht)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">von-bis</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fr. 11.10.2024</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dauer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 min (Zeitgründe)</p></td>
+</tr>
+</tbody>
 </table>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/cld.png" alt="Class Diagram">
-</div>
-</div>
-<div class="paragraph">
-<p>An Election defines the period during which votes can be cast, by whom, and for whom.
-The Election contains the candidates available for selection and the email addresses of eligible voters.</p>
-</div>
-<div class="paragraph">
-<p>Emails with a link to the vote can be sent through an email service.
-After logging in via Keycloak, users can register for the election using their token (UUID).</p>
-</div>
-<div class="paragraph">
-<p>Afterward, a vote can be cast, which will be added to the blockchain.</p>
-</div>
-<div class="paragraph">
-<p>The election contains multiple candidates, where one can be selected.
-The candidate selection view contains the participating candidates name, class and a picture.</p>
-</div>
-</div>
 </div>
 <div class="sect1">
-<h2 id="_architecture"><a class="anchor" href="#_architecture"></a>2. Architecture</h2>
+<h2 id="_besprochene_themen"><a class="anchor" href="#_besprochene_themen"></a>1. Besprochene Themen</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Backend</p>
+<p>letzte Sprintvereinbarung erklärt</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Programmed in Java with Quarkus</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Responsible for saving participants, emails, voter tokens.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The tokens are associated with the emails, to provoke people giving the code to other people</p>
-</li>
-</ul>
-</div>
+<p>Probleme und zukünfte Sprint</p>
 </li>
 <li>
-<p>Saves Results and Votes from participants.</p>
+<p>Backend-Endpoints nicht sicher</p>
 </li>
 <li>
-<p>Checks if given code is associated with email.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<p>CI/CD-Pipeline Probleme</p>
 </li>
 <li>
-<p>Frontend</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Admin View:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Create Candidates</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Image Upload supported</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Create Elections</p>
-</li>
-<li>
-<p>Add Candidates to Elections</p>
-</li>
-<li>
-<p>See results from elections</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Voter View:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Enter code sent via E-Mail</p>
-</li>
-<li>
-<p>Select one of the participating candidates</p>
-</li>
-</ul>
-</div>
+<p>Aussehen des Frontend</p>
 </li>
 </ul>
 </div>
@@ -572,39 +551,42 @@ The candidate selection view contains the participating candidates name, class a
 </div>
 </div>
 <div class="sect1">
-<h2 id="_problems"><a class="anchor" href="#_problems"></a>3. Problems</h2>
+<h2 id="_vereinbarungen_und_entscheidungen"><a class="anchor" href="#_vereinbarungen_und_entscheidungen"></a>2. Vereinbarungen und Entscheidungen</h2>
 <div class="sectionbody">
-<div class="ulist">
+<table class="tableblock frame-all grid-all fit-content">
+<caption class="title">Table 3. Was wurde vereinbart?</caption>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">wer</th>
+<th class="tableblock halign-left valign-top">macht was</th>
+<th class="tableblock halign-left valign-top">bis wann</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leovote-Team</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>CI/CD Pipeline (WIP)</p>
+<p>Backend-Endpoints sichern</p>
 </li>
 <li>
-<p>At the moment we only support to vote for a single person in one election.</p>
+<p>CI/CD-Pipeline</p>
 </li>
 <li>
-<p>Backend endpoints not secured from outside. (ROLES)</p>
+<p>Punkte-System integrieren</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_future_plans"><a class="anchor" href="#_future_plans"></a>4. Future Plans</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Add point system, like in the school council election (HTL Leonding)</p>
-</li>
-<li>
-<p>Secure backend endpoints with roles (Authentication, Authorisation)</p>
-</li>
-<li>
-<p>Frontend design overwork</p>
-</li>
-</ul>
-</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">25.10.2024 bzw. so viel wie möglich, sonst noch ein Sprint</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
