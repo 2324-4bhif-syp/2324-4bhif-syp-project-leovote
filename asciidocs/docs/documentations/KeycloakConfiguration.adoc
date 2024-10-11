@@ -3,6 +3,7 @@
 :hide-uri-scheme:
 //ifndef::imagesdir[:imagesdir: images]
 :imagesdir: images
+:icons: font
 
 == Keycloak setup
 
@@ -176,7 +177,7 @@ export class AuthGuard extends KeycloakAuthGuard {
 ----
 ****
 
-IMPORTANT:: There is no Client-Secret needed for the frontend configuration, since there is no safe way to save those.
+IMPORTANT: There is no Client-Secret needed for the frontend configuration, since there is no safe way to save those.
 
 == Backend
 * WIP
