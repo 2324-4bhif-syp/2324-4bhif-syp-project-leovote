@@ -22,7 +22,8 @@ jobs:
 
       - name: Start Postgres DB
         run: |
-          ./postgres-download-scripts.sh
+          chmod +x ./postgres-download-scripts-16.3.sh
+          ./postgres-download-scripts-16.3.sh
           ./postgres-create-db.sh
           ./postgres-start.sh
         working-directory: backend

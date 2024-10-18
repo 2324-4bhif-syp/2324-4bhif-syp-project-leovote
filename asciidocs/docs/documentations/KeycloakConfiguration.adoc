@@ -1,0 +1,183 @@
+= Configuration for Keycloak (01.10.24)
+:toc:
+:hide-uri-scheme:
+//ifndef::imagesdir[:imagesdir: images]
+:imagesdir: images
+:icons: font
+
+== Keycloak setup
+
+* Guide for local setup: https://www.keycloak.org/getting-started/getting-started-zip
+* Download Keycloak from given website.
+* Go into the downloaded keycloak folder and use these commands:
+
+.After running these commands, keycloak will start, reachable via localhost:8080.
+image::setup.png[]
+
+
+=== Admin Panel
+
+. Create a new realm at the dropdown in the top left (Figure 2)
+. Set the name for the realm (htl-leonding in our case) and switch the slider to enabled, to activate the realm. (Figure 3)
+Hit the create button afterward.
+. Switch to the created realm at the dropdown in the top left, and create a client. (Figure 4)
+** Switch to the Clients tab and hit the Create client button.
+. When you are in the Create client window, you have to set the ClientID and the Name (Figure 5)
+** The ClientID is important, since this is registered in the identity provider.
+** If you want to create a connection to the keycloak. You will need this aswell
+** We set the ClientID to *leovote* for production and *leovotetest* for local development
+** The Name field is only the displayed name in the admin panel
+** The description contains some extra info you might need in your admin panel.
+. When you hit next, you will get to some further configurations for the client. (Figure 6)
+** In the capability config tab you can set the client authentication/authorization
+** You can enable some login flows.
+** We've only enabled the standard flow and the Direct access grants
+*** Standard flow: Standard OpenId login flow
+*** Direct access grants: The client has access to username/password and exchange it directly with
+Keycloak server for access token.
+*** Client Authentication is not needed, because we can't securely store the secret in the frontend.
+. Click next, to get to the Login settings (Figure 7 / Figure 8)
+** Root URL: Default Route to Client
+** Home URL: The URL the Keycloak uses, when Keycloak needs to redirect to the Client.
+** Valid redirect URIs: You can specify a URI pattern, where the browser can redirect to, after a successful login.
+** Valid post logout redirect URIs: Valid URI pattern a browser can redirect to after a successful logout.
+** Web origins: Allowed CORS origins. To permit all origins use a wildcard (*).
+** Admin URL: URL to the admin interface of the client.
+*** We have 2 configurations, one for local development, one for production.
+*** See the configurations at the screenshot below. (Figure 7 / Figure 8)
+
+.realm dropdown
+image::realm.png[]
+
+.realm settings
+image::realmSetup.png[]
+
+.client overview
+image::client.png[]
+
+.client settings
+image::clientSetup.png[]
+
+.capability config
+image::clientSetupAuth.png[]
+
+.leovotetest client config
+image::loginSettings.png[]
+
+.leovote client config
+image::loginSettingsLeovote.png[]
+
+== Frontend
+* Found in:
+** app.guard.ts in src/app/utils
+** app.init.ts in src/app/utils
+** environment.development.ts in src/environments (local development configuration)
+** environment.ts in src/environments (production configuration)
+
+image::folder.png[]
+image::folderEnv.png[]
+****
+* app.init.ts
+** Configurations made in this file:
+*** url: The URL where the keycloak is found. *(https://auth.htl-leonding.ac.at)*
+*** realm: The realm for our project, which is set in the keycloak. *(htl-leonding)*
+*** clientId: The clientID is the "name" of our project in the realm 'htl-leonding' in the keycloak.
+**** We have two configurations. One for the deployed application on the server, and one for local development.
+***** leovote (deployed)
+***** leovotetest (local development)
+**** These are set in the environment files
+*** initOptions: the checkLoginIframe option is a iframe that is used to detect if a Single-Sign Out has occurred.
+
+[source, javascript]
+----
+export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boolean> {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'https://auth.htl-leonding.ac.at',
+        realm: 'htl-leonding',
+        clientId: environment.clientId,
+        //clientId: 'leovote' for production
+        //clientId: 'leovotetest' for local development
+      },
+      initOptions: {
+        checkLoginIframe: true,
+        checkLoginIframeInterval: 20
+      },
+      loadUserProfileAtStartUp: true
+    });
+}
+----
+
+* environment.ts
+
+[source, javascript]
+----
+export const environment = {
+  production: true,
+  apiUrl: 'http://leovote.htl-leonding.ac.at/api/',
+  clientId: 'leovote'
+};
+----
+
+* environment.development.ts
+
+[source, javascript]
+----
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/',
+  clientId: 'leovotetest'
+};
+----
+****
+
+****
+* app.guard.ts
+* Configurations:
+** Set the keycloak login redirectURL.
+*** This Setting forces the user to stay on login page, if currently unauthenticated.
+** The roles, which are needed to successfully login are set.
+*** This configuration loads the needed roles out of the route and checks if the user contains them. If so,
+the user is allowed to proceed.
+
+[source, javascript]
+----
+export class AuthGuard extends KeycloakAuthGuard {
+  constructor(
+    protected override readonly router: Router,
+    protected readonly keycloak: KeycloakService
+  ) {
+    super(router, keycloak);
+  }
+
+  public async isAccessAllowed(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
+    // Force the user to log in if currently unauthenticated.
+    if (!this.authenticated) {
+      await this.keycloak.login({
+        redirectUri: window.location.origin + state.url
+      });
+    }
+
+    // Get the roles required from the route.
+    const requiredRoles = route.data["roles"];
+
+    // Allow the user to proceed if no additional roles are required to access the route.
+    if (!Array.isArray(requiredRoles) || requiredRoles.length === 0) {
+      return true;
+    }
+
+    // Allow the user to proceed if all the required roles are present.
+    return requiredRoles.every((role) => this.roles.includes(role));
+  }
+}
+----
+****
+
+IMPORTANT: There is no Client-Secret needed for the frontend configuration, since there is no safe way to save those.
+
+== Backend
+* WIP

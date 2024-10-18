@@ -7,15 +7,15 @@
     <artifactId>backend</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <compiler-plugin.version>3.11.0</compiler-plugin.version>
-        <maven.compiler.release>17</maven.compiler.release>
+        <compiler-plugin.version>3.12.1</compiler-plugin.version>
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.5.0</quarkus.platform.version>
+        <quarkus.platform.version>3.15.1</quarkus.platform.version>
         <skipITs>true</skipITs>
-        <surefire-plugin.version>3.1.2</surefire-plugin.version>
+        <surefire-plugin.version>3.2.3</surefire-plugin.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -51,16 +51,15 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-client</artifactId>
+            <artifactId>quarkus-resteasy-client</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-client-jackson</artifactId>
+            <artifactId>quarkus-resteasy-client-jackson</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
-            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -69,7 +68,6 @@
         <dependency>
             <groupId>jakarta.json</groupId>
             <artifactId>jakarta.json-api</artifactId>
-            <version>2.1.2</version>
         </dependency>
         <dependency>
             <groupId>io.quarkus.resteasy.reactive</groupId>
@@ -88,6 +86,11 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-mutiny</artifactId>
+        </dependency>
+        <!--Open API-->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
         </dependency>
 
         <!--Database-->
@@ -190,7 +193,8 @@
             </activation>
             <properties>
                 <skipITs>false</skipITs>
-                <quarkus.package.type>native</quarkus.package.type>
+                <quarkus.native.enabled>true</quarkus.native.enabled>
+                <quarkus.package.jar.enabled>false</quarkus.package.jar.enabled>
             </properties>
         </profile>
     </profiles>

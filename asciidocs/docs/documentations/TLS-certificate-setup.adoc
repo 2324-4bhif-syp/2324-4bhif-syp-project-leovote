@@ -1,0 +1,59 @@
+= Setup TLS Server Certificate
+:toc:
+:icons: font
+
+WARNING: This configuration is specifically designed for nginx servers
+
+== Edit sites-available
+
+Edit file /etc/nginx/sites-available/default
+
+[source, text]
+----
+server_name example.com www.example.com
+----
+
+Replace with domain name
+
+[source, text]
+----
+server_name leovote.htl-leonding.ac.at
+----
+
+== Save, verify, reload
+
+Verify the config:
+[source, text]
+----
+sudo nginx -t
+----
+
+Reload nginx
+[source, text]
+----
+sudo systemctl reload nginx
+----
+
+== Certbot
+
+Install certbot and python3-certbot-nginx
+
+[source,text]
+----
+sudo apt update
+sudo apt install -y certbot python3-certbot-nginx
+----
+
+Generate TLS certificate
+
+[source, text]
+----
+sudo certbot --nginx -d example.com -d www.example.com
+----
+
+Replace with correct uri
+
+[source, text]
+----
+sudo certbot --nginx -d leovote.htl-leonding.ac.at
+----

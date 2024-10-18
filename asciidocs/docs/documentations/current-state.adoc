@@ -1,0 +1,55 @@
+= Current State - Leovote - 08.10.2024
+:toc:
+:hide-uri-scheme:
+//ifndef::imagesdir[:imagesdir: images]
+:imagesdir: images
+:icons: font
+
+== Current State
+
+WARNING: The CLD could change since 'Leovote' and the documentation is under development.
+
+image::cld.png[Class Diagram]
+
+An Election defines the period during which votes can be cast, by whom, and for whom.
+The Election contains the candidates available for selection and the email addresses of eligible voters.
+
+Emails with a link to the vote can be sent through an email service.
+After logging in via Keycloak, users can register for the election using their token (UUID).
+
+Afterward, a vote can be cast, which will be added to the blockchain.
+
+The election contains multiple candidates, where one can be selected.
+The candidate selection view contains the participating candidates name, class and a picture.
+
+== Architecture
+
+* Backend
+** Programmed in Java with Quarkus
+*** Responsible for saving participants, emails, voter tokens.
+**** The tokens are associated with the emails, to provoke people giving the code to other people
+*** Saves Results and Votes from participants.
+*** Checks if given code is associated with email.
+
+* Frontend
+** Admin View:
+*** Create Candidates
+**** Image Upload supported
+*** Create Elections
+*** Add Candidates to Elections
+*** See results from elections
+** Voter View:
+*** Enter code sent via E-Mail
+*** Select one of the participating candidates
+
+== Problems
+
+* CI/CD Pipeline (WIP)
+* At the moment we only support to vote for a single person in one election.
+* Backend endpoints not secured from outside. (ROLES)
+
+== Future Plans
+
+* Add point system, like in the school council election (HTL Leonding)
+* Secure backend endpoints with roles (Authentication, Authorisation)
+* Frontend design overwork

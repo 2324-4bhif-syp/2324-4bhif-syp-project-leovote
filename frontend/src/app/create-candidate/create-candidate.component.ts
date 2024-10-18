@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Candidate} from "../shared/entity/candidate-model";
 import {CandidateService} from "../shared/control/candidate.service";
-import {throwError} from "rxjs";
 
 @Component({
   selector: 'app-create-candidate',
@@ -51,7 +50,7 @@ export class CreateCandidateComponent {
         console.log(pathOfImage)
         const candidate = new Candidate(schoolId, firstName, lastName, grade, pathOfImage);
         if (!pathOfImage) {
-          candidate.pathOfImage = "";
+          candidate.pathOfImage = "default.jpg";
         }
         this.candidate = candidate;
         this.createCandidate();
@@ -84,13 +83,13 @@ export class CreateCandidateComponent {
         this.candidate.pathOfImage = this.candidate.schoolId + ".jpg";
       } else {
         if (this.candidate.pathOfImage === '') {
-          this.candidate.pathOfImage = '';
+          this.candidate.pathOfImage = 'default.jpg';
         }
       }
       this.addCandidate();
     } else {
       if (this.candidate.pathOfImage === '') {
-        this.candidate.pathOfImage = '';
+        this.candidate.pathOfImage = 'default.jpg';
       }
       this.addCandidate();
     }
@@ -111,8 +110,8 @@ export class CreateCandidateComponent {
   }
 
   confirmDelete(candidate: Candidate) {
-    if (confirm(`Are you sure you want to delete Candidate: ${candidate.firstName} ${candidate.lastName}?`)) {
-      this.deleteCandidate(candidate);``
+    if (confirm("Are you sure you want to delete this Candidate?")) {
+      this.deleteCandidate(candidate);
     }
   }
 
@@ -143,9 +142,5 @@ export class CreateCandidateComponent {
         }
       );
     }
-  }
-
-  checkFields() {
-    return this.candidate.schoolId === '' || this.candidate.firstName === '' || this.candidate.lastName === '' || this.candidate.grade === '';
   }
 }
