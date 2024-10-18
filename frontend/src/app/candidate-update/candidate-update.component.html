@@ -15,9 +15,9 @@
               </div>
               <div class="card-body">
                 <div class="title-card">
-                  <h3 class="card-title">{{ candidate.firstName }}</h3>
-                  <h3 class="card-title"> {{ candidate.lastName }} </h3>
-                  <h4>{{ candidate.grade }}</h4>
+                  <h3 class="card-title">{{ updatedCandidate.firstName }}</h3>
+                  <h3 class="card-title"> {{ updatedCandidate.lastName }} </h3>
+                  <h4>{{ updatedCandidate.grade }}</h4>
                 </div>
               </div>
             </div>
@@ -41,7 +41,7 @@
           <input type="file" id="imageInput" (change)="onImageChange($event)">
         </div>
         <div class="input">
-          <button (click)="updateCandidate()">Update Candidate</button>
+          <button [disabled]="checkFields()" (click)="updateCandidate()">Update Candidate</button>
         </div>
       </div>
     </th>

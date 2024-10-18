@@ -19,6 +19,7 @@ export class LeovoteWebApiService {
   //baseUrl = 'http://localhost:8080/'; for local development
   private baseUrl = environment.apiUrl;
   private candidates = 'candidates';
+  private candidatesAll = 'candidates/all';
   private elections: string = 'elections';
   private addElectionUrl: string = 'elections/election';
   private electionById: string = 'elections/${id}'
@@ -38,13 +39,13 @@ export class LeovoteWebApiService {
   private getCandidatesAndImages: string = 'candidates/images';
   private getCandidateByIdUrl: string = 'candidates/${id}';
   private getImageByIdUrl: string = 'candidates/images/${id}';
-  private updateCandidateUrl: string = 'candidates/${id}';
+  private updateCandidateUrl: string = 'candidates/update/${id}';
 
   constructor(private http: HttpClient) {
   }
 
   public getAllCandidates() {
-    return this.http.get<Candidate[]>(this.baseUrl + this.candidates, {headers: this.headers});
+    return this.http.get<Candidate[]>(this.baseUrl + this.candidatesAll, {headers: this.headers});
   }
 
   public getAllElections() {

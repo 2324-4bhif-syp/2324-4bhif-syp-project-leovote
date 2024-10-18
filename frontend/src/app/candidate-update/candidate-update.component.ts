@@ -29,6 +29,13 @@ export class CandidateUpdateComponent implements OnInit {
         this.candidateId = Number(id);
         this.candidateService.getById(this.candidateId).subscribe(candidate => {
           this.candidate = candidate;
+          this.updatedCandidate = new Candidate();
+          this.updatedCandidate.firstName = this.candidate.firstName;
+          this.updatedCandidate.lastName = this.candidate.lastName;
+          this.updatedCandidate.grade = this.candidate.grade;
+          this.updatedCandidate.id = this.candidate.id;
+          this.updatedCandidate.schoolId = this.candidate.schoolId;
+          this.updatedCandidate.pathOfImage = this.candidate.pathOfImage;
           this.updatedCandidate.schoolId = this.candidate.schoolId;
           if (this.candidateId != null) {
             this.candidateService.getImageById(this.candidateId).subscribe(candidateImage => {
@@ -94,5 +101,10 @@ export class CandidateUpdateComponent implements OnInit {
 
       }
     }
+  }
+
+  checkFields() {
+    return this.updatedCandidate.firstName == "" || this.updatedCandidate.lastName == "" || this.updatedCandidate.grade == ""
+      || this.updatedCandidate.schoolId == null;
   }
 }

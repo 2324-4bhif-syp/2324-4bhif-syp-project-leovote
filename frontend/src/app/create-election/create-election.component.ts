@@ -98,7 +98,7 @@ export class CreateElectionComponent implements OnInit {
   }
 
   confirmDelete(election: Election) {
-    if (confirm("Are you sure you want to delete this Election?")) {
+    if (confirm(`Are you sure you want to delete Election: ${election.name} ?`)) {
       this.deleteElection(election);
     }
   }

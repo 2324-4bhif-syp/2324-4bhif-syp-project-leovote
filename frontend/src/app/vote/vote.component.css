@@ -452,7 +452,7 @@
   border-radius: 12px;
   font-size: 1.1rem;
   color: white;
-  background: hsl(345deg 100% 47%);
+  background: #A8151C;
   will-change: transform;
   transform: translateY(-4px);
   transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
@@ -557,7 +557,7 @@
   border-radius: 12px;
   font-size: 1.1rem;
   color: white;
-  background: hsl(116deg 100% 47%);
+  background: #12632D;
   will-change: transform;
   transform: translateY(-4px);
   transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
@@ -610,4 +610,8 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+}
+
+.d-flex justify-content-center .button{
+  padding-left: 20px;
 }

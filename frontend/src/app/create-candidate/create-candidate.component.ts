@@ -71,7 +71,21 @@ export class CreateCandidateComponent {
 
   createCandidate() {
     if (this.imageFile) {
-      this.candidate.pathOfImage = this.candidate.schoolId + ".jpg";
+      this.candidateService.uploadImage(this.imageFile,this.candidate.schoolId).subscribe(
+        (response: string) => {
+          console.log('Bild erfolgreich hochgeladen:', response);
+        },
+        (error) => {
+          console.error('Fehler beim Hochladen des Bildes:', error);
+        }
+      );
+      if (this.imageFile != null) {
+        this.candidate.pathOfImage = this.candidate.schoolId + ".jpg";
+      } else {
+        if (this.candidate.pathOfImage === '') {
+          this.candidate.pathOfImage = 'default.jpg';
+        }
+      }
       this.addCandidate();
     } else {
       if (this.candidate.pathOfImage === '') {
@@ -80,24 +94,14 @@ export class CreateCandidateComponent {
       this.addCandidate();
     }
     this.candidate = new Candidate();
+    this.resetImageInput();
   }
 
   addCandidate() {
     this.candidateService.add(this.candidate).subscribe(
-      (response: Candidate) => {
+      (response) => {
         console.log('Candidate created successfully:', response);
-        this.candidates.push(response);
-        if (this.imageFile) {
-          this.candidateService.uploadImage(this.imageFile, response.schoolId).subscribe(
-            (responseImage: string) => {
-              console.log('Bild erfolgreich hochgeladen:', responseImage);
-            },
-            (error) => {
-              console.error('Fehler beim Hochladen des Bildes:', error);
-            }
-          );
-        }
-        this.resetImageInput();
+        this.candidates.push(response); // push response to update candidate
       },
       (error) => {
         console.error('Error creating candidate:', error);

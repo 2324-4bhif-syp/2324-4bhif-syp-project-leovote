@@ -30,16 +30,17 @@ export class ResultsComponent implements OnInit {
   }
 
   createChart(results: Result[]) {
-    const labels = results.map((r) => `${r.firstname} ${r.lastname} (${r.grade})`);
+    const labels = results.map((r) => `${r.firstname} ${r.lastname} (${r.grade}): ${r.percentage}%`);
     const data = results.map((r) => r.percentage);
 
     this.chart = new Chart("Results", {
       type: 'pie',
       data: {
-        labels,
+        labels: labels,
         datasets: [{
           label: 'Percent',
-          data
+          borderWidth: 1,
+          data: data
         }],
       },
       options: {
@@ -47,11 +48,12 @@ export class ResultsComponent implements OnInit {
         layout: {
           autoPadding:true
         },
-        aspectRatio: 0.6,
+        aspectRatio: 1,
         plugins: {
           legend: {
             position:"top",
             display:true,
+            align:"start",
           }
         }
       },

@@ -49,7 +49,7 @@ export class CandidateOverviewComponent implements OnInit {
         const matchingImage = this.candidatesImage.find((c) => c.candidateId === candidate.id);
         if (matchingImage) {
           candidate.pathOfImage = matchingImage.imagePath;
-          console.log(candidate.pathOfImage);
+          //console.log(candidate.pathOfImage);
         }
       });
     }
@@ -60,7 +60,7 @@ export class CandidateOverviewComponent implements OnInit {
 
   deleteCandidate(candidate: Candidate): void {
     if (candidate.id !== null) {
-      if(confirm(`Do you want to delete ${candidate.firstName} ${candidate.lastName}`))
+      if(confirm(`Do you want to delete ${candidate.firstName} ${candidate.lastName}?`))
       this.candidateService.isCandidateInAnyElection(candidate.id).subscribe(
         isInAnyElection => {
           if (isInAnyElection) {
