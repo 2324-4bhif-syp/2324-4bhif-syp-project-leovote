@@ -56,7 +56,8 @@ export class LoginComponent {
         email = keycloakInstance.profile.email;
       }
       const checkEmailAndCode = await this.voteService.checkEmailAndCode(email, this.code);
-      if (success && roleTrue && checkEmailAndCode) {
+      //removed roleTrue, because LDAP field is not set in keycloak
+      if (success && checkEmailAndCode) {
         await this.router.navigate(['/votes']);
 
       } else {
