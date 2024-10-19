@@ -123,8 +123,6 @@ public class Candidate extends PanacheEntity {
 
     @Override
     public String toString() {
-        return "Candidate{" +
-                "schoolId='" + schoolId + '\'' +
-                '}';
+        return schoolId;
     }
 }
