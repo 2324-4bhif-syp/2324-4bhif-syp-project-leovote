@@ -3,6 +3,8 @@ package at.htlleonding.entity;
 import at.htlleonding.control.HashService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Block {
@@ -10,7 +12,7 @@ public class Block {
     private final HashService hashService = new HashService();
     private final int index;
     private final Long timestamp;
-    private final Candidate voted;
+    private final HashMap<Candidate, Integer> voted;
     private final String previousHash;
     private final String hash;
     private final UUID voterUUID;
@@ -18,7 +20,7 @@ public class Block {
 
     //<editor-fold desc="Constructors">
     public Block(@JsonProperty("index") int index, @JsonProperty("timestamp") Long timestamp,
-                 @JsonProperty("voted") Candidate voted, @JsonProperty("previousHash") String previousHash,
+                 @JsonProperty("voted") HashMap<Candidate, Integer> voted, @JsonProperty("previousHash") String previousHash,
                  @JsonProperty("voterUUID") UUID voterUUID) {
         this.index = index;
         this.timestamp = timestamp;
@@ -31,7 +33,7 @@ public class Block {
 
     //<editor-fold desc="Methods">
     private String calculateHash() {
-        String data = index + timestamp + voted.toString() + previousHash + voterUUID.toString();
+        String data = this.toString();
         return hashService.calculateSHA256Hash(data);
     }
 
@@ -51,7 +53,7 @@ public class Block {
         return previousHash;
     }
 
-    public Candidate getVoted() {
+    public HashMap<Candidate, Integer> getVoted() {
         return voted;
     }
 
@@ -59,5 +61,32 @@ public class Block {
         return voterUUID;
     }
 
+    @Override
+    public String toString() {
+        if (voted == null) {
+            return "Block{" +
+                    "index=" + index +
+                    ", timestamp=" + timestamp +
+                    ", previousHash='" + previousHash + '\'' +
+                    ", voterUUID=" + voterUUID +
+                    '}';
+        }
+
+        return "Block{" +
+                "index=" + index +
+                ", timestamp=" + timestamp +
+                ", voted=" + votedToString() +
+                ", previousHash='" + previousHash + '\'' +
+                ", voterUUID=" + voterUUID +
+                '}';
+    }
+
+    private String votedToString() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Candidate, Integer> entry : voted.entrySet()) {
+            sb.append(entry.getKey()).append(": ").append(entry.getValue()).append(", ");
+        }
+        return sb.toString();
+    }
     //</editor-fold>
 }

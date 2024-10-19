@@ -26,6 +26,14 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
         return Response.ok(candidates).build();
     }
 
+    @GET
+    @Path("getBySchoolId/{schoolId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    default Response getCandidatesBySchoolId(@PathParam("schoolId") String schoolId) {
+        Candidate candidate = candidateRepository.getCandidateBySchoolId(schoolId);
+        return Response.ok(candidate).build();
+    }
+
     @DELETE
     @Transactional
     @Path("{id}")

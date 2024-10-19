@@ -5,6 +5,7 @@ import at.htlleonding.control.ElectionRepository;
 import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
+import at.htlleonding.entity.ElectionType;
 import at.htlleonding.entity.Voter;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,7 +36,7 @@ public class VoterRepoTest {
     public void Election_Test_good() {
         //arrange
         Candidate candidate_winner = new Candidate("id1", "c1", "winner", "1a");
-        Candidate candidate_loser = new Candidate("id2", "c2", "looser", "1a");
+        Candidate candidate_loser = new Candidate("id2", "c2", "loser", "1a");
         List<Candidate> candidateList = new ArrayList<>();
 
         //act
@@ -46,17 +48,27 @@ public class VoterRepoTest {
                 "TestElection1",
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(1),
-                "TestType",
+                ElectionType.MULTIVALUE,
                 candidateList
         );
         entityManager.persist(election1);
+
+        // Prepare votes map
+        HashMap<Candidate, Integer> votesMap_winner = new HashMap<>();
+        HashMap<Candidate, Integer> votesMap_loser = new HashMap<>();
+
+        // Create voters and collect votes for winner
         List<Voter> voterList_winner = voterRepository.createVotersForElection(8, election1);
         for (Voter v : voterList_winner) {
-            voterRepository.voteForCandidate(v, candidate_winner, election1);
+            votesMap_winner.put(candidate_winner, 1);
+            voterRepository.voteForCandidate(v, votesMap_winner, election1);
         }
+
+        // Create voters and collect votes for loser
         List<Voter> voterList_loser = voterRepository.createVotersForElection(2, election1);
         for (Voter v : voterList_loser) {
-            voterRepository.voteForCandidate(v, candidate_loser, election1);
+            votesMap_loser.put(candidate_loser, 1);
+            voterRepository.voteForCandidate(v, votesMap_loser, election1);
         }
 
         //assert
@@ -107,13 +119,18 @@ public class VoterRepoTest {
                 "TestElection2",
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(1),
-                "TestType",
+                ElectionType.MULTIVALUE,
                 candidateList
         );
         entityManager.persist(election1);
+
+        // Create voters and try to vote for candidate not in election
         List<Voter> voterList = voterRepository.createVotersForElection(10, election1);
+        HashMap<Candidate, Integer> votesMap = new HashMap<>();
+        votesMap.put(candidate_notInElection, 1);  // Add invalid vote
+
         for (Voter v : voterList) {
-            voterRepository.voteForCandidate(v, candidate_notInElection, election1);
+            voterRepository.voteForCandidate(v, votesMap, election1);
         }
 
         //assert
@@ -154,13 +171,18 @@ public class VoterRepoTest {
                 "TestElection2",
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(1),
-                "TestType",
+                ElectionType.MULTIVALUE,
                 candidateList
         );
         entityManager.persist(election1);
+
+        // Create voters and try to vote for candidate not participating in the election
         List<Voter> voterList = voterRepository.createVotersForElection(10, election1);
+        HashMap<Candidate, Integer> votesMap = new HashMap<>();
+        votesMap.put(candidate1, 1);  // Invalid vote
+
         for (Voter v : voterList) {
-            voterRepository.voteForCandidate(v, candidate1, election1);
+            voterRepository.voteForCandidate(v, votesMap, election1);
         }
 
         //assert

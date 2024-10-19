@@ -3,15 +3,17 @@ package at.htlleonding.control;
 import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Voter;
+import at.htlleonding.entity.deserializer.CandidateKeyDeserializer;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,18 +36,10 @@ public class Blockchain {
     }
 
     private Block createGenesisBlock() {
-        Candidate candidate1 = new Candidate(
-                "IF92837497234",
-                "genesisFirstName",
-                "genesisLastName",
-                "genClass",
-                "imagePath"
-        );
-
-        return new Block(0, System.currentTimeMillis(), candidate1, "0", UUID.randomUUID());
+        return new Block(0, System.currentTimeMillis(), null, "0", UUID.randomUUID());
     }
 
-    public synchronized void addBlock(Candidate voted, Voter voter) {
+    public synchronized void addBlock(HashMap<Candidate, Integer> voted, Voter voter) {
         Block previousBlock = chain.get(chain.size() - 1);
         int index = chain.size();
         long timestamp = System.currentTimeMillis();
@@ -68,6 +62,12 @@ public class Blockchain {
 
     private synchronized List<Block> readJsonArray() {
         ObjectMapper objectMapper = new ObjectMapper();
+
+        // Register the custom deserializer for Candidate keys
+        SimpleModule module = new SimpleModule();
+        module.addKeyDeserializer(Candidate.class, new CandidateKeyDeserializer());
+        objectMapper.registerModule(module);
+
         File file = new File(filePath);
 
         if (!file.exists() && !file.isDirectory()) {
@@ -76,8 +76,10 @@ public class Blockchain {
         }
 
         try {
-            return objectMapper.readValue(file, new TypeReference<>() {
-            });
+            // Deserialize the list of blocks
+            List<Block> blocks = objectMapper.readValue(file, new TypeReference<List<Block>>() {});
+
+            return blocks;
         } catch (IOException e) {
             throw new RuntimeException("Error reading existing JSON array from file", e);
         }

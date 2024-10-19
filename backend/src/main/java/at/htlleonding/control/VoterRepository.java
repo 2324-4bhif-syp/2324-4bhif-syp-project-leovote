@@ -32,24 +32,30 @@ public class VoterRepository implements PanacheRepository<Voter> {
     // Logic for the vote.
     // Vote passes, if candidate exists, voter hasn't voted, voter is able to vote in election
     // and election exists
-    public boolean voteForCandidate(Voter voter, Candidate candidate, Election election) {
+    public boolean voteForCandidate(Voter voter, HashMap<Candidate, Integer> voted, Election election) {
         Election election1 = Election.findById(election.id);
-        Optional<Candidate> candidate1 = election1.getParticipatingCandidates()
-                .stream()
-                .filter(candidate2 -> candidate2 == candidate)
-                .findFirst();
+        boolean candidatesExist = true;
+        for (Map.Entry<Candidate, Integer> entry : voted.entrySet()) {
+            Optional<Candidate> candidate1 = election1.getParticipatingCandidates()
+                    .stream()
+                    .filter(candidate2 -> candidate2 == entry.getKey())
+                    .findFirst();
+            if(candidate1.isEmpty()) {
+                candidatesExist = false;
+            }
+        }
 
         Blockchain blockchain = new Blockchain(election1.getBlockchainFileName());
 
-        boolean voteIsValid = candidate1.isPresent() &&
+        boolean voteIsValid = candidatesExist &&
                 voter.getElection() == election1 &&
                 election1.getElectionStart().isBefore(LocalDateTime.now()) &&
                 election1.getElectionEnd().isAfter(LocalDateTime.now()) &&
                 !hasAlreadyVoted(blockchain, voter);
 
         if (voteIsValid) {
-            entityManager.merge(voter);
-            blockchain.addBlock(candidate, voter);
+            entityManager.merge(voter); // If this line is removed, the validity check of the blockhain will fail
+            blockchain.addBlock(voted, voter);
             return true;
         }
         return false;

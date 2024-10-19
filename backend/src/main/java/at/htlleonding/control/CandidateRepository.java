@@ -35,6 +35,7 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
 
         candidate.delete();
     }
+
     public void updateFile(Candidate candidate, Candidate candidateToUpdate) {
         File oldImageFile = new File(PATH_IMAGES + candidateToUpdate.getSchoolId() + ".jpg");
         File newImageFile = new File(PATH_IMAGES + candidate.getSchoolId() + ".jpg");
@@ -51,6 +52,11 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
 
         candidateToUpdate.persist();
     }
+
+    public Candidate getCandidateBySchoolId(String schoolId) {
+        return find("schoolId", schoolId).firstResult();
+    }
+
     public List<CandidateImageDTO> getImagesForCandidates() throws IOException {
         List<Candidate> candidates = Candidate.listAll();
         List<CandidateImageDTO> imageDTOList = new ArrayList<>();
@@ -82,6 +88,7 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
         }
         return imageDTOList;
     }
+
     public CandidateImageDTO getImageByCandidateId(Long id) throws IOException {
         Candidate candidate = Candidate.findById(id);
 

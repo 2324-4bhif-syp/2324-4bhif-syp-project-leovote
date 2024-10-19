@@ -5,6 +5,8 @@ import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Voter;
+import at.htlleonding.entity.dto.CandidateVoteDTO;
+import at.htlleonding.entity.dto.VoteRequestDTO;
 import at.htlleonding.entity.dto.VoterDTO;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
@@ -17,6 +19,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -49,29 +52,56 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         }
     }
 
+//    TODO: Remove comment when implemented in frontend
+//    Example request body:
+//    {
+//        "voterId": "fbc07018-49b6-4c4c-9f2f-5ceccf7b11f1",
+//            "candidateVotes": [
+//        {
+//            "candidateId": 1,
+//                "points": 5
+//        },
+//        {
+//            "candidateId": 2,
+//                "points": 3
+//        }
+//        ]
+//    }
+
     @POST
-    @Path("vote/{electionId}/{candidateId}")
+    @Path("vote/{electionId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     default Response vote(
             @PathParam("electionId") Long electionId,
-            @PathParam("candidateId") Long candidateId,
-            Map<String, UUID> requestBody
+            VoteRequestDTO voteRequest
     ) {
-        UUID voterId = requestBody.get("voterId");
+        UUID voterId = UUID.fromString(voteRequest.getVoterId());
+        List<CandidateVoteDTO> candidateVotes = voteRequest.getCandidateVotes();
+
         Election election = Election.findById(electionId);
-        Candidate candidate = Candidate.findById(candidateId);
-        boolean voteIsValid;
+        Voter voter;
+        HashMap<Candidate, Integer> votesMap = new HashMap<>();
+
         try {
-            Voter voter = Voter.findById(voterId);
-            voteIsValid = voterRepository.voteForCandidate(voter, candidate, election);
+            voter = Voter.findById(voterId);
+
+            for (CandidateVoteDTO vote : candidateVotes) {
+                Long candidateId = vote.getCandidateId();
+                int points = vote.getPoints();
+
+                Candidate candidate = Candidate.findById(candidateId);
+                votesMap.put(candidate, points);
+            }
+
+            boolean voteIsValid = voterRepository.voteForCandidate(voter, votesMap, election);
+
+            if (!voteIsValid) {
+                return Response.status(Response.Status.FORBIDDEN).build();
+            }
         } catch (Exception e) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-        }
-
-        if (!voteIsValid) {
-            return Response.status(Response.Status.FORBIDDEN).build();
         }
 
         return Response.accepted().build();

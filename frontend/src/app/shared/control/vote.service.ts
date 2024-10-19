@@ -4,6 +4,9 @@ import {Vote} from "../entity/vote";
 import {VoteCandidate} from "../entity/vote-candidate-model";
 import {Router} from "@angular/router";
 import {LoginModel} from "../entity/login-model";
+import {VoteRequestDto} from "../entity/dto/vote-request-dto";
+import {Candidate} from "../entity/candidate-model";
+import {CandidateVoteDto} from "../entity/dto/candidate-vote-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -55,19 +58,24 @@ export class VoteService {
     });
   }
 
-  voteCall(candidateId: number, electionId: number) {
+  voteCall(selectedCandidate: number, electionId: number) {
     if (this.vote?.generatedId != undefined) {
       let voteCandidate: VoteCandidate = new VoteCandidate(this.vote.generatedId)
       console.log(voteCandidate);
-      this.apiClient.voteForCandidate(voteCandidate, candidateId, electionId).subscribe(
-        () => {
-          console.log('Vote successful');
-          this.isLoggedIn = false;
-        },
-        (error) => {
-          console.error('Error in voting');
-        }
-      );
+      if(selectedCandidate) {
+        let candidateVote: CandidateVoteDto[] = [];
+        candidateVote.push(new CandidateVoteDto(selectedCandidate, 1))
+        let voteRequest: VoteRequestDto = new VoteRequestDto(this.vote.generatedId, candidateVote)
+        this.apiClient.voteForCandidate(electionId, voteRequest).subscribe(
+          () => {
+            console.log('Vote successful');
+            this.isLoggedIn = false;
+          },
+          (error) => {
+            console.error('Error in voting');
+          }
+        );
+      }
     } else {
       console.log("No Id given");
     }

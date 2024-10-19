@@ -66,6 +66,10 @@ export class CandidateService {
     return this.apiClient.getImageById(id);
   }
 
+  getBySchoolId(id: string): Observable<Candidate> {
+    return this.apiClient.getCandidateBySchoolId(id);
+  }
+
   update(candidate: Candidate, id: number): Observable<Object> {
     return this.apiClient.updateCandidate(candidate, id);
   }
