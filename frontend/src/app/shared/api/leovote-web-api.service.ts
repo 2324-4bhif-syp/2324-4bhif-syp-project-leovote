@@ -32,6 +32,7 @@ export class LeovoteWebApiService {
   private removeMailUrl: string = 'elections/removeEmail/${id}';
   private sendCodesUrl: string = 'email/election/${electionId}';
   private removeCandidate: string = 'candidates/${id}';
+  private candidateBySchoolId: string = 'candidates/getBySchoolId/${schoolId}';
   private removeElection: string = 'elections/${id}';
   private checkLoginDataUrl: string = 'token';
   private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}';
@@ -140,5 +141,9 @@ export class LeovoteWebApiService {
 
   public updateCandidate(candidate: Candidate, id: number) {
     return this.http.put(this.baseUrl + this.updateCandidateUrl.replace('${id}', id.toString()), candidate, {headers: this.headers});
+  }
+
+  public getCandidateBySchoolId(schoolId: string){
+    return this.http.get<Candidate>(this.baseUrl + this.candidateBySchoolId.replace('${schoolId}', schoolId), {headers: this.headers});
   }
 }
