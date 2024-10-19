@@ -3,16 +3,20 @@ package at.htlleonding.entity.deserializer;
 import at.htlleonding.control.CandidateRepository;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.KeyDeserializer;
-import jakarta.inject.Inject;
+import jakarta.enterprise.inject.spi.CDI;
 
 import java.io.IOException;
 
 public class CandidateKeyDeserializer extends KeyDeserializer {
-    @Inject
     CandidateRepository candidateRepository;
 
     @Override
     public Object deserializeKey(String key, DeserializationContext deserializationContext) throws IOException {
-        return candidateRepository.getCandidateBySchoolId(key); // Adjust as per your Candidate constructor
+        // Lazy load the CandidateRepository via CDI if it's not yet initialized
+        if (candidateRepository == null) {
+            candidateRepository = CDI.current().select(CandidateRepository.class).get();
+        }
+
+        return candidateRepository.getCandidateBySchoolId(key); // Fetch the candidate by schoolId
     }
 }
