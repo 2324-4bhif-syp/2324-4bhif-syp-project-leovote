@@ -17,6 +17,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -50,28 +51,39 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     }
 
     @POST
-    @Path("vote/{electionId}/{candidateId}")
+    @Path("vote/{electionId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     default Response vote(
             @PathParam("electionId") Long electionId,
-            @PathParam("candidateId") Long candidateId,
-            Map<String, UUID> requestBody
+            Map<String, Object> requestBody
     ) {
-        UUID voterId = requestBody.get("voterId");
+        UUID voterId = UUID.fromString((String) requestBody.get("voterId"));
+        List<Map<String, Object>> candidateVotes = (List<Map<String, Object>>) requestBody.get("candidateVotes");
+
         Election election = Election.findById(electionId);
-        Candidate candidate = Candidate.findById(candidateId);
-        boolean voteIsValid;
+        Voter voter;
+        HashMap<Candidate, Integer> votesMap = new HashMap<>();
+
         try {
-            Voter voter = Voter.findById(voterId);
-            voteIsValid = voterRepository.voteForCandidate(voter, candidate, election);
+            voter = Voter.findById(voterId);
+
+            for (Map<String, Object> vote : candidateVotes) {
+                Long candidateId = ((Number) vote.get("candidateId")).longValue();
+                int points = ((Number) vote.get("points")).intValue();
+
+                Candidate candidate = Candidate.findById(candidateId);
+                votesMap.put(candidate, points);
+            }
+
+            boolean voteIsValid = voterRepository.voteForCandidate(voter, votesMap, election);
+
+            if (!voteIsValid) {
+                return Response.status(Response.Status.FORBIDDEN).build();
+            }
         } catch (Exception e) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-        }
-
-        if (!voteIsValid) {
-            return Response.status(Response.Status.FORBIDDEN).build();
         }
 
         return Response.accepted().build();
