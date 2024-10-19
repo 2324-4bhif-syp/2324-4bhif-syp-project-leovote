@@ -5,6 +5,8 @@ import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Voter;
+import at.htlleonding.entity.dto.CandidateVoteDTO;
+import at.htlleonding.entity.dto.VoteRequestDTO;
 import at.htlleonding.entity.dto.VoterDTO;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
@@ -50,6 +52,22 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         }
     }
 
+//    TODO: Remove comment when implemented in frontend
+//    Example request body:
+//    {
+//        "voterId": "fbc07018-49b6-4c4c-9f2f-5ceccf7b11f1",
+//            "candidateVotes": [
+//        {
+//            "candidateId": 1,
+//                "points": 5
+//        },
+//        {
+//            "candidateId": 2,
+//                "points": 3
+//        }
+//        ]
+//    }
+
     @POST
     @Path("vote/{electionId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -57,10 +75,10 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     @Transactional
     default Response vote(
             @PathParam("electionId") Long electionId,
-            Map<String, Object> requestBody
+            VoteRequestDTO voteRequest
     ) {
-        UUID voterId = UUID.fromString((String) requestBody.get("voterId"));
-        List<Map<String, Object>> candidateVotes = (List<Map<String, Object>>) requestBody.get("candidateVotes");
+        UUID voterId = UUID.fromString(voteRequest.getVoterId());
+        List<CandidateVoteDTO> candidateVotes = voteRequest.getCandidateVotes();
 
         Election election = Election.findById(electionId);
         Voter voter;
@@ -69,9 +87,9 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         try {
             voter = Voter.findById(voterId);
 
-            for (Map<String, Object> vote : candidateVotes) {
-                Long candidateId = ((Number) vote.get("candidateId")).longValue();
-                int points = ((Number) vote.get("points")).intValue();
+            for (CandidateVoteDTO vote : candidateVotes) {
+                Long candidateId = vote.getCandidateId();
+                int points = vote.getPoints();
 
                 Candidate candidate = Candidate.findById(candidateId);
                 votesMap.put(candidate, points);
