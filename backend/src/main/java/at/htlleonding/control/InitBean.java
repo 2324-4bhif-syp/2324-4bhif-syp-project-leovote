@@ -73,6 +73,7 @@ public class InitBean {
             if (i % 2 == 0) {
                 HashMap<Candidate, Integer> vote2 = new HashMap<>();
                 vote2.put(candidate2, 6);
+                vote2.put(candidate1, 5);
                 voterRepository.voteForCandidate(voter, vote2, election2);
             } else {
                 HashMap<Candidate, Integer> vote2 = new HashMap<>();
