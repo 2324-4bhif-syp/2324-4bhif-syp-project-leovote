@@ -113,12 +113,12 @@ public class Candidate extends PanacheEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Candidate candidate = (Candidate) o;
-        return Objects.equals(schoolId, candidate.schoolId) && Objects.equals(firstName, candidate.firstName) && Objects.equals(lastName, candidate.lastName) && Objects.equals(grade, candidate.grade) && Objects.equals(pathOfImage, candidate.pathOfImage);
+        return Objects.equals(schoolId, candidate.schoolId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(schoolId, firstName, lastName, grade, pathOfImage);
+        return Objects.hash(schoolId);
     }
 
     @Override
