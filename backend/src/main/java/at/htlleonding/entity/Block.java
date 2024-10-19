@@ -59,6 +59,5 @@ public class Block {
     public UUID getVoterUUID() {
         return voterUUID;
     }
-
     //</editor-fold>
 }

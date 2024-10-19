@@ -123,9 +123,8 @@ public class Candidate extends PanacheEntity {
 
     @Override
     public String toString() {
-        return "Candidate: " +
-                "Firstname: " + firstName + " " +
-                "Lastname: " + lastName + " " +
-                "Grade: " + grade + " ";
+        return "Candidate{" +
+                "schoolId='" + schoolId + '\'' +
+                '}';
     }
 }
