@@ -54,7 +54,7 @@ public class VoterRepository implements PanacheRepository<Voter> {
                 !hasAlreadyVoted(blockchain, voter);
 
         if (voteIsValid) {
-            entityManager.merge(voter);
+            entityManager.merge(voter); // If this line is removed, the validity check of the blockhain will fail
             blockchain.addBlock(voted, voter);
             return true;
         }

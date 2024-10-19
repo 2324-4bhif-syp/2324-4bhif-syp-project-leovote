@@ -36,17 +36,7 @@ public class Blockchain {
     }
 
     private Block createGenesisBlock() {
-        HashMap<Candidate, Integer> initCandidates = new HashMap<>();
-        Candidate candidate1 = new Candidate(
-                "IF92837497234",
-                "genesisFirstName",
-                "genesisLastName",
-                "genClass",
-                "imagePath"
-        );
-        initCandidates.put(candidate1, 6);
-
-        return new Block(0, System.currentTimeMillis(), initCandidates, "0", UUID.randomUUID());
+        return new Block(0, System.currentTimeMillis(), null, "0", UUID.randomUUID());
     }
 
     public synchronized void addBlock(HashMap<Candidate, Integer> voted, Voter voter) {
@@ -88,11 +78,6 @@ public class Blockchain {
         try {
             // Deserialize the list of blocks
             List<Block> blocks = objectMapper.readValue(file, new TypeReference<List<Block>>() {});
-
-            // Go through each block and remove any invalid null candidates
-            for (Block block : blocks) {
-                block.getVoted().entrySet().removeIf(entry -> entry.getKey() == null);
-            }
 
             return blocks;
         } catch (IOException e) {

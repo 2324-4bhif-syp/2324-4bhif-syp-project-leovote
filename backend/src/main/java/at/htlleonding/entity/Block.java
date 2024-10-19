@@ -4,6 +4,7 @@ import at.htlleonding.control.HashService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Block {
