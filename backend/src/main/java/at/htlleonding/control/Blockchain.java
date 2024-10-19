@@ -3,8 +3,10 @@ package at.htlleonding.control;
 import at.htlleonding.entity.Block;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.Voter;
+import at.htlleonding.entity.deserializer.CandidateKeyDeserializer;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,6 +72,12 @@ public class Blockchain {
 
     private synchronized List<Block> readJsonArray() {
         ObjectMapper objectMapper = new ObjectMapper();
+
+        // Register the custom deserializer for Candidate keys
+        SimpleModule module = new SimpleModule();
+        module.addKeyDeserializer(Candidate.class, new CandidateKeyDeserializer());
+        objectMapper.registerModule(module);
+
         File file = new File(filePath);
 
         if (!file.exists() && !file.isDirectory()) {
@@ -78,8 +86,7 @@ public class Blockchain {
         }
 
         try {
-            return objectMapper.readValue(file, new TypeReference<>() {
-            });
+            return objectMapper.readValue(file, new TypeReference<List<Block>>() {});
         } catch (IOException e) {
             throw new RuntimeException("Error reading existing JSON array from file", e);
         }
