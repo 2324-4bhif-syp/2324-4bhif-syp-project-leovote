@@ -86,7 +86,15 @@ public class Blockchain {
         }
 
         try {
-            return objectMapper.readValue(file, new TypeReference<List<Block>>() {});
+            // Deserialize the list of blocks
+            List<Block> blocks = objectMapper.readValue(file, new TypeReference<List<Block>>() {});
+
+            // Go through each block and remove any invalid null candidates
+            for (Block block : blocks) {
+                block.getVoted().entrySet().removeIf(entry -> entry.getKey() == null);
+            }
+
+            return blocks;
         } catch (IOException e) {
             throw new RuntimeException("Error reading existing JSON array from file", e);
         }
