@@ -9,8 +9,14 @@
           <input id="electionName" [(ngModel)]="election.name" placeholder="Election Name"/>
         </div>
         <div class="input">
-          <input id="electionType" [(ngModel)]="election.electionType" placeholder="Election Type"/>
+          <label for="electionType">Election Type:</label>
+          <select id="electionType" [(ngModel)]="election.electionType">
+            <option value="">Select Election Type</option>
+            <option value="MULTIVALUE">MULTIVALUE</option>
+            <option value="CROSSES">CROSSES</option>
+          </select>
         </div>
+
         <div class="input">
           <label for="electionStart">Election Start:</label>
           <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>
