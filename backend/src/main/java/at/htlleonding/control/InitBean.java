@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @ApplicationScoped
@@ -38,14 +39,14 @@ public class InitBean {
                 "Student Council Election",
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(7),
-                "General",
+                ElectionType.MULTIVALUE,
                 candidateList
         );
         Election election2 = new Election(
                 "Class Representative Election",
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(7),
-                "Class",
+                ElectionType.MULTIVALUE,
                 candidateList
         );
         entityManager.persist(election1);
@@ -56,7 +57,9 @@ public class InitBean {
 
         for (Voter voter : voters1) {
             System.out.println(voter.getGeneratedId());
-            voterRepository.voteForCandidate(voter, candidate1, election1);
+            HashMap<Candidate, Integer> vote1 = new HashMap<>();
+            vote1.put(candidate1, 6);
+            voterRepository.voteForCandidate(voter, vote1, election1);
         }
         try {
             System.out.println((electionRepository.reviewResults(election1)));
@@ -68,9 +71,13 @@ public class InitBean {
             Voter voter = voters2.get(i);
             System.out.println(voter.getGeneratedId());
             if (i % 2 == 0) {
-                voterRepository.voteForCandidate(voter, candidate2, election2);
+                HashMap<Candidate, Integer> vote2 = new HashMap<>();
+                vote2.put(candidate2, 6);
+                voterRepository.voteForCandidate(voter, vote2, election2);
             } else {
-                voterRepository.voteForCandidate(voter, candidate1, election2);
+                HashMap<Candidate, Integer> vote2 = new HashMap<>();
+                vote2.put(candidate1, 6);
+                voterRepository.voteForCandidate(voter, vote2, election2);
             }
         }
         try {

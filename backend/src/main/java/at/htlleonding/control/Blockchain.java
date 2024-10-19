@@ -8,10 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +34,7 @@ public class Blockchain {
     }
 
     private Block createGenesisBlock() {
+        HashMap<Candidate, Integer> initCandidates = new HashMap<>();
         Candidate candidate1 = new Candidate(
                 "IF92837497234",
                 "genesisFirstName",
@@ -41,11 +42,12 @@ public class Blockchain {
                 "genClass",
                 "imagePath"
         );
+        initCandidates.put(candidate1, 6);
 
-        return new Block(0, System.currentTimeMillis(), candidate1, "0", UUID.randomUUID());
+        return new Block(0, System.currentTimeMillis(), initCandidates, "0", UUID.randomUUID());
     }
 
-    public synchronized void addBlock(Candidate voted, Voter voter) {
+    public synchronized void addBlock(HashMap<Candidate, Integer> voted, Voter voter) {
         Block previousBlock = chain.get(chain.size() - 1);
         int index = chain.size();
         long timestamp = System.currentTimeMillis();

@@ -12,6 +12,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -44,15 +45,20 @@ public class ElectionRepository implements PanacheRepository<Election> {
 
         // Assuming the Candidate class has proper equals() and hashCode() implementations
         for (int i = 1; i < chain.size(); i++) {
-            Candidate votedCandidate = chain.get(i).getVoted();
-            System.out.println((votedCandidate.getFirstName() + " " + votedCandidate.getSchoolId()));
+            HashMap<Candidate, Integer> votedCandidate = chain.get(i).getVoted();
 
             // Update vote count for the candidate
-            voteCounts.put(votedCandidate, voteCounts.getOrDefault(votedCandidate, 0) + 1);
+            for(Map.Entry<Candidate, Integer> entry : votedCandidate.entrySet()) {
+                voteCounts.put(entry.getKey(), voteCounts.getOrDefault(entry.getKey(), 0) + entry.getValue());
+            }
         }
 
         // Calculate percentages
-        int totalVotes = blockchain.getBlocks().size() - 1; // excluding genesis block
+        int totalVotes = 0;
+        for(Map.Entry<Candidate, Integer> entry : voteCounts.entrySet()) {
+            totalVotes += entry.getValue();
+        }
+
         HashMap<Candidate, Double> results = new HashMap<>();
         for (Candidate candidate : voteCounts.keySet()) {
             int votes = voteCounts.get(candidate);

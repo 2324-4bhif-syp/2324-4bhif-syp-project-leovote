@@ -12,7 +12,7 @@ public class Election extends PanacheEntity {
     private String name;
     private LocalDateTime electionStart;
     private LocalDateTime electionEnd;
-    private String electionType;
+    private ElectionType electionType;
     private String blockchainFileName;
 
     @ManyToMany(cascade = {
@@ -27,7 +27,7 @@ public class Election extends PanacheEntity {
     }
 
     public Election(String name, LocalDateTime electionStart, LocalDateTime electionEnd,
-                    String electionType, List<Candidate> participatingCandidates) {
+                    ElectionType electionType, List<Candidate> participatingCandidates) {
         this.name = name;
         this.electionStart = electionStart;
         this.electionEnd = electionEnd;
@@ -69,11 +69,11 @@ public class Election extends PanacheEntity {
         this.electionEnd = electionEnd;
     }
 
-    public String getElectionType() {
+    public ElectionType getElectionType() {
         return electionType;
     }
 
-    public void setElectionType(String electionType) {
+    public void setElectionType(ElectionType electionType) {
         this.electionType = electionType;
     }
 
@@ -93,7 +93,7 @@ public class Election extends PanacheEntity {
                 "name='" + name + '\'' +
                 ", electionStart=" + electionStart +
                 ", electionEnd=" + electionEnd +
-                ", electionType='" + electionType + '\'' +
+                ", electionType='" + electionType.toString() + '\'' +
                 '}';
     }
     //</editor-fold>
