@@ -1,0 +1,40 @@
+<div class="container">
+  <!-- Linke Seite: Liste der Filme -->
+  <div class="movies-container">
+    <h3>Filme</h3>
+    <div
+      cdkDropList
+      [cdkDropListData]="movies"
+      class="movies-list"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListConnectedTo]="allDropLists"
+      id="movies-list"
+    >
+      <div *ngFor="let movie of movies" class="movie-item" cdkDrag>
+        {{ movie.title }}
+        <img [src]="movie.poster" alt="{{ movie.title }}" width="50" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Rechte Seite: Bewertungsboxen mit Punktzahlen -->
+  <div class="rating-container">
+    <h3>Punkte</h3>
+    <div *ngFor="let point of points; let i = index" class="rating-box">
+      <h4>{{ point }} Punkte</h4>
+      <div
+        cdkDropList
+        [cdkDropListData]="ratedMovies[i]"
+        class="example-list"
+        (cdkDropListDropped)="dropToRating($event, i)"
+        [cdkDropListConnectedTo]="allDropLists"
+        [id]="'rating-list-' + i"
+      >
+        <div *ngFor="let movie of ratedMovies[i]" class="movie-item" cdkDrag>
+          {{ movie.title }}
+          <img [src]="movie.poster" alt="{{ movie.title }}" width="50" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

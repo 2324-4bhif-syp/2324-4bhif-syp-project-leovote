@@ -10,10 +10,10 @@ import {CandidateImage} from "../shared/entity/candidate-image";
 
 @Component({
   selector: 'app-vote',
-  templateUrl: './vote.component.html',
-  styleUrls: ['./vote.component.css']
+  templateUrl: './cross-vote.component.html',
+  styleUrls: ['./cross-vote.component.css']
 })
-export class VoteComponent implements OnInit{
+export class CrossVoteComponent implements OnInit{
   isVoted: boolean = false;
   isSelected: boolean = false;
 

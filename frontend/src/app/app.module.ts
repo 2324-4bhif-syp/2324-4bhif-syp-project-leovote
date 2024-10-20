@@ -7,7 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {LeovotePageComponent} from './leovote-page/leovote-page.component';
 import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from './login/login.component';
-import {VoteComponent} from './vote/vote.component';
+import {CrossVoteComponent} from './cross-vote/cross-vote.component';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {ResultsComponent} from './results/results.component';
 import {CreateCandidateComponent} from './create-candidate/create-candidate.component';
@@ -20,11 +20,15 @@ import {initializeKeycloak} from "./util/app.init";
 import { AdminElectionListComponent } from './admin-election-list/admin-election-list.component';
 import { CandidateOverviewComponent } from './candidate-overview/candidate-overview.component';
 import { CandidateUpdateComponent } from './candidate-update/candidate-update.component';
+import { MultivalueVoteComponent } from './multivalue-vote/multivalue-vote.component';
+import {CdkDrag, CdkDragPreview, CdkDropList} from "@angular/cdk/drag-drop";
+import {CdkListbox} from "@angular/cdk/listbox";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-  {path: 'votes', component: VoteComponent},
+  {path: 'votes', component: CrossVoteComponent},
+  {path: 'multivalue-votes', component: MultivalueVoteComponent},
   {
     path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], children: [
       {path: 'overview', component: AdminElectionListComponent},
@@ -43,7 +47,7 @@ const appRoutes: Routes = [
     AppComponent,
     LeovotePageComponent,
     LoginComponent,
-    VoteComponent,
+    CrossVoteComponent,
     AdminPanelComponent,
     ResultsComponent,
     CreateCandidateComponent,
@@ -51,7 +55,8 @@ const appRoutes: Routes = [
     EmailsComponent,
     AdminElectionListComponent,
     CandidateOverviewComponent,
-    CandidateUpdateComponent
+    CandidateUpdateComponent,
+    MultivalueVoteComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     NgOptimizedImage,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    CdkDropList,
+    CdkListbox,
+    CdkDragPreview,
+    CdkDrag
   ],
   providers: [
     {

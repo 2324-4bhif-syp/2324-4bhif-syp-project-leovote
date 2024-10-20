@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VoteComponent } from './vote.component';
+import { CrossVoteComponent } from './cross-vote.component';
 
 describe('VoteComponent', () => {
-  let component: VoteComponent;
-  let fixture: ComponentFixture<VoteComponent>;
+  let component: CrossVoteComponent;
+  let fixture: ComponentFixture<CrossVoteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VoteComponent ]
+      declarations: [ CrossVoteComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VoteComponent);
+    fixture = TestBed.createComponent(CrossVoteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
