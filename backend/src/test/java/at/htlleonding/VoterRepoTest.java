@@ -49,7 +49,8 @@ public class VoterRepoTest {
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(1),
                 ElectionType.MULTIVALUE,
-                candidateList
+                candidateList,
+                2
         );
         entityManager.persist(election1);
 
@@ -120,7 +121,8 @@ public class VoterRepoTest {
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(1),
                 ElectionType.MULTIVALUE,
-                candidateList
+                candidateList,
+                2
         );
         entityManager.persist(election1);
 
@@ -172,7 +174,8 @@ public class VoterRepoTest {
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(1),
                 ElectionType.MULTIVALUE,
-                candidateList
+                candidateList,
+                2
         );
         entityManager.persist(election1);
 
