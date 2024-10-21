@@ -14,7 +14,10 @@
       id="candidates-list"
     >
       <div *ngFor="let candidate of election?.participatingCandidates" class="movie-item" cdkDrag>
-        {{ candidate.lastName }} {{ candidate.firstName }}
+        <div class="candidate-box">
+          {{ candidate.lastName }} {{ candidate.firstName }}
+          <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.firstName">
+        </div>
       </div>
     </div>
   </div>
