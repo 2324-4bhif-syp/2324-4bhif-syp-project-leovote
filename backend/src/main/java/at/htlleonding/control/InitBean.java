@@ -39,15 +39,17 @@ public class InitBean {
                 "Student Council Election",
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(7),
-                ElectionType.MULTIVALUE,
-                candidateList
+                ElectionType.CROSSES,
+                candidateList,
+                1
         );
         Election election2 = new Election(
                 "Class Representative Election",
                 LocalDateTime.now(),
                 LocalDateTime.now().plusDays(7),
                 ElectionType.MULTIVALUE,
-                candidateList
+                candidateList,
+                6
         );
         entityManager.persist(election1);
         entityManager.persist(election2);
@@ -58,7 +60,7 @@ public class InitBean {
         for (Voter voter : voters1) {
             System.out.println(voter.getGeneratedId());
             HashMap<Candidate, Integer> vote1 = new HashMap<>();
-            vote1.put(candidate1, 6);
+            vote1.put(candidate1, 1);
             voterRepository.voteForCandidate(voter, vote1, election1);
         }
         try {

@@ -19,10 +19,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @ResourceProperties(path = "voters")
 public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
@@ -52,22 +49,6 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         }
     }
 
-//    TODO: Remove comment when implemented in frontend
-//    Example request body:
-//    {
-//        "voterId": "fbc07018-49b6-4c4c-9f2f-5ceccf7b11f1",
-//            "candidateVotes": [
-//        {
-//            "candidateId": 1,
-//                "points": 5
-//        },
-//        {
-//            "candidateId": 2,
-//                "points": 3
-//        }
-//        ]
-//    }
-
     @POST
     @Path("vote/{electionId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -83,6 +64,10 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         Election election = Election.findById(electionId);
         Voter voter;
         HashMap<Candidate, Integer> votesMap = new HashMap<>();
+
+        if(!checkPoints(voteRequest, election)){
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        }
 
         try {
             voter = Voter.findById(voterId);
@@ -106,6 +91,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
 
         return Response.accepted().build();
     }
+
 
     @POST
     @Path("election/{electionId}")
@@ -141,5 +127,28 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         }
         return Response.status(Response.Status.NOT_ACCEPTABLE).entity(false).build();
 
+    }
+
+    private boolean checkPoints(VoteRequestDTO voteRequest, Election election) {
+        // Set, to check if Points only exist one time.
+        Set<Integer> uniquePoints = new HashSet<>();
+
+        // check for max value
+        int maxPoints = election.getMaxPoints();
+
+        for (CandidateVoteDTO voteDTO : voteRequest.getCandidateVotes()) {
+            // Check if points are between 0 and max value
+            int points = voteDTO.getPoints();
+            if (points < 0 || points > maxPoints) {
+                return false;
+            }
+
+            // Check for duplicated points
+            if (!uniquePoints.add(points)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

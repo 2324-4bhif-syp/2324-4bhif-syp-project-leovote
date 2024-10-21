@@ -9,6 +9,7 @@ export class Election {
   electionType: string;
   blockchainFileName: string;
   participatingCandidates: Candidate[];
+  maxPoints: number | null;
   //</editor-fold>
 
   //<editor-fold desc="Constructors">
@@ -19,7 +20,8 @@ export class Election {
     electionEnd: Date = new Date(),
     electionType: string,
     blockchainFileName: string,
-    participatingCandidates: Candidate[]
+    participatingCandidates: Candidate[],
+    maxPoints: number | null = null
   ) {
     this.id = id;
     this.name = name;
@@ -28,5 +30,6 @@ export class Election {
     this.electionType = electionType;
     this.blockchainFileName = blockchainFileName;
     this.participatingCandidates = participatingCandidates;
+    this.maxPoints = maxPoints
   }
 }

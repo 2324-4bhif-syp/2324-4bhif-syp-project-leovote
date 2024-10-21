@@ -21,7 +21,7 @@ export class CreateElectionComponent implements OnInit {
     new Date(),
     new Date(),
     "",
-    "", [])
+    "", [], null)
 
   ngOnInit(): void {
     this.loadAvailableCandidates();
@@ -74,6 +74,9 @@ export class CreateElectionComponent implements OnInit {
 
   createElection() {
     this.election.participatingCandidates = this.selectedCandidates;
+    if(this.election.electionType === 'CROSSES'){
+      this.election.maxPoints = 1;
+    }
     this.electionService.add(this.election).subscribe(
       (response) => {
         console.log('Election created successfully:', response);
@@ -90,7 +93,7 @@ export class CreateElectionComponent implements OnInit {
       new Date(),
       new Date(),
       "",
-      "", [])
+      "", [], null)
   }
 
   isSelected(candidate: Candidate): boolean {

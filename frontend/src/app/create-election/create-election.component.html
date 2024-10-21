@@ -16,6 +16,10 @@
           </select>
         </div>
 
+        <div class="input" *ngIf="election.electionType === 'MULTIVALUE'">
+          <input id="maxPoints" type="number" [(ngModel)]="election.maxPoints" placeholder="Max points"/>
+        </div>
+
         <div class="input">
           <label for="electionStart">Election Start:</label>
           <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>

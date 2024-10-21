@@ -70,7 +70,7 @@ public class ElectionRepository implements PanacheRepository<Election> {
 
     public Election createNewElection(Election election) {
         Election election1 = new Election(election.getName(), election.getElectionStart(), election.getElectionEnd()
-                , election.getElectionType(), election.getParticipatingCandidates());
+                , election.getElectionType(), election.getParticipatingCandidates(), election.getMaxPoints());
         getEntityManager().persist(election1);
         return election1;
     }

@@ -14,6 +14,7 @@ public class Election extends PanacheEntity {
     private LocalDateTime electionEnd;
     private ElectionType electionType;
     private String blockchainFileName;
+    private int maxPoints;
 
     @ManyToMany(cascade = {
             CascadeType.MERGE
@@ -27,7 +28,7 @@ public class Election extends PanacheEntity {
     }
 
     public Election(String name, LocalDateTime electionStart, LocalDateTime electionEnd,
-                    ElectionType electionType, List<Candidate> participatingCandidates) {
+                    ElectionType electionType, List<Candidate> participatingCandidates, int maxPoints) {
         this.name = name;
         this.electionStart = electionStart;
         this.electionEnd = electionEnd;
@@ -36,6 +37,7 @@ public class Election extends PanacheEntity {
         this.blockchainFileName = String.format("%s-%s%s-%s-%s-%s-%s%s-%s-%s-%s.json", this.name.replaceAll(" ", "_"),
                 this.electionStart.getSecond(), "sec", this.electionStart.getDayOfMonth(), this.electionStart.getMonthValue(), this.electionStart.getYear(),
                 this.electionEnd.getSecond(), "sec", this.electionEnd.getDayOfMonth(), this.electionEnd.getMonthValue(), this.electionEnd.getYear());
+        this.maxPoints = maxPoints;
     }
     //</editor-fold>
 
@@ -83,6 +85,14 @@ public class Election extends PanacheEntity {
 
     public void setParticipatingCandidates(List<Candidate> participatingCandidates) {
         this.participatingCandidates = participatingCandidates;
+    }
+
+    public int getMaxPoints(){
+        return this.maxPoints;
+    }
+
+    public void setMaxPoints(int maxPoints){
+        this.maxPoints = maxPoints;
     }
     //</editor-fold>
 
