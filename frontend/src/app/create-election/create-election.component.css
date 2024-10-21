@@ -22,18 +22,16 @@ h2 {
 
 .election-creation-container {
   background-color: #A2B2C0;
-  width: 100%;
   border: none;
   outline: none;
-  padding: 20px;
   border-radius: 10px;
   max-width: 1000px;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  max-height: 300px;
-  min-height: 150px;
-  min-width: 200px;
+  display: block;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
   margin: 0 auto;
 }
 
