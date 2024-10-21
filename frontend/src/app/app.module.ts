@@ -22,6 +22,8 @@ import { CandidateUpdateComponent } from './candidate-update/candidate-update.co
 import { MultivalueVoteComponent } from './multivalue-vote/multivalue-vote.component';
 import {CdkDrag, CdkDragPreview, CdkDropList} from "@angular/cdk/drag-drop";
 import {CdkListbox} from "@angular/cdk/listbox";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -66,7 +68,9 @@ const appRoutes: Routes = [
     CdkDropList,
     CdkListbox,
     CdkDragPreview,
-    CdkDrag
+    CdkDrag,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     {

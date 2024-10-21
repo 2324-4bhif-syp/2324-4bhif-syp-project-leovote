@@ -106,7 +106,24 @@ export class VoteService {
       console.log("No Id given");
     }
   }
+  voteCallForAll(candidates: CandidateVoteDto[], electionId: number) {
+    if (this.vote?.generatedId != undefined) {
+      let voteRequest: VoteRequestDto = new VoteRequestDto(this.vote.generatedId, candidates)
+      console.log("Candidates: " + candidates);
+      this.apiClient.voteForCandidate(electionId, voteRequest).subscribe(
+        () => {
+          console.log('Vote successful');
+          this.isLoggedIn = false;
+        },
+        (error) => {
+          console.error('Error in voting');
+        }
+      );
 
+    } else {
+      console.log("No Vote Id given");
+    }
+  }
   checkLoginData(schoolId: string, password: string): Promise<LoginModel | undefined> {
     return new Promise<LoginModel | undefined>((resolve, reject) => {
       if (schoolId != undefined && password != undefined) {

@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {CdkDragDrop, transferArrayItem, moveItemInArray} from '@angular/cdk/drag-drop';
-import {Vote} from "../shared/entity/vote";
-import {Election} from "../shared/entity/election-model";
-import {Candidate} from "../shared/entity/candidate-model";
-import {CandidateImage} from "../shared/entity/candidate-image";
-import {VoteService} from "../shared/control/vote.service";
-import {ElectionService} from "../shared/control/election.service";
-import {KeycloakService} from "keycloak-angular";
-import {CandidateService} from "../shared/control/candidate.service";
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Vote } from "../shared/entity/vote";
+import { Election } from "../shared/entity/election-model";
+import { Candidate } from "../shared/entity/candidate-model";
+import { CandidateImage } from "../shared/entity/candidate-image";
+import { VoteService } from "../shared/control/vote.service";
+import { ElectionService } from "../shared/control/election.service";
+import { KeycloakService } from "keycloak-angular";
+import { CandidateService } from "../shared/control/candidate.service";
+import {CandidateVoteDto} from "../shared/entity/dto/candidate-vote-dto";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-multivalue-vote',
@@ -15,27 +17,26 @@ import {CandidateService} from "../shared/control/candidate.service";
   styleUrls: ['./multivalue-vote.component.css'],
 })
 export class MultivalueVoteComponent implements OnInit {
+  @ViewChild('confirmationDialog') confirmationDialog!: TemplateRef<any>;
 
   isVoted: boolean = false;
-
   voter: Vote | undefined = this.voteService.vote;
   election: Election | undefined = undefined;
-  selectedCandidate: Candidate | undefined = undefined;
   candidates: CandidateImage[] = [];
   electionInFuture: boolean = true;
 
   points = [6, 5, 4, 3, 2, 1];
   ratedCandidates: Candidate[][] = [[], [], [], [], [], []];
   ratingListIds = this.points.map((_, i) => `rating-list-${i}`);
-  allDropLists = ['movies-list', ...this.ratingListIds];
+  allDropLists = ['candidates-list', ...this.ratingListIds];
 
   constructor(
     public voteService: VoteService,
     public electionService: ElectionService,
     public keycloakService: KeycloakService,
-    public candidateService: CandidateService
-  ) {
-  }
+    public candidateService: CandidateService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.candidateService.candidateImage().subscribe((candidateImages) => {
@@ -48,14 +49,38 @@ export class MultivalueVoteComponent implements OnInit {
     });
   }
 
+  openConfirmationDialog() {
+    const dialogRef = this.dialog.open(this.confirmationDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+      }
+    });
+  }
+
+  confirmVote() {
+    this.dialog.closeAll();
+    this.voting();
+  }
+
+  cancelVote() {
+    this.dialog.closeAll();
+  }
+
   voting() {
-    if (this.selectedCandidate?.id != undefined && this.election?.id != undefined) {
-      this.voteService.voteCall(this.selectedCandidate.id, this.election.id);
+    if (this.election?.id != undefined) {
+      let candidateVoteDto: CandidateVoteDto[] = [];
+      this.ratedCandidates.forEach((candidates, index) => {
+        const points = this.points[index];
+        candidates.forEach(candidate => {
+          candidateVoteDto.push(new CandidateVoteDto(candidate.id!, points));
+        });
+      });
+      this.voteService.voteCallForAll(candidateVoteDto, this.election.id);
       this.voteService.isLoggedIn = false;
       this.isVoted = true;
     }
   }
-
   linkCandidatesToElection() {
     if (this.election && this.candidates.length > 0) {
       this.election.participatingCandidates.forEach((candidate) => {
@@ -84,6 +109,7 @@ export class MultivalueVoteComponent implements OnInit {
     if (event.container.data !== undefined && event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
+    this.logCurrentState();
   }
 
   // Moving candidates between the list and rating boxes
@@ -104,7 +130,7 @@ export class MultivalueVoteComponent implements OnInit {
     }
 
     // Handle returning the candidate to the main list
-    if (previousData && event.container.id === 'movies-list' && this.election?.participatingCandidates) {
+    if (previousData && event.container.id === 'candidates-list' && this.election?.participatingCandidates) {
       transferArrayItem(
         previousData,
         this.election.participatingCandidates,
@@ -112,5 +138,20 @@ export class MultivalueVoteComponent implements OnInit {
         event.currentIndex
       );
     }
+    this.logCurrentState();
+  }
+
+  logCurrentState() {
+    console.log("Candidates in the election:");
+    this.election?.participatingCandidates.forEach(candidate => {
+      console.log(`${candidate.firstName} ${candidate.lastName}`);
+    });
+    console.log("Rated Candidates with Points:");
+    this.ratedCandidates.forEach((candidates, index) => {
+      console.log(`Points ${this.points[index]}:`);
+      candidates.forEach(candidate => {
+        console.log(` - ${candidate.firstName} ${candidate.lastName}`);
+      });
+    });
   }
 }

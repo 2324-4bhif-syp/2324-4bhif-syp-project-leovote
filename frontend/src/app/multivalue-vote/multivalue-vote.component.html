@@ -1,14 +1,17 @@
+<div class="headliner-container">
+  <h2>{{ election?.name }}</h2>
+  <p>Logged in as: {{ keycloakService.getUsername() }}</p>
+</div>
 <div class="container">
-  <!-- Left side: list of candidates -->
   <div class="movies-container">
     <h3>Candidate</h3>
     <div
       cdkDropList
       [cdkDropListData]="election?.participatingCandidates"
-      class="movies-list"
+      class="candidates-list"
       (cdkDropListDropped)="drop($event)"
       [cdkDropListConnectedTo]="allDropLists"
-      id="movies-list"
+      id="candidates-list"
     >
       <div *ngFor="let candidate of election?.participatingCandidates" class="movie-item" cdkDrag>
         {{ candidate.lastName }} {{ candidate.firstName }}
@@ -34,6 +37,17 @@
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- Submit Button -->
+  <div class="submit-container">
+    <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Abstimmen</button>
   </div>
 </div>
+
+<ng-template #confirmationDialog>
+  <h3>Bestätigung</h3>
+  <p>Bist du sicher, dass du deine Abstimmung absenden möchtest?</p>
+  <button mat-button (click)="confirmVote()">Ja</button>
+  <button mat-button (click)="cancelVote()">Nein</button>
+</ng-template>
