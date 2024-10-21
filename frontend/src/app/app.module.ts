@@ -4,7 +4,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {LeovotePageComponent} from './leovote-page/leovote-page.component';
 import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from './login/login.component';
 import {CrossVoteComponent} from './cross-vote/cross-vote.component';
@@ -27,7 +26,7 @@ import {CdkListbox} from "@angular/cdk/listbox";
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-  {path: 'votes', component: CrossVoteComponent},
+  {path: 'cross-votes', component: CrossVoteComponent},
   {path: 'multivalue-votes', component: MultivalueVoteComponent},
   {
     path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], children: [
@@ -45,7 +44,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LeovotePageComponent,
     LoginComponent,
     CrossVoteComponent,
     AdminPanelComponent,

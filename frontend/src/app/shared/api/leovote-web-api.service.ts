@@ -22,7 +22,6 @@ export class LeovoteWebApiService {
   private candidatesAll = 'candidates/all';
   private elections: string = 'elections';
   private addElectionUrl: string = 'elections/election';
-  private electionById: string = 'elections/${id}'
   private voters: string = 'voters/voter/${id}';
   private vote: string = 'voters/vote/${electionId}';
   private electionResult: string = 'elections/results/${id}';
@@ -39,6 +38,7 @@ export class LeovoteWebApiService {
   private uploadImageUrl: string = 'candidates/images/${id}';
   private getCandidatesAndImages: string = 'candidates/images';
   private getCandidateByIdUrl: string = 'candidates/${id}';
+  private getElectionByIdUrl: string = 'elections/${id}';
   private getImageByIdUrl: string = 'candidates/images/${id}';
   private updateCandidateUrl: string = 'candidates/update/${id}';
 
@@ -134,6 +134,10 @@ export class LeovoteWebApiService {
   public getCandidateById(id: number) {
     return this.http.get<Candidate>(this.baseUrl + this.getCandidateByIdUrl.replace('${id}', id.toString()), {headers: this.headers});
   }
+  public getElectionById(id: number) {
+    return this.http.get<Election>(this.baseUrl + this.getElectionByIdUrl.replace('${id}', id.toString()), {headers: this.headers});
+  }
+
 
   public getImageById(id: number) {
     return this.http.get<CandidateImage>(this.baseUrl + this.getImageByIdUrl.replace('${id}', id.toString()), {headers: this.headers});

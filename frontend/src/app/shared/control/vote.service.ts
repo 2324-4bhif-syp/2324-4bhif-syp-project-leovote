@@ -57,6 +57,32 @@ export class VoteService {
       );
     });
   }
+  getVoter(email: string, code: string): Promise<Vote | undefined> {
+    return new Promise<Vote | undefined>((resolve, reject) => {
+      this.apiClient.checkEmailAndCode(email, code).subscribe(
+        (value) => {
+          if (value) {
+            this.apiClient.getVoteByCode(code).subscribe(
+              (vote: Vote) => {
+                this.vote = vote;
+                resolve(vote);
+              },
+              (error) => {
+                console.error('Error fetching vote:', error);
+                reject(error);
+              }
+            );
+          } else {
+            resolve(undefined)
+          }
+        },
+        (error) => {
+          console.error('Error checking email and code:', error);
+          reject(error)
+        }
+      );
+    });
+  }
 
   voteCall(selectedCandidate: number, electionId: number) {
     if (this.vote?.generatedId != undefined) {

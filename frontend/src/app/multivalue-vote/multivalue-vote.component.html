@@ -1,40 +1,39 @@
 <div class="container">
-  <!-- Linke Seite: Liste der Filme -->
+  <!-- Left side: list of candidates -->
   <div class="movies-container">
-    <h3>Filme</h3>
+    <h3>Candidate</h3>
     <div
       cdkDropList
-      [cdkDropListData]="movies"
+      [cdkDropListData]="election?.participatingCandidates"
       class="movies-list"
       (cdkDropListDropped)="drop($event)"
       [cdkDropListConnectedTo]="allDropLists"
       id="movies-list"
     >
-      <div *ngFor="let movie of movies" class="movie-item" cdkDrag>
-        {{ movie.title }}
-        <img [src]="movie.poster" alt="{{ movie.title }}" width="50" />
+      <div *ngFor="let candidate of election?.participatingCandidates" class="movie-item" cdkDrag>
+        {{ candidate.lastName }} {{ candidate.firstName }}
       </div>
     </div>
   </div>
 
-  <!-- Rechte Seite: Bewertungsboxen mit Punktzahlen -->
+  <!-- Right side: rating boxes -->
   <div class="rating-container">
     <h3>Punkte</h3>
     <div *ngFor="let point of points; let i = index" class="rating-box">
       <h4>{{ point }} Punkte</h4>
       <div
         cdkDropList
-        [cdkDropListData]="ratedMovies[i]"
+        [cdkDropListData]="ratedCandidates[i]"
         class="example-list"
         (cdkDropListDropped)="dropToRating($event, i)"
         [cdkDropListConnectedTo]="allDropLists"
         [id]="'rating-list-' + i"
       >
-        <div *ngFor="let movie of ratedMovies[i]" class="movie-item" cdkDrag>
-          {{ movie.title }}
-          <img [src]="movie.poster" alt="{{ movie.title }}" width="50" />
+        <div *ngFor="let candidate of ratedCandidates[i]" class="movie-item" cdkDrag>
+          {{ candidate.firstName }} {{ candidate.lastName }}
         </div>
       </div>
     </div>
+
   </div>
 </div>

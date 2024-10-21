@@ -1,31 +1,34 @@
-import {Component, Input} from '@angular/core';
-import {VoteService} from '../shared/control/vote.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LoginModel} from "../shared/entity/login-model";
-import {KeycloakService} from "keycloak-angular";
-import {JwtHelperService} from '@auth0/angular-jwt';
-import {Election} from "../shared/entity/election-model";
+import { Component, Input, OnInit } from '@angular/core';
+import { VoteService } from '../shared/control/vote.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginModel } from "../shared/entity/login-model";
+import { KeycloakService } from "keycloak-angular";
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Election } from "../shared/entity/election-model";
+import { Vote } from "../shared/entity/vote";
+import { ElectionService } from "../shared/control/election.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   @Input() code: string = "";
   DeniedToVote: boolean = false;
   authFail: boolean = false;
   username: string = "";
   password: string = "";
   user: LoginModel | undefined = undefined;
+  election: Election | undefined;
 
   constructor(
     public voteService: VoteService,
     private router: Router,
     private route: ActivatedRoute,
-    private keycloakService: KeycloakService
-  ) {
-  }
+    private keycloakService: KeycloakService,
+    public electionService: ElectionService
+  ) {}
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
@@ -35,33 +38,33 @@ export class LoginComponent {
       }
     });
   }
-  election: Election | undefined = undefined;
 
   async checkLogin() {
     try {
-      // Check code and user
-      let roleTrue: boolean = false;
       const helper = new JwtHelperService();
-      const val = helper.decodeToken(this.keycloakService.getToken())
-      val.then(value => {
-        const ldap = value['LDAP_ENTRY_DN'];
-        roleTrue = ldap.includes("Students");
-      });
-      const success = await this.voteService.checkCode(this.code);
-      const keycloakInstance = this.keycloakService.getKeycloakInstance();
-      let email = '';
-      if (keycloakInstance !== undefined
-        && keycloakInstance.profile !== undefined
-        && keycloakInstance.profile.email !== undefined) {
-        email = keycloakInstance.profile.email;
-      }
-      const checkEmailAndCode = await this.voteService.checkEmailAndCode(email, this.code);
-      //removed roleTrue, because LDAP field is not set in keycloak
-      if (success && checkEmailAndCode) {
-        await this.router.navigate(['/votes']);
+      const val = await helper.decodeToken(this.keycloakService.getToken());
+      const email = this.keycloakService.getKeycloakInstance().profile?.email || '';
 
+      const success = await this.voteService.checkCode(this.code);
+      const checkEmailAndCode = await this.voteService.checkEmailAndCode(email, this.code);
+      const voter: Vote | undefined = await this.voteService.getVoter(email, this.code);
+
+      if (success && checkEmailAndCode && voter !== undefined) {
+        this.electionService.getById(voter.participatingIn).subscribe({
+          next: (election) => {
+            this.election = election;
+            if (election.electionType === "CROSSES") {
+              this.router.navigate(['/cross-votes']);
+            } else if (election.electionType === "MULTIVALUE") {
+              this.router.navigate(['/multivalue-votes']);
+            }
+          },
+          error: (err) => {
+            console.error('Error fetching election by ID:', err);
+            this.DeniedToVote = true;
+          }
+        });
       } else {
-        //console.log("alreadyVotedOrIncorrect is TRUE")
         this.DeniedToVote = true;
       }
     } catch (error) {

@@ -73,6 +73,10 @@ export class ElectionService {
       })
     );
   }
+  getById(id: number): Observable<Election> {
+    return this.apiClient.getElectionById(id);
+  }
+
 
   refreshList(): void {
     this.refreshListSubject.next();
