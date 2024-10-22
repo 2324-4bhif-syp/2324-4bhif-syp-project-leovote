@@ -58,7 +58,7 @@
 </table>
 
 <div class="add-button-container">
-  <button class="add-button" [disabled]="!checkMoreThanOneCandidate()" (click)="createElection()">Create</button>
+  <button class="add-button" [disabled]="isCreateButtonDisabled()" (click)="createElection()">Create</button>
 </div>
 
 <div class="election-table-container">

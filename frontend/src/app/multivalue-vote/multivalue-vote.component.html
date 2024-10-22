@@ -38,7 +38,7 @@
         <div *ngFor="let candidate of ratedCandidates[i]" class="movie-item" cdkDrag>
           <div class="candidate-box">
             {{ candidate.lastName }} {{ candidate.firstName }}
-            <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.firstName">
+            <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.lastName">
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
   </div>
 </div>
 <div *ngIf="!isVoted" class="submit-container">
-  <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Abstimmen</button>
+  <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Submit</button>
 </div>
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
@@ -54,8 +54,8 @@
   </div>
 </div>
 <ng-template #confirmationDialog>
-  <h3>Bestätigung</h3>
-  <p>Bist du sicher, dass du deine Abstimmung absenden möchtest?</p>
-  <button mat-button (click)="confirmVote()">Ja</button>
-  <button mat-button (click)="cancelVote()">Nein</button>
+  <h3>Confirmation</h3>
+  <p>Are you sure, you want to continue with your vote?</p>
+  <button mat-button (click)="confirmVote()">Yes</button>
+  <button mat-button (click)="cancelVote()">No</button>
 </ng-template>

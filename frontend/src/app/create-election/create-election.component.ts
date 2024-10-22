@@ -68,8 +68,15 @@ export class CreateElectionComponent implements OnInit {
     }
   }
 
-  checkMoreThanOneCandidate() {
-    return this.selectedCandidates.length > 1;
+  isCreateButtonDisabled(): boolean {
+    const isMaxPointsRequired = this.election.electionType === 'MULTIVALUE';
+    return !this.election.name ||
+      !this.election.electionType ||
+      !this.election.electionStart ||
+      !this.election.electionEnd ||
+      (isMaxPointsRequired && !this.election.maxPoints) || // Ensure maxPoints is specified for MULTIVALUE
+      this.selectedCandidates.length < 2 ||
+      this.election.electionEnd <= this.election.electionStart; // Ensure End is after Start
   }
 
   createElection() {
