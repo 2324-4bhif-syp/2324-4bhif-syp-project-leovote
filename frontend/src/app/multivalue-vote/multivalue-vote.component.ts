@@ -25,10 +25,10 @@ export class MultivalueVoteComponent implements OnInit {
   candidates: CandidateImage[] = [];
   electionInFuture: boolean = true;
 
-  points = [6, 5, 4, 3, 2, 1];
-  ratedCandidates: Candidate[][] = [[], [], [], [], [], []];
-  ratingListIds = this.points.map((_, i) => `rating-list-${i}`);
-  allDropLists = ['candidates-list', ...this.ratingListIds];
+  points: number[] = [];
+  ratedCandidates: Candidate[][] = [];
+  ratingListIds: string[] = [];
+  allDropLists: string[] = ['candidates-list'];
 
   constructor(
     public voteService: VoteService,
@@ -45,14 +45,22 @@ export class MultivalueVoteComponent implements OnInit {
         this.election = elections.find((e) => e.id === this.voter?.participatingIn);
         this.linkCandidatesToElection();
         this.checkDate();
+        this.initializePointsArray();
       });
     });
+  }
+  initializePointsArray() {
+    if (this.election && this.election.maxPoints) {
+      this.points = Array.from({ length: this.election.maxPoints }, (_, i) => this.election!.maxPoints! - i);
+      this.ratedCandidates = Array(this.election.maxPoints).fill([]).map(() => []);
+      this.ratingListIds = this.points.map((_, i) => `rating-list-${i}`);
+      this.allDropLists = ['candidates-list', ...this.ratingListIds];
+    }
   }
 
   openConfirmationDialog() {
     const dialogRef = this.dialog.open(this.confirmationDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
       }
     });
@@ -73,7 +81,7 @@ export class MultivalueVoteComponent implements OnInit {
       let candidateVoteDto: CandidateVoteDto[] = [];
       this.ratedCandidates.forEach((candidates, index) => {
         const points = this.points[index];
-        candidates.forEach(candidate => {
+        candidates.forEach((candidate) => {
           candidateVoteDto.push(new CandidateVoteDto(candidate.id!, points));
         });
       });
@@ -82,6 +90,7 @@ export class MultivalueVoteComponent implements OnInit {
       this.isVoted = true;
     }
   }
+
   linkCandidatesToElection() {
     if (this.election && this.candidates.length > 0) {
       this.election.participatingCandidates.forEach((candidate) => {
@@ -95,9 +104,6 @@ export class MultivalueVoteComponent implements OnInit {
 
   checkDate() {
     const now = new Date();
-    if (this.election == undefined) {
-      console.log("undefined");
-    }
     this.electionInFuture = this.election != undefined && this.election.electionEnd > now;
   }
 
@@ -144,13 +150,13 @@ export class MultivalueVoteComponent implements OnInit {
 
   logCurrentState() {
     console.log("Candidates in the election:");
-    this.election?.participatingCandidates.forEach(candidate => {
+    this.election?.participatingCandidates.forEach((candidate) => {
       console.log(`${candidate.firstName} ${candidate.lastName}`);
     });
     console.log("Rated Candidates with Points:");
     this.ratedCandidates.forEach((candidates, index) => {
       console.log(`Points ${this.points[index]}:`);
-      candidates.forEach(candidate => {
+      candidates.forEach((candidate) => {
         console.log(` - ${candidate.firstName} ${candidate.lastName}`);
       });
     });
