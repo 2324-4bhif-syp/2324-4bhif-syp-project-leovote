@@ -61,6 +61,7 @@ export class MultivalueVoteComponent implements OnInit {
   confirmVote() {
     this.dialog.closeAll();
     this.voting();
+    this.isVoted = true;
   }
 
   cancelVote() {
