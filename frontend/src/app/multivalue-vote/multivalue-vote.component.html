@@ -36,16 +36,17 @@
         [id]="'rating-list-' + i"
       >
         <div *ngFor="let candidate of ratedCandidates[i]" class="movie-item" cdkDrag>
-          {{ candidate.firstName }} {{ candidate.lastName }}
+          <div class="candidate-box">
+            {{ candidate.lastName }} {{ candidate.firstName }}
+            <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.firstName">
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Submit Button -->
-  <div class="submit-container">
-    <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Abstimmen</button>
-  </div>
+</div>
+<div class="submit-container">
+  <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Abstimmen</button>
 </div>
 
 <ng-template #confirmationDialog>
