@@ -10,7 +10,7 @@
         </div>
         <div class="input">
           <label for="electionType">Election Type:</label>
-          <select id="electionType" [(ngModel)]="election.electionType">
+          <select id="electionType" [(ngModel)]="election.electionType" class="styled-select">
             <option value="MULTIVALUE">MULTIVALUE</option>
             <option value="CROSSES">CROSSES</option>
           </select>
@@ -19,6 +19,7 @@
         <div class="input" *ngIf="election.electionType === 'MULTIVALUE'">
           <input id="maxPoints" type="number" [(ngModel)]="election.maxPoints" placeholder="Max points"/>
         </div>
+
 
         <div class="input">
           <label for="electionStart">Election Start:</label>

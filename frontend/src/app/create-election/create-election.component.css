@@ -92,7 +92,9 @@ h2 {
   max-height: 200px;
   overflow-y: auto;
 }
-
+.input {
+  margin-bottom: 15px;
+}
 .input input {
   border: none;
   border-radius: 10px;
@@ -101,6 +103,22 @@ h2 {
   background-color: #DAE3EB;
   width: 450px;
 }
+
+.styled-select {
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding: 5px;
+  background-color: #DAE3EB;
+  width: 450px;
+  appearance: none;
+}
+
+.styled-select option {
+  background-color: #DAE3EB;
+  color: black;
+}
+
 
 @media screen and (max-width: 1000px) {
   .input input {
