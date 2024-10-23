@@ -24,7 +24,7 @@ export class MultivalueVoteComponent implements OnInit {
   election: Election | undefined = undefined;
   candidates: CandidateImage[] = [];
   electionInFuture: boolean = true;
-
+  originalCandidates: Candidate[] = [];
   points: number[] = [];
   ratedCandidates: Candidate[][] = [];
   ratingListIds: string[] = [];
@@ -37,12 +37,14 @@ export class MultivalueVoteComponent implements OnInit {
     public candidateService: CandidateService,
     private dialog: MatDialog
   ) {}
-
   ngOnInit() {
     this.candidateService.candidateImage().subscribe((candidateImages) => {
       this.candidates = candidateImages;
       this.electionService.getList().subscribe((elections) => {
         this.election = elections.find((e) => e.id === this.voter?.participatingIn);
+        if (this.election) {
+          this.originalCandidates = [...this.election.participatingCandidates];
+        }
         this.linkCandidatesToElection();
         this.checkDate();
         this.initializePointsArray();
@@ -116,7 +118,6 @@ export class MultivalueVoteComponent implements OnInit {
     if (event.container.data !== undefined && event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
-    this.logCurrentState();
   }
 
   // Moving candidates between the list and rating boxes
@@ -145,20 +146,11 @@ export class MultivalueVoteComponent implements OnInit {
         event.currentIndex
       );
     }
-    this.logCurrentState();
   }
-
-  logCurrentState() {
-    console.log("Candidates in the election:");
-    this.election?.participatingCandidates.forEach((candidate) => {
-      console.log(`${candidate.firstName} ${candidate.lastName}`);
-    });
-    console.log("Rated Candidates with Points:");
-    this.ratedCandidates.forEach((candidates, index) => {
-      console.log(`Points ${this.points[index]}:`);
-      candidates.forEach((candidate) => {
-        console.log(` - ${candidate.firstName} ${candidate.lastName}`);
-      });
-    });
+  resetCandidatesList() {
+    if (this.election) {
+      this.election.participatingCandidates = [...this.originalCandidates];
+      this.ratedCandidates = Array(this.points.length).fill([]).map(() => []);
+    }
   }
 }

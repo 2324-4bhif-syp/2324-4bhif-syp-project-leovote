@@ -47,6 +47,7 @@
 </div>
 <div *ngIf="!isVoted" class="submit-container">
   <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Submit</button>
+  <button mat-raised-button color="warn" (click)="resetCandidatesList()">Reset Candidates</button>
 </div>
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
