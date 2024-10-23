@@ -24,34 +24,21 @@
             </div>
             <input class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="candidate"
                    id="{{ 'candidate' + index }}">
+
           </div>
         </div>
       </div>
     </div>
-    <div class="containerBtn" *ngIf="selectedCandidate == undefined">
-      <a class="button type--B">
-        <div class="button__line"></div>
-        <div class="button__line"></div>
-        <span class="button__text">Select</span>
-        <div class="button__drow1"></div>
-        <div class="button__drow2"></div>
-      </a>
-    </div>
-    <div class="containerBtn" *ngIf="selectedCandidate != undefined">
-      <a (click)="select()" class="button type--B">
-        <div class="button__line"></div>
-        <div class="button__line"></div>
-        <span class="button__text">Select</span>
-        <div class="button__drow1"></div>
-        <div class="button__drow2"></div>
-      </a>
+    <div class="containerBtn">
+      <button (click)="select()" [disabled]="selectedCandidate == undefined" class="SelectButton"><span>Select</span>
+      </button>
     </div>
   </div>
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
   <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
-    <div class="container-for-image">
+    <div class="container-for-image" style="height: 80%">
       <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(selectedCandidate?.pathOfImage)"
            alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
     </div>
@@ -68,23 +55,12 @@
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
-  <div class="d-grid gap-2 d-md-block" (click)="deselect()">
-    <button class="button-82-pushable" role="button">
-      <span class="button-82-shadow"></span>
-      <span class="button-82-edge"></span>
-      <span class="button-82-front text">
-        NO
-      </span>
-    </button>
-    <button class="button-83-pushable" (click)="voting()" role="button">
-      <span class="button-83-shadow"></span>
-      <span class="button-83-edge"></span>
-      <span class="button-83-front text">
-        YES
-      </span>
-    </button>
+  <div class="containerBtn d-flex gap-2">
+    <button (click)="deselect()" class="NoButton"><span>NO</span></button>
+    <button (click)="voting()" class="YesButton"><span>YES</span></button>
   </div>
 </div>
+
 
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
@@ -111,9 +87,3 @@
   <br>
   <p>We're sorry!</p>
 </div>
-
-<!--
-<div *ngFor="let candidate of candidates">
-  <div>{{ candidate.candidateId }}</div>
-  <img [src]="getBase64Image(candidate.imagePath)" alt="Candidate Image">
-</div>-->
