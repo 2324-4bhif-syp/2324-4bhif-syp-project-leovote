@@ -19,10 +19,10 @@
       <th scope="row">{{ i }}</th>
       <td>{{ election.name }}</td>
       <td>{{ election.electionType }}</td>
-      <td class="status" *ngIf="isDateAfterNow(election.electionEnd)">
+      <td class="status" *ngIf="isDateAfterNow(election.electionEnd) && isDateBeforeNow(election.electionStart)">
         <span class="active">Active</span>
       </td>
-      <td class="status" *ngIf="isDateBeforeNow(election.electionEnd)">
+      <td class="status" *ngIf="isDateBeforeNow(election.electionEnd) || isDateAfterNow(election.electionStart)">
         <span class="closed">Closed</span>
       </td>
       <td>

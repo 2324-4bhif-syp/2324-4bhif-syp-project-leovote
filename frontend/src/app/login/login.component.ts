@@ -53,6 +53,13 @@ export class LoginComponent implements OnInit {
         this.electionService.getById(voter.participatingIn).subscribe({
           next: (election) => {
             this.election = election;
+
+            let electionStart = new Date(election.electionStart);
+            let electionEnd = new Date(election.electionEnd);
+            if(electionStart > new Date() || electionEnd < new Date()) {
+              this.DeniedToVote = true;
+              return;
+            }
             if (election.electionType === "CROSSES") {
               this.router.navigate(['/cross-votes']);
             } else if (election.electionType === "MULTIVALUE") {
