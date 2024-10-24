@@ -135,7 +135,7 @@ button.mat-raised-button.color-warn {
   color: #00135C;
 }
 
-.YesButton {
+.SubmitButton {
   display: inline-block;
   border-radius: 4px;
   background-color: #12632D;
@@ -149,7 +149,7 @@ button.mat-raised-button.color-warn {
   cursor: pointer;
 }
 
-.NoButton {
+.ResetButton {
   display: inline-block;
   border-radius: 4px;
   background-color: #A8151C;
@@ -164,14 +164,14 @@ button.mat-raised-button.color-warn {
 }
 
 
-.YesButton:disabled, .NoButton:disabled {
+.SubmitButton:disabled, .ResetButton:disabled {
   background-color: grey;
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 
-.YesButton span, .NoButton span {
+.SubmitButton span, .ResetButton span {
   cursor: pointer;
   display: inline-block;
   position: relative;
@@ -179,7 +179,7 @@ button.mat-raised-button.color-warn {
 }
 
 
-.YesButton span:after {
+.SubmitButton span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -188,17 +188,17 @@ button.mat-raised-button.color-warn {
   transition: 0.5s;
 }
 
-.YesButton:hover span {
+.SubmitButton:hover span {
   padding-right: 25px;
 }
 
-.YesButton:hover span:after {
+.SubmitButton:hover span:after {
   opacity: 1;
   right: 0;
 }
 
 
-.NoButton span:after {
+.ResetButton span:after {
   content: '\00ab';
   position: absolute;
   opacity: 0;
@@ -207,11 +207,11 @@ button.mat-raised-button.color-warn {
   transition: 0.5s;
 }
 
-.NoButton:hover span {
+.ResetButton:hover span {
   padding-left: 25px;
 }
 
-.NoButton:hover span:after {
+.ResetButton:hover span:after {
   opacity: 1;
   left: 0;
 }
