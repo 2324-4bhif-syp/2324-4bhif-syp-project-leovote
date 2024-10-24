@@ -45,10 +45,16 @@
     </div>
   </div>
 </div>
-<div *ngIf="!isVoted" class="submit-container">
-  <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Submit</button>
-  <button mat-raised-button color="warn" (click)="resetCandidatesList()">Reset Candidates</button>
+<div class="d-flex justify-content-center" *ngIf="!isVoted">
+  <div class="containerBtn d-flex gap-2">
+    <button (click)="openConfirmationDialog()" class="NoButton"><span>Submit</span></button>
+    <button (click)="resetCandidatesList()" class="YesButton"><span>Reset</span></button>
+  </div>
 </div>
+<!--<div *ngIf="!isVoted" class="submit-container">-->
+<!--  <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Submit</button>-->
+<!--  <button mat-raised-button color="warn" (click)="resetCandidatesList()">Reset Candidates</button>-->
+<!--</div>-->
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
     <h2>Thank you for voting in {{ election?.name }}</h2>

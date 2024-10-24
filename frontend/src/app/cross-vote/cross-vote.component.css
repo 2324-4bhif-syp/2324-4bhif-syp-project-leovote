@@ -398,7 +398,6 @@
 }
 
 
-
 .button-82-pushable {
   position: relative;
   border: none;
@@ -676,32 +675,24 @@
   right: 0;
 }
 
-.YesButton {
+.NoButton .YesButton {
   display: inline-block;
   border-radius: 4px;
-  background-color: #12632D;
   border: none;
   color: #FFFFFF;
   text-align: center;
   font-size: 28px;
-  padding: 20px;
+  padding: 5px;
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;
 }
 
+.YesButton {
+  background-color: #12632D;
+}
 .NoButton {
-  display: inline-block;
-  border-radius: 4px;
   background-color: #A8151C;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
 }
 
 
