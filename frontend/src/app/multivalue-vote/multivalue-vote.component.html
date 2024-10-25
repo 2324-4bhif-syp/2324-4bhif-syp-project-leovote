@@ -61,8 +61,12 @@
   </div>
 </div>
 <ng-template #confirmationDialog>
-  <h3>Confirmation</h3>
-  <p>Are you sure, you want to continue with your vote?</p>
-  <button mat-button (click)="confirmVote()">Yes</button>
-  <button mat-button (click)="cancelVote()">No</button>
+  <div class="confirmation-dialog">
+    <h3>Confirmation</h3>
+    <p>Are you sure, you want to continue with your vote?</p>
+    <div class="dialog-button-container">
+      <button class="confirm-button" (click)="confirmVote()">Yes</button>
+      <button class="cancel-button" (click)="cancelVote()">No</button>
+    </div>
+  </div>
 </ng-template>
