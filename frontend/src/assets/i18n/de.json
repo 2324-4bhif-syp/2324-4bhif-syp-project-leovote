@@ -1,0 +1,18 @@
+{
+  "admin_panel": "Admin-Panel",
+  "logout": "Abmelden",
+  "election_overview": "Wahlübersicht",
+  "id": "ID",
+  "name": "Name",
+  "type": "Typ",
+  "status": "Status",
+  "active": "Aktiv",
+  "closed": "Geschlossen",
+  "upload_emails": "E-Mails hochladen",
+  "results": "Ergebnisse",
+  "candidate": "Kandidat",
+  "edit_icon": "Bearbeiten Symbol",
+  "candidates_overview": "Kandidatenübersicht",
+  "search": "Suchen",
+  "candidate_image": "Bild des Kandidaten"
+}

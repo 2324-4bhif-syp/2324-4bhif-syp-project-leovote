@@ -1,0 +1,18 @@
+{
+  "admin_panel": "Admin Panel",
+  "logout": "Logout",
+  "election_overview": "Election Overview",
+  "id": "ID",
+  "name": "Name",
+  "type": "Type",
+  "status": "Status",
+  "active": "Active",
+  "closed": "Closed",
+  "upload_emails": "Upload Emails",
+  "results": "Results",
+  "candidate": "Candidate",
+  "edit_icon": "Edit Icon",
+  "candidates_overview": "Candidates Overview",
+  "search": "Search",
+  "candidate_image": "Picture of Candidate"
+}

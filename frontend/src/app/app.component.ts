@@ -15,11 +15,16 @@ export class AppComponent {
   currentLanguage = 'en';
 
   constructor(public voteService: VoteService, private router: Router, protected adminService: AdminService, private keycloakService: KeycloakService, private translate: TranslateService) {
-    this.translate.setDefaultLang(this.currentLanguage);  }
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    this.currentLanguage = savedLanguage;
+    this.translate.setDefaultLang(savedLanguage);
+    this.translate.use(savedLanguage);
+  }
 
   setLanguage(language: string) {
     this.currentLanguage = language;
     this.translate.use(language);
+    localStorage.setItem('language', language);
   }
   /*
   ngOnInit(): void {

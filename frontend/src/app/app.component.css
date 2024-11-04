@@ -17,6 +17,8 @@ h1 {
   padding: 0;
   margin: 0;
   background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
 }
 
 .nav li {
@@ -48,12 +50,12 @@ hr {
   margin: 20px 0;
 }
 
-/* Dropdown Button */
-.dropbtn {
+.dropbtn,
+.logoutbtn {
   outline: none;
   border: none;
   text-decoration: none;
-  width: 50%;
+  width: 100px;
   margin: 0;
   font-size: 15px;
   display: block;
@@ -61,54 +63,32 @@ hr {
   max-width: 100%;
   font-weight: bolder;
   background-color: #ffffff;
-  padding: 15px 0;
+  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
 }
-
-.logoutbtn{
-  outline: none;
-  border: none;
-  text-decoration: none;
-  width: 50%;
-  margin: 0;
-  font-size: 15px;
-  display: block;
-  color: #000000;
-  max-width: 100%;
-  font-weight: bolder;
-  background-color: #ffffff;
-  padding: 15px 0;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-menu {
   display: block;
 }
 
-.active .dropbtn{
+.active .dropbtn {
   background-color: white;
   color: black;
 }
 
-.logo{
+.logo {
   cursor: pointer;
 }
-
-/* Sprachumschalter-Dropdown Styling */
 .language-dropdown {
-  margin-left: 50px;
   color: #000000;
   font-weight: bold;
   background-color: #ffffff;
   border: 1px solid #ccc;
+  width: 100px;
 }
 
 .dropdown-menu {
   min-width: 100px;
-  margin-left: 50px;
 }
 
 .dropdown-item {
@@ -120,7 +100,12 @@ hr {
   color: #000000;
 }
 
-hr {
-  border-color: rgba(255, 255, 255, 0.1);
-  margin: 20px 0;
+.d-flex {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.dropdown {
+  margin-left: 20px;
 }

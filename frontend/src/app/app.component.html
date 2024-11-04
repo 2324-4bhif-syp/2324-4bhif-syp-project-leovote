@@ -2,17 +2,17 @@
   <div class="container-fluid">
     <div class="navbar" id="navbarNav">
       <a class="navbar-brand" routerLink="login">
-        <img src="assets/img-frontend/htl-leonding.png" alt="Bootstrap" width="150vw">
+        <img src="assets/img-frontend/htl-leonding.png" alt="{{ 'logo_alt' | translate }}" width="150vw">
       </a>
       <ul class="navbar-nav" *ngIf="adminService.isLoggedIn">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="admin/overview">Admin Panel</a>
+          <a class="nav-link" routerLink="admin/overview">{{ 'admin_panel' | translate }}</a>
         </li>
       </ul>
     </div>
-    <form class="d-flex" role="search">
-      <button class="btn btn-outline-success" (click)="logout()">Logout</button>
-      <div class="dropdown">
+    <div class="d-flex align-items-center ml-auto">
+      <button class="btn btn-outline-success" (click)="logout()">{{ 'logout' | translate }}</button>
+      <div class="dropdown ml-3">
         <button class="btn btn-light dropdown-toggle language-dropdown" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
           {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : 'ไทย' }}
         </button>
@@ -22,9 +22,8 @@
           <li><a class="dropdown-item" (click)="setLanguage('th')">ไทย</a></li>
         </ul>
       </div>
-    </form>
+    </div>
   </div>
 </nav>
-
 <hr>
 <router-outlet></router-outlet>

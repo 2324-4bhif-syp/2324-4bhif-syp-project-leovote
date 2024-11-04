@@ -1,0 +1,18 @@
+{
+  "admin_panel": "แผงผู้ดูแลระบบ",
+  "logout": "ออกจากระบบ",
+  "election_overview": "ภาพรวมการเลือกตั้ง",
+  "id": "ไอดี",
+  "name": "ชื่อ",
+  "type": "ประเภท",
+  "status": "สถานะ",
+  "active": "ใช้งานอยู่",
+  "closed": "ปิด",
+  "upload_emails": "อัปโหลดอีเมล",
+  "results": "ผลลัพธ์",
+  "candidate": "ผู้สมัคร",
+  "edit_icon": "ไอคอนแก้ไข",
+  "candidates_overview": "ภาพรวมผู้สมัคร",
+  "search": "ค้นหา",
+  "candidate_image": "ภาพของผู้สมัคร"
+}
