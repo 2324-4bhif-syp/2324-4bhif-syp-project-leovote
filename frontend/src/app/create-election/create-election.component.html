@@ -1,46 +1,47 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<h2>Elections</h2>
+<h2>{{ 'elections' | translate }}</h2>
 <table class="top-table">
   <tr>
     <th>
       <div class="election-creation-container">
-        <h3>Create Election</h3>
+        <h3>{{ 'create_election' | translate }}</h3>
         <div class="input">
-          <input id="electionName" [(ngModel)]="election.name" placeholder="Election Name"/>
+          <input id="electionName" [(ngModel)]="election.name" placeholder="{{ 'election_name' | translate }}"/>
         </div>
         <div class="input">
-          <label for="electionType">Election Type:</label>
+          <label for="electionType">{{ 'election_type' | translate }}:</label>
           <select id="electionType" [(ngModel)]="election.electionType" class="styled-select">
-            <option value="MULTIVALUE">MULTIVALUE</option>
-            <option value="CROSSES">CROSSES</option>
+            <option value="MULTIVALUE">{{ 'multivalue' | translate }}</option>
+            <option value="CROSSES">{{ 'crosses' | translate }}</option>
           </select>
         </div>
 
         <div class="input" *ngIf="election.electionType === 'MULTIVALUE'">
-          <input id="maxPoints" type="number" [(ngModel)]="election.maxPoints" placeholder="Max points"/>
+          <input id="maxPoints" type="number" [(ngModel)]="election.maxPoints" placeholder="{{ 'max_points' | translate }}"/>
         </div>
 
 
         <div class="input">
-          <label for="electionStart">Election Start:</label>
+          <label for="electionStart">{{ 'election_start' | translate }}:</label>
           <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>
         </div>
         <div class="input">
-          <label for="electionEnd">Election End:</label>
+          <label for="electionEnd">{{ 'election_end' | translate }}:</label>
           <input id="electionEnd" type="datetime-local" [(ngModel)]="election.electionEnd"/>
         </div>
       </div>
     </th>
     <th>
       <div class="participating-candidates-container">
-        <h3>Participating Candidates</h3>
+        <h3>{{ 'participating_candidates' | translate }}</h3>
         <div class="table-wrapper">
           <table class="second-table">
             <tr class="header-line">
               <th style="width: 150px;"></th>
               <th style="width: 50px"></th>
-              <th style="width: 50px"><input style="width: 150px;" type="text" (input)="filterCandidates()"
-                                             [(ngModel)]="searchText" placeholder="Search">
+              <th style="width: 50px">
+                <input style="width: 150px;" type="text" (input)="filterCandidates()"
+                       [(ngModel)]="searchText" placeholder="{{ 'search' | translate }}">
               </th>
             </tr>
             <tr *ngFor="let candidate of filteredCandidates; let i = index"
@@ -59,16 +60,16 @@
 </table>
 
 <div class="add-button-container">
-  <button class="add-button" [disabled]="isCreateButtonDisabled()" (click)="createElection()">Create</button>
+  <button class="add-button" [disabled]="isCreateButtonDisabled()" (click)="createElection()">{{ 'create_button' | translate }}</button>
 </div>
 
 <div class="election-table-container">
   <table class="election-table">
-    <tr class='header-line'>
-      <th>ID</th>
-      <th>Election Name</th>
-      <th>Start</th>
-      <th>End</th>
+    <tr class="header-line">
+      <th>{{ 'id' | translate }}</th>
+      <th>{{ 'election_name' | translate }}</th>
+      <th>{{ 'start' | translate }}</th>
+      <th>{{ 'end' | translate }}</th>
       <th></th>
     </tr>
     <tr *ngFor="let election of elections; let i = index"
@@ -88,6 +89,6 @@
 
 <div id="container-floating">
   <div [routerLink]="['/admin', 'overview']" id="floating-button">
-    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="picture of candidate"/>
+    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="{{ 'picture_of_candidate' | translate }}"/>
   </div>
 </div>

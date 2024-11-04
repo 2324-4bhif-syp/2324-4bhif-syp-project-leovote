@@ -1,4 +1,4 @@
-<h2>Update Candidate {{candidate.firstName}} {{candidate.lastName}}</h2>
+<h2>{{ 'update_candidate' | translate }} {{candidate.firstName}} {{candidate.lastName}}</h2>
 
 <table class="table-candidate-update">
   <tr>
@@ -10,7 +10,7 @@
             <div class="card mb-4 box-shadow text-center h-100"
                  style="align-content: center">
               <div class="container-for-image">
-                <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
+y                <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
                      alt="{{ candidate.firstName }} {{ candidate.lastName }}">
               </div>
               <div class="card-body">
@@ -28,20 +28,20 @@
     <th class="input-th">
       <div class="candidate-creation-container">
         <div class="input">
-          <input [(ngModel)]="updatedCandidate.firstName" placeholder="First Name"/>
+          <input [(ngModel)]="updatedCandidate.firstName" placeholder="{{ 'first_name' | translate }}"/>
         </div>
         <div class="input">
-          <input [(ngModel)]="updatedCandidate.lastName" placeholder="Last Name"/>
+          <input [(ngModel)]="updatedCandidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
         </div>
         <div class="input">
-          <input [(ngModel)]="updatedCandidate.grade" placeholder="Class"/>
+          <input [(ngModel)]="updatedCandidate.grade" placeholder="{{ 'class' | translate }}"/>
         </div>
-        <p>Image: </p>
+        <p>{{ 'image' | translate }}: </p>
         <div class="input">
           <input type="file" id="imageInput" (change)="onImageChange($event)">
         </div>
         <div class="input">
-          <button [disabled]="checkFields()" (click)="updateCandidate()">Update Candidate</button>
+          <button [disabled]="checkFields()" (click)="updateCandidate()">{{ 'update_candidate_button' | translate }}</button>
         </div>
       </div>
     </th>
@@ -50,6 +50,6 @@
 
 <div id="container-floating">
   <div [routerLink]="['/admin', 'overview' ,'candidate-overview']" id="floating-button">
-    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="picture of candidate"/>
+    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="{{ 'picture_of_candidate' | translate }}"/>
   </div>
 </div>
