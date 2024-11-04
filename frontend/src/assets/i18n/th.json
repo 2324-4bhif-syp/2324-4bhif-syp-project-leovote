@@ -77,7 +77,7 @@
   "points": "คะแนน",
   "reset": "รีเซ็ต",
   "submit": "ส่ง",
-  "thank_you_for_voting": "ขอบคุณที่ลงคะแนนใน {{ election?.name }}",
+  "thank_you_for_voting": "ขอบคุณที่ลงคะแนนใน",
   "confirmation": "ยืนยัน",
   "continue_with_vote": "คุณแน่ใจหรือไม่ว่าต้องการดำเนินการกับการลงคะแนนของคุณ?",
 
