@@ -97,3 +97,30 @@ hr {
   cursor: pointer;
 }
 
+/* Sprachumschalter-Dropdown Styling */
+.language-dropdown {
+  margin-left: 50px;
+  color: #000000;
+  font-weight: bold;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+
+.dropdown-menu {
+  min-width: 100px;
+  margin-left: 50px;
+}
+
+.dropdown-item {
+  color: #000000;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+  color: #000000;
+}
+
+hr {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 20px 0;
+}

@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {VoteService} from "./shared/control/vote.service";
 import {AdminService} from "./shared/control/admin.service";
 import {KeycloakService} from "keycloak-angular";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,15 @@ import {KeycloakService} from "keycloak-angular";
 })
 export class AppComponent {
   title = 'Leovote';
+  currentLanguage = 'en';
 
-  constructor(public voteService: VoteService, private router: Router, protected adminService: AdminService, private keycloakService: KeycloakService) {
+  constructor(public voteService: VoteService, private router: Router, protected adminService: AdminService, private keycloakService: KeycloakService, private translate: TranslateService) {
+    this.translate.setDefaultLang(this.currentLanguage);  }
+
+  setLanguage(language: string) {
+    this.currentLanguage = language;
+    this.translate.use(language);
   }
-
   /*
   ngOnInit(): void {
     if (!this.voteService.isLoggedIn) {
