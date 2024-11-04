@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Candidate} from "../shared/entity/candidate-model";
 import {CandidateService} from "../shared/control/candidate.service";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-candidate',
@@ -15,7 +16,7 @@ export class CreateCandidateComponent {
   candidates: Candidate[] = [];
   errorMessage: string = '';
 
-  constructor(protected candidateService: CandidateService) {
+  constructor(protected candidateService: CandidateService,  private translate: TranslateService) {
     candidateService.getList().forEach(value => {
       this.candidates = value;
     });
@@ -110,7 +111,11 @@ export class CreateCandidateComponent {
   }
 
   confirmDelete(candidate: Candidate) {
-    if (confirm("Are you sure you want to delete this Candidate?")) {
+    const message = this.translate.instant('confirm_delete_candidate', {
+      firstName: candidate.firstName,
+      lastName: candidate.lastName
+    });
+    if (confirm(message)) {
       this.deleteCandidate(candidate);
     }
   }
@@ -121,7 +126,10 @@ export class CreateCandidateComponent {
         isInAnyElection => {
           if (isInAnyElection) {
             console.error('Candidate is in one or more elections!');
-            this.errorMessage = `Candidate ${candidate.firstName} ${candidate.lastName} is in one or more elections!`
+            this.errorMessage = this.translate.instant('candidate_in_election', {
+              firstName: candidate.firstName,
+              lastName: candidate.lastName
+            });
           } else {
             if (candidate.id !== null) {
               this.candidateService.delete(candidate.id.toString()).subscribe(

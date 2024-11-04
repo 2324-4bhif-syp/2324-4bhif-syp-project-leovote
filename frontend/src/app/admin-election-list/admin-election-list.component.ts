@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ElectionService} from "../shared/control/election.service";
 import {Election} from "../shared/entity/election-model";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin-election-list',
@@ -10,7 +11,7 @@ import {Election} from "../shared/entity/election-model";
 export class AdminElectionListComponent {
   elections: Election[] | undefined = undefined;
 
-  constructor(public electionService: ElectionService) {
+  constructor(public electionService: ElectionService, private translate: TranslateService) {
     this.loadElections()
   }
 
@@ -35,7 +36,7 @@ export class AdminElectionListComponent {
   }
 
   confirmDelete(id: number | null, election: Election) {
-    if (confirm(`Are you sure you want to delete Election: ${election.name} ?`)) {
+    if (confirm(this.translate.instant('confirm_delete', { name: election.name }))) {
       this.deleteElection(id);
     }
   }

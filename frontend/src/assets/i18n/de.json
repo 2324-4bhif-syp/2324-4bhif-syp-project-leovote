@@ -12,9 +12,14 @@
   "results": "Ergebnisse",
   "candidate": "Kandidat",
   "edit_icon": "Bearbeiten Symbol",
+  "confirm_delete": "Möchten Sie die Wahl wirklich löschen: {{ name }}?",
+
   "candidates_overview": "Kandidatenübersicht",
   "search": "Suchen",
   "candidate_image": "Bild des Kandidaten",
+  "confirm_delete_candidate": "Möchten Sie {{ firstName }} {{ lastName }} löschen?",
+  "candidate_in_election": "Der Kandidat {{ firstName }} {{ lastName }} ist in einer oder mehreren Wahlen!",
+
   "update_candidate": "Kandidat aktualisieren",
   "first_name": "Vorname",
   "last_name": "Nachname",
@@ -28,6 +33,7 @@
   "csv_upload": "CSV-Upload",
   "upload_button": "Hochladen",
   "elections": "Wahlen",
+
   "create_election": "Wahl erstellen",
   "election_name": "Wahlname",
   "election_type": "Wahltyp",
@@ -40,6 +46,7 @@
   "create_button": "Erstellen",
   "start": "Beginn",
   "end": "Ende",
+  "confirm_delete_election": "Möchten Sie die Wahl: {{ name }} wirklich löschen?",
 
   "logged_in_as": "Eingeloggt als",
   "confirm_vote_for": "Bestätigen Sie die Stimme für",

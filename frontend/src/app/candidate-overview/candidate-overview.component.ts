@@ -4,6 +4,8 @@ import {ElectionService} from "../shared/control/election.service";
 import {CandidateService} from "../shared/control/candidate.service";
 import {CandidateImage} from "../shared/entity/candidate-image";
 import {Router} from "@angular/router";
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-candidate-overview',
   templateUrl: './candidate-overview.component.html',
@@ -16,7 +18,8 @@ export class CandidateOverviewComponent implements OnInit {
   filteredCandidates: Candidate[] = [];
 
   constructor(public candidateService: CandidateService,
-              private router: Router) {
+              private router: Router,
+              private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -60,11 +63,18 @@ export class CandidateOverviewComponent implements OnInit {
 
   deleteCandidate(candidate: Candidate): void {
     if (candidate.id !== null) {
-      if(confirm(`Do you want to delete ${candidate.firstName} ${candidate.lastName}?`))
+      const message = this.translate.instant('confirm_delete_candidate', {
+        firstName: candidate.firstName,
+        lastName: candidate.lastName
+      });
+      if(confirm(message))
       this.candidateService.isCandidateInAnyElection(candidate.id).subscribe(
         isInAnyElection => {
           if (isInAnyElection) {
-            alert(`Candidate ${candidate.firstName} ${candidate.lastName} is in one or more elections!`);
+            alert(this.translate.instant('candidate_in_election', {
+              firstName: candidate.firstName,
+              lastName: candidate.lastName
+            }));
           } else {
             if (candidate.id !== null) {
               this.candidateService.delete(candidate.id.toString()).subscribe(

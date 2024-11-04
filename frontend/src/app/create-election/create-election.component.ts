@@ -3,6 +3,8 @@ import {Candidate} from "../shared/entity/candidate-model";
 import {Election} from "../shared/entity/election-model";
 import {CandidateService} from "../shared/control/candidate.service";
 import {ElectionService} from "../shared/control/election.service";
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-create-election',
@@ -52,7 +54,8 @@ export class CreateElectionComponent implements OnInit {
 
   constructor(
     protected candidateService: CandidateService,
-    protected electionService: ElectionService
+    protected electionService: ElectionService,
+    private translate: TranslateService
   ) {
     electionService.getList().forEach(value => {
       this.elections = value;
@@ -108,13 +111,13 @@ export class CreateElectionComponent implements OnInit {
   }
 
   confirmDelete(election: Election) {
-    if (confirm(`Are you sure you want to delete Election: ${election.name} ?`)) {
+    const message = this.translate.instant('confirm_delete_election', { name: election.name });
+    if (confirm(message)) {
       this.deleteElection(election);
     }
   }
 
   deleteElection(election: Election): void {
-    if(confirm(`Do you want to delete election ${election.name}?`))
     if (election.id !== null) {
       this.electionService.delete(election.id.toString()).subscribe(
         () => {

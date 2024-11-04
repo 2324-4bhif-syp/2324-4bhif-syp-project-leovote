@@ -12,9 +12,14 @@
   "results": "ผลลัพธ์",
   "candidate": "ผู้สมัคร",
   "edit_icon": "ไอคอนแก้ไข",
+  "confirm_delete": "คุณแน่ใจหรือไม่ว่าต้องการลบการเลือกตั้ง: {{ name }}?",
+
   "candidates_overview": "ภาพรวมผู้สมัคร",
   "search": "ค้นหา",
   "candidate_image": "ภาพของผู้สมัคร",
+  "confirm_delete_candidate": "คุณต้องการลบ {{ firstName }} {{ lastName }} หรือไม่?",
+  "candidate_in_election": "ผู้สมัคร {{ firstName }} {{ lastName }} อยู่ในการเลือกตั้งอย่างน้อยหนึ่งรายการ!",
+
   "update_candidate": "ปรับปรุงผู้สมัคร",
   "first_name": "ชื่อ",
   "last_name": "นามสกุล",
@@ -27,6 +32,7 @@
   "create_candidate_button": "สร้างผู้สมัคร",
   "csv_upload": "อัปโหลด CSV",
   "upload_button": "อัปโหลด",
+
   "elections": "การเลือกตั้ง",
   "create_election": "สร้างการเลือกตั้ง",
   "election_name": "ชื่อการเลือกตั้ง",
@@ -40,6 +46,7 @@
   "create_button": "สร้าง",
   "start": "เริ่ม",
   "end": "สิ้นสุด",
+  "confirm_delete_election": "คุณแน่ใจหรือว่าต้องการลบการเลือกตั้ง: {{ name }}?",
 
   "logged_in_as": "เข้าสู่ระบบในชื่อ",
   "confirm_vote_for": "ยืนยันการลงคะแนนสำหรับ",

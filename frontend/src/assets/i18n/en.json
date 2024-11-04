@@ -12,9 +12,14 @@
   "results": "Results",
   "candidate": "Candidate",
   "edit_icon": "Edit Icon",
+  "confirm_delete": "Are you sure you want to delete Election: {{ name }}?",
+
   "candidates_overview": "Candidates Overview",
   "search": "Search",
   "candidate_image": "Picture of Candidate",
+  "confirm_delete_candidate": "Do you want to delete {{ firstName }} {{ lastName }}?",
+  "candidate_in_election": "Candidate {{ firstName }} {{ lastName }} is in one or more elections!",
+
   "update_candidate": "Update Candidate",
   "first_name": "First Name",
   "last_name": "Last Name",
@@ -27,6 +32,7 @@
   "create_candidate_button": "Create Candidate",
   "csv_upload": "CSV Upload",
   "upload_button": "Upload",
+
   "elections": "Elections",
   "create_election": "Create Election",
   "election_name": "Election Name",
@@ -40,6 +46,8 @@
   "create_button": "Create",
   "start": "Start",
   "end": "End",
+  "confirm_delete_election": "Are you sure you want to delete the election: {{ name }}?",
+
 
   "logged_in_as": "Logged in as",
   "confirm_vote_for": "Confirm vote for",
