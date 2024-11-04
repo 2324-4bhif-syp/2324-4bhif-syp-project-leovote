@@ -1,10 +1,10 @@
 <div *ngIf="!isVoted" class="headliner-container">
   <h2>{{ election?.name }}</h2>
-  <p>Logged in as: {{ keycloakService.getUsername() }}</p>
+  <p>{{ 'logged_in_as' | translate }}: {{ keycloakService.getUsername() }}</p>
 </div>
 <div *ngIf="!isVoted" class="container">
   <div class="movies-container">
-    <h3>Candidate</h3>
+    <h3>{{ 'candidate' | translate }}</h3>
     <div
       cdkDropList
       [cdkDropListData]="election?.participatingCandidates"
@@ -24,9 +24,9 @@
 
   <!-- Right side: rating boxes -->
   <div class="rating-container">
-    <h3>Punkte</h3>
+    <h3>{{ 'points' | translate }}</h3>
     <div *ngFor="let point of points; let i = index" class="rating-box">
-      <h4>{{ point }} Punkte</h4>
+      <h4>{{ point }} {{ 'points' | translate }}</h4>
       <div
         cdkDropList
         [cdkDropListData]="ratedCandidates[i]"
@@ -47,8 +47,8 @@
 </div>
 <div class="d-flex justify-content-center" *ngIf="!isVoted">
   <div class="containerBtn d-flex gap-2">
-    <button (click)="resetCandidatesList()" class="ResetButton"><span>Reset</span></button>
-    <button (click)="openConfirmationDialog()" class="SubmitButton"><span>Submit</span></button>
+    <button (click)="resetCandidatesList()" class="ResetButton"><span>{{ 'reset' | translate }}</span></button>
+    <button (click)="openConfirmationDialog()" class="SubmitButton"><span>{{ 'submit' | translate }}</span></button>
   </div>
 </div>
 <!--<div *ngIf="!isVoted" class="submit-container">-->
@@ -57,16 +57,16 @@
 <!--</div>-->
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
-    <h2>Thank you for voting in {{ election?.name }}</h2>
+    <h2>{{ 'thank_you_for_voting' | translate }}</h2>
   </div>
 </div>
 <ng-template #confirmationDialog>
   <div class="confirmation-dialog">
-    <h3>Confirmation</h3>
-    <p>Are you sure, you want to continue with your vote?</p>
+    <h3>{{ 'confirmation' | translate }}</h3>
+    <p>{{ 'continue_with_vote' | translate }}</p>
     <div class="dialog-button-container">
-      <button class="confirm-button" (click)="confirmVote()">Yes</button>
-      <button class="cancel-button" (click)="cancelVote()">No</button>
+      <button class="confirm-button" (click)="confirmVote()">{{ 'yes' | translate }}</button>
+      <button class="cancel-button" (click)="cancelVote()">{{ 'no' | translate }}</button>
     </div>
   </div>
 </ng-template>

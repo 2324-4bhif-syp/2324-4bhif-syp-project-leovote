@@ -39,5 +39,42 @@
   "participating_candidates": "Teilnehmende Kandidaten",
   "create_button": "Erstellen",
   "start": "Beginn",
-  "end": "Ende"
+  "end": "Ende",
+
+  "logged_in_as": "Eingeloggt als",
+  "confirm_vote_for": "Bestätigen Sie die Stimme für",
+  "select": "Auswählen",
+  "no": "Nein",
+  "yes": "Ja",
+  "thank_you_for_voting_in": "Danke für Ihre Teilnahme an der Wahl",
+  "election_ended": "Die Wahl ist beendet",
+  "sorry": "Entschuldigung, die Wahl ist bereits beendet.",
+
+  "emails": "E-Mails",
+  "election": "Wahl",
+  "selected": "Ausgewählt",
+  "upload": "Hochladen",
+  "invalid_email": "Ungültige E-Mail-Adresse",
+  "select_election": "Bitte wählen Sie eine Wahl",
+  "email": "E-Mail",
+  "insert_email": "E-Mail-Adresse eingeben",
+  "send_codes": "Codes senden",
+  "email_send_error": "Fehler beim Senden der E-Mails",
+  "emails_sent": "E-Mails wurden erfolgreich gesendet",
+
+  "login": "Anmelden",
+  "transactional_code": "Transaktionscode",
+  "vote_now": "Jetzt abstimmen",
+  "code_used_no_permission": "Code wurde bereits verwendet oder Sie haben keine Berechtigung zur Abstimmung!",
+
+  "points": "Punkte",
+  "reset": "Zurücksetzen",
+  "submit": "Absenden",
+  "thank_you_for_voting": "Danke für Ihre Stimme in {{ election?.name }}",
+  "confirmation": "Bestätigung",
+  "continue_with_vote": "Sind Sie sicher, dass Sie mit Ihrer Abstimmung fortfahren möchten?",
+
+  "chart": "Diagramm",
+  "error_validating_blockchain": "Fehler bei der Blockchain-Validierung. Es könnte manipuliert worden sein.",
+  "please_select_election": "Bitte wählen Sie eine Wahl"
 }

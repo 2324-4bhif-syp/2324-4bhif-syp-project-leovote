@@ -39,5 +39,42 @@
   "participating_candidates": "ผู้สมัครที่เข้าร่วม",
   "create_button": "สร้าง",
   "start": "เริ่ม",
-  "end": "สิ้นสุด"
+  "end": "สิ้นสุด",
+
+  "logged_in_as": "เข้าสู่ระบบในชื่อ",
+  "confirm_vote_for": "ยืนยันการลงคะแนนสำหรับ",
+  "select": "เลือก",
+  "no": "ไม่ใช่",
+  "yes": "ใช่",
+  "thank_you_for_voting_in": "ขอบคุณที่ลงคะแนนใน",
+  "election_ended": "การเลือกตั้งสิ้นสุดลงแล้ว",
+  "sorry": "ขออภัย การเลือกตั้งสิ้นสุดลงแล้ว",
+
+  "emails": "อีเมล",
+  "election": "การเลือกตั้ง",
+  "selected": "เลือกแล้ว",
+  "upload": "อัปโหลด",
+  "invalid_email": "ที่อยู่อีเมลไม่ถูกต้อง",
+  "select_election": "กรุณาเลือกการเลือกตั้ง",
+  "email": "อีเมล",
+  "insert_email": "ป้อนอีเมล",
+  "send_codes": "ส่งรหัส",
+  "email_send_error": "เกิดข้อผิดพลาดในการส่งอีเมล",
+  "emails_sent": "ส่งอีเมลสำเร็จแล้ว",
+
+  "login": "เข้าสู่ระบบ",
+  "transactional_code": "รหัสธุรกรรม",
+  "vote_now": "ลงคะแนนตอนนี้",
+  "code_used_no_permission": "รหัสนี้ถูกใช้แล้วหรือคุณไม่มีสิทธิ์ลงคะแนน!",
+
+  "points": "คะแนน",
+  "reset": "รีเซ็ต",
+  "submit": "ส่ง",
+  "thank_you_for_voting": "ขอบคุณที่ลงคะแนนใน {{ election?.name }}",
+  "confirmation": "ยืนยัน",
+  "continue_with_vote": "คุณแน่ใจหรือไม่ว่าต้องการดำเนินการกับการลงคะแนนของคุณ?",
+
+  "chart": "แผนภูมิ",
+  "error_validating_blockchain": "เกิดข้อผิดพลาดในการตรวจสอบความถูกต้องของ Blockchain อาจมีการแก้ไข",
+  "please_select_election": "กรุณาเลือกการเลือกตั้ง"
 }

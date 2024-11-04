@@ -39,5 +39,42 @@
   "participating_candidates": "Participating Candidates",
   "create_button": "Create",
   "start": "Start",
-  "end": "End"
+  "end": "End",
+
+  "logged_in_as": "Logged in as",
+  "confirm_vote_for": "Confirm vote for",
+  "select": "Select",
+  "no": "No",
+  "yes": "Yes",
+  "thank_you_for_voting_in": "Thank you for voting in",
+  "election_ended": "The election has ended",
+  "sorry": "Sorry, the election has already ended.",
+
+  "emails": "Emails",
+  "election": "Election",
+  "selected": "Selected",
+  "upload": "Upload",
+  "invalid_email": "Invalid email address",
+  "select_election": "Please select an election",
+  "email": "Email",
+  "insert_email": "Insert email",
+  "send_codes": "Send codes",
+  "email_send_error": "Error sending emails",
+  "emails_sent": "Emails were sent successfully",
+
+  "login": "Login",
+  "transactional_code": "Transactional Code",
+  "vote_now": "Vote now",
+  "code_used_no_permission": "Code has already been used, or you got no permission to vote!",
+
+  "points": "Points",
+  "reset": "Reset",
+  "submit": "Submit",
+  "thank_you_for_voting": "Thank you for voting in {{ election?.name }}",
+  "confirmation": "Confirmation",
+  "continue_with_vote": "Are you sure, you want to continue with your vote?",
+
+  "chart": "Chart",
+  "error_validating_blockchain": "Error validating Blockchain. Could've been manipulated",
+  "please_select_election": "Please select election"
 }

@@ -1,12 +1,12 @@
 <div class="login-form">
   <div class="login">
-    <h3>Login</h3>
+    <h3>{{ 'login' | translate }}</h3>
     <span>
-      <input type="text" [(ngModel)]="code" placeholder="Transactional Code" id="code" required>
-      <button id="loginbtn" type="button" (click)="checkLogin()">Vote now</button>
+      <input type="text" [(ngModel)]="code" placeholder="{{ 'transactional_code' | translate }}" id="code" required>
+      <button id="loginbtn" type="button" (click)="checkLogin()">{{ 'vote_now' | translate }}</button>
     </span>
   </div>
   <div *ngIf="DeniedToVote" class="error-message">
-    <p>Code has already been used, or you got no permission to vote!</p>
+    <p>{{ 'code_used_no_permission' | translate }}</p>
   </div>
 </div>

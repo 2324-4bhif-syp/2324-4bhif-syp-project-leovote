@@ -1,9 +1,9 @@
 <div *ngIf="!isVoted && electionInFuture">
   <div class="headliner-container">
     <h2>{{ election?.name }}</h2>
-    <p>Logged in as: {{ keycloakService.getUsername() }}</p>
-    <h2 *ngIf="isSelected" style="align-content: center; justify-content: center">Do you want to vote
-      for {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
+    <p>{{ 'logged_in_as' | translate }}: {{ keycloakService.getUsername() }}</p>
+    <h2 *ngIf="isSelected" style="align-content: center; justify-content: center">{{ 'confirm_vote_for' | translate }}
+      {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
   </div>
 
   <div class="container-lg" *ngIf="!isSelected">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="containerBtn">
-      <button (click)="select()" [disabled]="selectedCandidate == undefined" class="SelectButton"><span>Select</span>
+      <button (click)="select()" [disabled]="selectedCandidate == undefined" class="SelectButton"><span>{{ 'select' | translate }}</span>
       </button>
     </div>
   </div>
@@ -56,15 +56,15 @@
 
 <div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
   <div class="containerBtn d-flex gap-2">
-    <button (click)="deselect()" class="NoButton"><span>NO</span></button>
-    <button (click)="voting()" class="YesButton"><span>YES</span></button>
+    <button (click)="deselect()" class="NoButton"><span>{{ 'no' | translate }}</span></button>
+    <button (click)="voting()" class="YesButton"><span>{{ 'yes' | translate }}</span></button>
   </div>
 </div>
 
 
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
-    <h2>Thank you for voting in {{ election?.name }}</h2>
+    <h2>{{ 'thank_you_for_voting_in' | translate }} {{ election?.name }}</h2>
     <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
       <div class="container-for-image">
         <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(selectedCandidate?.pathOfImage)"
@@ -83,7 +83,7 @@
 
 
 <div *ngIf="!electionInFuture" class="container">
-  <h2>Election {{ election?.name }} has already ended</h2>
+  <h2>{{ 'election_ended' | translate }} {{ election?.name }}</h2>
   <br>
-  <p>We're sorry!</p>
+  <p>{{ 'sorry' | translate }}</p>
 </div>

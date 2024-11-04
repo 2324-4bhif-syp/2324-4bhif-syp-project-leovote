@@ -1,4 +1,4 @@
-<h2>Results</h2>
+<h2>{{ 'results' | translate }}</h2>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </script>
@@ -7,8 +7,8 @@
   <tr>
     <th>
       <div class="election-selector">
-        <h3>Election</h3>
-        <p>Selected: {{ selectedElection?.name }}</p>
+        <h3>{{ 'election' | translate }}</h3>
+        <p>{{ 'selected' | translate }}: {{ selectedElection?.name }}</p>
       </div>
     </th>
     <th>
@@ -18,11 +18,11 @@
       <div class="result-box">
         <div *ngIf="result !== undefined">
           <div *ngIf="resultError">
-            <p>Error validating Blockchain. Could've been manipulated</p>
+            <p>{{ 'error_validating_blockchain' | translate }}</p>
           </div>
         </div>
         <div *ngIf="selectedElection === undefined">
-          <p>Please select election</p>
+          <p>{{ 'please_select_election' | translate }}</p>
         </div>
       </div>
     </th>
