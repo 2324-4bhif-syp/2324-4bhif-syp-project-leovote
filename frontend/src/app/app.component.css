@@ -131,3 +131,10 @@ hr {
 .spacer {
   flex: 1 1 auto;
 }
+
+/* Hides the logo on screens smaller than 768px */
+@media (max-width: 600px) {
+  .logo-span {
+    display: none;
+  }
+}

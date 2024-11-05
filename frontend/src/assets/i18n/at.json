@@ -9,7 +9,7 @@
   "active": "Aktiv",
   "closed": "Zua",
   "upload_emails": "E-Mails auffi lona",
-  "results": "Ergebnis",
+  "results": "Ergebnisse",
   "candidate": "Kandidat",
   "edit_icon": "Bearbeit-Symbol",
   "confirm_delete": "Sicha, dass de Woi echt glöscht wean soi: {{ name }}?",
@@ -17,7 +17,7 @@
   "candidates_overview": "Kandidatn-Übasicht",
   "search": "Suachn",
   "candidate_image": "Büd vom Kandidatn",
-  "confirm_delete_candidate": "Duast in {{ firstName }} {{ lastName }} echt weg?",
+  "confirm_delete_candidate": "Duast {{ firstName }} {{ lastName }} echt weg?",
   "candidate_in_election": "Da Kandidat {{ firstName }} {{ lastName }} is scho in ana oda mehrare Wahln drin!",
 
   "update_candidate": "Kandidat updaten",
