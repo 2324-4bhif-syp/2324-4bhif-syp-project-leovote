@@ -22,39 +22,44 @@
     </div>
   </div>
 
-  <!-- Right side: rating boxes -->
   <div class="rating-container">
     <h3>{{ 'points' | translate }}</h3>
-    <div *ngFor="let point of points; let i = index" class="rating-box">
-      <h4>{{ point }} {{ 'points' | translate }}</h4>
-      <div
-        cdkDropList
-        [cdkDropListData]="ratedCandidates[i]"
-        class="example-list"
-        (cdkDropListDropped)="dropToRating($event, i)"
-        [cdkDropListConnectedTo]="allDropLists"
-        [id]="'rating-list-' + i"
-      >
-        <div *ngFor="let candidate of ratedCandidates[i]" class="movie-item" cdkDrag>
-          <div class="candidate-box">
-            {{ candidate.lastName }} {{ candidate.firstName }}
-            <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.lastName">
+    <table class="rating-table">
+      <tr *ngFor="let point of points; let i = index">
+        <td class="rating-box">
+          <div
+            cdkDropList
+            [cdkDropListData]="ratedCandidates[i]"
+            class="example-list"
+            (cdkDropListDropped)="dropToRating($event, i)"
+            [cdkDropListConnectedTo]="allDropLists"
+            [id]="'rating-list-' + i"
+          >
+            <div *ngFor="let candidate of ratedCandidates[i]" class="movie-item" cdkDrag>
+              <div class="candidate-box">
+                {{ candidate.lastName }} {{ candidate.firstName }}
+                <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.lastName">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </td>
+        <td class="points-column">
+          <h4>{{ point }} {{ 'points' | translate }}</h4>
+        </td>
+      </tr>
+    </table>
   </div>
+
 </div>
+
+
 <div class="d-flex justify-content-center" *ngIf="!isVoted">
   <div class="containerBtn d-flex gap-2">
     <button (click)="resetCandidatesList()" class="ResetButton"><span>{{ 'reset' | translate }}</span></button>
     <button (click)="openConfirmationDialog()" class="SubmitButton"><span>{{ 'submit' | translate }}</span></button>
   </div>
 </div>
-<!--<div *ngIf="!isVoted" class="submit-container">-->
-<!--  <button mat-raised-button color="primary" (click)="openConfirmationDialog()">Submit</button>-->
-<!--  <button mat-raised-button color="warn" (click)="resetCandidatesList()">Reset Candidates</button>-->
-<!--</div>-->
+
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
     <h2>{{ 'thank_you_for_voting' | translate }} {{ election?.name }}</h2>
