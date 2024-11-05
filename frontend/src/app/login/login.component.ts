@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { VoteService } from '../shared/control/vote.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginModel } from "../shared/entity/login-model";
@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Election } from "../shared/entity/election-model";
 import { Vote } from "../shared/entity/vote";
 import { ElectionService } from "../shared/control/election.service";
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -22,12 +23,15 @@ export class LoginComponent implements OnInit {
   user: LoginModel | undefined = undefined;
   election: Election | undefined;
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
   constructor(
     public voteService: VoteService,
     private router: Router,
     private route: ActivatedRoute,
     private keycloakService: KeycloakService,
-    public electionService: ElectionService
+    public electionService: ElectionService,
   ) {}
 
   ngOnInit() {
@@ -69,6 +73,7 @@ export class LoginComponent implements OnInit {
           error: (err) => {
             console.error('Error fetching election by ID:', err);
             this.DeniedToVote = true;
+
           }
         });
       } else {

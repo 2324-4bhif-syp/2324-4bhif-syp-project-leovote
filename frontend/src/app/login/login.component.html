@@ -14,3 +14,6 @@
     </mat-card-content>
   </mat-card>
 </div>
+<div *ngIf="DeniedToVote" class="error-message">
+  <p>{{ 'code_used_no_permission' | translate }}</p>
+</div>
