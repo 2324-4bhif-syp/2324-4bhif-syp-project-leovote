@@ -198,7 +198,7 @@ button.mat-raised-button.color-warn {
 
 
 .ResetButton span:after {
-  content: '\00ab';
+  content: '\21BA';
   position: absolute;
   opacity: 0;
   top: 0;
