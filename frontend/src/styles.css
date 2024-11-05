@@ -58,3 +58,6 @@ label {
   min-width: 200px;
   margin-left: 5vw;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

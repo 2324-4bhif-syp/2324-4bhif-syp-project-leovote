@@ -24,6 +24,7 @@ import {CdkDrag, CdkDragPreview, CdkDropList} from "@angular/cdk/drag-drop";
 import {CdkListbox} from "@angular/cdk/listbox";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
     CdkDragPreview,
     CdkDrag,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [
     {
