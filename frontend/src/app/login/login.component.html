@@ -1,14 +1,16 @@
-
-
 <div class="login-form">
-  <div class="login">
-    <h3>{{ 'login' | translate }}</h3>
-    <span>
-      <input type="text" [(ngModel)]="code" placeholder="{{ 'transactional_code' | translate }}" id="code" required>
-      <button id="loginbtn" type="button" (click)="checkLogin()">{{ 'vote_now' | translate }}</button>
-    </span>
-  </div>
-  <div *ngIf="DeniedToVote" class="error-message">
-    <p>{{ 'code_used_no_permission' | translate }}</p>
-  </div>
+  <mat-card class="login-card">
+    <mat-card-header>
+      <h1>{{ 'login' | translate }}</h1>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="login">
+        <span>
+        <input type="text" [(ngModel)]="code" placeholder="{{ 'transactional_code' | translate }}" id="code" required>
+        <button id="loginbtn" type="button" (click)="checkLogin()">{{ 'vote_now' | translate }}</button>
+        </span>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

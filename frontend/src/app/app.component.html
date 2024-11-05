@@ -1,29 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="navbar" id="navbarNav">
-      <a class="navbar-brand" routerLink="login">
-        <img src="assets/img-frontend/htl-leonding.png" alt="{{ 'logo_alt' | translate }}" width="150vw">
-      </a>
-      <ul class="navbar-nav" *ngIf="adminService.isLoggedIn">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="admin/overview">{{ 'admin_panel' | translate }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="d-flex align-items-center ml-auto">
-      <button class="btn btn-outline-success" (click)="logout()">{{ 'logout' | translate }}</button>
-      <div class="dropdown ml-3">
-        <button class="btn btn-light dropdown-toggle language-dropdown" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : 'ไทย' }}
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-          <li><a class="dropdown-item" (click)="setLanguage('en')">English</a></li>
-          <li><a class="dropdown-item" (click)="setLanguage('de')">Deutsch</a></li>
-          <li><a class="dropdown-item" (click)="setLanguage('th')">ไทย</a></li>
-        </ul>
-      </div>
-    </div>
+<mat-toolbar style="background-color: #B6BABF" class="toolbar">
+  <span class="logo-span">
+    <a class="navbar-brand" routerLink="login">
+      <img src="assets/img-frontend/htl-leonding.png" alt="{{ 'logo_alt' | translate }}" width="150vw">
+    </a>
+  </span>
+
+  <span class="adminpanel-span">
+    <a class="nav-link" routerLink="admin/overview">{{ 'admin_panel' | translate }}</a>
+  </span>
+  <span class="spacer"></span>
+
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+  </button>
+  <div class="dropdown ml-3">
+    <button class="btn dropdown-toggle language-dropdown" style="background-color: #B6BABF" type="button" id="languageDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+      {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : 'ไทย' }}
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+      <li><a class="dropdown-item" (click)="setLanguage('en')">English</a></li>
+      <li><a class="dropdown-item" (click)="setLanguage('de')">Deutsch</a></li>
+      <li><a class="dropdown-item" (click)="setLanguage('th')">ไทย</a></li>
+    </ul>
   </div>
-</nav>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
 <hr>
 <router-outlet></router-outlet>

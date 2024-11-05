@@ -109,3 +109,24 @@ hr {
 .dropdown {
   margin-left: 20px;
 }
+
+.logo-span {
+  width: 100px;
+  margin-left: 2em;
+  margin-right: 2em
+}
+
+.adminpanel-span {
+  width: 100px;
+  margin-left: 2em;
+  font-size: 17px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

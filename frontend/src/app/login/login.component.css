@@ -10,15 +10,10 @@ body{
   border-radius: 10px;
   border: 2px solid rgba(255, 255, 255, 0.1);
   display: inline;
-
-
   min-height: 180px;
   height: 18%;
   width: 40%;
-  background-color: rgba(215, 215, 215, 0.09);
   position: absolute;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
   padding: 1vw;
 }
 
@@ -38,6 +33,10 @@ body{
 
 .login {
   margin: 0;
+  width: 40em;
+  height: 10em;
+  display: flex;
+  flex-direction: column;
 }
 
 .login input{
@@ -94,3 +93,11 @@ body{
 .error-message{
   text-align: center;
 }
+
+
+.login-card {
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: #DAE0E5;
+}
+
