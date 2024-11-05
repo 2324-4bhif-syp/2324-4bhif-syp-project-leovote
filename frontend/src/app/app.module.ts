@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from './login/login.component';
 import {CrossVoteComponent} from './cross-vote/cross-vote.component';
@@ -24,8 +24,8 @@ import {CdkDrag, CdkDragPreview, CdkDropList} from "@angular/cdk/drag-drop";
 import {CdkListbox} from "@angular/cdk/listbox";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {TranslateLoader, TranslateModule, TranslatePipe} from "@ngx-translate/core";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -76,7 +76,15 @@ const appRoutes: Routes = [
     CdkDragPreview,
     CdkDrag,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {
