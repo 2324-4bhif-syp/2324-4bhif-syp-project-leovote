@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   @Input() code: string = "";
   DeniedToVote: boolean = false;
   authFail: boolean = false;
-  username: string = "";
+  username: string|undefined = "";
   password: string = "";
   user: LoginModel | undefined = undefined;
   election: Election | undefined;
@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         this.code = token;
       }
     });
+    this.username = this.keycloakService.getKeycloakInstance().profile?.firstName;
   }
 
   async checkLogin() {

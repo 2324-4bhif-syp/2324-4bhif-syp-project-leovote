@@ -13,18 +13,19 @@
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
   </button>
   <div class="dropdown ml-3">
-    <button class="btn dropdown-toggle language-dropdown" style="background-color: #B6BABF" type="button" id="languageDropdown"
+    <button class="btn dropdown-toggle language-dropdown" style="background-color: #B6BABF; overflow: clip" type="button" id="languageDropdown"
             data-bs-toggle="dropdown" aria-expanded="false">
-      {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : 'ไทย' }}
+      {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : currentLanguage === 'at' ? 'Österreichisch' : 'ไทย'}}
     </button>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
       <li><a class="dropdown-item" (click)="setLanguage('en')">English</a></li>
       <li><a class="dropdown-item" (click)="setLanguage('de')">Deutsch</a></li>
       <li><a class="dropdown-item" (click)="setLanguage('th')">ไทย</a></li>
+      <li><a class="dropdown-item" (click)="setLanguage('at')">Österreichisch</a></li>
     </ul>
   </div>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
-    <mat-icon>logout</mat-icon>
+    <mat-icon style="color: #242526">logout</mat-icon>
   </button>
 </mat-toolbar>
 
