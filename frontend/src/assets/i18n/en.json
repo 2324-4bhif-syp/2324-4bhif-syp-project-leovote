@@ -84,5 +84,6 @@
 
   "chart": "Chart",
   "error_validating_blockchain": "Error validating Blockchain. Could've been manipulated",
-  "please_select_election": "Please select election"
+  "please_select_election": "Please select election",
+  "greeting": "Hello, "
 }

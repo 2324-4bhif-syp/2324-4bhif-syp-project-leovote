@@ -83,5 +83,6 @@
 
   "chart": "Diagramm",
   "error_validating_blockchain": "Fehler bei der Blockchain-Validierung. Es könnte manipuliert worden sein.",
-  "please_select_election": "Bitte wählen Sie eine Wahl"
+  "please_select_election": "Bitte wählen Sie eine Wahl",
+  "greeting": "Hallo, "
 }

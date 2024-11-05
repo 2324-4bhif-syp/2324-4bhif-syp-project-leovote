@@ -83,5 +83,6 @@
 
   "chart": "แผนภูมิ",
   "error_validating_blockchain": "เกิดข้อผิดพลาดในการตรวจสอบความถูกต้องของ Blockchain อาจมีการแก้ไข",
-  "please_select_election": "กรุณาเลือกการเลือกตั้ง"
+  "please_select_election": "กรุณาเลือกการเลือกตั้ง",
+  "greeting": "สวัสดี "
 }
