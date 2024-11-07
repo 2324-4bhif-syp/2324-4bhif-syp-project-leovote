@@ -72,7 +72,7 @@
 
   "login": "Login",
   "transactional_code": "Transactional Code",
-  "vote_now": "Vote now",
+  "vote_now": "Start voting",
   "code_used_no_permission": "Code has already been used, or you got no permission to vote!",
 
   "points": "Points",
