@@ -59,11 +59,11 @@ body{
   width: 40%;
   height: 50px;
   max-height: 50px;
-  background-color: #6c757d;
+  background-color: #797C80;
   color: white;
   font-weight: 450;
   font-size: calc(1em + 0.1vw); /* Example scaling based on button size */
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 10px 10px 0;
   cursor: pointer;
   outline: none;
   border: none;
@@ -84,7 +84,7 @@ body{
 }
 
 #code{
-  border-radius: 3px 0 0 3px;
+  border-radius: 10px 0 0 10px;
   background-color: #B6BABF;
   color: #242526;
   font-weight: 500;
