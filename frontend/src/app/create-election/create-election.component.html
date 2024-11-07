@@ -60,7 +60,7 @@
 </table>
 
 <div class="add-button-container">
-  <button class="add-button" [disabled]="isCreateButtonDisabled()" (click)="createElection()">{{ 'create_button' | translate }}</button>
+  <button [disabled]="isCreateButtonDisabled()" (click)="createElection()">{{ 'create_button' | translate }}</button>
 </div>
 
 <div class="election-table-container">
