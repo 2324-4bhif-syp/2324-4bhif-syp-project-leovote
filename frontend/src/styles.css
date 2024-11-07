@@ -65,37 +65,54 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 /*Election "Card" in results for example. Shows selected Election*/
-.election-selector {
+.custom-card {
   border-radius: 30px;
   text-align: center;
   margin-right: 10vw;
   background-color: #DAE0E5;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Adds a soft shadow */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Adds a soft shadow */
+  padding: 0; /* No padding on the outer card */
+  box-sizing: border-box; /* Ensures padding doesn’t increase total width */
+  overflow: hidden; /* Ensures inner elements respect the border radius */
 }
 
-.election-selector h3 {
+.custom-card h3 {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
   background-color: #797C80;
-  margin-bottom: 0;
   color: #F2F9FF;
   font-size: 40px;
-  padding: 15px;
-  height: 70px;
+  padding: 20px; /* Controls height without clipping */
   font-weight: bold;
   border-radius: 30px 30px 0 0;
+  width: 100%; /* Full width to match card */
+  box-sizing: border-box;
+  margin: 0; /* Remove margin to prevent shifting */
+  line-height: 1.2; /* Increase line spacing for better readability */
+  min-height: 70px; /* Allow for minimum height, but expand if needed */
 }
 
-.election-selector p {
+.custom-card p {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
   outline: none;
   border: none;
-  padding: 20px;
-  border-radius: 0 0 30px 30px;
+  margin: 0; /* Remove margin to prevent shifting */
+  padding: 35px; /* Controls height without clipping */
+  font-size: 32px; /* Adjusted font size */
+  font-weight: bold;
+  width: 100%; /* Full width to match card */
   cursor: pointer;
-  font-size: 15px;
-  height: 75px;
-  width: 270px;
+  border-radius: 0 0 30px 30px;
+  box-sizing: border-box;
+  background-color: #DAE0E5; /* Ensure it matches the background */
+  line-height: 1.2; /* Increase line spacing for better readability */
+  min-height: 75px; /* Allow for minimum height, but expand if needed */
 }
 
-.election-selector select {
+.custom-card select {
   outline: none;
   border: none;
   padding: 20px;
