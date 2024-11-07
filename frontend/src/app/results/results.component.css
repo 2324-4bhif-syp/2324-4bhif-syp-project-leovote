@@ -9,40 +9,6 @@ h2 {
 body {
   background-color: #ECF0F5;
 }
-
-.election-selector {
-  border-radius: 10px;
-  text-align: center;
-  margin-right: 10vw;
-}
-
-.election-selector h3 {
-  background-color: #A2B2C0;
-  margin-bottom: 0;
-  padding: 15px;
-  font-weight: bold;
-  border-radius: 10px 10px 0 0;
-}
-
-.election-selector p {
-  outline: none;
-  border: none;
-  padding: 20px;
-  background-color: #DAE3EB;
-  border-radius: 0 0 10px 10px;
-  cursor: pointer;
-  width: 250px;
-}
-
-.election-selector select {
-  outline: none;
-  border: none;
-  padding: 20px;
-  background-color: #DAE3EB;
-  border-radius: 0 0 10px 10px;
-  cursor: pointer;
-}
-
 .result-box {
   padding: 20px;
   padding-top: 5px;
