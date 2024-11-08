@@ -747,3 +747,11 @@
   opacity: 1;
   left: 0;
 }
+
+/*Card*/
+.candidate-card {
+  width: 300px;
+  border-radius: 10px;
+  background-color: #B6BABF;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+}
