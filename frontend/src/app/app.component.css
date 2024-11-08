@@ -139,3 +139,29 @@ hr {
     display: none;
   }
 }
+
+
+
+.sidenav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Space between icon and text */
+  font-size: 16px; /* Adjust font size as needed */
+  font-weight: 500; /* Slightly bolder text for readability */
+  color: #333; /* Adjust color for better contrast */
+}
+
+.mat-list-item {
+  padding: 12px 16px; /* Add padding for a more comfortable click/touch area */
+}
+
+/* Optional: Customize the icon color */
+.sidenav-item mat-icon {
+  color: #555; /* A softer color for the icon */
+  font-size: 24px; /* Slightly larger icon for emphasis */
+  margin: 0;
+}
+
+.sidenav-item span {
+  margin: 0;
+}

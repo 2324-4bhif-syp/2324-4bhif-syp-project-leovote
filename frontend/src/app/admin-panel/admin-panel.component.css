@@ -77,3 +77,7 @@ input {
 .login h2 {
   text-align: center;
 }
+
+::ng-deep .mat-sidenav-container{
+  height: 95vh !important;
+}

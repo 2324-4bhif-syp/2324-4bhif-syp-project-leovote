@@ -6,7 +6,7 @@
   </span>
 
   <span class="adminpanel-span">
-    <a class="nav-link" routerLink="admin/overview">{{ 'admin_panel' | translate }}</a>
+    <a class="nav-link" routerLink="admin/overview" (click)="toggleSidenav()">{{ 'admin_panel' | translate }}</a>
   </span>
   <span class="spacer"></span>
 
@@ -29,5 +29,46 @@
   </button>
 </mat-toolbar>
 
-<hr>
-<router-outlet></router-outlet>
+
+<mat-sidenav-container style="background-color: transparent" class="sidenavs-container" hasBackdrop="false" autosize>
+  <mat-sidenav style="background-color: #DAE0E5" #sidenav class="menu-sidenav" mode="over" fixedInViewport="false" [opened]="true">
+    <mat-nav-list class="nav-list">
+      <!-- Election Overview -->
+      <mat-list-item matTooltip="Election Overview" routerLink="admin/overview">
+        <div class="sidenav-item">
+          <mat-icon>how_to_vote</mat-icon>
+          <span>Election Overview</span>
+        </div>
+      </mat-list-item>
+
+      <!-- Create Election -->
+      <mat-list-item matTooltip="Create Election" routerLink="admin/overview/create-election">
+        <div class="sidenav-item" >
+          <mat-icon>add</mat-icon>
+          <span>Create Election</span>
+        </div>
+      </mat-list-item>
+
+      <!-- Candidate Overview -->
+      <mat-list-item matTooltip="Candidate Overview" routerLink="admin/overview/candidate-overview">
+        <div class="sidenav-item">
+          <mat-icon>person</mat-icon>
+          <span>Candidate Overview</span>
+        </div>
+      </mat-list-item>
+
+      <!-- Create Candidate -->
+      <mat-list-item matTooltip="Create Candidate" routerLink="admin/overview/create-candidate">
+        <div class="sidenav-item">
+          <mat-icon>add</mat-icon>
+          <span>Create Candidate</span>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Sidenav Content -->
+  <mat-sidenav-content style="background-color: transparent" class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
