@@ -27,23 +27,24 @@
       </div>
     </th>
     <th class="input-th">
-      <div class="candidate-creation-container">
-        <div class="input">
-          <input [(ngModel)]="updatedCandidate.firstName" placeholder="{{ 'first_name' | translate }}"/>
-        </div>
-        <div class="input">
-          <input [(ngModel)]="updatedCandidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
-        </div>
-        <div class="input">
-          <input [(ngModel)]="updatedCandidate.grade" placeholder="{{ 'class' | translate }}"/>
-        </div>
-        <p>{{ 'image' | translate }}: </p>
-        <div class="input">
-          <input type="file" id="imageInput" (change)="onImageChange($event)">
-        </div>
-        <div class="input">
-          <button [disabled]="checkFields()" (click)="updateCandidate()">{{ 'update_candidate_button' | translate }}
-          </button>
+      <div class="card-container">
+        <div class="custom-card" id="create-candidate-card">
+          <h3>Update Candidate</h3>
+          <div class="custom-card-content">
+            <div class="candidate-creation-container">
+              <input class="input-template" [(ngModel)]="updatedCandidate.firstName"
+                     placeholder="{{ 'first_name' | translate }}"/>
+              <br>
+              <input class="input-template" [(ngModel)]="updatedCandidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
+              <br>
+              <input class="input-template" [(ngModel)]="updatedCandidate.grade" placeholder="{{ 'class' | translate }}"/>
+              <div class="file-upload-row">
+                <p>{{ 'image' | translate }}:</p>
+                <input type="file" (change)="onImageChange($event)">
+              </div>
+              <button class="button-template" [disabled]="checkFields()" (click)="updateCandidate()">{{ 'update_candidate_button' | translate }}</button>
+            </div>
+          </div>
         </div>
       </div>
     </th>
