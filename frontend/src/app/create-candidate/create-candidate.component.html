@@ -5,22 +5,15 @@
   <tr>
     <th>
       <div class="candidate-creation-container">
-        <div class="input">
-          <input [(ngModel)]="this.candidate.schoolId" placeholder="{{ 'school_id' | translate }}"/>
-        </div>
-        <div class="input">
-          <input [(ngModel)]="this.candidate.firstName" placeholder="{{ 'first_name' | translate }}"/>
-        </div>
-        <div class="input">
-          <input [(ngModel)]="this.candidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
-        </div>
-        <div class="input">
-          <input [(ngModel)]="this.candidate.grade" placeholder="{{ 'class' | translate }}"/>
-        </div>
+        <input class="input-template" [(ngModel)]="this.candidate.schoolId" placeholder="{{ 'school_id' | translate }}"/>
+        <br>
+        <input class="input-template" [(ngModel)]="this.candidate.firstName" placeholder="{{ 'first_name' | translate }}"/>
+        <br>
+        <input class="input-template" [(ngModel)]="this.candidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
+        <br>
+        <input class="input-template" [(ngModel)]="this.candidate.grade" placeholder="{{ 'class' | translate }}"/>
         <p>{{ 'image' | translate }}:</p>
-        <div class="input">
-          <input type="file" id="imageInput" (change)="onImageChange($event)">
-        </div>
+        <input type="file" id="imageInput" (change)="onImageChange($event)">
         <div class="input">
           <button (click)="createCandidate()">{{ 'create_candidate_button' | translate }}</button>
         </div>
@@ -67,6 +60,7 @@
 
 <div id="container-floating">
   <div [routerLink]="['/admin', 'overview' ,'candidate-overview']" id="floating-button">
-    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="{{ 'picture_of_candidate' | translate }}"/>
+    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px"
+         alt="{{ 'picture_of_candidate' | translate }}"/>
   </div>
 </div>
