@@ -13,27 +13,32 @@
   <div class="row">
     <div *ngFor="let candidate of filteredCandidates; let index" class="col-md-6"
          style="width: 0; padding-right: 340px; padding-bottom: 20px">
-      <div class="card mb-4 box-shadow text-center h-100"
-           style="align-content: center" [routerLink]="['/admin', 'overview', 'candidate-update']"
-           [queryParams]="{candidate: candidate.id}">
-        <button class="delete-btn" (click)="deleteCandidate(candidate); $event.stopPropagation()">
-          <i class="fa fa-trash fa-2x"></i>
-        </button>
-        <div class="container-for-image">
-          <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
-               alt="{{ candidate.firstName }} {{ candidate.lastName }}">
+      <mat-card class="candidate-card" appearance="outlined"
+                [routerLink]="['/admin', 'overview', 'candidate-update']"
+                [queryParams]="{candidate: candidate.id}">
+        <div class="image-container">
+          <img [src]="getBase64Image(candidate.pathOfImage)"
+               alt="{{ candidate.firstName }} {{ candidate.lastName }}"
+               class="responsive-image" />
         </div>
-        <div class="card-body">
-          <div class="title-card">
-            <h3 class="card-title">{{ candidate.firstName }}</h3>
-            <h3 class="card-title">{{ candidate.lastName }}</h3>
-            <h4>{{ candidate.grade }}</h4>
-          </div>
-        </div>
-      </div>
+        <mat-card-header>
+          <mat-card-title-group style="">
+            <mat-card-title>
+              {{ candidate.firstName }} {{ candidate.lastName }}
+            </mat-card-title>
+            <mat-card-subtitle>{{ candidate.grade }}</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+        <mat-card-actions>
+          <button (click)="deleteCandidate(candidate); $event.stopPropagation()">{{ 'remove' | translate }}</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>
+
 
 <div id="container-floating">
   <div class="nd3 nds" [routerLink]="['/admin', 'overview']">

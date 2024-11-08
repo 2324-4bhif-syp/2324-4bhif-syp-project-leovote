@@ -13,6 +13,7 @@
   "candidate": "Candidate",
   "edit_icon": "Edit Icon",
   "confirm_delete": "Are you sure you want to delete Election: {{ name }}?",
+  "remove": "Delete",
 
   "candidates_overview": "Candidates Overview",
   "search": "Search",
