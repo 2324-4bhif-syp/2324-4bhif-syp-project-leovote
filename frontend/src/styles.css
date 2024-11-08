@@ -71,7 +71,8 @@ body {
 }
 
 
-/*Election "Card" in results for example. Shows selected Election*/
+/* General Card Template */
+
 .custom-card {
   border-radius: 30px;
   text-align: center;
@@ -140,6 +141,8 @@ button {
   transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
+/* Button Template */
+
 button:hover {
   background-color: #6D7073; /* Darker color */
   transform: scale(1.05); /* Slightly increase size for emphasis */
@@ -149,6 +152,103 @@ button:active {
   background-color: #616366; /* Even darker color */
   transform: scale(0.98); /* Slightly shrink for "pressed" effect */
 }
+
+/* Delete Table row button */
+
+.delete-row {
+  color: #3D3E40;
+  background-color: transparent;
+  font-size: 32px;
+}
+
+.delete-row:hover {
+  color: #3D3E40;
+  background-color: transparent;
+  transform: scale(1.05); /* Slightly increase size for emphasis */
+}
+
+.delete-row:active {
+  color: #3D3E40;
+  background-color: transparent;
+  transform: scale(0.98); /* Slightly shrink for "pressed" effect */
+}
+
+.delete-row-icon {
+  transform: scale(1.5);
+}
+
+/* Table Template */
+
+/* Table Container with Rounded Corners */
+.table-container {
+  width: 50%;
+  margin: auto;
+  border: 1px solid #DAE0E5;
+  border-radius: 20px; /* Rounded corners for container */
+  overflow: hidden; /* Ensure child elements respect the border-radius */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  border-radius: 20px; /* Rounded corners for table */
+  overflow: hidden; /* Prevent table cells from overflowing the rounded corners */
+}
+
+table th,
+table td {
+  padding: 20px 50px;
+  text-align: left;
+}
+
+table th {
+  background-color: #797C80;
+  color: #F2F9FF;
+  font-weight: bold;
+  font-size: 36px;
+  height: 75px;
+}
+
+table td {
+  height: 65px;
+  font-size: 32px;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #DAE0E5;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: #F2F9FF;
+}
+
+table tbody tr td:last-child {
+  text-align: center;
+  color: #333;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #F2F9FF;
+}
+
+.pagination button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2em;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pagination span {
+  font-weight: bold;
+}
+
 
 /*New Card for candidate*/
 
