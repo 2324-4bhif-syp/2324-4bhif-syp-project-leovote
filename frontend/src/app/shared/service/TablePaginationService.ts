@@ -52,8 +52,8 @@ export class TablePagination {
   getPageCount(): number {
     const pageCount = Math.ceil(this.data.length / this._pageSize);
 
-    if (pageCount < this._currentPage) {
-      return this._currentPage;
+    if (pageCount <= 0) {
+      return 1;
     }
 
     return pageCount;
@@ -69,5 +69,9 @@ export class TablePagination {
 
   deleteRow(index: number) {
     this.data.splice(index, 1);
+
+    if (this._currentPage > this.getPageCount()) {
+      this.goToFirstPage();
+    }
   }
 }
