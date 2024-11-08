@@ -23,7 +23,7 @@ export class AdminElectionListComponent {
     // Add more rows here as needed
   ];
 
-  tablePaginationService = new TablePagination(this.sampleCandidates, 3)
+  tablePaginationService = new TablePagination(this.sampleCandidates, 10)
 
 
   constructor(public electionService: ElectionService, private translate: TranslateService) {

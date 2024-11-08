@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Candidate} from "../shared/entity/candidate-model";
 import {CandidateService} from "../shared/control/candidate.service";
 import { TranslateService } from '@ngx-translate/core';
+import {TablePagination} from "../shared/service/TablePaginationService";
 
 @Component({
   selector: 'app-create-candidate',
@@ -15,10 +16,21 @@ export class CreateCandidateComponent {
   csvData: string = "";
   candidates: Candidate[] = [];
   errorMessage: string = '';
+  sampleCandidates = [
+    {name: "Adam", class: "1CHIF"},
+    {name: "Something", class: "1BHIF"},
+    {name: "Alan", class: "3CHIF"},
+    {name: "Echo", class: "4BHIF"},
+    {name: "Charlie", class: "2CHIF"},
+    // Add more rows here as needed
+  ];
+
+  tablePaginationService = new TablePagination(this.sampleCandidates, 9)
 
   constructor(protected candidateService: CandidateService,  private translate: TranslateService) {
     candidateService.getList().forEach(value => {
       this.candidates = value;
+      this.tablePaginationService = new TablePagination(this.candidates, 9)
     });
   }
 

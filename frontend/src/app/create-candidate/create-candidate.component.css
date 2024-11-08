@@ -363,3 +363,8 @@ h2 {
   margin: auto;
   right: 20px;
 }
+
+
+#create-candidate-table {
+  width: 90%;
+}
