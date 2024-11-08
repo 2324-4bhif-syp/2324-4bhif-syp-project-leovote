@@ -33,6 +33,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatListModule} from "@angular/material/list";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -98,7 +99,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatToolbarModule,
     MatIconModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [
     {
