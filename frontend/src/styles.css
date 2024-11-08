@@ -101,7 +101,7 @@ body {
   min-height: 70px; /* Allow for minimum height, but expand if needed */
 }
 
-.custom-card p {
+.custom-card-content{
   display: flex;
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */

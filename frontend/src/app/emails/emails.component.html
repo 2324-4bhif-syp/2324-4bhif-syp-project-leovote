@@ -6,7 +6,9 @@
       <th>
         <div class="custom-card">
           <h3>{{ 'election' | translate }}</h3>
-          <p>{{ 'selected' | translate }}: {{ selectedElection?.name }}</p>
+          <div class="custom-card-content">
+            <p>{{ 'selected' | translate }}: {{ selectedElection?.name }}</p>
+          </div>
         </div>
       </th>
       <th>
@@ -22,9 +24,9 @@
           <h3>
             {{ 'browse_files' | translate }}
           </h3>
-          <p>
+          <div class="custom-card-content">
             <button class="transparent-button" [disabled]="!isCsvUploaded" (click)="parseCSV()"><mat-icon>upload</mat-icon></button>
-          </p>
+          </div>
           <img src="./assets/img-frontend/upload.png" height=20% width=20%>
           <input type="file" (change)="onFileChange($event)">
         </div>
