@@ -179,11 +179,13 @@ button:active {
 
 /* Table Template */
 
+/* Table Container with Rounded Corners */
 .table-container {
   width: 50%;
   margin: auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #DAE0E5;
+  border-radius: 20px; /* Rounded corners for container */
+  overflow: hidden; /* Ensure child elements respect the border-radius */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -191,6 +193,8 @@ table {
   width: 100%;
   border-collapse: collapse;
   table-layout: auto;
+  border-radius: 20px; /* Rounded corners for table */
+  overflow: hidden; /* Prevent table cells from overflowing the rounded corners */
 }
 
 table th,
@@ -204,9 +208,11 @@ table th {
   color: #F2F9FF;
   font-weight: bold;
   font-size: 36px;
+  height: 75px;
 }
 
 table td {
+  height: 65px;
   font-size: 32px;
 }
 
