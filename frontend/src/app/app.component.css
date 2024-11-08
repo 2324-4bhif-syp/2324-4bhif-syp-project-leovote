@@ -165,3 +165,7 @@ hr {
 .sidenav-item span {
   margin: 0;
 }
+
+::ng-deep .mat-sidenav-container{
+  height: 95vh !important;
+}

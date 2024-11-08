@@ -6,7 +6,7 @@
   </span>
 
   <span class="adminpanel-span">
-    <a class="nav-link" routerLink="admin/overview" (click)="toggleSidenav()">{{ 'admin_panel' | translate }}</a>
+    <a class="nav-link" (click)="toggleSidenav()">{{ 'admin_panel' | translate }}</a>
   </span>
   <span class="spacer"></span>
 
@@ -29,9 +29,8 @@
   </button>
 </mat-toolbar>
 
-
 <mat-sidenav-container style="background-color: transparent" class="sidenavs-container" hasBackdrop="false" autosize>
-  <mat-sidenav style="background-color: #DAE0E5" #sidenav class="menu-sidenav" mode="over" fixedInViewport="false" [opened]="true">
+  <mat-sidenav #sidenav style="background-color: #DAE0E5" class="menu-sidenav" mode="over" fixedInViewport="false" [opened]="false">
     <mat-nav-list class="nav-list">
       <!-- Election Overview -->
       <mat-list-item matTooltip="Election Overview" routerLink="admin/overview">

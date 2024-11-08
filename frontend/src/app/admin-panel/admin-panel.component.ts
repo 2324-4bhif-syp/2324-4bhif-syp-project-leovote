@@ -1,8 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {AdminService} from "../shared/control/admin.service";
 import {KeycloakService} from "keycloak-angular";
-import {NavbarService} from "../shared/control/navbar.service";
-import {MatSidenav} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-admin-panel',

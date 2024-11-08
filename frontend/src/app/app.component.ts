@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {VoteService} from "./shared/control/vote.service";
 import {AdminService} from "./shared/control/admin.service";
@@ -12,7 +12,7 @@ import {MatSidenav} from "@angular/material/sidenav";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
   title = 'Leovote';
   currentLanguage = 'en';
 
@@ -23,7 +23,8 @@ export class AppComponent {
               protected adminService: AdminService,
               private keycloakService: KeycloakService,
               private translate: TranslateService,
-              private navbarService: NavbarService) {
+              private navbarService: NavbarService,
+              private cdr: ChangeDetectorRef) {
     const savedLanguage = localStorage.getItem('language') || 'en';
     this.currentLanguage = savedLanguage;
     this.translate.setDefaultLang(savedLanguage);
@@ -40,6 +41,10 @@ export class AppComponent {
     this.navbarService.toggle$.subscribe(() => {
       this.sidenav.toggle();
     });
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
   }
 
   /*
