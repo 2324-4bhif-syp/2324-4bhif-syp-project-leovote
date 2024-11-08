@@ -11,6 +11,11 @@ body {
   background-image: none;
 }
 
+#email-input {
+  background-color: #797C80;
+  color: #F2F9FF;
+}
+
 .upload-container img {
   padding-bottom: 10px;
 }

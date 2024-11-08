@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Election} from "../shared/entity/election-model";
 import {EmailModel} from "../shared/entity/email-model";
 import {ElectionService} from "../shared/control/election.service";
+import {TablePagination} from "../shared/service/TablePaginationService";
 
 @Component({
   selector: 'app-emails',
@@ -19,6 +20,7 @@ export class EmailsComponent {
   csvData: string = "";
   sendingError: boolean = false;
   sent: boolean = false;
+  tablePaginationService = new TablePagination([], 3)
 
   constructor(
     public electionService: ElectionService,

@@ -10,12 +10,23 @@
         </div>
       </th>
       <th>
-        <div class="upload-container" *ngIf="selectedElection !== undefined">
-          <div class="centered-elements">
-            <img src="./assets/img-frontend/upload.png" height=20% width=20%>
-            <input type="file" (change)="onFileChange($event)">
-            <button [disabled]="!isCsvUploaded" (click)="parseCSV()">{{ 'upload' | translate }}</button>
-          </div>
+        <input class="input-template" id="email-input" placeholder="{{ 'insert_email' | translate }}" type="Add Email"
+               [(ngModel)]="emailInput">
+        <button (click)="addEmail()" class="btn">
+          <i class="fa fa-plus"></i>
+        </button>
+      </th>
+
+      <th>
+        <div class="custom-card" *ngIf="selectedElection !== undefined">
+          <h3>
+            {{ 'browse_files' | translate }}
+          </h3>
+          <p>
+            <button class="transparent-button" [disabled]="!isCsvUploaded" (click)="parseCSV()"><mat-icon>upload</mat-icon></button>
+          </p>
+          <img src="./assets/img-frontend/upload.png" height=20% width=20%>
+          <input type="file" (change)="onFileChange($event)">
         </div>
       </th>
     </tr>
@@ -34,35 +45,46 @@
       </th>
     </tr>
   </table>
-  <div class="email-table-container" *ngIf="selectedElection !== undefined">
-    <table class="email-table">
-      <tr class="header-line">
-        <th>{{ 'id' | translate }}</th>
-        <th>{{ 'email' | translate }}</th>
-        <th>
-          <div class="input-email-container">
-            <input placeholder="{{ 'insert_email' | translate }}" type="Add Email" [(ngModel)]="emailInput">
-            <button (click)="addEmail()" class="btn">
-              <i class="fa fa-plus"></i>
-            </button>
-          </div>
-        </th>
-      </tr>
-      <tr *ngFor="let email of emails; let i = index" [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
-        <td>{{i}}</td>
-        <td>
-          {{ email.email }}
-        </td>
+  <div class="table-container" *ngIf="selectedElection !== undefined">
+    <table class="table-template">
+      <thead>
+      <th>{{ 'id' | translate }}</th>
+      <th>{{ 'email' | translate }}</th>
+      <th>Delete</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let email of emails; let i = index">
+        <td>{{ i }}</td>
+        <td>{{ email.email }}</td>
         <td>
           <button (click)="deleteEmail(email.id)" class="btn">
             <i class="fa fa-minus"></i>
           </button>
         </td>
       </tr>
+      </tbody>
     </table>
+    <div class="pagination-divider"></div> <!-- Divider line above pagination -->
+    <div class="pagination">
+      <button (click)="tablePaginationService.goToFirstPage()">
+        <mat-icon>skip_previous</mat-icon> <!-- Skip to first -->
+      </button>
+      <button (click)="tablePaginationService.goToPreviousPage()">
+        <mat-icon>navigate_before</mat-icon> <!-- Previous -->
+      </button>
+      <span class="page-info">{{ tablePaginationService.currentPage }}
+        / {{ tablePaginationService.getPageCount() }}</span>
+      <button (click)="tablePaginationService.goToNextPage()">
+        <mat-icon>navigate_next</mat-icon> <!-- Next -->
+      </button>
+      <button (click)="tablePaginationService.goToLastPage()">
+        <mat-icon>skip_next</mat-icon> <!-- Skip to end -->
+      </button>
+    </div>
+
   </div>
   <div class="send-button-container" *ngIf="selectedElection !== undefined && emailCount > 0">
-    <button class="send-button" (click)="sendCodes()">{{ 'send_codes' | translate }}</button>
+    <button class="button-template" (click)="sendCodes()">{{ 'send_codes' | translate }}</button>
   </div>
   <div *ngIf="sendingError">
     <p>{{ 'email_send_error' | translate }}</p>
