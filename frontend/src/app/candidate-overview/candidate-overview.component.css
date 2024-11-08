@@ -11,21 +11,6 @@ h2 {
   padding-top: 2%;
 }
 
-.card {
-  border: none;
-  transition: transform 0.2s;
-  font-weight: bolder;
-  margin: 0;
-  height: 600px;
-  width: 320px;
-  border-radius: 20px;
-  background-color: #6D7E8D;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .title-card {
   max-width: 320px;
   white-space: nowrap;
@@ -401,11 +386,19 @@ input:focus + .line:after {
   height: 3px;
   transform: scalex(0);
   transition: transform 0.3s ease;
-  background: #1abc9c;
+  background: #1a8bbc;
 }
 
 .centered{
   align-items: center;
   padding-bottom: 3vw;
   width: 50%;
+}
+
+/*Card*/
+.candidate-card {
+  width: 300px;
+  border-radius: 10px;
+  background-color: #B6BABF;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
 }

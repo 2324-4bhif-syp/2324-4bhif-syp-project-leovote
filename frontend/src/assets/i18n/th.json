@@ -13,6 +13,7 @@
   "candidate": "ผู้สมัคร",
   "edit_icon": "ไอคอนแก้ไข",
   "confirm_delete": "คุณแน่ใจหรือไม่ว่าต้องการลบการเลือกตั้ง: {{ name }}?",
+  "remove": "ลบ",
 
   "candidates_overview": "ภาพรวมผู้สมัคร",
   "search": "ค้นหา",

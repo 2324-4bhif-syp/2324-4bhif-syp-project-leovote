@@ -13,6 +13,7 @@
   "candidate": "Kandidat",
   "edit_icon": "Bearbeiten Symbol",
   "confirm_delete": "Möchten Sie die Wahl wirklich löschen: {{ name }}?",
+  "remove": "Löschen",
 
   "candidates_overview": "Kandidatenübersicht",
   "search": "Suchen",
