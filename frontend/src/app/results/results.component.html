@@ -13,9 +13,9 @@
   </mat-grid-tile>
 
   <mat-grid-tile>
-    <div class="chart-container">
+    <div class="outer-chart-container">
       <div class="chart-container">
-        <canvas id="Results">{{ chart }}</canvas>
+        <canvas id="Results" style="min-height: 25em; min-width: 25em;">{{ chart }}</canvas>
       </div>
       <div class="result-box">
         <div *ngIf="result !== undefined">
