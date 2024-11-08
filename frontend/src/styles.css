@@ -183,7 +183,7 @@ body {
 
 /* Table Container with Rounded Corners */
 .table-container {
-  width: 40%;
+  width: 80%;
   overflow: scroll;
   margin: auto;
   border: 1px solid #DAE0E5;
@@ -200,7 +200,7 @@ body {
 
 .table-template th,
 .table-template td {
-  padding: 20px 50px;
+  padding: 10px 30px;
   text-align: left;
 }
 
@@ -208,12 +208,12 @@ body {
   background-color: #797C80;
   color: #F2F9FF;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 20px;
 }
 
 .table-template td {
   height: 65px;
-  font-size: 24px;
+  font-size: 17px;
 }
 
 .table-template tbody tr:nth-child(even) {

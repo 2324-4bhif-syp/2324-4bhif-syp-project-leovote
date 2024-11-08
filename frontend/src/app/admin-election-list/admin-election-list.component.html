@@ -1,9 +1,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <h2>{{ 'election_overview' | translate }}</h2>
 
-<div class="container-lg">
-  <table class="table">
-    <thead class="thead-black">
+<div id="container-floating">
+  <div class="nd3 nds" [routerLink]="['/admin', 'overview' ,'candidate-overview']">
+    <img class="reminder" src="./assets/img-frontend/candidate.png" height="25px" width="25px"
+         alt="{{ 'candidate' | translate }}"/>
+  </div>
+
+  <div routerLink="create-election" class="nd1 nds">
+    <p class="letter">+</p>
+  </div>
+
+  <div id="floating-button">
+    <p class="plus">+</p>
+    <img class="edit" src="./assets/img-frontend/edit-icon.png" alt="{{ 'edit_icon' | translate }}">
+  </div>
+</div>
+
+<div class="table-container">
+  <table class="table-template">
+    <thead>
     <tr>
       <th scope="col">{{ 'id' | translate }}</th>
       <th scope="col">{{ 'name' | translate }}</th>
@@ -11,12 +27,12 @@
       <th scope="col">{{ 'status' | translate }}</th>
       <th scope="col"></th>
       <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col">{{ 'remove' | translate }}</th>
     </tr>
     </thead>
-    <tbody *ngFor="let election of elections; let i = index">
-    <tr>
-      <th scope="row">{{ i }}</th>
+    <tbody>
+    <tr *ngFor="let election of tablePaginationService.getCurrentPageData(); let i = index">
+      <td>{{ election.id }}</td>
       <td>{{ election.name }}</td>
       <td>{{ election.electionType }}</td>
       <td class="status" *ngIf="isDateAfterNow(election.electionEnd) && isDateBeforeNow(election.electionStart)">
@@ -38,47 +54,6 @@
       <td>
         <button (click)="confirmDelete(election.id, election)" class="btn">
           <i class="fa fa-trash fa-2x"></i>
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-
-<div id="container-floating">
-  <div class="nd3 nds" [routerLink]="['/admin', 'overview' ,'candidate-overview']">
-    <img class="reminder" src="./assets/img-frontend/candidate.png" height="25px" width="25px"
-         alt="{{ 'candidate' | translate }}"/>
-  </div>
-
-  <div routerLink="create-election" class="nd1 nds">
-    <p class="letter">+</p>
-  </div>
-
-  <div id="floating-button">
-    <p class="plus">+</p>
-    <img class="edit" src="./assets/img-frontend/edit-icon.png" alt="{{ 'edit_icon' | translate }}">
-  </div>
-</div>
-
-<div class="table-container">
-  <table class="table-template">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Class</th>
-      <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let candidate of tablePaginationService.getCurrentPageData(); let i = index">
-      <td>{{ i + tablePaginationService.getIndexOffset() + 1}}</td>
-      <td>{{ candidate.name }}</td>
-      <td>{{ candidate.class }}</td>
-      <td>
-        <button class="transparent-button" (click)="tablePaginationService.deleteRow(i + tablePaginationService.getIndexOffset())">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
         </button>
       </td>
     </tr>

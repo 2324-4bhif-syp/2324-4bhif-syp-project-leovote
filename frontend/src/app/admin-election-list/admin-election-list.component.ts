@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ElectionService} from "../shared/control/election.service";
 import {Election} from "../shared/entity/election-model";
 import {TranslateService} from '@ngx-translate/core';
@@ -37,6 +37,7 @@ export class AdminElectionListComponent {
   loadElections() {
     this.electionService.getList().forEach(value => {
       this.elections = value;
+      this.tablePaginationService = new TablePagination(this.elections, 9)
     });
   }
 
