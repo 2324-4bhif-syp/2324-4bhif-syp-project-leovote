@@ -62,7 +62,7 @@
 </div>
 
 <div class="table-container">
-  <table>
+  <table class="table-template">
     <thead>
     <tr>
       <th>ID</th>
@@ -72,90 +72,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
-      <td>
-        <button class="delete-row">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
-      <td>
-        <button class="delete-row">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
-      <td>
-        <button class="delete-row">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
-      <td>
-        <button class="delete-row">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
-      <td>
-        <button class="delete-row">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
-      <td>
-        <button class="delete-row">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
-      <td>
-        <button class="delete-row">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
-      <td>
-        <button class="delete-row">
-          <mat-icon class="delete-row-icon">remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>row.id</td>
-      <td>row.name</td>
-      <td>row.class</td>
+    <tr *ngFor="let candidate of tablePaginationService.getCurrentPageData(); let i = index">
+      <td>{{ i + tablePaginationService.getIndexOffset() }}</td>
+      <td>{{ candidate.name }}</td>
+      <td>{{ candidate.class }}</td>
       <td>
         <button class="delete-row">
           <mat-icon class="delete-row-icon">remove</mat-icon>
@@ -164,9 +84,22 @@
     </tr>
     </tbody>
   </table>
+
+  <div class="pagination-divider"></div> <!-- Divider line above pagination -->
   <div class="pagination">
-    <button>&laquo;</button>
-    <span>2 / 9</span>
-    <button>&raquo;</button>
+    <button (click)="tablePaginationService.goToFirstPage()">
+      <mat-icon>skip_previous</mat-icon> <!-- Skip to first -->
+    </button>
+    <button (click)="tablePaginationService.goToPreviousPage()">
+      <mat-icon>navigate_before</mat-icon> <!-- Previous -->
+    </button>
+    <span class="page-info">{{ tablePaginationService.currentPage }}
+      / {{ tablePaginationService.getPageCount() }}</span>
+    <button (click)="tablePaginationService.goToNextPage()">
+      <mat-icon>navigate_next</mat-icon> <!-- Next -->
+    </button>
+    <button (click)="tablePaginationService.goToLastPage()">
+      <mat-icon>skip_next</mat-icon> <!-- Skip to end -->
+    </button>
   </div>
 </div>

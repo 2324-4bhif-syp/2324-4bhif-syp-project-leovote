@@ -189,21 +189,20 @@ button:active {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-table {
+.table-template {
   width: 100%;
   border-collapse: collapse;
   table-layout: auto;
-  border-radius: 20px; /* Rounded corners for table */
   overflow: hidden; /* Prevent table cells from overflowing the rounded corners */
 }
 
-table th,
-table td {
+.table-template th,
+.table-template td {
   padding: 20px 50px;
   text-align: left;
 }
 
-table th {
+.table-template th {
   background-color: #797C80;
   color: #F2F9FF;
   font-weight: bold;
@@ -211,40 +210,55 @@ table th {
   height: 75px;
 }
 
-table td {
+.table-template td {
   height: 65px;
   font-size: 32px;
 }
 
-table tbody tr:nth-child(even) {
+.table-template tbody tr:nth-child(even) {
   background-color: #DAE0E5;
 }
 
-table tbody tr:nth-child(odd) {
+.table-template tbody tr:nth-child(odd) {
   background-color: #F2F9FF;
 }
 
-table tbody tr td:last-child {
+.table-template tbody tr td:last-child {
   text-align: center;
   color: #333;
 }
 
+/* Divider line above pagination */
+.pagination-divider {
+  border-top: 2px solid #797C80;
+}
+
+/* Pagination styles */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  color:#797C80;
   background-color: #F2F9FF;
+  gap: 10px; /* Space between buttons and info */
 }
 
 .pagination button {
   background-color: transparent;
   border: none;
-  font-size: 1.2em;
-  margin: 0 5px;
   cursor: pointer;
+  color: #797C80;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
 }
 
-.pagination span {
+.pagination .page-info {
   font-weight: bold;
+  color: #333;
+}
+
+.pagination button:hover {
+  color: #3D3E40;
 }
