@@ -1,62 +1,71 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <h2>{{ 'candidates' | translate }}</h2>
 
-<table>
-  <tr>
-    <th>
-      <div class="candidate-creation-container">
-        <input class="input-template" [(ngModel)]="this.candidate.schoolId" placeholder="{{ 'school_id' | translate }}"/>
-        <br>
-        <input class="input-template" [(ngModel)]="this.candidate.firstName" placeholder="{{ 'first_name' | translate }}"/>
-        <br>
-        <input class="input-template" [(ngModel)]="this.candidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
-        <br>
-        <input class="input-template" [(ngModel)]="this.candidate.grade" placeholder="{{ 'class' | translate }}"/>
-        <p>{{ 'image' | translate }}:</p>
-        <input type="file" id="imageInput" (change)="onImageChange($event)">
-        <div class="input">
-          <button (click)="createCandidate()">{{ 'create_candidate_button' | translate }}</button>
-        </div>
-      </div>
-    </th>
-    <th>
-      <div class="upload-container">
-        <p>{{ 'csv_upload' | translate }}:</p>
-        <div class="centered-elements">
-          <img src="./assets/img-frontend/upload.png" height=20% width=20%>
-          <input type="file" (change)="onFileChange($event)">
-          <button [disabled]="!isCsvUploaded" (click)="parseCSV()">{{ 'upload_button' | translate }}</button>
-        </div>
-      </div>
-    </th>
-  </tr>
-</table>
 
+<mat-grid-list cols="2" rowHeight="25em">
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="2">
+    <div class="candidate-table-container">
+      <table class="candidate-table">
+        <tr class='header-line'>
+          <th>{{ 'school_id' | translate }}</th>
+          <th>{{ 'name' | translate }}</th>
+          <th>{{ 'class' | translate }}</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let candidate of candidates; let i = index"
+            [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
+          <td>{{ candidate.id }}</td>
+          <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
+          <td>{{ candidate.grade }}</td>
+          <td>
+            <button style="background-color: rgba(255,0,0,0)" (click)="confirmDelete(candidate)" class="btn">
+              <i class="fa fa-trash fa-2x"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div style="color: red" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </mat-grid-tile>
 
-<div class="candidate-table-container">
-  <table class="candidate-table">
-    <tr class='header-line'>
-      <th>{{ 'school_id' | translate }}</th>
-      <th>{{ 'name' | translate }}</th>
-      <th>{{ 'class' | translate }}</th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let candidate of candidates; let i = index"
-        [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
-      <td>{{ candidate.id }}</td>
-      <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
-      <td>{{ candidate.grade }}</td>
-      <td>
-        <button style="background-color: rgba(255,0,0,0)" (click)="confirmDelete(candidate)" class="btn">
-          <i class="fa fa-trash fa-2x"></i>
-        </button>
-      </td>
-    </tr>
-  </table>
-</div>
-<div style="color: red" *ngIf="errorMessage">
-  {{ errorMessage }}
-</div>
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="1">
+    <div class="upload-container">
+      <p>{{ 'csv_upload' | translate }}:</p>
+      <div class="centered-elements">
+        <img src="./assets/img-frontend/upload.png" height=20% width=20%>
+        <input type="file" (change)="onFileChange($event)">
+        <button [disabled]="!isCsvUploaded" (click)="parseCSV()">{{ 'upload_button' | translate }}</button>
+      </div>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="1">
+    <div class="candidate-creation-container">
+      <input class="input-template" [(ngModel)]="this.candidate.schoolId" placeholder="{{ 'school_id' | translate }}"/>
+      <br>
+      <input class="input-template" [(ngModel)]="this.candidate.firstName"
+             placeholder="{{ 'first_name' | translate }}"/>
+      <br>
+      <input class="input-template" [(ngModel)]="this.candidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
+      <br>
+      <input class="input-template" [(ngModel)]="this.candidate.grade" placeholder="{{ 'class' | translate }}"/>
+      <p>{{ 'image' | translate }}:</p>
+      <input type="file" id="imageInput" (change)="onImageChange($event)">
+      <div class="input">
+        <button (click)="createCandidate()">{{ 'create_candidate_button' | translate }}</button>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
 
 <div id="container-floating">
   <div [routerLink]="['/admin', 'overview' ,'candidate-overview']" id="floating-button">
