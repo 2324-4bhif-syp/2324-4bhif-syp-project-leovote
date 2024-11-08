@@ -6,27 +6,6 @@ h2 {
   padding-top: 2%;
 }
 
-body {
-  background-color: #ECF0F5;
-}
-.result-box {
-  padding: 20px;
-  padding-top: 5px;
-  width: 25vw;
-  border-radius: 10px;
-}
-
-.result-box h3 {
-  padding-top: 0;
-}
-
-.inside-text {
-  margin-top: 20px;
-  background-color: #A2B2C0;
-  padding: 20px;
-  border-radius: 10px;
-}
-
 .canvas {
   /*width: 400px;*/
 }
@@ -39,6 +18,69 @@ body {
   align-items: center;
 }
 
-#Results{
-  width: 600px;
+#result-custom-card {
+  width: 100%;
+  margin: 0;
+}
+#email-custom-card  {
+  width: 100%;
+  margin: 0;
+
+}
+
+.result-col {
+  width: 50%;
+  height: 100%;
+  margin: 0;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card-col {
+  width: 25%;
+  padding-left: 7em !important;
+}
+
+.card-col2 {
+  width: 25%;
+  padding-right: 7em !important;
+}
+
+.card-container{
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+.table-result{
+  height: 100%;
+  width: 100%;
+}
+
+#result-content {
+  display: block;
+  padding: 5px;
+  height: 30px;
+  width: 100%;
+  min-width: 250px;
+}
+
+#result-content p {
+  margin: 0;
+}
+
+#result-card-container {
+  width: 70%;
+}
+
+#selected-card-container {
+  width: 70%;
+  min-width: 250px;
+}
+
+::ng-deep .mat-grid-tile-content {
+  align-items: flex-start !important;
 }
