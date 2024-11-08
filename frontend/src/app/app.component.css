@@ -81,10 +81,11 @@ hr {
 .language-dropdown {
   color: #242526;
   font-weight: bold;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
   min-width: 100px;
   width: auto;
+  background-color: #B6BABF;
+  border: none;
+  overflow: clip
 }
 
 .dropdown-menu {

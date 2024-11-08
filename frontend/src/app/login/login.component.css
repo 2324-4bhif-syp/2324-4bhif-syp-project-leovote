@@ -60,6 +60,7 @@ body{
   height: 50px;
   max-height: 50px;
   background-color: #797C80;
+  overflow: clip;
   color: white;
   font-weight: 450;
   font-size: calc(1em + 0.1vw); /* Example scaling based on button size */
