@@ -73,11 +73,11 @@
     </thead>
     <tbody>
     <tr *ngFor="let candidate of tablePaginationService.getCurrentPageData(); let i = index">
-      <td>{{ i + tablePaginationService.getIndexOffset() }}</td>
+      <td>{{ i + tablePaginationService.getIndexOffset() + 1}}</td>
       <td>{{ candidate.name }}</td>
       <td>{{ candidate.class }}</td>
       <td>
-        <button class="delete-row">
+        <button class="delete-row" (click)="tablePaginationService.deleteRow(i + tablePaginationService.getIndexOffset())">
           <mat-icon class="delete-row-icon">remove</mat-icon>
         </button>
       </td>

@@ -58,6 +58,10 @@ export class TablePagination {
   }
 
   getIndexOffset(): number {
-    return (this.currentPage - 1) * this.pageSize + 1
+    return (this.currentPage - 1) * this.pageSize;
+  }
+
+  deleteRow(index: number) {
+    this.data.splice(index, 1);
   }
 }
