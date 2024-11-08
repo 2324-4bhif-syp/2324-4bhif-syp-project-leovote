@@ -11,6 +11,7 @@ import {TablePagination} from "../shared/service/TablePaginationService";
 })
 export class CreateCandidateComponent {
   imageFile: File | null = null;
+  fileName: string | null = null;
   candidate: Candidate = new Candidate();
   isCsvUploaded: boolean = false;
   csvData: string = "";
@@ -25,12 +26,12 @@ export class CreateCandidateComponent {
     // Add more rows here as needed
   ];
 
-  tablePaginationService = new TablePagination(this.sampleCandidates, 9)
+  tablePaginationService = new TablePagination(this.sampleCandidates, 10)
 
   constructor(protected candidateService: CandidateService,  private translate: TranslateService) {
     candidateService.getList().forEach(value => {
       this.candidates = value;
-      this.tablePaginationService = new TablePagination(this.candidates, 9)
+      this.tablePaginationService = new TablePagination(this.candidates, 10)
     });
   }
 
@@ -41,6 +42,7 @@ export class CreateCandidateComponent {
   onFileChange(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
+    this.fileName = file.name;
     reader.onload = () => {
       const fileType = file.name.split('.').pop()?.toLowerCase();
       if (fileType !== 'csv') {

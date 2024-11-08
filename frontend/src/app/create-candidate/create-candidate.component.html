@@ -5,10 +5,10 @@
 </div>
 
 
-<mat-grid-list cols="2" rowHeight="25em">
+<mat-grid-list cols="5" rowHeight="18.5em">
   <mat-grid-tile
-    [colspan]="1"
-    [rowspan]="2">
+    [colspan]="3"
+    [rowspan]="3">
 
     <div class="table-container" id="create-candidate-table">
       <table class="table-template">
@@ -55,34 +55,63 @@
   </mat-grid-tile>
 
   <mat-grid-tile
-    [colspan]="1"
+    [colspan]="2"
     [rowspan]="1">
-    <div class="upload-container">
-      <p>{{ 'csv_upload' | translate }}:</p>
-      <div class="centered-elements">
-        <img src="./assets/img-frontend/upload.png" height=20% width=20%>
-        <input type="file" (change)="onFileChange($event)">
-        <button [disabled]="!isCsvUploaded" (click)="parseCSV()">{{ 'upload_button' | translate }}</button>
+    <div class="card-container">
+      <div class="custom-card" id="csv-card">
+        <h3>CSV upload</h3>
+        <div class="custom-card-content" id="card-content-candidate">
+          <div class="centered-elements">
+            <img
+              src="./assets/img-frontend/upload.png"
+              height="10%"
+              width="10%"
+              (click)="fileInput.click()"
+              style="cursor: pointer;"
+              alt="Upload icon"
+            >
+
+            <!-- Hidden file input element -->
+            <input
+              type="file"
+              #fileInput
+              style="display: none;"
+              (change)="onFileChange($event)"
+            >
+
+            <!-- Display the file name if selected -->
+            <div *ngIf="fileName">{{ fileName }}</div>
+
+            <button class="button-template" id="custom-button-upload" [disabled]="!isCsvUploaded" (click)="parseCSV()">{{ 'upload_button' | translate }}</button>
+          </div>
+        </div>
       </div>
     </div>
   </mat-grid-tile>
 
   <mat-grid-tile
-    [colspan]="1"
-    [rowspan]="1">
-    <div class="candidate-creation-container">
-      <input class="input-template" [(ngModel)]="this.candidate.schoolId" placeholder="{{ 'school_id' | translate }}"/>
-      <br>
-      <input class="input-template" [(ngModel)]="this.candidate.firstName"
-             placeholder="{{ 'first_name' | translate }}"/>
-      <br>
-      <input class="input-template" [(ngModel)]="this.candidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
-      <br>
-      <input class="input-template" [(ngModel)]="this.candidate.grade" placeholder="{{ 'class' | translate }}"/>
-      <p>{{ 'image' | translate }}:</p>
-      <input type="file" id="imageInput" (change)="onImageChange($event)">
-      <div class="input">
-        <button (click)="createCandidate()">{{ 'create_candidate_button' | translate }}</button>
+    [colspan]="2"
+    [rowspan]="2">
+    <div class="card-container">
+      <div class="custom-card" id="create-candidate-card">
+        <h3>Create Candidate</h3>
+        <div class="custom-card-content">
+          <div class="candidate-creation-container">
+            <input class="input-template" [(ngModel)]="this.candidate.schoolId" placeholder="{{ 'school_id' | translate }}"/>
+            <br>
+            <input class="input-template" [(ngModel)]="this.candidate.firstName"
+                   placeholder="{{ 'first_name' | translate }}"/>
+            <br>
+            <input class="input-template" [(ngModel)]="this.candidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
+            <br>
+            <input class="input-template" [(ngModel)]="this.candidate.grade" placeholder="{{ 'class' | translate }}"/>
+            <div class="file-upload-row">
+              <p>{{ 'image' | translate }}:</p>
+              <input type="file" (change)="onImageChange($event)">
+            </div>
+              <button class="button-template" (click)="createCandidate()">{{ 'create_candidate_button' | translate }}</button>
+          </div>
+        </div>
       </div>
     </div>
   </mat-grid-tile>
