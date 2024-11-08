@@ -50,7 +50,13 @@ export class TablePagination {
   }
 
   getPageCount(): number {
-    return Math.ceil(this.data.length / this._pageSize);
+    const pageCount = Math.ceil(this.data.length / this._pageSize);
+
+    if (pageCount < this._currentPage) {
+      return this._currentPage;
+    }
+
+    return pageCount;
   }
 
   get pageSize(): number {
