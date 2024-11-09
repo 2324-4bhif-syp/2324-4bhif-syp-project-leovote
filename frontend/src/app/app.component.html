@@ -15,7 +15,7 @@
   <div class="dropdown ml-3">
     <button class="btn dropdown-toggle language-dropdown" type="button" id="languageDropdown"
             data-bs-toggle="dropdown" aria-expanded="false">
-      {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : currentLanguage === 'at' ? 'Österreichisch' : 'ไทย'}}
+      {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : currentLanguage === 'at' ? 'Österreichisch' : 'ไทย' }}
     </button>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
       <li><a class="dropdown-item" (click)="setLanguage('en')">English</a></li>
@@ -30,21 +30,22 @@
 </mat-toolbar>
 
 <mat-sidenav-container style="background-color: transparent" class="sidenavs-container" hasBackdrop="false" autosize>
-  <mat-sidenav #sidenav style="background-color: #DAE0E5" class="menu-sidenav" mode="over" fixedInViewport="false" [opened]="false">
+  <mat-sidenav #sidenav style="background-color: #DAE0E5" class="menu-sidenav" mode="over" fixedInViewport="false"
+               [opened]="false">
     <mat-nav-list class="nav-list">
       <!-- Election Overview -->
       <mat-list-item matTooltip="Election Overview" routerLink="admin/overview">
         <div class="sidenav-item">
           <mat-icon>how_to_vote</mat-icon>
-          <span>Election Overview</span>
+          <span>{{ 'election_overview' | translate }}</span>
         </div>
       </mat-list-item>
 
       <!-- Create Election -->
       <mat-list-item matTooltip="Create Election" routerLink="admin/overview/create-election">
-        <div class="sidenav-item" >
+        <div class="sidenav-item">
           <mat-icon>add</mat-icon>
-          <span>Create Election</span>
+          <span>{{ 'create_election' | translate}}</span>
         </div>
       </mat-list-item>
 
@@ -52,7 +53,7 @@
       <mat-list-item matTooltip="Candidate Overview" routerLink="admin/overview/candidate-overview">
         <div class="sidenav-item">
           <mat-icon>person</mat-icon>
-          <span>Candidate Overview</span>
+          <span>{{ 'candidates_overview' | translate }}</span>
         </div>
       </mat-list-item>
 
@@ -60,7 +61,7 @@
       <mat-list-item matTooltip="Create Candidate" routerLink="admin/overview/create-candidate">
         <div class="sidenav-item">
           <mat-icon>add</mat-icon>
-          <span>Create Candidate</span>
+          <span>{{ 'create_candidate_button' | translate}}</span>
         </div>
       </mat-list-item>
     </mat-nav-list>

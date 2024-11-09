@@ -20,6 +20,7 @@ export class EmailsComponent {
   csvData: string = "";
   sendingError: boolean = false;
   sent: boolean = false;
+  filename: string = "";
   tablePaginationService = new TablePagination([], 3)
 
   constructor(
@@ -33,6 +34,7 @@ export class EmailsComponent {
 
   onFileChange(event: any) {
     const file = event.target.files[0];
+    this.filename = file.name;
     const reader = new FileReader();
     reader.onload = () => {
       const fileType = file.name.split('.').pop()?.toLowerCase();
