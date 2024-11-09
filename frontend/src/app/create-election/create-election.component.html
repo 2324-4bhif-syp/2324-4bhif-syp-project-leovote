@@ -61,7 +61,7 @@
           <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
           <td>{{ candidate.grade }}</td>
           <td>
-            <input type="checkbox" [checked]="isSelected(candidate)"
+            <input class="checkbox-selected-candidate" type="checkbox" [checked]="isSelected(candidate)"
                    (change)="toggleCandidateSelection(candidate)"/>
 
           </td>

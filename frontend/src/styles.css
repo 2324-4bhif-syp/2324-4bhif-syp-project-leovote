@@ -153,6 +153,13 @@ body {
   transform: scale(0.98); /* Slightly shrink for "pressed" effect */
 }
 
+.button-template:disabled {
+  background-color: #B0B3B8; /* Light grey background */
+  color: #D1D4D8; /* Faded text color */
+  cursor: not-allowed; /* Shows "not allowed" cursor */
+  opacity: 0.6; /* Reduce opacity for a "dimmed" effect */
+  transform: none; /* Removes any scaling effect */
+}
 /* Delete Table row button */
 
 .transparent-button {

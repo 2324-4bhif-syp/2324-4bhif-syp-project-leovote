@@ -31,7 +31,7 @@
 
 <mat-sidenav-container style="background-color: transparent" class="sidenavs-container" hasBackdrop="false" autosize>
   <mat-sidenav #sidenav style="background-color: #DAE0E5" class="menu-sidenav" mode="over" fixedInViewport="false"
-               [opened]="false">
+               [opened]="false" (mouseleave)="toggleSidenav()">
     <mat-nav-list class="nav-list">
       <!-- Election Overview -->
       <mat-list-item matTooltip="Election Overview" routerLink="admin/overview">

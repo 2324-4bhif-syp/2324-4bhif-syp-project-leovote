@@ -128,3 +128,8 @@ lection-table{
   font-size: 16px;
   border: none;
 }
+
+.checkbox-selected-candidate {
+  height: 20px;
+  width: 20px;
+}
