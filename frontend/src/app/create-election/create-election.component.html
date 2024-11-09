@@ -2,9 +2,9 @@
 <h2>{{ 'elections' | translate }}</h2>
 
 
-<mat-grid-list cols="2" rowHeight="40em">
+<mat-grid-list cols="5" rowHeight="40em">
   <mat-grid-tile
-  [colspan]="1"
+  [colspan]="2"
   [rowspan]="1">
     <div class="card-container">
       <div class="custom-card" id="create-candidate-card">
@@ -42,16 +42,16 @@
   </mat-grid-tile>
 
   <mat-grid-tile
-  [colspan]="1"
+  [colspan]="3"
   [rowspan]="1">
     <div class="table-container" id="create-election-table">
-      <table class="table-template" style="width: 100%; margin: 0">
+      <table class="table-template">
         <thead>
         <tr>
           <th>{{ 'name' | translate }}</th>
           <th>{{ 'class' | translate }}</th>
-          <th style="width: 50px">
-            <input style="width: 150px;" type="text" (input)="filterCandidates()"
+          <th style="width: 100px">
+            <input class="searchbar" type="text" (input)="filterCandidates()"
                    [(ngModel)]="searchText" placeholder="{{ 'search' | translate }}">
           </th>
         </tr>

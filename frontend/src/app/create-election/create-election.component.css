@@ -100,11 +100,31 @@ lection-table{
 }
 
 #create-candidate-card {
-  width: 60%;
+  width: 80%;
   margin: 0;
 }
 
 .candidate-creation-container {
   margin: 0;
   width: 100%;
+}
+
+#create-election-table {
+  margin: 0;
+  width: 90%;
+}
+
+.table-template {
+  width: 100%;
+  margin: 0
+}
+
+.searchbar {
+  width: 200px;
+  height: 2em;
+  background-color: #f2f9ff;
+  color: #797C80;
+  border-radius: 8px;
+  font-size: 16px;
+  border: none;
 }
