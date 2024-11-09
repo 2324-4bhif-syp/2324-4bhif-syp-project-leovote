@@ -16,7 +16,7 @@
           <th>{{ 'school_id' | translate }}</th>
           <th>{{ 'name' | translate }}</th>
           <th>{{ 'class' | translate }}</th>
-          <th>{{'remove' | translate}}</th>
+          <th>{{ 'remove' | translate }}</th>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +25,8 @@
           <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
           <td>{{ candidate.grade }}</td>
           <td>
-            <button mat-icon-button style="background-color: rgba(255,0,0,0)" (click)="confirmDelete(candidate)" class="btn">
+            <button mat-icon-button style="background-color: rgba(255,0,0,0)" (click)="confirmDelete(candidate)"
+                    class="btn">
               <mat-icon style="font-weight: 700">remove</mat-icon>
             </button>
           </td>
@@ -81,7 +82,9 @@
             <!-- Display the file name if selected -->
             <div *ngIf="fileName">{{ fileName }}</div>
 
-            <button class="button-template" id="custom-button-upload" [disabled]="!isCsvUploaded" (click)="parseCSV()">{{ 'upload_button' | translate }}</button>
+            <button class="button-template" id="custom-button-upload" [disabled]="!isCsvUploaded"
+                    (click)="parseCSV()">{{ 'upload_button' | translate }}
+            </button>
           </div>
         </div>
       </div>
@@ -93,22 +96,25 @@
     [rowspan]="2">
     <div class="card-container">
       <div class="custom-card" id="create-candidate-card">
-        <h3>Create Candidate</h3>
+        <h3>{{ 'create_candidate_button' | translate }}</h3>
         <div class="custom-card-content">
           <div class="candidate-creation-container">
-            <input class="input-template" [(ngModel)]="this.candidate.schoolId" placeholder="{{ 'school_id' | translate }}"/>
+            <input class="input-template" [(ngModel)]="this.candidate.schoolId"
+                   placeholder="{{ 'school_id' | translate }}"/>
             <br>
             <input class="input-template" [(ngModel)]="this.candidate.firstName"
                    placeholder="{{ 'first_name' | translate }}"/>
             <br>
-            <input class="input-template" [(ngModel)]="this.candidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
+            <input class="input-template" [(ngModel)]="this.candidate.lastName"
+                   placeholder="{{ 'last_name' | translate }}"/>
             <br>
             <input class="input-template" [(ngModel)]="this.candidate.grade" placeholder="{{ 'class' | translate }}"/>
             <div class="file-upload-row">
               <p>{{ 'image' | translate }}:</p>
               <input type="file" (change)="onImageChange($event)">
             </div>
-              <button class="button-template" (click)="createCandidate()">{{ 'create_candidate_button' | translate }}</button>
+            <button class="button-template" (click)="createCandidate()">{{ 'create_candidate_button' | translate }}
+            </button>
           </div>
         </div>
       </div>

@@ -69,12 +69,18 @@ h2 {
 }
 
 
-.add-button-container{
+.add-button-container {
+  position: fixed;      /* Fixes the button in place */
+  bottom: 20px;         /* Adjusts distance from the bottom of the page */
+  left: 50%;            /* Positions horizontally at the center */
+  transform: translateX(-50%); /* Centers the button exactly in the middle */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: 1000;        /* Ensures it stays above other elements, if needed */
 }
+
 
 .add-button{
   margin-top: 10px;

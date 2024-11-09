@@ -4,6 +4,7 @@ import {Election} from "../shared/entity/election-model";
 import {CandidateService} from "../shared/control/candidate.service";
 import {ElectionService} from "../shared/control/election.service";
 import { TranslateService } from '@ngx-translate/core';
+import {TablePagination} from "../shared/service/TablePaginationService";
 
 
 @Component({
@@ -25,6 +26,18 @@ export class CreateElectionComponent implements OnInit {
     "",
     "", [], null)
 
+  sampleCandidates = [
+    {name: "Adam", class: "1CHIF"},
+    {name: "Something", class: "1BHIF"},
+    {name: "Alan", class: "3CHIF"},
+    {name: "Echo", class: "4BHIF"},
+    {name: "Charlie", class: "2CHIF"},
+    // Add more rows here as needed
+  ];
+
+  tablePaginationService = new TablePagination(this.sampleCandidates, 10)
+
+
   ngOnInit(): void {
     this.loadAvailableCandidates();
   }
@@ -39,6 +52,8 @@ export class CreateElectionComponent implements OnInit {
         candidate.firstName.toLowerCase().includes(this.searchText.toLowerCase()) ||
         candidate.lastName.toLowerCase().includes(this.searchText.toLowerCase())
       );
+
+      this.tablePaginationService = new TablePagination(this.filteredCandidates, 10);
     }
   }
 
@@ -47,6 +62,7 @@ export class CreateElectionComponent implements OnInit {
       candidates => {
         this.availableCandidates = candidates;
         this.filteredCandidates = this.availableCandidates;
+        this.tablePaginationService = new TablePagination(this.availableCandidates, 10)
       },
       error => console.error('Error loading candidates:', error)
     );

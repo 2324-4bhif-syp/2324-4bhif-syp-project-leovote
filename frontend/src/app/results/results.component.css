@@ -14,10 +14,22 @@ h2 {
   width: 100%;
   margin: 0;
 }
+
+#result-custom-card h3 {
+  font-size: 25px;
+}
+
 #email-custom-card  {
   width: 100%;
   margin: 0;
+}
 
+#email-custom-card div {
+  font-size: 20px;
+}
+
+#email-custom-card h3 {
+  font-size: 25px;
 }
 
 .result-col {
