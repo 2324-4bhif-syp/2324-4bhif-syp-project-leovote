@@ -2,7 +2,7 @@
 <h2>{{ 'elections' | translate }}</h2>
 
 
-<mat-grid-list cols="2" rowHeight="30em">
+<mat-grid-list cols="2" rowHeight="40em">
   <mat-grid-tile
   [colspan]="1"
   [rowspan]="1">
@@ -26,7 +26,7 @@
               <input class="input-template" id="number-input" type="number" [(ngModel)]="this.election.maxPoints"
                      placeholder="{{ 'max_points' | translate }}"/>
             </div>
-            <br>
+
             <div class="input-date">
               <label for="electionStart">{{ 'election_start' | translate }}:</label>
               <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>

@@ -38,9 +38,10 @@ lection-table{
 #name-input {
   width: 100%;
   font-size: 15px;
+  height: 2.5em;
   font-weight: bold;
   border-radius: 8px;
-  height: 30px;
+  color: #797C80;
 }
 
 #number-input {
@@ -48,12 +49,20 @@ lection-table{
   font-size: 15px;
   font-weight: bold;
   border-radius: 8px;
-  height: 30px;
+  height: 2.5em;
 }
 
-.type-select {
+.type-select select {
   background-color: #f2f9ff;
-  height: 50px;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 2.5em;
+  padding: 0 0 0 5px;
+  color: #797C80;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .input-date {
@@ -80,4 +89,22 @@ lection-table{
   width: calc(100%); /* Adjust width to account for padding */
   margin: 0;              /* Removes default margins */
   display: block;         /* Aligns input to start of container */
+}
+
+.card-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#create-candidate-card {
+  width: 60%;
+  margin: 0;
+}
+
+.candidate-creation-container {
+  margin: 0;
+  width: 100%;
 }
