@@ -21,7 +21,16 @@ export class EmailsComponent {
   sendingError: boolean = false;
   sent: boolean = false;
   filename: string = "";
-  tablePaginationService = new TablePagination([], 3)
+  sampleCandidates = [
+    {name: "Adam", class: "1CHIF"},
+    {name: "Something", class: "1BHIF"},
+    {name: "Alan", class: "3CHIF"},
+    {name: "Echo", class: "4BHIF"},
+    {name: "Charlie", class: "2CHIF"},
+    // Add more rows here as needed
+  ];
+
+  tablePaginationService = new TablePagination(this.sampleCandidates, 10)
 
   constructor(
     public electionService: ElectionService,
@@ -87,6 +96,7 @@ export class EmailsComponent {
       this.electionService.getMails(this.selectedElection.id.toString()).forEach(value => {
         this.emails = value;
         this.emailCount = value.length;
+        this.tablePaginationService = new TablePagination(this.emails, 7)
       })
     }
   }

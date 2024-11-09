@@ -1,51 +1,62 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <h2>{{ 'emails' | translate }}</h2>
 <div class="input">
-  <table style="width: 100%">
+  <table class="top-table">
     <tr>
-      <th style="width: 33%">
-        <div class="custom-card" id="selected-election-card">
-          <h3>{{ 'election' | translate }}</h3>
-          <div class="custom-card-content">
-            <p>{{ 'selected' | translate }}: {{ selectedElection?.name }}</p>
+      <th>
+        <div class="centered-elements-th">
+          <div class="custom-card" id="selected-election-card">
+            <h3>{{ 'election' | translate }}</h3>
+            <div class="custom-card-content">
+              <p>{{ 'selected' | translate }}: {{ selectedElection?.name }}</p>
+            </div>
           </div>
         </div>
       </th>
-      <th style="width: 33%">
-        <input class="input-template" id="email-input" placeholder="{{ 'insert_email' | translate }}" type="Add Email"
-               [(ngModel)]="emailInput">
-        <button (click)="addEmail()" class="btn">
-          <i class="fa fa-plus"></i>
-        </button>
+      <th>
+        <div class="centered-elements-th">
+          <div class="email-input-container">
+            <input class="input-template" id="email-input" placeholder="{{ 'insert_email' | translate }}"
+                   type="Add Email"
+                   [(ngModel)]="emailInput">
+            <button (click)="addEmail()" class="btn">
+              <i style="color: #F2F9FF" class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
       </th>
 
-      <th style="width: 33%">
-        <div class="card-container">
-          <div class="custom-card" id="csv-card">
-            <h3>CSV upload</h3>
-            <div class="custom-card-content" id="card-content-candidate">
-              <div class="centered-elements">
-                <img
-                  src="./assets/img-frontend/upload.png"
-                  height="10%"
-                  width="10%"
-                  (click)="fileInput.click()"
-                  style="cursor: pointer;"
-                  alt="Upload icon"
-                >
+      <th>
+        <div class="centered-elements-th">
+          <div class="card-container" id="csv-card-container">
+            <div class="custom-card" id="csv-card">
+              <h3>CSV upload</h3>
+              <div class="custom-card-content" id="card-content-candidate">
+                <div class="centered-elements">
+                  <img
+                    src="./assets/img-frontend/upload.png"
+                    height="10%"
+                    width="10%"
+                    (click)="fileInput.click()"
+                    style="cursor: pointer;"
+                    alt="Upload icon"
+                  >
 
-                <!-- Hidden file input element -->
-                <input
-                  type="file"
-                  #fileInput
-                  style="display: none;"
-                  (change)="onFileChange($event)"
-                >
+                  <!-- Hidden file input element -->
+                  <input
+                    type="file"
+                    #fileInput
+                    style="display: none;"
+                    (change)="onFileChange($event)"
+                  >
 
-                <!-- Display the file name if selected -->
-                <div *ngIf="filename">{{ filename }}</div>
+                  <!-- Display the file name if selected -->
+                  <div *ngIf="filename">{{ filename }}</div>
 
-                <button class="button-template" id="custom-button-upload" [disabled]="!isCsvUploaded" (click)="parseCSV()">{{ 'upload_button' | translate }}</button>
+                  <button class="button-template" id="custom-button-upload" [disabled]="!isCsvUploaded"
+                          (click)="parseCSV()">{{ 'upload_button' | translate }}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -54,33 +65,41 @@
     </tr>
     <tr>
       <th>
-        <div *ngIf="selectedElection !== undefined">
-          <div *ngIf="emailError">
-            <p>{{ 'invalid_email' | translate }}</p>
+        <div class="centered-elements-th">
+          <div *ngIf="selectedElection !== undefined">
+            <div *ngIf="emailError">
+              <p>{{ 'invalid_email' | translate }}</p>
+            </div>
           </div>
         </div>
       </th>
       <th>
-        <div *ngIf="selectedElection === undefined">
-          <p>{{ 'select_election' | translate }}</p>
+        <div class="centered-elements-th">
+          <div *ngIf="selectedElection === undefined">
+            <p>{{ 'select_election' | translate }}</p>
+          </div>
         </div>
       </th>
     </tr>
   </table>
+
+
   <div class="table-container" *ngIf="selectedElection !== undefined">
     <table class="table-template">
       <thead>
-      <th>{{ 'id' | translate }}</th>
-      <th>{{ 'email' | translate }}</th>
-      <th>Delete</th>
+      <tr>
+        <th>{{ 'id' | translate }}</th>
+        <th>{{ 'email' | translate }}</th>
+        <th>{{ 'remove' | translate }}</th>
+      </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let email of emails; let i = index">
-        <td>{{ i }}</td>
+      <tr *ngFor="let email of tablePaginationService.getCurrentPageData(); let i = index">
+        <td>{{ email.id }}</td>
         <td>{{ email.email }}</td>
         <td>
-          <button (click)="deleteEmail(email.id)" class="btn">
-            <i class="fa fa-minus"></i>
+          <button mat-icon-button style="background-color: rgba(255,0,0,0)" (click)="deleteEmail(email.id)" class="btn">
+            <mat-icon style="font-weight: 700">remove</mat-icon>
           </button>
         </td>
       </tr>
