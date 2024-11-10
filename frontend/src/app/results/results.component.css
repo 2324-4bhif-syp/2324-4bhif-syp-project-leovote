@@ -13,6 +13,7 @@ h2 {
 #result-custom-card {
   width: 100%;
   margin: 0;
+  max-height: 50em;
 }
 
 #result-custom-card h3 {
@@ -76,8 +77,9 @@ h2 {
 
 #result-content {
   display: block;
-  padding: 5px;
-  height: 30px;
+  overflow-y: scroll;
+  padding: 20px 5px 5px;
+  height: 100%;
   width: 100%;
   min-width: 250px;
 }
@@ -88,6 +90,7 @@ h2 {
 
 #result-card-container {
   width: 70%;
+  max-height: 50em;
 }
 
 #selected-card-container {

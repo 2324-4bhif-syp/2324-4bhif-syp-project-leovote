@@ -1,7 +1,9 @@
 <h2>{{ 'results' | translate }}</h2>
 
 <mat-grid-list cols="3" rowHeight="50em">
-  <mat-grid-tile>
+  <mat-grid-tile
+  [colspan]="1"
+  [rowspan]="1">
     <div class="card-container" id="selected-card-container">
       <div class="custom-card" id="email-custom-card">
         <h3>{{ 'selected' | translate }} {{ 'election' | translate }}</h3>
@@ -12,7 +14,9 @@
     </div>
   </mat-grid-tile>
 
-  <mat-grid-tile>
+  <mat-grid-tile
+  [colspan]="1"
+  [rowspan]="1">
     <div class="outer-chart-container">
       <div class="chart-container">
         <canvas id="Results" style="min-height: 25em; min-width: 25em;">{{ chart }}</canvas>
@@ -30,7 +34,9 @@
     </div>
   </mat-grid-tile>
 
-  <mat-grid-tile>
+  <mat-grid-tile
+  [colspan]="1"
+  [rowspan]="1">
     <div class="card-container" id="result-card-container">
       <div class="custom-card" id="result-custom-card">
         <h3>{{ 'results' | translate }}</h3>

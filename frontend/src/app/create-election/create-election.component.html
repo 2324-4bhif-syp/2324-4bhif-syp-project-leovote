@@ -2,10 +2,10 @@
 <h2>{{ 'elections' | translate }}</h2>
 
 
-<mat-grid-list cols="5" rowHeight="40em">
+<mat-grid-list cols="5" rowHeight="50em">
   <mat-grid-tile
-  [colspan]="2"
-  [rowspan]="1">
+    [colspan]="2"
+    [rowspan]="1">
     <div class="card-container">
       <div class="custom-card" id="create-candidate-card">
         <h3>{{ 'create_election' | translate }}</h3>
@@ -42,9 +42,9 @@
   </mat-grid-tile>
 
   <mat-grid-tile
-  [colspan]="3"
-  [rowspan]="1">
-    <div class="table-container" id="create-election-table">
+    [colspan]="3"
+    [rowspan]="1">
+    <div class="table-container" id="create-candidate-table">
       <table class="table-template">
         <thead>
         <tr>
@@ -91,5 +91,7 @@
 </mat-grid-list>
 
 <div class="add-button-container">
-  <button class="button-template" [disabled]="isCreateButtonDisabled()" (click)="createElection()">{{ 'create_election' | translate }}</button>
+  <button class="button-template" [disabled]="isCreateButtonDisabled()"
+          (click)="createElection()">{{ 'create_election' | translate }}
+  </button>
 </div>

@@ -53,7 +53,7 @@ export class CreateElectionComponent implements OnInit {
         candidate.lastName.toLowerCase().includes(this.searchText.toLowerCase())
       );
 
-      this.tablePaginationService = new TablePagination(this.filteredCandidates, 10);
+      this.tablePaginationService = new TablePagination(this.filteredCandidates, 8);
     }
   }
 
@@ -62,7 +62,7 @@ export class CreateElectionComponent implements OnInit {
       candidates => {
         this.availableCandidates = candidates;
         this.filteredCandidates = this.availableCandidates;
-        this.tablePaginationService = new TablePagination(this.availableCandidates, 10)
+        this.tablePaginationService = new TablePagination(this.availableCandidates, 8)
       },
       error => console.error('Error loading candidates:', error)
     );
