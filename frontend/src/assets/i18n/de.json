@@ -14,6 +14,7 @@
   "edit_icon": "Bearbeiten Symbol",
   "confirm_delete": "Möchten Sie die Wahl wirklich löschen: {{ name }}?",
   "remove": "Löschen",
+  "selected_election": "Ausgewählte Wahl",
 
   "candidates_overview": "Kandidatenübersicht",
   "search": "Suchen",
