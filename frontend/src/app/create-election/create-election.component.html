@@ -1,94 +1,97 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <h2>{{ 'elections' | translate }}</h2>
-<table class="top-table">
-  <tr>
-    <th>
-      <div class="election-creation-container">
+
+
+<mat-grid-list cols="5" rowHeight="50em">
+  <mat-grid-tile
+    [colspan]="2"
+    [rowspan]="1">
+    <div class="card-container">
+      <div class="custom-card" id="create-candidate-card">
         <h3>{{ 'create_election' | translate }}</h3>
-        <div class="input">
-          <input id="electionName" [(ngModel)]="election.name" placeholder="{{ 'election_name' | translate }}"/>
-        </div>
-        <div class="input">
-          <label for="electionType">{{ 'election_type' | translate }}:</label>
-          <select id="electionType" [(ngModel)]="election.electionType" class="styled-select">
-            <option value="MULTIVALUE">{{ 'multivalue' | translate }}</option>
-            <option value="CROSSES">{{ 'crosses' | translate }}</option>
-          </select>
-        </div>
+        <div class="custom-card-content">
+          <div class="candidate-creation-container">
+            <input class="input-template" id="name-input" [(ngModel)]="this.election.name"
+                   placeholder="{{ 'election_name' | translate }}"/>
+            <br>
+            <div class="type-select">
+              <select [(ngModel)]="election.electionType">
+                <option value="" disabled selected>{{ 'election_type' | translate }}</option>
+                <option value="MULTIVALUE">{{ 'multivalue' | translate }}</option>
+                <option value="CROSSES">{{ 'crosses' | translate }}</option>
+              </select>
+            </div>
 
-        <div class="input" *ngIf="election.electionType === 'MULTIVALUE'">
-          <input id="maxPoints" type="number" [(ngModel)]="election.maxPoints" placeholder="{{ 'max_points' | translate }}"/>
-        </div>
+            <div *ngIf="election.electionType === 'MULTIVALUE'">
+              <input class="input-template" id="number-input" type="number" [(ngModel)]="this.election.maxPoints"
+                     placeholder="{{ 'max_points' | translate }}"/>
+            </div>
 
-
-        <div class="input">
-          <label for="electionStart">{{ 'election_start' | translate }}:</label>
-          <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>
-        </div>
-        <div class="input">
-          <label for="electionEnd">{{ 'election_end' | translate }}:</label>
-          <input id="electionEnd" type="datetime-local" [(ngModel)]="election.electionEnd"/>
+            <div class="input-date">
+              <label for="electionStart">{{ 'election_start' | translate }}:</label>
+              <input id="electionStart" type="datetime-local" [(ngModel)]="election.electionStart"/>
+            </div>
+            <div class="input-date">
+              <label for="electionEnd">{{ 'election_end' | translate }}:</label>
+              <input id="electionEnd" type="datetime-local" [(ngModel)]="election.electionEnd"/>
+            </div>
+          </div>
         </div>
       </div>
-    </th>
-    <th>
-      <div class="participating-candidates-container">
-        <h3>{{ 'participating_candidates' | translate }}</h3>
-        <div class="table-wrapper">
-          <table class="second-table">
-            <tr class="header-line">
-              <th style="width: 150px;"></th>
-              <th style="width: 50px"></th>
-              <th style="width: 50px">
-                <input style="width: 150px;" type="text" (input)="filterCandidates()"
-                       [(ngModel)]="searchText" placeholder="{{ 'search' | translate }}">
-              </th>
-            </tr>
-            <tr *ngFor="let candidate of filteredCandidates; let i = index"
-                [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
-              <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
-              <td>{{ candidate.grade }}</td>
-              <td><input type="checkbox" [checked]="isSelected(candidate)"
-                         (change)="toggleCandidateSelection(candidate)"/>
-              </td>
-            </tr>
-          </table>
-        </div>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+    [colspan]="3"
+    [rowspan]="1">
+    <div class="table-container" id="create-candidate-table">
+      <table class="table-template">
+        <thead>
+        <tr>
+          <th>{{ 'name' | translate }}</th>
+          <th>{{ 'class' | translate }}</th>
+          <th style="width: 100px">
+            <input class="searchbar" type="text" (input)="filterCandidates()"
+                   [(ngModel)]="searchText" placeholder="{{ 'search' | translate }}">
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let candidate of tablePaginationService.getCurrentPageData(); let i = index">
+          <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
+          <td>{{ candidate.grade }}</td>
+          <td>
+            <input class="checkbox-selected-candidate" type="checkbox" [checked]="isSelected(candidate)"
+                   (change)="toggleCandidateSelection(candidate)"/>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination-divider"></div> <!-- Divider line above pagination -->
+      <div class="pagination">
+        <button (click)="tablePaginationService.goToFirstPage()">
+          <mat-icon>skip_previous</mat-icon> <!-- Skip to first -->
+        </button>
+        <button (click)="tablePaginationService.goToPreviousPage()">
+          <mat-icon>navigate_before</mat-icon> <!-- Previous -->
+        </button>
+        <span class="page-info">{{ tablePaginationService.currentPage }}
+          / {{ tablePaginationService.getPageCount() }}</span>
+        <button (click)="tablePaginationService.goToNextPage()">
+          <mat-icon>navigate_next</mat-icon> <!-- Next -->
+        </button>
+        <button (click)="tablePaginationService.goToLastPage()">
+          <mat-icon>skip_next</mat-icon> <!-- Skip to end -->
+        </button>
       </div>
-    </th>
-  </tr>
-</table>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
 <div class="add-button-container">
-  <button [disabled]="isCreateButtonDisabled()" (click)="createElection()">{{ 'create_button' | translate }}</button>
-</div>
-
-<div class="election-table-container">
-  <table class="election-table">
-    <tr class="header-line">
-      <th>{{ 'id' | translate }}</th>
-      <th>{{ 'election_name' | translate }}</th>
-      <th>{{ 'start' | translate }}</th>
-      <th>{{ 'end' | translate }}</th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let election of elections; let i = index"
-        [ngClass]="{ 'grey-row': i % 2 === 0, 'white-row': i % 2 !== 0 }">
-      <td>{{ election.id }}</td>
-      <td>{{ election.name }}</td>
-      <td>{{ election.electionStart.toLocaleString() }}</td>
-      <td>{{ election.electionEnd.toLocaleString() }}</td>
-      <td>
-        <button (click)="confirmDelete(election)" class="btn">
-          <i class="fa fa-trash fa-2x"></i>
-        </button>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<div id="container-floating">
-  <div [routerLink]="['/admin', 'overview']" id="floating-button">
-    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="{{ 'picture_of_candidate' | translate }}"/>
-  </div>
+  <button class="button-template" [disabled]="isCreateButtonDisabled()"
+          (click)="createElection()">{{ 'create_election' | translate }}
+  </button>
 </div>

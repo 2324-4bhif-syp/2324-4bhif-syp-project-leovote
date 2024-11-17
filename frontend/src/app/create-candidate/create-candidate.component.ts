@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Candidate} from "../shared/entity/candidate-model";
 import {CandidateService} from "../shared/control/candidate.service";
 import { TranslateService } from '@ngx-translate/core';
+import {TablePagination} from "../shared/service/TablePaginationService";
 
 @Component({
   selector: 'app-create-candidate',
@@ -10,15 +11,27 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CreateCandidateComponent {
   imageFile: File | null = null;
+  fileName: string | null = null;
   candidate: Candidate = new Candidate();
   isCsvUploaded: boolean = false;
   csvData: string = "";
   candidates: Candidate[] = [];
   errorMessage: string = '';
+  sampleCandidates = [
+    {name: "Adam", class: "1CHIF"},
+    {name: "Something", class: "1BHIF"},
+    {name: "Alan", class: "3CHIF"},
+    {name: "Echo", class: "4BHIF"},
+    {name: "Charlie", class: "2CHIF"},
+    // Add more rows here as needed
+  ];
+
+  tablePaginationService = new TablePagination(this.sampleCandidates, 10)
 
   constructor(protected candidateService: CandidateService,  private translate: TranslateService) {
     candidateService.getList().forEach(value => {
       this.candidates = value;
+      this.tablePaginationService = new TablePagination(this.candidates, 10)
     });
   }
 
@@ -29,6 +42,7 @@ export class CreateCandidateComponent {
   onFileChange(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
+    this.fileName = file.name;
     reader.onload = () => {
       const fileType = file.name.split('.').pop()?.toLowerCase();
       if (fileType !== 'csv') {

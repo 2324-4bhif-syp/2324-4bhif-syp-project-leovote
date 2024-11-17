@@ -1,64 +1,73 @@
 <div *ngIf="!isVoted && electionInFuture">
   <div class="headliner-container">
     <h2>{{ election?.name }}</h2>
-    <p>{{ 'logged_in_as' | translate }}: {{ keycloakService.getUsername() }}</p>
+    <p>{{ 'logged_in_as' | translate }}: {{ keycloakService.getKeycloakInstance().profile?.firstName }}</p>
     <h2 *ngIf="isSelected" style="align-content: center; justify-content: center">{{ 'confirm_vote_for' | translate }}
       {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
   </div>
 
   <div class="container-lg" *ngIf="!isSelected">
     <div class="row">
-      <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-6"
-           style="width: 0; padding-right: 340px; padding-bottom: 20px">
-        <div
-          (click)="selectedCandidate = candidate"
-          class="card mb-4 box-shadow text-center h-100"
-          [ngStyle]="{'background-color': selectedCandidate === candidate ? '#12632D' : ''}"
-          style="align-content: center">
-          <div class="container-for-image">
-            <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
-                 alt="{{ candidate.firstName }} {{ candidate.lastName }}">
+      <div *ngFor="let candidate of election?.participatingCandidates; let index = index" class="col-md-6"
+           style="width: 0; padding-right: 340px; padding-bottom: 20px;">
+        <mat-card class="candidate-card"
+                  [ngClass]="{'selected-candidate-border': selectedCandidate === candidate}"
+                  appearance="outlined"
+                  (click)="selectedCandidate = candidate">
+          <div class="image-container">
+            <img [src]="getBase64Image(candidate.pathOfImage)"
+                 alt="{{ candidate.firstName }} {{ candidate.lastName }}"
+                 class="responsive-image"/>
           </div>
-          <div class="card-body">
-            <div class="title-card">
-              <h3 class="card-title">{{ candidate.firstName }}</h3>
-              <h3 class="card-title"> {{ candidate.lastName }} </h3>
-              <h4>{{ candidate.grade }}</h4>
-            </div>
-          </div>
-        </div>
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>
+                {{ candidate.firstName }} {{ candidate.lastName }}
+              </mat-card-title>
+              <mat-card-subtitle>{{ candidate.grade }}</mat-card-subtitle>
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+          </mat-card-content>
+          <mat-card-actions>
+          </mat-card-actions>
+        </mat-card>
       </div>
     </div>
-
-  <div class="containerBtn">
-      <button (click)="select()" [disabled]="selectedCandidate == undefined" class="button-template"><span>{{ 'select' | translate }}</span>
+    <div class="containerBtn">
+      <button (click)="select()" [disabled]="selectedCandidate == undefined" class="button-template">
+        <span>{{ 'select' | translate }}</span>
       </button>
     </div>
   </div>
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
-  <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
-    <div class="container-for-image" style="height: 80%">
-      <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(selectedCandidate?.pathOfImage)"
-           alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
-    </div>
-    <div class="card-body">
-      <div class="title-card">
-        <h3 class="card-title">{{ selectedCandidate?.firstName }}</h3>
-        <h3 class="card-title"> {{ selectedCandidate?.lastName }} </h3>
-        <h4>{{ selectedCandidate?.grade }}</h4>
-      </div>
-      <input *ngIf="!isSelected" class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate"
-             [value]="selectedCandidate ">
-    </div>
-  </div>
+      <mat-card class="candidate-card">
+        <div class="image-container">
+          <img [src]="getBase64Image(selectedCandidate?.pathOfImage)"
+               alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}"
+               class="responsive-image"/>
+        </div>
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>
+              {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName}}
+            </mat-card-title>
+            <mat-card-subtitle>{{ selectedCandidate?.grade }}</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
   <div class="containerBtn d-flex gap-2">
-    <button (click)="deselect()" class="button-template"><span>{{ 'back' | translate }}</span></button>
-    <button (click)="voting()" class="button-template "><span>{{ 'confirmation' | translate }}</span></button>
+    <button (click)="deselect()" class="NoButton"><span>{{ 'no' | translate }}</span></button>
+    <button (click)="voting()" class="YesButton"><span>{{ 'yes' | translate }}</span></button>
   </div>
 </div>
 
@@ -66,19 +75,25 @@
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
     <h2>{{ 'thank_you_for_voting_in' | translate }} {{ election?.name }}</h2>
-    <div class="card mb-4 box-shadow text-center h-100" style="align-content: center">
-      <div class="container-for-image">
-        <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(selectedCandidate?.pathOfImage)"
-             alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}">
+    <mat-card class="candidate-card">
+      <div class="image-container">
+        <img [src]="getBase64Image(selectedCandidate?.pathOfImage)"
+             alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}"
+             class="responsive-image"/>
       </div>
-      <div class="card-body">
-        <div class="title-card">
-          <h3 class="card-title">{{ selectedCandidate?.firstName }}</h3>
-          <h3 class="card-title"> {{ selectedCandidate?.lastName }} </h3>
-          <h4>{{ selectedCandidate?.grade }}</h4>
-        </div>
-      </div>
-    </div>
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>
+            {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName}}
+          </mat-card-title>
+          <mat-card-subtitle>{{ selectedCandidate?.grade }}</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>
 

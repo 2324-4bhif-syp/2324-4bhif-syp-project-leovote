@@ -1,4 +1,4 @@
-<mat-toolbar style="background-color: #B6BABF" class="toolbar">
+<mat-toolbar class="toolbar">
   <span class="logo-span">
     <a class="navbar-brand" routerLink="login">
       <img src="assets/img-frontend/htl-leonding.png" alt="{{ 'logo_alt' | translate }}" width="150vw">
@@ -6,7 +6,7 @@
   </span>
 
   <span class="adminpanel-span">
-    <a class="nav-link" routerLink="admin/overview">{{ 'admin_panel' | translate }}</a>
+    <a class="nav-link" (click)="toggleSidenav()">{{ 'admin_panel' | translate }}</a>
   </span>
   <span class="spacer"></span>
 
@@ -15,7 +15,7 @@
   <div class="dropdown ml-3">
     <button class="btn dropdown-toggle language-dropdown" type="button" id="languageDropdown"
             data-bs-toggle="dropdown" aria-expanded="false">
-      {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : currentLanguage === 'at' ? 'Österreichisch' : 'ไทย'}}
+      {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : currentLanguage === 'at' ? 'Österreichisch' : 'ไทย' }}
     </button>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
       <li><a class="dropdown-item" (click)="setLanguage('en')">English</a></li>
@@ -29,5 +29,46 @@
   </button>
 </mat-toolbar>
 
-<hr>
-<router-outlet></router-outlet>
+<mat-sidenav-container style="background-color: transparent" class="sidenavs-container" hasBackdrop="false" autosize>
+  <mat-sidenav #sidenav style="background-color: #DAE0E5" class="menu-sidenav" mode="over" fixedInViewport="false"
+               [opened]="false" (mouseleave)="toggleSidenav()">
+    <mat-nav-list class="nav-list">
+      <!-- Election Overview -->
+      <mat-list-item matTooltip="Election Overview" routerLink="admin/overview">
+        <div class="sidenav-item">
+          <mat-icon>how_to_vote</mat-icon>
+          <span>{{ 'election_overview' | translate }}</span>
+        </div>
+      </mat-list-item>
+
+      <!-- Create Election -->
+      <mat-list-item matTooltip="Create Election" routerLink="admin/overview/create-election">
+        <div class="sidenav-item">
+          <mat-icon>add</mat-icon>
+          <span>{{ 'create_election' | translate}}</span>
+        </div>
+      </mat-list-item>
+
+      <!-- Candidate Overview -->
+      <mat-list-item matTooltip="Candidate Overview" routerLink="admin/overview/candidate-overview">
+        <div class="sidenav-item">
+          <mat-icon>person</mat-icon>
+          <span>{{ 'candidates_overview' | translate }}</span>
+        </div>
+      </mat-list-item>
+
+      <!-- Create Candidate -->
+      <mat-list-item matTooltip="Create Candidate" routerLink="admin/overview/create-candidate">
+        <div class="sidenav-item">
+          <mat-icon>add</mat-icon>
+          <span>{{ 'create_candidate_button' | translate}}</span>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Sidenav Content -->
+  <mat-sidenav-content style="background-color: transparent" class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

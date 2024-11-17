@@ -1,20 +1,30 @@
-import {Component, Input} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {VoteService} from "./shared/control/vote.service";
 import {AdminService} from "./shared/control/admin.service";
 import {KeycloakService} from "keycloak-angular";
 import {TranslateService} from "@ngx-translate/core";
+import {NavbarService} from "./shared/control/navbar.service";
+import {MatSidenav} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
   title = 'Leovote';
   currentLanguage = 'en';
 
-  constructor(public voteService: VoteService, private router: Router, protected adminService: AdminService, private keycloakService: KeycloakService, private translate: TranslateService) {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  constructor(public voteService: VoteService,
+              private router: Router,
+              protected adminService: AdminService,
+              private keycloakService: KeycloakService,
+              private translate: TranslateService,
+              private navbarService: NavbarService,
+              private cdr: ChangeDetectorRef) {
     const savedLanguage = localStorage.getItem('language') || 'en';
     this.currentLanguage = savedLanguage;
     this.translate.setDefaultLang(savedLanguage);
@@ -26,6 +36,17 @@ export class AppComponent {
     this.translate.use(language);
     localStorage.setItem('language', language);
   }
+
+  ngOnInit() {
+    this.navbarService.toggle$.subscribe(() => {
+      this.sidenav.toggle();
+    });
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
+
   /*
   ngOnInit(): void {
     if (!this.voteService.isLoggedIn) {
@@ -33,6 +54,10 @@ export class AppComponent {
     }
   }*/
   logout() {
-     this.keycloakService.logout();
+    this.keycloakService.logout();
+  }
+
+  toggleSidenav() {
+    this.navbarService.toggleSidenav();
   }
 }

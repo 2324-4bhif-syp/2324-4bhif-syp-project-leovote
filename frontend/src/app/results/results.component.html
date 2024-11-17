@@ -1,19 +1,25 @@
 <h2>{{ 'results' | translate }}</h2>
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-</script>
 
-<table class="table-result">
-  <tr>
-    <th>
-      <div class="custom-card">
-        <h3>{{ 'selected' | translate }} {{ 'election' | translate }}</h3>
-        <p>{{ selectedElection?.name }}</p>
+<mat-grid-list cols="3" rowHeight="50em">
+  <mat-grid-tile
+  [colspan]="1"
+  [rowspan]="1">
+    <div class="card-container" id="selected-card-container">
+      <div class="custom-card" id="email-custom-card">
+        <h3>{{ 'selected_election' | translate }}</h3>
+        <div class="custom-card-content">
+          <p>{{ selectedElection?.name }}</p>
+        </div>
       </div>
-    </th>
-    <th>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+  [colspan]="1"
+  [rowspan]="1">
+    <div class="outer-chart-container">
       <div class="chart-container">
-        <canvas id="Results">{{ chart }}</canvas>
+        <canvas id="Results" style="min-height: 25em; min-width: 25em;">{{ chart }}</canvas>
       </div>
       <div class="result-box">
         <div *ngIf="result !== undefined">
@@ -25,7 +31,23 @@
           <p>{{ 'please_select_election' | translate }}</p>
         </div>
       </div>
-    </th>
-  </tr>
-</table>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile
+  [colspan]="1"
+  [rowspan]="1">
+    <div class="card-container" id="result-card-container">
+      <div class="custom-card" id="result-custom-card">
+        <h3>{{ 'results' | translate }}</h3>
+        <div class="custom-card-content" id="result-content">
+          <div *ngFor="let oneResult of result">
+            <p>{{oneResult.firstname}} {{oneResult.lastname}}: {{oneResult.percentage}}%</p>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 

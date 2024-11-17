@@ -8,6 +8,7 @@ import {KeycloakService} from "keycloak-angular";
   styleUrls: ['./admin-panel.component.css']
 })
 export class AdminPanelComponent {
-  constructor(protected adminService: AdminService, private keycloakService: KeycloakService) {
+  constructor(protected adminService: AdminService,
+              private keycloakService: KeycloakService) {
   }
 }

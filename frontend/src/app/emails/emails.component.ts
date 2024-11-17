@@ -20,7 +20,17 @@ export class EmailsComponent {
   csvData: string = "";
   sendingError: boolean = false;
   sent: boolean = false;
-  tablePaginationService = new TablePagination([], 3)
+  filename: string = "";
+  sampleCandidates = [
+    {name: "Adam", class: "1CHIF"},
+    {name: "Something", class: "1BHIF"},
+    {name: "Alan", class: "3CHIF"},
+    {name: "Echo", class: "4BHIF"},
+    {name: "Charlie", class: "2CHIF"},
+    // Add more rows here as needed
+  ];
+
+  tablePaginationService = new TablePagination(this.sampleCandidates, 10)
 
   constructor(
     public electionService: ElectionService,
@@ -33,6 +43,7 @@ export class EmailsComponent {
 
   onFileChange(event: any) {
     const file = event.target.files[0];
+    this.filename = file.name;
     const reader = new FileReader();
     reader.onload = () => {
       const fileType = file.name.split('.').pop()?.toLowerCase();
@@ -85,6 +96,7 @@ export class EmailsComponent {
       this.electionService.getMails(this.selectedElection.id.toString()).forEach(value => {
         this.emails = value;
         this.emailCount = value.length;
+        this.tablePaginationService = new TablePagination(this.emails, 7)
       })
     }
   }

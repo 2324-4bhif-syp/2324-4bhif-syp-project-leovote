@@ -14,6 +14,7 @@
   "edit_icon": "ไอคอนแก้ไข",
   "confirm_delete": "คุณแน่ใจหรือไม่ว่าต้องการลบการเลือกตั้ง: {{ name }}?",
   "remove": "ลบ",
+  "selected_election": "การเลือกตั้งที่ได้รับการคัดเลือก",
 
   "candidates_overview": "ภาพรวมผู้สมัคร",
   "search": "ค้นหา",

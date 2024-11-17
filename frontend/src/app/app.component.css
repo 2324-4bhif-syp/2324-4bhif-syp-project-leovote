@@ -85,7 +85,8 @@ hr {
   width: auto;
   background-color: #B6BABF;
   border: none;
-  overflow: clip
+  overflow: clip;
+  font-size: 18px;
 }
 
 .dropdown-menu {
@@ -120,13 +121,17 @@ hr {
 .adminpanel-span {
   width: 100px;
   margin-left: 2em;
-  font-size: 17px;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 .toolbar {
   display: flex;
   align-items: center;
   color: #242526;
+  background-color: #B6BABF;
+  height: 70px;
+  font-size: 18px;
 }
 
 .spacer {
@@ -139,3 +144,34 @@ hr {
     display: none;
   }
 }
+
+
+
+.sidenav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Space between icon and text */
+  font-size: 16px; /* Adjust font size as needed */
+  font-weight: 500; /* Slightly bolder text for readability */
+  color: #333; /* Adjust color for better contrast */
+}
+
+.mat-list-item {
+  padding: 12px 16px; /* Add padding for a more comfortable click/touch area */
+}
+
+/* Optional: Customize the icon color */
+.sidenav-item mat-icon {
+  color: #555; /* A softer color for the icon */
+  font-size: 24px; /* Slightly larger icon for emphasis */
+  margin: 0;
+}
+
+.sidenav-item span {
+  margin: 0;
+}
+
+::ng-deep .mat-sidenav-container{
+  height: 95vh !important;
+}
+

@@ -1,4 +1,4 @@
-<h2>{{ 'update_candidate' | translate }} {{candidate.firstName}} {{candidate.lastName}}</h2>
+<h2>{{ 'update_candidate' | translate }} {{ candidate.firstName }} {{ candidate.lastName }}</h2>
 
 <table class="table-candidate-update">
   <tr>
@@ -7,49 +7,46 @@
         <div class="row">
           <div class="col-md-6"
                style="width: 0; padding-right: 340px; padding-bottom: 20px">
-            <div class="card mb-4 box-shadow text-center h-100"
-                 style="align-content: center">
-              <div class="container-for-image">
-y                <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
-                     alt="{{ candidate.firstName }} {{ candidate.lastName }}">
+            <mat-card class="candidate-card" appearance="outlined">
+              <div class="image-container">
+                <img [src]="getBase64Image(candidate.pathOfImage)"
+                     alt="{{ candidate.firstName }} {{ candidate.lastName }}"
+                     class="responsive-image"/>
               </div>
-              <div class="card-body">
-                <div class="title-card">
-                  <h3 class="card-title">{{ updatedCandidate.firstName }}</h3>
-                  <h3 class="card-title"> {{ updatedCandidate.lastName }} </h3>
-                  <h4>{{ updatedCandidate.grade }}</h4>
-                </div>
-              </div>
-            </div>
+              <mat-card-header>
+                <mat-card-title-group style="">
+                  <mat-card-title>
+                    {{ candidate.firstName }} {{ candidate.lastName }}
+                  </mat-card-title>
+                  <mat-card-subtitle>{{ candidate.grade }}</mat-card-subtitle>
+                </mat-card-title-group>
+              </mat-card-header>
+            </mat-card>
           </div>
         </div>
       </div>
     </th>
     <th class="input-th">
-      <div class="candidate-creation-container">
-        <div class="input">
-          <input [(ngModel)]="updatedCandidate.firstName" placeholder="{{ 'first_name' | translate }}"/>
-        </div>
-        <div class="input">
-          <input [(ngModel)]="updatedCandidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
-        </div>
-        <div class="input">
-          <input [(ngModel)]="updatedCandidate.grade" placeholder="{{ 'class' | translate }}"/>
-        </div>
-        <p>{{ 'image' | translate }}: </p>
-        <div class="input">
-          <input type="file" id="imageInput" (change)="onImageChange($event)">
-        </div>
-        <div class="input">
-          <button [disabled]="checkFields()" (click)="updateCandidate()">{{ 'update_candidate_button' | translate }}</button>
+      <div class="card-container">
+        <div class="custom-card" id="create-candidate-card">
+          <h3>Update Candidate</h3>
+          <div class="custom-card-content">
+            <div class="candidate-creation-container">
+              <input class="input-template" [(ngModel)]="updatedCandidate.firstName"
+                     placeholder="{{ 'first_name' | translate }}"/>
+              <br>
+              <input class="input-template" [(ngModel)]="updatedCandidate.lastName" placeholder="{{ 'last_name' | translate }}"/>
+              <br>
+              <input class="input-template" [(ngModel)]="updatedCandidate.grade" placeholder="{{ 'class' | translate }}"/>
+              <div class="file-upload-row">
+                <p>{{ 'image' | translate }}:</p>
+                <input type="file" (change)="onImageChange($event)">
+              </div>
+              <button class="button-template" [disabled]="checkFields()" (click)="updateCandidate()">{{ 'update_candidate_button' | translate }}</button>
+            </div>
+          </div>
         </div>
       </div>
     </th>
   </tr>
 </table>
-
-<div id="container-floating">
-  <div [routerLink]="['/admin', 'overview' ,'candidate-overview']" id="floating-button">
-    <img class="reminder" src="./assets/img-frontend/back.png" height="25px" width="25px" alt="{{ 'picture_of_candidate' | translate }}"/>
-  </div>
-</div>

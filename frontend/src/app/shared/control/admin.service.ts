@@ -13,7 +13,7 @@ export class AdminService {
     const helper = new JwtHelperService();
     const val = helper.decodeToken(this.keycloakService.getToken())
     val.then(value => {
-      const ldap = value['LDAP_ENTRY_DN'];
+      const ldap = value['ldap_entry_dn'];
       //this.isLoggedIn = ldap.includes("Teachers");
     });
   }
