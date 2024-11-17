@@ -43,32 +43,30 @@
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
-      <mat-card class="candidate-card">
-        <div class="image-container">
-          <img [src]="getBase64Image(selectedCandidate?.pathOfImage)"
-               alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}"
-               class="responsive-image"/>
-        </div>
-        <mat-card-header>
-          <mat-card-title-group>
-            <mat-card-title>
-              {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName}}
-            </mat-card-title>
-            <mat-card-subtitle>{{ selectedCandidate?.grade }}</mat-card-subtitle>
-          </mat-card-title-group>
-        </mat-card-header>
-        <mat-card-content>
-        </mat-card-content>
-        <mat-card-actions>
-        </mat-card-actions>
-      </mat-card>
+  <mat-card class="candidate-card">
+    <div class="image-container">
+      <img [src]="getBase64Image(selectedCandidate?.pathOfImage)"
+           alt="{{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}"
+           class="responsive-image"/>
+    </div>
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}
+        </mat-card-title>
+        <mat-card-subtitle>{{ selectedCandidate?.grade }}</mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
 </div>
 
-<div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
-  <div class="containerBtn d-flex gap-2">
-    <button (click)="deselect()" class="NoButton"><span>{{ 'no' | translate }}</span></button>
-    <button (click)="voting()" class="YesButton"><span>{{ 'yes' | translate }}</span></button>
-  </div>
+<div class="containerBtn" *ngIf="isSelected && !isVoted">
+  <button (click)="deselect()" class="button-template"><span>{{ 'back' | translate }}</span></button>
+  <button (click)="voting()" class="button-template"><span>{{ 'confirmation' | translate }}</span></button>
 </div>
 
 
@@ -84,7 +82,7 @@
       <mat-card-header>
         <mat-card-title-group>
           <mat-card-title>
-            {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName}}
+            {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}
           </mat-card-title>
           <mat-card-subtitle>{{ selectedCandidate?.grade }}</mat-card-subtitle>
         </mat-card-title-group>
