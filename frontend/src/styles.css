@@ -152,6 +152,10 @@ body {
   background-color: #616366; /* Even darker color */
   transform: scale(0.98); /* Slightly shrink for "pressed" effect */
 }
+.button-template:disabled {
+  background-color: #000000; /* Even darker color */
+  transform: scale(0.98); /* Slightly shrink for "pressed" effect */
+}
 
 /* Delete Table row button */
 

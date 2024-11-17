@@ -13,7 +13,7 @@
         <div
           (click)="selectedCandidate = candidate"
           class="card mb-4 box-shadow text-center h-100"
-          [ngStyle]="{'border': selectedCandidate === candidate ? '10px solid #12632D' : ''}"
+          [ngStyle]="{'background-color': selectedCandidate === candidate ? '#12632D' : ''}"
           style="align-content: center">
           <div class="container-for-image">
             <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
