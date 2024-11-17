@@ -38,7 +38,7 @@
                 <div
                   cdkDropList
                   [cdkDropListData]="ratedCandidates[i]"
-                  class="example-list"
+                  class="candidates-list"
                   (cdkDropListDropped)="dropToRating($event, i)"
                   [cdkDropListConnectedTo]="allDropLists"
                   [id]="'rating-list-' + i"
