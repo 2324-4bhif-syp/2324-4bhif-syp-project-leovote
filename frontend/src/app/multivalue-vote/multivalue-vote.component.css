@@ -6,13 +6,8 @@
   padding: 20px;
 }
 
-.movies-container,
-.rating-container {
-  margin-top: 0;
-  width: 30%;
-  background-color: #B6BABF;
-  border-radius: 10px;
-  padding: 10px;
+.candidates-list-container,
+.candidates-rating-container {
   align-items: center;
   justify-content: center;
 }
@@ -26,7 +21,7 @@
   align-items: center;
 }
 
-.movies-container .movie-item {
+.candidates-list-container .movie-item {
   background-color: #B6BABF;
   border: 2px solid black;
   border-radius: 10px;
@@ -73,7 +68,7 @@ img {
 }
 
 
-.movies-container .rating-box {
+.candidates-list-container .rating-box {
   background-color: #DEFFFA;
   border-radius: 10px;
   padding: 10px;
@@ -301,7 +296,7 @@ button.mat-raised-button.color-warn {
 }
 
 /*WER DES LIEßT MEI BEILEID :)*/
-.rating-container .rating-box {
+.candidates-rating-container .rating-box {
   width: 100%;
   height: 100%;
   min-height: 50px;
@@ -318,7 +313,7 @@ button.mat-raised-button.color-warn {
   overflow: hidden;
 }
 
-.rating-container .movie-item{
+.candidates-rating-container .movie-item{
   background-color: #B6BABF;
   border: 2px solid black;
   border-radius: 10px;
