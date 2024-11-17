@@ -331,5 +331,13 @@ button.mat-raised-button.color-warn {
 }
 
 .top-table tr th {
-  width: 33%
+  width: 33%;
+  align-content: center;
+  align-items: center;
+}
+
+.centered-elements-th {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }

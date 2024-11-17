@@ -59,12 +59,16 @@
         </div>
       </div>
     </th>
+  </tr>
   <tr>
-    <div class="d-flex justify-content-center" *ngIf="!isVoted">
-      <div class="containerBtn d-flex gap-2">
-        <button (click)="resetCandidatesList()" class="ResetButton"><span>{{ 'reset' | translate }}</span></button>
-        <button (click)="openConfirmationDialog()" class="SubmitButton"><span>{{ 'submit' | translate }}</span>
-        </button>
+    <div class="centered-elements-th">
+      <div class="d-flex justify-content-center" *ngIf="!isVoted">
+        <div class="containerBtn d-flex gap-2">
+          <button (click)="resetCandidatesList()" class="button-template"><span>{{ 'reset' | translate }}</span>
+          </button>
+          <button (click)="openConfirmationDialog()" class="button-template"><span>{{ 'submit' | translate }}</span>
+          </button>
+        </div>
       </div>
     </div>
   </tr>
@@ -79,8 +83,8 @@
     <h3>{{ 'confirmation' | translate }}</h3>
     <p>{{ 'continue_with_vote' | translate }}</p>
     <div class="dialog-button-container">
-      <button class="confirm-button" (click)="confirmVote()">{{ 'yes' | translate }}</button>
-      <button class="cancel-button" (click)="cancelVote()">{{ 'no' | translate }}</button>
+      <button class="button-template" (click)="confirmVote()">{{ 'yes' | translate }}</button>
+      <button class="button-template" (click)="cancelVote()">{{ 'no' | translate }}</button>
     </div>
   </div>
 </ng-template>
