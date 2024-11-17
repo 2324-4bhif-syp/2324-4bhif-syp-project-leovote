@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-.candidates-list-container .movie-item {
+.candidates-list-container .candidates-list-item {
   background-color: #B6BABF;
   border: 2px solid black;
   border-radius: 10px;
@@ -313,7 +313,7 @@ button.mat-raised-button.color-warn {
   overflow: hidden;
 }
 
-.candidates-rating-container .movie-item{
+.candidates-rating-container .candidates-list-item{
   background-color: #B6BABF;
   border: 2px solid black;
   border-radius: 10px;
@@ -327,4 +327,11 @@ button.mat-raised-button.color-warn {
   max-width: 100%;
   max-height: 100%;
   overflow: hidden;
+}
+.top-table {
+  width: 100%;
+}
+
+.top-table tr th {
+  width: 33%
 }

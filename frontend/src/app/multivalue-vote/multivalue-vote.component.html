@@ -2,67 +2,75 @@
   <h2>{{ election?.name }}</h2>
   <p>{{ 'logged_in_as' | translate }}: {{ keycloakService.getUsername() }}</p>
 </div>
-<div class="">
-<div class="centered-elements-th">
-  <div *ngIf="!isVoted" class="custom-card" id="candidate-list-card">
-    <div class="candidates-list-container">
-      <h3>{{ 'candidate' | translate }}</h3>
-      <div
-        cdkDropList
-        [cdkDropListData]="election?.participatingCandidates"
-        class="candidates-list"
-        (cdkDropListDropped)="drop($event)"
-        [cdkDropListConnectedTo]="allDropLists"
-        id="candidates-list"
-      >
-        <div *ngFor="let candidate of election?.participatingCandidates" class="movie-item" cdkDrag>
-          <div class="candidate-box">
-            {{ candidate.lastName }} {{ candidate.firstName }}
-            <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.firstName">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="centered-elements-th">
-  <div class="custom-card" id="candidate-point-card">
-    <h3>{{ 'points' | translate }}</h3>
-    <table class="rating-table">
-      <tr *ngFor="let point of points; let i = index">
-        <td class="rating-box">
-          <div
-            cdkDropList
-            [cdkDropListData]="ratedCandidates[i]"
-            class="example-list"
-            (cdkDropListDropped)="dropToRating($event, i)"
-            [cdkDropListConnectedTo]="allDropLists"
-            [id]="'rating-list-' + i"
-          >
-            <div *ngFor="let candidate of ratedCandidates[i]" class="movie-item" cdkDrag>
-              <div class="candidate-box">
-                {{ candidate.lastName }} {{ candidate.firstName }}
-                <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.lastName">
+<table class="top-table">
+  <tr>
+    <th>
+      <div class="centered-elements-th">
+        <div *ngIf="!isVoted" class="custom-card" id="candidate-list-card">
+          <div class="candidates-list-container">
+            <h3>{{ 'candidate' | translate }}</h3>
+            <div
+              cdkDropList
+              [cdkDropListData]="election?.participatingCandidates"
+              class="candidates-list"
+              (cdkDropListDropped)="drop($event)"
+              [cdkDropListConnectedTo]="allDropLists"
+              id="candidates-list"
+            >
+              <div *ngFor="let candidate of election?.participatingCandidates" class="candidates-list-item" cdkDrag>
+                <div class="candidate-box">
+                  {{ candidate.lastName }} {{ candidate.firstName }}
+                  <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.firstName">
+                </div>
               </div>
             </div>
           </div>
-        </td>
-        <td class="points-column">
-          <h4>{{ point }}</h4>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<div class="d-flex justify-content-center" *ngIf="!isVoted">
-  <div class="containerBtn d-flex gap-2">
-    <button (click)="resetCandidatesList()" class="ResetButton"><span>{{ 'reset' | translate }}</span></button>
-    <button (click)="openConfirmationDialog()" class="SubmitButton"><span>{{ 'submit' | translate }}</span></button>
-  </div>
-</div>
-
+        </div>
+      </div>
+    </th>
+    <th>
+      <div class="centered-elements-th">
+        <div class="custom-card" id="candidate-point-card">
+          <h3>{{ 'points' | translate }}</h3>
+          <table class="rating-table">
+            <tr *ngFor="let point of points; let i = index">
+              <td class="rating-box">
+                <div
+                  cdkDropList
+                  [cdkDropListData]="ratedCandidates[i]"
+                  class="example-list"
+                  (cdkDropListDropped)="dropToRating($event, i)"
+                  [cdkDropListConnectedTo]="allDropLists"
+                  [id]="'rating-list-' + i"
+                >
+                  <div *ngFor="let candidate of ratedCandidates[i]" class="movie-item" cdkDrag>
+                    <div class="candidate-box">
+                      {{ candidate.lastName }} {{ candidate.firstName }}
+                      <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.lastName">
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="points-column">
+                <h4>{{ point }}</h4>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </th>
+  <tr>
+    <th>
+      <div class="d-flex justify-content-center" *ngIf="!isVoted">
+        <div class="containerBtn d-flex gap-2">
+          <button (click)="resetCandidatesList()" class="ResetButton"><span>{{ 'reset' | translate }}</span></button>
+          <button (click)="openConfirmationDialog()" class="SubmitButton"><span>{{ 'submit' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </th>
+  </tr>
+</table>
 <div *ngIf="isVoted" class="container">
   <div class="d-flex flex-column align-items-center">
     <h2>{{ 'thank_you_for_voting' | translate }} {{ election?.name }}</h2>
