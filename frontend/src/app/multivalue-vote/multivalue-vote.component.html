@@ -43,10 +43,10 @@
                   [cdkDropListConnectedTo]="allDropLists"
                   [id]="'rating-list-' + i"
                 >
-                  <div *ngFor="let candidate of ratedCandidates[i]" class="movie-item" cdkDrag>
+                  <div *ngFor="let candidate of ratedCandidates[i]" class="candidates-list-item" cdkDrag>
                     <div class="candidate-box">
                       {{ candidate.lastName }} {{ candidate.firstName }}
-                      <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.lastName">
+                      <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.firstName">
                     </div>
                   </div>
                 </div>
@@ -60,15 +60,13 @@
       </div>
     </th>
   <tr>
-    <th>
-      <div class="d-flex justify-content-center" *ngIf="!isVoted">
-        <div class="containerBtn d-flex gap-2">
-          <button (click)="resetCandidatesList()" class="ResetButton"><span>{{ 'reset' | translate }}</span></button>
-          <button (click)="openConfirmationDialog()" class="SubmitButton"><span>{{ 'submit' | translate }}</span>
-          </button>
-        </div>
+    <div class="d-flex justify-content-center" *ngIf="!isVoted">
+      <div class="containerBtn d-flex gap-2">
+        <button (click)="resetCandidatesList()" class="ResetButton"><span>{{ 'reset' | translate }}</span></button>
+        <button (click)="openConfirmationDialog()" class="SubmitButton"><span>{{ 'submit' | translate }}</span>
+        </button>
       </div>
-    </th>
+    </div>
   </tr>
 </table>
 <div *ngIf="isVoted" class="container">
