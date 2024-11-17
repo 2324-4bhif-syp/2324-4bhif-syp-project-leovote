@@ -10,8 +10,11 @@
     <div class="row">
       <div *ngFor="let candidate of election?.participatingCandidates; let index" class="col-md-6"
            style="width: 0; padding-right: 340px; padding-bottom: 20px">
-        <div (click)="selectedCandidate = candidate" class="card mb-4 box-shadow text-center h-100"
-             style="align-content: center">
+        <div
+          (click)="selectedCandidate = candidate"
+          class="card mb-4 box-shadow text-center h-100"
+          [ngStyle]="{'border': selectedCandidate === candidate ? '10px solid #12632D' : ''}"
+          style="align-content: center">
           <div class="container-for-image">
             <img class="card-img-top mx-auto my-auto" [src]="getBase64Image(candidate.pathOfImage)"
                  alt="{{ candidate.firstName }} {{ candidate.lastName }}">
@@ -22,15 +25,13 @@
               <h3 class="card-title"> {{ candidate.lastName }} </h3>
               <h4>{{ candidate.grade }}</h4>
             </div>
-            <input class="rectangular-radio" type="radio" [(ngModel)]="selectedCandidate" [value]="candidate"
-                   id="{{ 'candidate' + index }}">
-
           </div>
         </div>
       </div>
     </div>
-    <div class="containerBtn">
-      <button (click)="select()" [disabled]="selectedCandidate == undefined" class="SelectButton"><span>{{ 'select' | translate }}</span>
+
+  <div class="containerBtn">
+      <button (click)="select()" [disabled]="selectedCandidate == undefined" class="button-template"><span>{{ 'select' | translate }}</span>
       </button>
     </div>
   </div>
@@ -56,8 +57,8 @@
 
 <div class="d-flex justify-content-center" *ngIf="isSelected && !isVoted">
   <div class="containerBtn d-flex gap-2">
-    <button (click)="deselect()" class="NoButton"><span>{{ 'no' | translate }}</span></button>
-    <button (click)="voting()" class="YesButton"><span>{{ 'yes' | translate }}</span></button>
+    <button (click)="deselect()" class="button-template"><span>{{ 'back' | translate }}</span></button>
+    <button (click)="voting()" class="button-template "><span>{{ 'confirmation' | translate }}</span></button>
   </div>
 </div>
 
