@@ -65,7 +65,7 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<div class="centered-elements-th">
+<div *ngIf="!isVoted" class="centered-elements-th">
   <div class="d-flex justify-content-center">
     <div class="containerBtn d-flex gap-2">
       <button (click)="resetCandidatesList()" class="button-template"><span>{{ 'reset' | translate }}</span>
