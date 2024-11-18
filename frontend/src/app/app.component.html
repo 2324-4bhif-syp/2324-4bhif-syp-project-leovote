@@ -24,7 +24,9 @@
       <li><a class="dropdown-item" (click)="setLanguage('th')">ไทย</a></li>
     </ul>
   </div>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+  <button mat-icon-button class="example-icon" matTooltip="{{'logout' | translate}}"
+          aria-label="Example icon-button with share icon"
+          (click)="logout()">
     <mat-icon style="color: #242526">logout</mat-icon>
   </button>
 </mat-toolbar>
@@ -45,7 +47,7 @@
       <mat-list-item matTooltip="Create Election" routerLink="admin/overview/create-election">
         <div class="sidenav-item">
           <mat-icon>add</mat-icon>
-          <span>{{ 'create_election' | translate}}</span>
+          <span>{{ 'create_election' | translate }}</span>
         </div>
       </mat-list-item>
 
@@ -61,7 +63,7 @@
       <mat-list-item matTooltip="Create Candidate" routerLink="admin/overview/create-candidate">
         <div class="sidenav-item">
           <mat-icon>add</mat-icon>
-          <span>{{ 'create_candidate_button' | translate}}</span>
+          <span>{{ 'create_candidate_button' | translate }}</span>
         </div>
       </mat-list-item>
     </mat-nav-list>
