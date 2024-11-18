@@ -29,6 +29,7 @@ export class MultivalueVoteComponent implements OnInit {
   ratedCandidates: Candidate[][] = [];
   ratingListIds: string[] = [];
   allDropLists: string[] = ['candidates-list'];
+  username: string|undefined = "";
 
   constructor(
     public voteService: VoteService,
@@ -50,6 +51,7 @@ export class MultivalueVoteComponent implements OnInit {
         this.initializePointsArray();
       });
     });
+    this.username = this.keycloakService.getKeycloakInstance().profile?.firstName;
   }
   initializePointsArray() {
     if (this.election && this.election.maxPoints) {

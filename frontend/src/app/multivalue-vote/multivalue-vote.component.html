@@ -1,6 +1,12 @@
 <div *ngIf="!isVoted" class="headliner-container">
-  <h2>{{ election?.name }}</h2>
-  <p>{{ 'logged_in_as' | translate }}: {{ keycloakService.getUsername() }}</p>
+  <mat-grid-list cols="2" [rowHeight]="'100px'">
+    <mat-grid-tile class="left-grid-tile">
+      <h2>{{ election?.name }}</h2>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p>{{ 'logged_in_as' | translate }}: {{ username }}</p>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
 <table class="top-table">
   <tr>

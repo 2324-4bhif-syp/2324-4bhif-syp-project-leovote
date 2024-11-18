@@ -368,3 +368,7 @@ button.mat-raised-button.color-warn {
 .table-template tr:nth-child(even) .candidate-box {
   background-color: #F2F9FF !important;
 }
+
+.left-grid-tile{
+  justify-content: left;
+}
