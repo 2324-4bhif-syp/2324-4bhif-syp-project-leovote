@@ -93,6 +93,16 @@
   font-weight: bold;
 }
 
+.headliner-container h2.left-aligned {
+  text-align: left;
+  margin: 0; /* Optional: Removes extra spacing */
+}
+
+.headliner-container p.right-aligned {
+  text-align: right;
+  margin: 0; /* Optional: Removes extra spacing */
+}
+
 .rectangular-radio {
   -webkit-appearance: none;
   -moz-appearance: none;
