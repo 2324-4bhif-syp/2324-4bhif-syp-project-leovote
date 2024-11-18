@@ -3,7 +3,7 @@
   <p>{{ 'logged_in_as' | translate }}: {{ keycloakService.getUsername() }}</p>
 </div>
 
-<mat-grid-list cols="2" rowHeight="40vw" *ngIf="!isVoted">
+<mat-grid-list cols="2" rowHeight="35vw" *ngIf="!isVoted">
   <mat-grid-tile colspan="1" rowspan="1">
     <div class="custom-card" id="candidate-list-card">
       <div class="candidates-list-container">
@@ -87,8 +87,8 @@
     <h3>{{ 'confirmation' | translate }}</h3>
     <p>{{ 'continue_with_vote' | translate }}</p>
     <div class="dialog-button-container">
-      <button class="button-template" (click)="confirmVote()">{{ 'yes' | translate }}</button>
       <button class="button-template" (click)="cancelVote()">{{ 'no' | translate }}</button>
+      <button class="button-template" (click)="confirmVote()">{{ 'yes' | translate }}</button>
     </div>
   </div>
 </ng-template>
