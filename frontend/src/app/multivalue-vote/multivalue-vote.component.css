@@ -23,7 +23,7 @@
 .candidate-box {
   display: flex;
   background-color: #F2F9FF;
-  color: #797C80;
+  color: #3D3E40;
   height: 3.5vw;
   font-size: 17px;
   width: 100%;
@@ -251,6 +251,7 @@ img {
 
 .points-column {
   text-align: center;
+  vertical-align: center;
   overflow: hidden;
 }
 
@@ -273,7 +274,7 @@ img {
 
 .candidates-list-container .candidates-list-item {
   border-radius: 10px;
-  padding-top: 2em;
+  padding-top: 15px;
   margin: 5px;
   display: flex;
   justify-content: center;
@@ -353,4 +354,10 @@ img {
 .table-template th {
   text-align: center;
   border: none;
+}
+
+#candidate-list-card {
+  margin: 0;
+  width: 50%;
+  padding-bottom: 15px;
 }
