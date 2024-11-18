@@ -88,29 +88,6 @@ img {
   margin-top: 20px;
 }
 
-button {
-  font-size: 16px;
-  padding: 15px 30px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: none;
-  transition: transform 0.2s;
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-button.mat-raised-button.color-primary {
-  background-color: #12632D;
-  color: white;
-}
-
-button.mat-raised-button.color-warn {
-  background-color: #A8151C;
-  color: white;
-}
-
 
 #confirmationDialog h3 {
   color: black;
@@ -367,4 +344,13 @@ button.mat-raised-button.color-warn {
 
 .table-template tr:nth-child(even) .candidate-box {
   background-color: #F2F9FF !important;
+}
+
+.table-template thead {
+  height: 50px;
+}
+
+.table-template th {
+  text-align: center;
+  border: none;
 }
