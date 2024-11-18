@@ -1,9 +1,12 @@
 <div *ngIf="!isVoted" class="headliner-container">
   <mat-grid-list cols="2" [rowHeight]="'100px'">
-    <mat-grid-tile class="left-grid-tile">
-      <h2>{{ election?.name }}</h2>
-    </mat-grid-tile>
-    <mat-grid-tile>
+    <div style="justify-content: left">
+      <mat-grid-tile>
+        <h2>{{ election?.name }}</h2>
+      </mat-grid-tile>
+    </div>
+
+    <mat-grid-tile style="justify-content: right">
       <p>{{ 'logged_in_as' | translate }}: {{ username }}</p>
     </mat-grid-tile>
   </mat-grid-list>
