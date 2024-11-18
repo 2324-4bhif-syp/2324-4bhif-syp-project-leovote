@@ -227,7 +227,7 @@ button.mat-raised-button.color-warn {
   justify-content: space-around;
 }
 
-::ng-deep .mat-mdc-button{
+::ng-deep .mat-mdc-button {
   color: white;
 }
 
@@ -277,7 +277,7 @@ button.mat-raised-button.color-warn {
   overflow: hidden;
 }
 
-.candidates-rating-container .candidates-list-item{
+.candidates-rating-container .candidates-list-item {
   background-color: #B6BABF;
   border: 2px solid black;
   border-radius: 10px;
@@ -334,19 +334,24 @@ button.mat-raised-button.color-warn {
 .table-template {
   border-collapse: collapse;
 }
+
 .table-template td, .table-template th {
   border: 1px solid black;
 }
+
 .table-template tr:first-child th {
   border-top: 0;
 }
+
 .table-template tr:last-child td {
   border-bottom: 0;
 }
+
 .table-template tr td:first-child,
 .table-template tr th:first-child {
   border-left: 0;
 }
+
 .table-template tr td:last-child,
 .table-template tr th:last-child {
   border-right: 0;
@@ -354,4 +359,12 @@ button.mat-raised-button.color-warn {
 
 #candidate-point-card {
   padding: 0;
+}
+
+.table-template tr:nth-child(odd) .candidate-box {
+  background-color: #DAE0E5 !important;
+}
+
+.table-template tr:nth-child(even) .candidate-box {
+  background-color: #F2F9FF !important;
 }

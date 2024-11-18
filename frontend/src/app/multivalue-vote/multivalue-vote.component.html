@@ -46,7 +46,7 @@
                 >
                   <div *ngFor="let candidate of ratedCandidates[i]" class="candidates-list-item"
                        style="width: 100%; height: 100%" cdkDrag>
-                    <div class="candidate-element">
+                    <div class="candidate-box">
                       {{ candidate.lastName }} {{ candidate.firstName }}
                       <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.firstName">
                     </div>
