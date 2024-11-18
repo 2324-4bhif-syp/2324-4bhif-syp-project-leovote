@@ -93,15 +93,23 @@
   font-weight: bold;
 }
 
-.headliner-container h2.left-aligned {
-  text-align: left;
-  margin: 0; /* Optional: Removes extra spacing */
+/* Explicitly target mat-grid-tile content */
+.headliner-container mat-grid-tile {
+  display: flex;
+  align-items: center; /* Centers content vertically */
+  height: 100%; /* Ensures full height alignment */
 }
 
-.headliner-container p.right-aligned {
-  text-align: right;
-  margin: 0; /* Optional: Removes extra spacing */
+/* Left alignment for the heading */
+.headliner-container mat-grid-tile:first-child {
+  justify-content: flex-start; /* Align content to the left */
 }
+
+/* Right alignment for the paragraph */
+.headliner-container mat-grid-tile:last-child {
+  justify-content: flex-end; /* Align content to the right */
+}
+
 
 .rectangular-radio {
   -webkit-appearance: none;
