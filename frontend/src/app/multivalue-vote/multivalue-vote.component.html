@@ -32,7 +32,8 @@
       <div class="centered-elements-th">
         <div class="custom-card" id="candidate-point-card">
           <h3>{{ 'points' | translate }}</h3>
-          <table class="rating-table">
+          <table class="table-template">
+            <tbody>
             <tr *ngFor="let point of points; let i = index">
               <td class="rating-box">
                 <div
@@ -43,8 +44,9 @@
                   [cdkDropListConnectedTo]="allDropLists"
                   [id]="'rating-list-' + i"
                 >
-                  <div *ngFor="let candidate of ratedCandidates[i]" class="candidates-list-item" cdkDrag>
-                    <div class="candidate-box">
+                  <div *ngFor="let candidate of ratedCandidates[i]" class="candidates-list-item"
+                       style="width: 100%; height: 100%" cdkDrag>
+                    <div class="candidate-element">
                       {{ candidate.lastName }} {{ candidate.firstName }}
                       <img *cdkDragPreview [src]="getBase64Image(candidate.pathOfImage)" [alt]="candidate.firstName">
                     </div>
@@ -55,6 +57,7 @@
                 <h4>{{ point }}</h4>
               </td>
             </tr>
+            </tbody>
           </table>
         </div>
       </div>
