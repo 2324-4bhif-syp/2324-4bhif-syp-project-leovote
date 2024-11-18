@@ -93,22 +93,18 @@
   font-weight: bold;
 }
 
-/* Explicitly target mat-grid-tile content */
-.headliner-container mat-grid-tile {
-  display: flex;
-  align-items: center; /* Centers content vertically */
-  height: 100%; /* Ensures full height alignment */
+.left-aligned {
+  justify-content: left;
+  text-align: left;
+  /*align-items: flex-start;*/
 }
 
-/* Left alignment for the heading */
-.headliner-container mat-grid-tile:first-child {
-  justify-content: flex-start; /* Align content to the left */
+.right-aligned {
+  justify-content: right;
+  text-align: right;
+  /*align-items: flex-end;*/
 }
 
-/* Right alignment for the paragraph */
-.headliner-container mat-grid-tile:last-child {
-  justify-content: flex-end; /* Align content to the right */
-}
 
 
 .rectangular-radio {
