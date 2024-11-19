@@ -84,28 +84,9 @@
   border: none;
 }
 
-.headliner-container {
-  margin-left: 20vw;
-  padding-bottom: 2%;
-}
-
 .headliner-container h2 {
   font-weight: bold;
 }
-
-.left-aligned {
-  justify-content: left;
-  text-align: left;
-  /*align-items: flex-start;*/
-}
-
-.right-aligned {
-  justify-content: right;
-  text-align: right;
-  /*align-items: flex-end;*/
-}
-
-
 
 .rectangular-radio {
   -webkit-appearance: none;
@@ -768,17 +749,19 @@
   width: 300px;
   border-radius: 10px;
   background-color: #B6BABF;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .selected-candidate-border {
-  border: 3px solid #004881; /* Green border */
+  border: 3px solid #004881;
 }
 
 ::ng-deep .left-aligned .mat-grid-tile-content {
   justify-content: left !important;
+  margin-left: 10% !important;
 }
 
 ::ng-deep .right-aligned .mat-grid-tile-content {
   justify-content: right !important;
+  margin-right: 10% !important;
 }

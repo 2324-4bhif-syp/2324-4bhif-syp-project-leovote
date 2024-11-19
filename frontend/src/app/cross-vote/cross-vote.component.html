@@ -1,15 +1,17 @@
 <div *ngIf="!isVoted && electionInFuture">
   <div *ngIf="!isVoted" class="headliner-container">
-    <mat-grid-list cols="2" [rowHeight]="'100px'">
+    <mat-grid-list cols="3" [rowHeight]="'100px'">
       <mat-grid-tile class="left-aligned">
         <h2>{{ election?.name }}</h2>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <h2 *ngIf="isSelected">{{ 'confirm_vote_for' | translate }}
+          {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
       </mat-grid-tile>
       <mat-grid-tile class="right-aligned">
         <p>{{ 'logged_in_as' | translate }}: {{ username }}</p>
       </mat-grid-tile>
     </mat-grid-list>
-    <h2 *ngIf="isSelected" style="align-content: center; justify-content: center">{{ 'confirm_vote_for' | translate }}
-      {{ selectedCandidate?.firstName }} {{ selectedCandidate?.lastName }}?</h2>
   </div>
 
   <div class="container-lg" *ngIf="!isSelected">
