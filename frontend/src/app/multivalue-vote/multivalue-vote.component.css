@@ -361,3 +361,11 @@ img {
   width: 50%;
   padding-bottom: 15px;
 }
+
+::ng-deep .left-aligned .mat-grid-tile-content {
+  justify-content: left !important;
+}
+
+::ng-deep .right-aligned .mat-grid-tile-content {
+  justify-content: right !important;
+}
