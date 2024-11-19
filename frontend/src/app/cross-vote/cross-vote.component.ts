@@ -22,6 +22,7 @@ export class CrossVoteComponent implements OnInit{
   selectedCandidate: Candidate | undefined = undefined;
   candidates: CandidateImage[] = []
   electionInFuture: boolean = true;
+  username: string|undefined = "";
 
   voting() {
     if (this.selectedCandidate?.id != undefined && this.election?.id != undefined) {
@@ -53,6 +54,7 @@ export class CrossVoteComponent implements OnInit{
         this.checkDate();
       });
     });
+    this.username = this.keycloakService.getKeycloakInstance().profile?.firstName;
   }
 
   linkCandidatesToElection() {

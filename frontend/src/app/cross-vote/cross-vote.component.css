@@ -774,3 +774,11 @@
 .selected-candidate-border {
   border: 3px solid #004881; /* Green border */
 }
+
+::ng-deep .left-aligned .mat-grid-tile-content {
+  justify-content: left !important;
+}
+
+::ng-deep .right-aligned .mat-grid-tile-content {
+  justify-content: right !important;
+}
