@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Vote } from "../shared/entity/vote";
 import { Election } from "../shared/entity/election-model";
@@ -8,8 +8,8 @@ import { VoteService } from "../shared/control/vote.service";
 import { ElectionService } from "../shared/control/election.service";
 import { KeycloakService } from "keycloak-angular";
 import { CandidateService } from "../shared/control/candidate.service";
-import {CandidateVoteDto} from "../shared/entity/dto/candidate-vote-dto";
-import {MatDialog} from "@angular/material/dialog";
+import { CandidateVoteDto } from "../shared/entity/dto/candidate-vote-dto";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-multivalue-vote',
@@ -29,7 +29,7 @@ export class MultivalueVoteComponent implements OnInit {
   ratedCandidates: Candidate[][] = [];
   ratingListIds: string[] = [];
   allDropLists: string[] = ['candidates-list'];
-  username: string|undefined = "";
+  username: string | undefined = "";
 
   constructor(
     public voteService: VoteService,
@@ -38,6 +38,7 @@ export class MultivalueVoteComponent implements OnInit {
     public candidateService: CandidateService,
     private dialog: MatDialog
   ) {}
+
   ngOnInit() {
     this.candidateService.candidateImage().subscribe((candidateImages) => {
       this.candidates = candidateImages;
@@ -53,6 +54,7 @@ export class MultivalueVoteComponent implements OnInit {
     });
     this.username = this.keycloakService.getKeycloakInstance().profile?.firstName;
   }
+
   initializePointsArray() {
     if (this.election && this.election.maxPoints) {
       this.points = Array.from({ length: this.election.maxPoints }, (_, i) => this.election!.maxPoints! - i);
@@ -138,21 +140,25 @@ export class MultivalueVoteComponent implements OnInit {
         );
       }
     }
+  }
 
-    // Handle returning the candidate to the main list
-    if (previousData && event.container.id === 'candidates-list' && this.election?.participatingCandidates) {
+  // Handling returning candidates to the main list
+  dropToCandidates(event: CdkDragDrop<Candidate[] | undefined>) {
+    const previousData = event.previousContainer.data as Candidate[];
+    const currentData = this.election?.participatingCandidates;
+
+    if (previousData && currentData) {
       transferArrayItem(
         previousData,
-        this.election.participatingCandidates,
+        currentData,
         event.previousIndex,
         event.currentIndex
       );
     }
   }
+
   resetCandidatesList() {
-    if (this.election) {
-      this.election.participatingCandidates = [...this.originalCandidates];
-      this.ratedCandidates = Array(this.points.length).fill([]).map(() => []);
-    }
+    this.election!.participatingCandidates = [...this.originalCandidates];
+    this.ratedCandidates = this.ratedCandidates.map(() => []);
   }
 }

@@ -19,9 +19,9 @@
           cdkDropList
           [cdkDropListData]="election?.participatingCandidates"
           class="candidates-list"
-          (cdkDropListDropped)="drop($event)"
-          [cdkDropListConnectedTo]="allDropLists"
-          id="candidates-list"
+          (cdkDropListDropped)="dropToCandidates($event)"
+        [cdkDropListConnectedTo]="allDropLists"
+        id="candidates-list"
         >
           <div *ngFor="let candidate of election?.participatingCandidates" class="candidates-list-item" cdkDrag>
             <div class="candidate-box">
