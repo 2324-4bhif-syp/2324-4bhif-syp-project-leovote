@@ -15,13 +15,17 @@
   <div class="dropdown ml-3">
     <button class="btn dropdown-toggle language-dropdown" type="button" id="languageDropdown"
             data-bs-toggle="dropdown" aria-expanded="false">
-      {{ currentLanguage === 'en' ? 'English' : currentLanguage === 'de' ? 'Deutsch' : currentLanguage === 'at' ? 'Österreichisch' : 'ไทย' }}
+      {{ currentLanguage === 'en' ? 'English'
+      : currentLanguage === 'de' ? 'Deutsch'
+        : currentLanguage === 'at' ? 'Österreichisch'
+          : currentLanguage === 'vn' ? 'Tiếng Việt' :  'ไทย' }}
     </button>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
       <li><a class="dropdown-item" (click)="setLanguage('en')">English</a></li>
       <li><a class="dropdown-item" (click)="setLanguage('de')">Deutsch</a></li>
       <li><a class="dropdown-item" (click)="setLanguage('at')">Österreichisch</a></li>
       <li><a class="dropdown-item" (click)="setLanguage('th')">ไทย</a></li>
+      <li><a class="dropdown-item" (click)="setLanguage('vn')">Tiếng Việt</a></li>
     </ul>
   </div>
   <button mat-icon-button class="example-icon" matTooltip="{{'logout' | translate}}"
