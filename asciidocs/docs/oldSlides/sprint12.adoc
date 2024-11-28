@@ -57,9 +57,9 @@ image::prove.jpg[background]
 === Sprintvereinbarung
 image::handshake.jpg[background]
 
-* Überarbeiten des Frontend-Designs
-* i18n integration
-* Multivalue-Wahl verständlicher gestalten
+* Unterstützung einer Punktewahl
+* Ausbau des Frontends zur Unterstützung des Punktesystems
+* Überarbeitung des Backends um Punktewahl zu unterstützen
 
 [.lightbg,background-opacity="0.3"]
 == Ziele
