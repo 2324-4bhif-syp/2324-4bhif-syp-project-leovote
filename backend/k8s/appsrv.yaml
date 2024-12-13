@@ -22,6 +22,9 @@ spec:
           # command: ["tail","-f","/dev/null"]
           ports:
             - containerPort: 8080
+          env:
+            - name: QUARKUS_PROFILE
+              value: prod
 #          startupProbe:
 #            httpGet:
 #              path: /api/q/health

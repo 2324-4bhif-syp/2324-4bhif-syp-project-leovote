@@ -47,6 +47,6 @@ jobs:
           ./postgres-start.sh
         working-directory: backend
 
-      - name: Build with Maven
+      - name: Build with Maven & Create Package
         run: ./build.sh
         working-directory: backend

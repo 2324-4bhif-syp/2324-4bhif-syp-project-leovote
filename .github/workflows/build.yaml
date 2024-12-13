@@ -1,44 +1,44 @@
-name: Build Leovote
-
-on:
-  push:
-    paths:
-      - 'backend/**'
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
-
-jobs:
-  build-backend:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: 'maven'
-          cache-dependency-path: 'backend/pom.xml'
-
-      - name: Start Postgres DB
-        run: |
-          chmod +x ./postgres-download-scripts-16.3.sh
-          ./postgres-download-scripts-16.3.sh
-          ./postgres-create-db.sh
-          ./postgres-start.sh
-        working-directory: backend
-
-      - name: Build with maven
-        run: |
-          ./cicd/build-backend.sh
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: 'leovote-backend'
-          path: 'dist/backend/leovote-backend.jar'
+#name: Build Leovote
+#
+#on:
+#  push:
+#    paths:
+#      - 'backend/**'
+#    branches:
+#      - main
+#  pull_request:
+#    branches:
+#      - main
+#  workflow_dispatch:
+#
+#jobs:
+#  build-backend:
+#    runs-on: ubuntu-22.04
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - name: Setup Java
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: 'temurin'
+#          java-version: '21'
+#          cache: 'maven'
+#          cache-dependency-path: 'backend/pom.xml'
+#
+#      - name: Start Postgres DB
+#        run: |
+#          chmod +x ./postgres-download-scripts-16.3.sh
+#          ./postgres-download-scripts-16.3.sh
+#          ./postgres-create-db.sh
+#          ./postgres-start.sh
+#        working-directory: backend
+#
+#      - name: Build with maven
+#        run: |
+#          ./cicd/build-backend.sh
+#
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: 'leovote-backend'
+#          path: 'dist/backend/leovote-backend.jar'

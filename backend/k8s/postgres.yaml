@@ -6,7 +6,7 @@ metadata:
 data:
   setup.sql: |
     DROP database if exists demo;
-    DROP user if exists app;
+    DROP user if exists demo;
     CREATE USER demo WITH
       LOGIN
       NOSUPERUSER
@@ -15,7 +15,7 @@ data:
       INHERIT
       NOREPLICATION
       CONNECTION LIMIT -1
-      PASSWORD 'app';
+      PASSWORD 'demo';
  
     CREATE DATABASE demo
         WITH 
