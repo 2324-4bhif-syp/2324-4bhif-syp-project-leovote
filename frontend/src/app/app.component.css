@@ -66,6 +66,7 @@ hr {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .dropdown:hover .dropdown-menu {
   display: block;
 }
@@ -78,6 +79,7 @@ hr {
 .logo {
   cursor: pointer;
 }
+
 .language-dropdown {
   color: #242526;
   font-weight: bold;
@@ -144,8 +146,6 @@ hr {
     display: none;
   }
 }
-
-
 
 .sidenav-item {
   display: flex;
