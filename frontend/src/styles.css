@@ -194,7 +194,7 @@ body {
 /* Table Container with Rounded Corners */
 .table-container {
   width: 80%;
-  overflow: scroll;
+  overflow: hidden;
   margin: auto;
   border: 1px solid #DAE0E5;
   border-radius: 20px; /* Rounded corners for container */
