@@ -16,21 +16,9 @@ h2 {
   max-height: 50em;
 }
 
-#result-custom-card h3 {
-  font-size: 25px;
-}
-
-#email-custom-card  {
+#election-name-custom {
   width: 100%;
   margin: 0;
-}
-
-#email-custom-card div {
-  font-size: 20px;
-}
-
-#email-custom-card h3 {
-  font-size: 25px;
 }
 
 .result-col {
@@ -64,13 +52,13 @@ h2 {
   padding-right: 7em !important;
 }
 
-.card-container{
+.card-container {
   display: flex;
   justify-content: flex-start;
   margin: 0;
 }
 
-.table-result{
+.table-result {
   height: 100%;
   width: 100%;
 }
