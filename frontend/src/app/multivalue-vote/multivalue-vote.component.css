@@ -75,7 +75,6 @@ img {
   font-weight: bold;
 }
 
-
 .headliner-container h2 {
   font-weight: bold;
   color: black;
@@ -359,6 +358,8 @@ img {
   margin: 0;
   width: 50%;
   padding-bottom: 15px;
+  max-height: 95%;
+  overflow-y: auto;
 }
 
 ::ng-deep .left-aligned .mat-grid-tile-content {
@@ -369,4 +370,9 @@ img {
 ::ng-deep .right-aligned .mat-grid-tile-content {
   justify-content: right !important;
   margin-right: 10% !important;
+}
+
+#table-container-points {
+  max-height: 95%;
+  overflow-y: auto;
 }

@@ -156,6 +156,10 @@ export class CreateCandidateComponent {
                   console.error('Error deleting candidate:', error);
                 }
               );
+              this.candidateService.getList().forEach(value => {
+                this.candidates = value;
+                this.tablePaginationService = new TablePagination(this.candidates, 10)
+              });
             }
           }
         },
