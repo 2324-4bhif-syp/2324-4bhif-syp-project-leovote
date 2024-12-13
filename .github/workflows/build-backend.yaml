@@ -25,7 +25,7 @@ jobs:
       - run: |
           pwd
           ls -lah
-        working-directory: ./backend/k8s
+        working-directory: ./k8s
 
       - uses: actions/setup-java@v4
         with:
