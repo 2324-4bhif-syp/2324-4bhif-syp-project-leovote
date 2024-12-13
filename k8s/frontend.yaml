@@ -21,10 +21,7 @@ spec:
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
           ports:
-            - containerPort: 8080
-          env:
-            - name: QUARKUS_PROFILE
-              value: prod
+            - containerPort: 4200
 #          startupProbe:
 #            httpGet:
 #              path: /api/q/health
@@ -51,8 +48,8 @@ metadata:
 
 spec:
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 4200
+      targetPort: 4200
       protocol: TCP
   selector:
     app: frontend
