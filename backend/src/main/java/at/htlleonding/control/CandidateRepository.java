@@ -29,7 +29,7 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
         String imagePath = PATH_IMAGES + candidate.getPathOfImage();
         File imageFile = new File(imagePath);
 
-        if (imageFile.exists() && imageFile.isFile()) {
+        if (imageFile.exists() && imageFile.isFile() && !imageFile.getName().equals(DEFAULT_IMAGE)) {
             imageFile.delete();
         }
 
