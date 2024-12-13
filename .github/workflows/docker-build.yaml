@@ -49,3 +49,4 @@ jobs:
 
       - name: Build with Maven
         run: ./backend/build.sh
+        working-directory: backend
