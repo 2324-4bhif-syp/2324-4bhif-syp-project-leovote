@@ -18,6 +18,8 @@ RUN npm run build
 # Use official nginx image as the base image
 FROM nginx:1.24.0
 
+COPY config/nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy the build output to replace the default nginx contents.
 COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
 
