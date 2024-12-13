@@ -22,7 +22,7 @@ jobs:
         run: |
           npm install
           npm run build --prod
-        working-directory: ./frontend
+        working-directory: frontend
 
       - name: Build Frontend Docker Image
         run: |
