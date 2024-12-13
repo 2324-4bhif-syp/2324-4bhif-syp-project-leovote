@@ -27,14 +27,6 @@ jobs:
           ls -lah
         working-directory: ./backend/k8s
 
-      - name: Start Postgres DB
-        run: |
-          chmod +x ./postgres-download-scripts-16.3.sh
-          ./postgres-download-scripts-16.3.sh
-          ./postgres-create-db.sh
-          ./postgres-start.sh
-        working-directory: backend
-
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -46,6 +38,14 @@ jobs:
 
       - name: Chmod +x for build.sh
         run: chmod +x ./backend/build.sh
+
+      - name: Start Postgres DB
+        run: |
+          chmod +x ./postgres-download-scripts-16.3.sh
+          ./postgres-download-scripts-16.3.sh
+          ./postgres-create-db.sh
+          ./postgres-start.sh
+        working-directory: backend
 
       - name: Build with Maven
         run: ./build.sh
