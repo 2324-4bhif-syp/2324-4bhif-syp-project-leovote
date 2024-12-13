@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: appsrv
+  name: frontend
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: appsrv
+      app: frontend
   template:
     metadata:
       labels:
-        app: appsrv
+        app: frontend
     spec:
       containers:
-        - name: appsrv
-          image: ghcr.io/2324-4bhif-syp/2324-4bhif-syp-project-leovote/backend:latest
+        - name: frontend
+          image: ghcr.io/2324-4bhif-syp/frontend:latest
           # remove this when stable. Currently, we do not take care of version numbers
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
@@ -47,7 +47,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: appsrv
+  name: frontend
 
 spec:
   ports:
@@ -55,4 +55,4 @@ spec:
       targetPort: 8080
       protocol: TCP
   selector:
-    app: appsrv
+    app: frontend
