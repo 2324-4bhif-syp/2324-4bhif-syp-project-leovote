@@ -1,25 +1,25 @@
-# Stage 1: Build the Angular app
-FROM node:20 AS build
+# Stage 1: Compile and Build angular codebase
 
-# Set the working directory
-WORKDIR /frontend
+# Use official node image as the base image
+FROM node:20 as build
 
-# Copy package.json and install dependencies
-COPY package*.json ./
+WORKDIR /usr/src/app
+
+COPY . /usr/src/app
+
+# Install all the dependencies
 RUN npm install
 
-# Copy the entire project and build it
-COPY . .
-RUN npm run build --prod
+# Generate the build of the application
+RUN npm run build
 
-# Stage 2: Serve the Angular app using NGINX
-FROM nginx:alpine
+# Stage 2: Serve app with nginx server
 
-# Copy the build artifacts from the build stage to the NGINX html folder
-COPY --from=build /dist/frontend /usr/share/nginx/html
+# Use official nginx image as the base image
+FROM nginx:1.24.0
 
-# Expose the default port for NGINX
+# Copy the build output to replace the default nginx contents.
+COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
+
+# Expose port 80
 EXPOSE 80
-
-# Start NGINX
-CMD ["nginx", "-g", "daemon off;"]
