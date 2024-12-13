@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appsrv
-          image: ghcr.io/2324-4bhif-syp/2324-4bhif-syp-project-leovote-backend:latest
+          image: ghcr.io/2324-4bhif-syp/2324-4bhif-syp-project-leovote/backend:latest
           # remove this when stable. Currently, we do not take care of version numbers
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
