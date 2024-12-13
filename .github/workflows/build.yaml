@@ -25,6 +25,14 @@ jobs:
           cache: 'maven'
           cache-dependency-path: 'backend/pom.xml'
 
+      - name: Start Postgres DB
+        run: |
+          chmod +x ./postgres-download-scripts-16.3.sh
+          ./postgres-download-scripts-16.3.sh
+          ./postgres-create-db.sh
+          ./postgres-start.sh
+        working-directory: backend
+
       - name: Build with maven
         run: |
           ./cicd/build-backend.sh
