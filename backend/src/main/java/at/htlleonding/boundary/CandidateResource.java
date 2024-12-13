@@ -11,6 +11,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -39,6 +40,10 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     default Response deleteCandidate(@PathParam("id") Long id) {
+        if (id == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Id must not be null").build();
+        }
+
         Candidate candidate = Candidate
                 .findById(id);
 
@@ -72,7 +77,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     default Response getCandidateImageById(@PathParam("id") Long id) {
         try {
             CandidateImageDTO imageDTO = candidateRepository.getImageByCandidateId(id);
-            if(imageDTO == null) {
+            if (imageDTO == null) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
             if (imageDTO.imagePath() == null) {
@@ -89,9 +94,9 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Path("images")
     @Produces(MediaType.APPLICATION_JSON)
     default Response getAllCandidateImages() {
-        try{
+        try {
             return Response.ok(candidateRepository.getImagesForCandidates()).build();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return Response.serverError().build();
         }

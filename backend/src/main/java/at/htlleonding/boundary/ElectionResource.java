@@ -101,6 +101,10 @@ public interface ElectionResource extends PanacheRepositoryResource<ElectionRepo
     @Path("removeEmail/{emailId}")
     @Transactional
     default Response removeEmailFromElection(@PathParam("emailId") Long email) {
+        if (email == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Id must not be null").build();
+        }
+
         electionRepository.removeEmailFromElection(email);
         return Response.noContent().build();
     }
