@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Candidate} from "../shared/entity/candidate-model";
 import {CandidateService} from "../shared/control/candidate.service";
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {TablePagination} from "../shared/service/TablePaginationService";
 
 @Component({
@@ -28,7 +28,7 @@ export class CreateCandidateComponent {
 
   tablePaginationService = new TablePagination(this.sampleCandidates, 10)
 
-  constructor(protected candidateService: CandidateService,  private translate: TranslateService) {
+  constructor(protected candidateService: CandidateService, private translate: TranslateService) {
     candidateService.getList().forEach(value => {
       this.candidates = value;
       this.tablePaginationService = new TablePagination(this.candidates, 10)
@@ -86,7 +86,7 @@ export class CreateCandidateComponent {
 
   createCandidate() {
     if (this.imageFile) {
-      this.candidateService.uploadImage(this.imageFile,this.candidate.schoolId).subscribe(
+      this.candidateService.uploadImage(this.imageFile, this.candidate.schoolId).subscribe(
         (response: string) => {
           console.log('Bild erfolgreich hochgeladen:', response);
         },
@@ -164,5 +164,12 @@ export class CreateCandidateComponent {
         }
       );
     }
+  }
+
+  createCandidateButtonDisabled() {
+    return this.candidate.schoolId.length <= 0 ||
+      this.candidate.firstName.length <= 0 ||
+      this.candidate.lastName.length <= 0 ||
+      this.candidate.grade.length <= 0;
   }
 }
