@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: Always
           # command: ["tail","-f","/dev/null"]
           ports:
-            - containerPort: 4200
+            - containerPort: 80
 #          startupProbe:
 #            httpGet:
 #              path: /api/q/health
@@ -50,5 +50,7 @@ spec:
     - port: 80
       targetPort: 80
       protocol: TCP
+      nodePort: 30001  # This is optional, Minikube will auto-assign if you omit it
+  type: NodePort
   selector:
     app: frontend
