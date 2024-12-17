@@ -151,15 +151,15 @@ export class CreateCandidateComponent {
                   console.log('Candidate deleted successfully');
                   this.errorMessage = '';
                   this.candidates = this.candidates.filter(c => c.id !== candidate.id);
+                  this.candidateService.getList().forEach(value => {
+                    this.candidates = value;
+                    this.tablePaginationService = new TablePagination(this.candidates, 10)
+                  });
                 },
                 error => {
                   console.error('Error deleting candidate:', error);
                 }
               );
-              this.candidateService.getList().forEach(value => {
-                this.candidates = value;
-                this.tablePaginationService = new TablePagination(this.candidates, 10)
-              });
             }
           }
         },
