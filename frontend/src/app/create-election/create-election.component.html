@@ -51,7 +51,7 @@
           <th>{{ 'name' | translate }}</th>
           <th>{{ 'class' | translate }}</th>
           <th style="width: 100px">
-            <input class="searchbar" type="text" (input)="filterCandidates()"
+            <input class="searchbar" type="text" (keyup)=filterCandidates()
                    [(ngModel)]="searchText" placeholder="{{ 'search' | translate }}">
           </th>
         </tr>

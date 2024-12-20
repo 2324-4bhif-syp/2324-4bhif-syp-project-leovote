@@ -6,7 +6,7 @@ export class Candidate {
   grade: string;
   pathOfImage: string;
   id: number | null;
-   //</editor-fold>
+  //</editor-fold>
 
   //<editor-fold desc="Constructors">
   constructor(

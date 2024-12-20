@@ -3,7 +3,7 @@ import {Candidate} from "../shared/entity/candidate-model";
 import {Election} from "../shared/entity/election-model";
 import {CandidateService} from "../shared/control/candidate.service";
 import {ElectionService} from "../shared/control/election.service";
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {TablePagination} from "../shared/service/TablePaginationService";
 
 
@@ -40,21 +40,6 @@ export class CreateElectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAvailableCandidates();
-  }
-
-  filterCandidates() {
-    if (this.searchText.trim() === '') {
-      // If search text is empty, show all candidates
-      this.filteredCandidates = this.availableCandidates;
-    } else {
-      // If search text is not empty, filter candidates based on it
-      this.filteredCandidates = this.availableCandidates.filter(candidate =>
-        candidate.firstName.toLowerCase().includes(this.searchText.toLowerCase()) ||
-        candidate.lastName.toLowerCase().includes(this.searchText.toLowerCase())
-      );
-
-      this.tablePaginationService = new TablePagination(this.filteredCandidates, 8);
-    }
   }
 
   loadAvailableCandidates(): void {
@@ -100,7 +85,7 @@ export class CreateElectionComponent implements OnInit {
 
   createElection() {
     this.election.participatingCandidates = this.selectedCandidates;
-    if(this.election.electionType === 'CROSSES'){
+    if (this.election.electionType === 'CROSSES') {
       this.election.maxPoints = 1;
     }
     this.electionService.add(this.election).subscribe(
@@ -127,7 +112,7 @@ export class CreateElectionComponent implements OnInit {
   }
 
   confirmDelete(election: Election) {
-    const message = this.translate.instant('confirm_delete_election', { name: election.name });
+    const message = this.translate.instant('confirm_delete_election', {name: election.name});
     if (confirm(message)) {
       this.deleteElection(election);
     }
@@ -145,5 +130,15 @@ export class CreateElectionComponent implements OnInit {
         }
       );
     }
+  }
+
+  filterCandidates(): void {
+    const search = this.searchText.trim().toLowerCase();
+    this.filteredCandidates = this.availableCandidates.filter(candidate =>
+      candidate.firstName.toLowerCase().includes(search) ||
+      candidate.lastName.toLowerCase().includes(search) ||
+      candidate.grade.toLowerCase().includes(search)
+    );
+    this.tablePaginationService = new TablePagination(this.filteredCandidates, 8);
   }
 }
