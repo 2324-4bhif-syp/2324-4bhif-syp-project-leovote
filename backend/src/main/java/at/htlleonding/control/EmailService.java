@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 
 @ApplicationScoped
 public class EmailService {
-    private static final String LINK_BASE = "http://leovote.htl-leonding.ac.at/login";
+    private static final String LINK_BASE = "https://leovote.htl-leonding.ac.at/login";
     @Inject
     ReactiveMailer reactiveMailer;
     @Inject

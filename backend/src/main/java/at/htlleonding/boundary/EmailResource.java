@@ -4,6 +4,9 @@ import at.htlleonding.control.EmailService;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Email;
 import at.htlleonding.entity.dto.EmailDTO;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.Scope;
 import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
@@ -23,6 +26,8 @@ public class EmailResource {
     EmailService emailService;
     @Inject
     EntityManager em;
+    @Inject
+    Tracer tracer;
 
     @POST
     @Blocking
@@ -30,17 +35,24 @@ public class EmailResource {
     @Path("election/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> sendInvite(@PathParam("electionId") Long electionId) {
+        Span span = tracer.spanBuilder("sendEmails").startSpan();
+
         Optional<Election> election = Election.findByIdOptional(electionId);
 
         if (election.isEmpty()) {
             return Uni.createFrom().item(Response.status(Response.Status.NOT_FOUND).build());
         }
 
-        // Perform email sending logic in a background task
-        emailService.sendInvitations(election.get()).subscribe().with(
-                success -> System.out.println("Emails sent successfully"),
-                failure -> System.out.println("Emails could not be sent\n" + failure.toString())
-        );
+        try (Scope scope = span.makeCurrent()) {
+
+            // Perform email sending logic in a background task
+            emailService.sendInvitations(election.get()).subscribe().with(
+                    success -> System.out.println("Emails sent successfully"),
+                    failure -> System.out.println("Emails could not be sent\n" + failure.toString())
+            );
+        } finally {
+            span.end();
+        }
 
         return Uni.createFrom().item(Response.ok().entity("{\"message\": \"Emails are being sent asynchronously.\"}").build());
     }
