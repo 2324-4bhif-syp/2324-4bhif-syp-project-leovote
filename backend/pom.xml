@@ -116,6 +116,17 @@
             <version>3.24.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- OpenTelemetry for Jaeger Tracing -->
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-opentelemetry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry.instrumentation</groupId>
+            <artifactId>opentelemetry-jdbc</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
