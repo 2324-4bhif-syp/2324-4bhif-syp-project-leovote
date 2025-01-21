@@ -1,5 +1,8 @@
 #! /bin/bash
 
+WORKING_DIR=/tmp/jaeger
+NAMESPACE=observability  # Change if needed
+
 # The script is taken from https://github.com/openshift/cluster-logging-operator
 
 WORKING_DIR=${WORKING_DIR:-/tmp/_working_dir}
