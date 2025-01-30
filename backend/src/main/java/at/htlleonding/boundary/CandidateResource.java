@@ -3,6 +3,7 @@ package at.htlleonding.boundary;
 import at.htlleonding.control.CandidateRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.dto.CandidateImageDTO;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
 import io.quarkus.rest.data.panache.ResourceProperties;
 import jakarta.enterprise.inject.spi.CDI;
@@ -10,7 +11,6 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.jboss.logging.Logger;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import java.io.IOException;
@@ -22,6 +22,7 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
 
     @GET
     @Path("/all")
+    @WithSpan("getAllCandidates")
     @Produces(MediaType.APPLICATION_JSON)
     default Response getAllCandidates() {
         List<Candidate> candidates = Candidate.listAll();
