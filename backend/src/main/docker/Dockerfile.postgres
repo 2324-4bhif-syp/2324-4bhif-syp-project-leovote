@@ -1,0 +1,10 @@
+# Use the PostgreSQL image
+FROM postgres:17.2-alpine
+
+# Set environment variables for PostgreSQL
+ENV POSTGRES_USER=app
+ENV POSTGRES_PASSWORD=app
+ENV POSTGRES_DB=db
+
+# Expose the required port
+EXPOSE 5432
