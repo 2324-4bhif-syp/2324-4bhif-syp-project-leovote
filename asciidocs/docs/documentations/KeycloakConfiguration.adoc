@@ -180,4 +180,100 @@ export class AuthGuard extends KeycloakAuthGuard {
 IMPORTANT: There is no Client-Secret needed for the frontend configuration, since there is no safe way to save those.
 
 == Backend
-* WIP
+=== Keycloak
+
+* The setup of the Keycloak client for out backend is pretty much the same, we just have to set some parameters in a different way.
+* What's important: The Client for the backend and for the frontend have to be in the same realm.
+* We have to differentiate between 'leovotetest' and 'leovote' clients like we had before, for local testing and deployed applications.
+
+==== Differences:
+
+* Activate Client Authentication & Authorization (Figure 9)
+
+.Activate Client Auth
+image::../images/backend_keycloak_auth.png[]
+
+* Setup for local development
+* The difference we have, is the URL. It now connects to 8080, instead of 4200, because it connects to our quarkus backend,
+instead of a angular frontend. (Figure 10)
+
+.paths
+image::../images/backend_paths.png[]
+
+* To connect to our Keycloak in our backend, we need to have some credentials.
+* To set things up, we go in the credentials tab, and copy the secret, which we will use in our backend. (Figure 11)
+
+.credentials
+image::../images/credentials.png[]
+
+* The Roles can be set in the 'Real Roles' Tab.
+* Click on 'Create role' and set a name for the role. Then save it. (Figure 12)
+
+.roles
+image::../images/roles.png[]
+
+* You have to permit roles to the users you got in your realm.
+1. Go to the 'Users' Tab
+2. Select the User (Klick on the User, or create a new one) (Figure 13)
+
+.users
+image::../images/users.png[]
+
+1. Go to Role mapping tab inside the user (Figure 14).
+
+.role mapping
+image::../images/roles_tab.png[]
+
+1. Click on 'Assign role' and filter by realm roles
+
+.realm roles
+image::../images/realm_roles.png[]
+
+Then Check the ones you want to permit the user with.
+
+=== Quarkus
+
+* If you want to use the keycloak you have to set following configurations in the application properties. (Figure 16)
+
+.application properties
+image::../images/application_properties_OIDC.png[]
+
+* auth-server-url: The url to the keycloak containing the realm name (testing).
+* client-id: The name of the client we created (backend).
+* credentials.secret: In there, we put our secret we got from the keycloak (in the credentials).
+* tls.verification: At the moment we have no tls-verification, which is why we say 'none'.
+
+==== POM
+
+You will need following dependencies:
+
+[source, xml]
+----
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-oidc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-keycloak-authorization</artifactId>
+        </dependency>
+----
+
+==== Usage in API:
+
+To block unauthorized users from accessing endpoints, they are nor supposed to, use the @RolesAllowed annotation.
+
+[source, java]
+----
+    @GET
+    @Path("getBySchoolId/{schoolId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin-role")
+    default Response getCandidatesBySchoolId(@PathParam("schoolId") String schoolId) {
+        Candidate candidate = candidateRepository.getCandidateBySchoolId(schoolId);
+        return Response.ok(candidate).build();
+    }
+----
+
+
+= That's it !
