@@ -1,0 +1,35 @@
+/* css/slides.css */
+
+/* Hintergrundbild verschwommen machen */
+reveal .lightbg { background: #fff8f1d0; }
+
+/* Custom CSS for Reveal.js Presentation */
+
+.custom-slide {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+h1, h2 {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #f8b400;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li::before {
+    content: '• ';
+    color: #f8b400;
+    font-size: 1.2em;
+}
