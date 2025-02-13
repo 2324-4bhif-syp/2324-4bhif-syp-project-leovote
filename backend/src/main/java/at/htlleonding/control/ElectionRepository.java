@@ -1,15 +1,11 @@
 package at.htlleonding.control;
 
-import at.htlleonding.entity.Block;
-import at.htlleonding.entity.Candidate;
-import at.htlleonding.entity.Election;
-import at.htlleonding.entity.Email;
+import at.htlleonding.entity.*;
 import io.quarkus.hibernate.orm.panache.Panache;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.TypedQuery;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +15,11 @@ import java.util.Optional;
 public class ElectionRepository implements PanacheRepository<Election> {
     @Inject
     HashService hashService;
+
+    @Inject
+    ChainHashRepository chainHashReporitory;
+
+    private static final String blockchainFileDir = "src/main/resources/blockchain/";
 
     public HashMap<Candidate, Double> reviewResults(Election election) throws Exception {
         HashMap<Candidate, Integer> voteCounts = new HashMap<>();
@@ -43,6 +44,17 @@ public class ElectionRepository implements PanacheRepository<Election> {
             }
         }
 
+        String returnedHash = hashService.getFileHash(blockchainFileDir + election.getBlockchainFileName());
+        Optional<ChainHash> first = chainHashReporitory.find("filePath",
+                blockchainFileDir + election.getBlockchainFileName()).firstResultOptional();
+
+        if(first.isPresent()) {
+            if(!returnedHash.equals(first.get().getHash())) {
+                throw new Exception("Hashes don't fit. Could've been manipulated");
+            }
+        } else {
+            throw new Exception("Hashes don't fit. Could've been manipulated");
+        }
         // Assuming the Candidate class has proper equals() and hashCode() implementations
         for (int i = 1; i < chain.size(); i++) {
             HashMap<Candidate, Integer> votedCandidate = chain.get(i).getVoted();

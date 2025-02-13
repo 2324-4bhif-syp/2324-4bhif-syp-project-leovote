@@ -12,12 +12,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 public class Blockchain {
+    private ChainHashRepository chainHashRepository = new ChainHashRepository();
+    private HashService hashService = new HashService();
     private static final String fileDir = "src/main/resources/blockchain/";
     private final String filePath;
     protected List<Block> chain = new ArrayList<>();
@@ -31,7 +31,11 @@ public class Blockchain {
             // Genesis block
             Block genesisBlock = createGenesisBlock();
             chain.add(genesisBlock);
-            addJson(genesisBlock);
+            try {
+                addJson(genesisBlock);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -46,10 +50,14 @@ public class Blockchain {
         String previousHash = previousBlock.getHash();
         Block newBlock = new Block(index, timestamp, voted, previousHash, voter.getGeneratedId());
         chain.add(newBlock);
-        addJson(newBlock);
+        try {
+            addJson(newBlock);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public synchronized void addJson(Block addedBlock) {
+    public synchronized void addJson(Block addedBlock) throws NoSuchAlgorithmException, IOException {
         // Read existing JSON array from file
         List<Block> existingBlocks = readJsonArray();
 
@@ -58,6 +66,9 @@ public class Blockchain {
 
         // Write the updated array back to the file
         writeJsonArray(existingBlocks);
+
+        String returnedHash = hashService.getFileHash(filePath);
+        chainHashRepository.updateChainHash(returnedHash, filePath);
     }
 
     private synchronized List<Block> readJsonArray() {
