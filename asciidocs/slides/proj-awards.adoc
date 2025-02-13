@@ -95,6 +95,5 @@ image::ziele.jpg[background]
 == Zukunftsaussichten
 
 [.custom-slide]
-✅ Verwendung in kontrollierten Umgebungen
-✅ Ideal für Schulen und kleinere Institutionen
-✅ Verbesserung und Erweiterung geplant
+* Verwendung in kontrollierten Umgebungen
+* Ideal für Schulen und kleinere Institutionen
