@@ -1,0 +1,72 @@
+= Leovote
+
+Project Awards - Prototyp
+
+:revdate: {docdate}
+:encoding: utf-8
+:lang: de
+:doctype: article
+:icons: font
+:customcss: css/slides.css
+:revealjs_theme: white
+:revealjs_width: 1408
+:revealjs_height: 792
+:source-highlighter: highlightjs
+ifdef::env-ide[]
+:imagesdir: ../images
+endif::[]
+ifndef::env-ide[]
+:imagesdir: images
+endif::[]
+:title-slide-transition: zoom
+:title-slide-transition-speed: fast
+:title-slide-background-image: wahl.jpg
+
+
+[.lightbg,background-opacity="0.3"]
+== Team
+image::wahl2.jpeg[background]
+* Cao Anton
+* Lehner David
+* Fröller Felix
+* Nikolaus Alexander
+
+[.lightbg,background-opacity="0.2"]
+== Problemstellung
+image::papier.jpg[background]
+
+* Der Wahlaufwand
+* Verbrauch von Papier
+* Verwirrung
+* Effizienz
+
+[.lightbg,background-opacity="0.2"]
+== Warum Leovote?
+image::handshake.jpg[background]
+
+* Moderne Gestaltung von Wahlen
+* Digitalisierung
+* Zeitsparend
+** Auswertung, Stimmabgabe
+* Keine Verschwendung von Papier
+
+[.lightbg,background-opacity="0.2"]
+=== Sicherheit
+image::prove.jpg[background]
+
+* 1 Problem:
+* 2 Problem:
+* 3 Problem:
+
+[.lightbg,background-opacity="0.3"]
+== Ziele
+image::ziele.jpg[background]
+
+* Vereinfachung
+* Fälschungssicherheit
+* Schnelle Auswertung
+
+== Wahlprozess
+image::process.png[]
+
+=== Live Demo
