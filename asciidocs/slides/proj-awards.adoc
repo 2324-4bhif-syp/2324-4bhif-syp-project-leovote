@@ -38,8 +38,8 @@ image::papier.jpg[background]
 [.custom-slide]
 * Hoher organisatorischer Aufwand
 * Verbrauch von Papier
-* Verwirrung
-* Fehlende Effizienz
+* Verwirrung - bei Kandidaten
+* Langwierig
 
 [.lightbg,background-opacity="0.2"]
 == Warum Leovote?
@@ -49,8 +49,8 @@ image::handshake.jpg[background]
 * Moderne, digitale Gestaltung von Wahlen
 * Zeitsparend
 ** Auswertung, Stimmabgabe
-* Keine Verschwendung von Papier
-* Zugang per E-Mail
+* Ökologischer Mehrwert
+** Zugang per E-Mail
 
 [.lightbg,background-opacity="0.2"]
 == Sicherheit
@@ -61,15 +61,14 @@ image::prove.jpg[background]
 image::prove.jpg[background]
 
 [.custom-slide]
-* Lösung: Code mit Hash der E-Mail verbunden + Keycloak authentifizierung
+* Bequem und sicher durch E-Mail Zugang
 
 [.lightbg,background-opacity="0.2"]
 === Problem 2: Speicherung von Daten
 image::prove.jpg[background]
 
 [.custom-slide]
-* Keine Speicherung von direkten Informationen, wer für wen gestimmt hat.
-* Keine direkte Speicherung von Benutzerspezifischen Daten.
+* Anonyme Speicherung der Stimmabgabe
 
 [.lightbg,background-opacity="0.2"]
 === Problem 3: Fälschungssicherheit & Zugriffsbeschränkung
@@ -77,12 +76,12 @@ image::prove.jpg[background]
 
 [.custom-slide]
 * Zugriffsbeschränkung: Schüler -> Wählerseite, Admin -> Adminseite
-* Stimmabgaben in separater Datei gespeichert
-* Anlehnung an Blockchain-Technologie
+* Fälschungsresistentes System
+* Blockchain inspirierte Datenverwaltung
 
 [.lightbg,background-opacity="0.3"]
 == Technologien
-image::ziele.jpg[background]
+image::technology.jpg[background]
 
 [.custom-slide]
 * Frontend: Angular
@@ -92,7 +91,9 @@ image::ziele.jpg[background]
 
 == Live Demo
 
+[.lightbg,background-opacity="0.3"]
 == Zukunftsaussichten
+image::future.jpg[background]
 
 [.custom-slide]
 * Verwendung in kontrollierten Umgebungen
