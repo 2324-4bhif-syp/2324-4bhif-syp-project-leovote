@@ -7,7 +7,7 @@ Project Awards - Prototyp
 :lang: de
 :doctype: article
 :icons: font
-:customcss: css/slides.css
+:customcss: css/proj-awards.css
 :revealjs_theme: white
 :revealjs_width: 1408
 :revealjs_height: 792
@@ -35,6 +35,7 @@ image::wahl2.jpeg[background]
 == Problemstellung
 image::papier.jpg[background]
 
+[.custom-slide]
 * Hoher organisatorischer Aufwand
 * Verbrauch von Papier
 * Verwirrung
@@ -44,6 +45,7 @@ image::papier.jpg[background]
 == Warum Leovote?
 image::handshake.jpg[background]
 
+[.custom-slide]
 * Moderne, digitale Gestaltung von Wahlen
 * Zeitsparend
 ** Auswertung, Stimmabgabe
@@ -57,17 +59,23 @@ image::prove.jpg[background]
 [.lightbg,background-opacity="0.2"]
 === Problem 1: Weitergabe des Codes
 image::prove.jpg[background]
+
+[.custom-slide]
 * Lösung: Code mit Hash der E-Mail verbunden + Keycloak authentifizierung
 
 [.lightbg,background-opacity="0.2"]
 === Problem 2: Speicherung von Daten
 image::prove.jpg[background]
+
+[.custom-slide]
 * Keine Speicherung von direkten Informationen, wer für wen gestimmt hat.
 * Keine direkte Speicherung von Benutzerspezifischen Daten.
 
 [.lightbg,background-opacity="0.2"]
 === Problem 3: Fälschungssicherheit & Zugriffsbeschränkung
 image::prove.jpg[background]
+
+[.custom-slide]
 * Zugriffsbeschränkung: Schüler -> Wählerseite, Admin -> Adminseite
 * Stimmabgaben in separater Datei gespeichert
 * Anlehnung an Blockchain-Technologie
@@ -76,6 +84,7 @@ image::prove.jpg[background]
 == Technologien
 image::ziele.jpg[background]
 
+[.custom-slide]
 * Frontend: Angular
 * Backend: Java mit Quarkus
 * Datenbank: PostgreSQL
@@ -85,6 +94,7 @@ image::ziele.jpg[background]
 
 == Zukunftsaussichten
 
+[.custom-slide]
 ✅ Verwendung in kontrollierten Umgebungen
 ✅ Ideal für Schulen und kleinere Institutionen
 ✅ Verbesserung und Erweiterung geplant
