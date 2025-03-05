@@ -79,6 +79,9 @@ image::prove.jpg[background]
 * Fälschungsresistentes System
 * Blockchain inspirierte Datenverwaltung
 
+==== Datenstruktur
+image::blockchain_structure.png[]
+
 [.lightbg,background-opacity="0.3"]
 == Technologien
 image::technology.jpg[background]
@@ -88,6 +91,9 @@ image::technology.jpg[background]
 * Backend: Java mit Quarkus
 * Datenbank: PostgreSQL
 * Authentifizierung: Keycloak
+
+=== Systemdiagramm
+image::system_diagram.png[]
 
 == Live Demo
 
