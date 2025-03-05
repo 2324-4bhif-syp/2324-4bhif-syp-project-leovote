@@ -79,7 +79,7 @@ image::prove.jpg[background]
 * Fälschungsresistentes System
 * Blockchain inspirierte Datenverwaltung
 
-==== Datenstruktur
+=== Datenstruktur
 image::blockchain_structure.png[]
 
 [.lightbg,background-opacity="0.3"]
