@@ -4,7 +4,6 @@ import {Candidate} from "../entity/candidate-model";
 import {Election} from "../entity/election-model";
 import {Vote} from "../entity/vote";
 import {EmailModel} from "../entity/email-model";
-import {LoginModel} from "../entity/login-model";
 import {CandidateImage} from "../entity/candidate-image";
 import {environment} from "../../../environments/environment";
 import {VoteRequestDto} from "../entity/dto/vote-request-dto";
@@ -33,7 +32,6 @@ export class LeovoteWebApiService {
   private removeCandidate: string = 'candidates/${id}';
   private candidateBySchoolId: string = 'candidates/getBySchoolId/${schoolId}';
   private removeElection: string = 'elections/${id}';
-  private checkLoginDataUrl: string = 'token';
   private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}';
   private uploadImageUrl: string = 'candidates/images/${id}';
   private getCandidatesAndImages: string = 'candidates/images';
@@ -103,14 +101,6 @@ export class LeovoteWebApiService {
     return this.http.post(this.baseUrl + this.addMultipleEmailsUrl.replace('${electionId}', electionId), email, {headers: this.headers});
   }
 
-  public checkLoginData(schoolId: string, password: string) {
-    const body = {
-      username: schoolId,
-      password: password
-    };
-    return this.http.post<LoginModel>(this.baseUrl + this.checkLoginDataUrl, body, {headers: this.headers});
-  }
-
   public checkEmailAndCode(email: string, code: string) {
     return this.http.get<boolean>(this.baseUrl + this.checkEmailAndCodeUrl
       .replace('${email}', email)
@@ -120,14 +110,12 @@ export class LeovoteWebApiService {
   public uploadImage(image: File, id: string) {
     const formData: FormData = new FormData();
     formData.append('image', image, image.name);
-    console.log(this.baseUrl + this.uploadImageUrl);
     return this.http.post(
       this.baseUrl + this.uploadImageUrl.replace('${id}', id.toString()),formData, {responseType: 'text'}
     );
   }
 
   public getImagesAndCandidates() {
-    console.log(this.http.get<CandidateImage[]>(this.baseUrl + this.getCandidatesAndImages))
     return this.http.get<CandidateImage[]>(this.baseUrl + this.getCandidatesAndImages);
   }
 

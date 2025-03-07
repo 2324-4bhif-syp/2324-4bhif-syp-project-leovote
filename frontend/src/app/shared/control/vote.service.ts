@@ -5,7 +5,6 @@ import {VoteCandidate} from "../entity/vote-candidate-model";
 import {Router} from "@angular/router";
 import {LoginModel} from "../entity/login-model";
 import {VoteRequestDto} from "../entity/dto/vote-request-dto";
-import {Candidate} from "../entity/candidate-model";
 import {CandidateVoteDto} from "../entity/dto/candidate-vote-dto";
 
 @Injectable({
@@ -123,26 +122,5 @@ export class VoteService {
     } else {
       console.log("No Vote Id given");
     }
-  }
-  checkLoginData(schoolId: string, password: string): Promise<LoginModel | undefined> {
-    return new Promise<LoginModel | undefined>((resolve, reject) => {
-      if (schoolId != undefined && password != undefined) {
-        this.apiClient.checkLoginData(schoolId, password).subscribe(
-          (u: LoginModel) => {
-            let user = u;
-            this.user = u;
-            if (user !== undefined) {
-              console.log(user);
-              resolve(user);
-            }
-          }, (error) => {
-            console.log('Authentication could not be completed');
-            resolve(undefined);
-          }
-        )
-      } else {
-        resolve(Promise.resolve(undefined));
-      }
-    })
   }
 }

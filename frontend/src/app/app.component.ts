@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {VoteService} from "./shared/control/vote.service";
 import {AdminService} from "./shared/control/admin.service";
@@ -12,7 +12,7 @@ import {MatSidenav} from "@angular/material/sidenav";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit, OnInit{
   title = 'Leovote';
   currentLanguage = 'en';
 
@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit{
     localStorage.setItem('language', language);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.navbarService.toggle$.subscribe(() => {
       this.sidenav.toggle();
     });

@@ -40,7 +40,7 @@
                [opened]="false">
     <mat-nav-list class="nav-list">
       <!-- Election Overview -->
-      <mat-list-item matTooltip="{{ 'election_overview' | translate }}" routerLink="admin/overview">
+      <mat-list-item routerLink="admin/overview">
         <div class="sidenav-item">
           <mat-icon>how_to_vote</mat-icon>
           <span>{{ 'election_overview' | translate }}</span>
@@ -48,7 +48,7 @@
       </mat-list-item>
 
       <!-- Create Election -->
-      <mat-list-item matTooltip="{{ 'create_election' | translate }}" routerLink="admin/overview/create-election">
+      <mat-list-item routerLink="admin/overview/create-election">
         <div class="sidenav-item">
           <mat-icon>add</mat-icon>
           <span>{{ 'create_election' | translate }}</span>
@@ -56,7 +56,7 @@
       </mat-list-item>
 
       <!-- Candidate Overview -->
-      <mat-list-item matTooltip="{{ 'candidates_overview' | translate }}" routerLink="admin/overview/candidate-overview">
+      <mat-list-item routerLink="admin/overview/candidate-overview">
         <div class="sidenav-item">
           <mat-icon>person</mat-icon>
           <span>{{ 'candidates_overview' | translate }}</span>
@@ -64,7 +64,7 @@
       </mat-list-item>
 
       <!-- Create Candidate -->
-      <mat-list-item matTooltip="{{ 'create_candidate_button' | translate }}" routerLink="admin/overview/create-candidate">
+      <mat-list-item routerLink="admin/overview/create-candidate">
         <div class="sidenav-item">
           <mat-icon>add</mat-icon>
           <span>{{ 'create_candidate_button' | translate }}</span>
