@@ -18,9 +18,7 @@ export class AppComponent implements AfterViewInit, OnInit{
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
-  constructor(public voteService: VoteService,
-              private router: Router,
-              protected adminService: AdminService,
+  constructor(protected adminService: AdminService,
               private keycloakService: KeycloakService,
               private translate: TranslateService,
               private navbarService: NavbarService,

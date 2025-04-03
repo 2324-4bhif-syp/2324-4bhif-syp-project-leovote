@@ -19,10 +19,10 @@ export class LeovoteWebApiService {
   private baseUrl = environment.apiUrl;
   private candidates = 'candidates';
   private candidatesAll = 'candidates/all';
-  private elections: string = 'elections';
+  private elections: string = 'elections'; // user
   private addElectionUrl: string = 'elections/election';
-  private voters: string = 'voters/voter/${id}';
-  private vote: string = 'voters/vote/${electionId}';
+  private voters: string = 'voters/voter/${id}'; // user
+  private vote: string = 'voters/vote/${electionId}'; // user
   private electionResult: string = 'elections/results/${id}';
   private addEmailUrl: string = 'elections/addEmail/${id}/${email}';
   private addMultipleEmailsUrl: string = 'elections/addEmail/multiples/${electionId}';
@@ -32,11 +32,11 @@ export class LeovoteWebApiService {
   private removeCandidate: string = 'candidates/${id}';
   private candidateBySchoolId: string = 'candidates/getBySchoolId/${schoolId}';
   private removeElection: string = 'elections/${id}';
-  private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}';
+  private checkEmailAndCodeUrl: string = 'voters/voter/${email}/${code}'; // user
   private uploadImageUrl: string = 'candidates/images/${id}';
-  private getCandidatesAndImages: string = 'candidates/images';
+  private getCandidatesAndImages: string = 'candidates/images'; // user
   private getCandidateByIdUrl: string = 'candidates/${id}';
-  private getElectionByIdUrl: string = 'elections/${id}';
+  private getElectionByIdUrl: string = 'elections/${id}'; // user
   private getImageByIdUrl: string = 'candidates/images/${id}';
   private updateCandidateUrl: string = 'candidates/update/${id}';
 
