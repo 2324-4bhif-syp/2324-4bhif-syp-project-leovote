@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.TypedQuery;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,12 +50,13 @@ public class ElectionRepository implements PanacheRepository<Election> {
                 blockchainFileDir + election.getBlockchainFileName()).firstResultOptional();
 
         if(first.isPresent()) {
-            if(!returnedHash.equals(first.get().getHash())) {
+            if (!returnedHash.equals(first.get().getHash())) {
                 throw new Exception("Hashes don't fit. Could've been manipulated");
             }
-        } else {
-            throw new Exception("Hashes don't fit. Could've been manipulated");
         }
+//        } else {
+//            throw new Exception("Hashes don't fit. Could've been manipulated");
+//        }
         // Assuming the Candidate class has proper equals() and hashCode() implementations
         for (int i = 1; i < chain.size(); i++) {
             HashMap<Candidate, Integer> votedCandidate = chain.get(i).getVoted();
@@ -119,5 +121,11 @@ public class ElectionRepository implements PanacheRepository<Election> {
 
     public void removeEmailFromElection(Long emailId) {
         Email.deleteById(emailId);
+    }
+
+
+    public void deleteElection(Election election) {
+        Election.delete("id", election.id);
+
     }
 }

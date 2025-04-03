@@ -3,6 +3,7 @@ package at.htlleonding.control;
 import at.htlleonding.entity.ChainHash;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
 import java.util.Date;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import java.util.Optional;
 @ApplicationScoped
 public class ChainHashRepository implements PanacheRepository<ChainHash> {
 
+    @Transactional
     public void updateChainHash(String newHash, String filePath) {
         Optional<ChainHash> existingHash = find("filePath", filePath).firstResultOptional();
 

@@ -1,5 +1,6 @@
 package at.htlleonding.boundary;
 
+import at.htlleonding.control.AuthorizationService;
 import at.htlleonding.control.EmailService;
 import at.htlleonding.entity.Election;
 import at.htlleonding.entity.Email;
@@ -16,9 +17,13 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.List;
 import java.util.Optional;
+
+import static at.htlleonding.boundary.Roles.ADMIN_ROLE;
+
 
 @Path("email")
 public class EmailResource {
@@ -28,6 +33,10 @@ public class EmailResource {
     EntityManager em;
     @Inject
     Tracer tracer;
+    @Inject
+    AuthorizationService authorizationService;
+    @Inject
+    JsonWebToken jwt;
 
     @POST
     @Blocking
@@ -35,6 +44,10 @@ public class EmailResource {
     @Path("election/{electionId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> sendInvite(@PathParam("electionId") Long electionId) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Uni.createFrom().item(Response.status(403).build());
+        }
+
         Span span = tracer.spanBuilder("sendEmails").startSpan();
 
         Optional<Election> election = Election.findByIdOptional(electionId);
@@ -62,7 +75,9 @@ public class EmailResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response emailsByElection(@PathParam("electionId") Long electionId) {
-
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
         // Should be capsuled outside the resource
         TypedQuery<Email> query = em.createQuery("select e from Email e where e.election.id = :electionId", Email.class);
         query.setParameter("electionId", electionId);

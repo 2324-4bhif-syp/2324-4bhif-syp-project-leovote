@@ -4,7 +4,6 @@ import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.dto.CandidateImageDTO;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.core.Response;
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
@@ -150,5 +149,10 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
                 outputStream.write(buffer, 0, bytesRead);
             }
         }
+    }
+
+    public Candidate createCandidate(Candidate candidate) {
+        candidate.persist();
+        return candidate;
     }
 }

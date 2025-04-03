@@ -1,5 +1,6 @@
 package at.htlleonding.boundary;
 
+import at.htlleonding.control.AuthorizationService;
 import at.htlleonding.control.Blockchain;
 import at.htlleonding.control.VoterRepository;
 import at.htlleonding.entity.Candidate;
@@ -8,9 +9,7 @@ import at.htlleonding.entity.Voter;
 import at.htlleonding.entity.dto.CandidateVoteDTO;
 import at.htlleonding.entity.dto.VoteRequestDTO;
 import at.htlleonding.entity.dto.VoterDTO;
-import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
-import io.quarkus.rest.data.panache.ResourceProperties;
-import jakarta.enterprise.inject.spi.CDI;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
@@ -18,19 +17,33 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.*;
 
-@ResourceProperties(path = "voters")
-public interface VoterResource extends PanacheRepositoryResource<VoterRepository, Voter, Long> {
-    VoterRepository voterRepository = CDI.current().select(VoterRepository.class).get();
-    EntityManager em = voterRepository.getEntityManager();
+import static at.htlleonding.boundary.Roles.ADMIN_ROLE;
+import static at.htlleonding.boundary.Roles.USER_ROLE;
+
+@Path("voters")
+public class VoterResource {
+    @Inject
+    VoterRepository voterRepository;
+    @Inject
+    EntityManager em;
+    @Inject
+    AuthorizationService authorizationService;
+    @Inject
+    JsonWebToken jwt;
 
     @GET
     @Path("voter/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response getByUUID(@PathParam("id") UUID uuid) {
+    public Response getByUUID(@PathParam("id") UUID uuid) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE) && !authorizationService.hasAccess(jwt, USER_ROLE)) {
+            return Response.status(403).build();
+        }
+
         TypedQuery<Voter> query = em.createQuery("select v FROM Voter v where generatedId = ?1", Voter.class)
                 .setParameter(1, uuid);
         try {
@@ -54,10 +67,14 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response vote(
+    public Response vote(
             @PathParam("electionId") Long electionId,
             VoteRequestDTO voteRequest
     ) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE) && !authorizationService.hasAccess(jwt, USER_ROLE)) {
+            return Response.status(403).build();
+        }
+
         UUID voterId = UUID.fromString(voteRequest.getVoterId());
         List<CandidateVoteDTO> candidateVotes = voteRequest.getCandidateVotes();
 
@@ -65,7 +82,7 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
         Voter voter;
         HashMap<Candidate, Integer> votesMap = new HashMap<>();
 
-        if(!checkPoints(voteRequest, election)){
+        if (!checkPoints(voteRequest, election)) {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
 
@@ -98,10 +115,14 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response createVoters(
+    public Response createVoters(
             @PathParam("electionId") Long electionId,
             Map<String, Integer> requestBody
     ) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
         Election election = Election.findById(electionId);
         Integer voterCount = requestBody.get("voterCount");
 
@@ -118,10 +139,14 @@ public interface VoterResource extends PanacheRepositoryResource<VoterRepository
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response checkEmailAndCode(
+    public Response checkEmailAndCode(
             @PathParam("email") String email,
             @PathParam("code") UUID uuid
     ) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE) && !authorizationService.hasAccess(jwt, USER_ROLE)) {
+            return Response.status(403).build();
+        }
+
         if (voterRepository.checkEmailAndCode(email, uuid)) {
             return Response.accepted().entity(true).build();
         }

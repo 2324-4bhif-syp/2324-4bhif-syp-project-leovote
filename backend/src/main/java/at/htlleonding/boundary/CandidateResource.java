@@ -1,38 +1,70 @@
 package at.htlleonding.boundary;
 
+import at.htlleonding.control.AuthorizationService;
 import at.htlleonding.control.CandidateRepository;
 import at.htlleonding.entity.Candidate;
 import at.htlleonding.entity.dto.CandidateImageDTO;
 import io.opentelemetry.instrumentation.annotations.WithSpan;
-import io.quarkus.hibernate.orm.rest.data.panache.PanacheRepositoryResource;
-import io.quarkus.rest.data.panache.ResourceProperties;
-import jakarta.enterprise.inject.spi.CDI;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
-
 import java.io.IOException;
 import java.util.*;
 
-@ResourceProperties(path = "candidates")
-public interface CandidateResource extends PanacheRepositoryResource<CandidateRepository, Candidate, Long> {
-    CandidateRepository candidateRepository = CDI.current().select(CandidateRepository.class).get();
+import static at.htlleonding.boundary.Roles.ADMIN_ROLE;
+import static at.htlleonding.boundary.Roles.USER_ROLE;
+
+@Path("candidates")
+public class CandidateResource {
+    @Inject
+    CandidateRepository candidateRepository;
+
+    @Inject
+    AuthorizationService authorizationService;
+
+    @Inject
+    JsonWebToken jwt;
 
     @GET
     @Path("/all")
     @WithSpan("getAllCandidates")
     @Produces(MediaType.APPLICATION_JSON)
-    default Response getAllCandidates() {
+    public Response getAllCandidates() {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
         List<Candidate> candidates = Candidate.listAll();
         return Response.ok(candidates).build();
     }
 
     @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCandidateById(@PathParam("id") Long id) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
+        Candidate candidate = Candidate.findById(id);
+        if (candidate == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(candidate).build();
+    }
+
+    @GET
     @Path("getBySchoolId/{schoolId}")
     @Produces(MediaType.APPLICATION_JSON)
-    default Response getCandidatesBySchoolId(@PathParam("schoolId") String schoolId) {
+    public Response getCandidatesBySchoolId(@PathParam("schoolId") String schoolId) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
         Candidate candidate = candidateRepository.getCandidateBySchoolId(schoolId);
         return Response.ok(candidate).build();
     }
@@ -41,7 +73,11 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Transactional
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    default Response deleteCandidate(@PathParam("id") Long id) {
+    public Response deleteCandidate(@PathParam("id") Long id) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
         if (id == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Id must not be null").build();
         }
@@ -56,14 +92,16 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
         return Response.ok().build();
     }
 
-    // Overide the default panache endpoint of put
-
     @PUT
     @Path("update/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    default Response updateCandidate(@PathParam("id") Long id, Candidate candidate) {
+    public Response updateCandidate(@PathParam("id") Long id, Candidate candidate) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
         Candidate candidateToUpdate = Candidate.findById(id);
 
         if (candidateToUpdate == null) {
@@ -76,7 +114,11 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @GET
     @Path("images/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    default Response getCandidateImageById(@PathParam("id") Long id) {
+    public Response getCandidateImageById(@PathParam("id") Long id) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
         try {
             CandidateImageDTO imageDTO = candidateRepository.getImageByCandidateId(id);
             if (imageDTO == null) {
@@ -95,7 +137,11 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @GET
     @Path("images")
     @Produces(MediaType.APPLICATION_JSON)
-    default Response getAllCandidateImages() {
+    public Response getAllCandidateImages() {
+        if (!authorizationService.hasAccess(jwt, USER_ROLE) && !authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
         try {
             return Response.ok(candidateRepository.getImagesForCandidates()).build();
         } catch (IOException e) {
@@ -108,7 +154,11 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
     @Path("images/{id}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
-    default Response uploadImage(@PathParam("id") String schoolId, MultipartFormDataInput input) {
+    public Response uploadImage(@PathParam("id") String schoolId, MultipartFormDataInput input) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
         try {
             String message = candidateRepository.createImage(schoolId, input);
             if (message.contains("Bild erfolgreich hochgeladen:")) {
@@ -121,5 +171,18 @@ public interface CandidateResource extends PanacheRepositoryResource<CandidateRe
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Fehler beim Hochladen des Bildes: " + exception.getMessage()).build();
         }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response createCandidate(Candidate candidate) {
+        if (!authorizationService.hasAccess(jwt, ADMIN_ROLE)) {
+            return Response.status(403).build();
+        }
+
+        Candidate createdCandidate = candidateRepository.createCandidate(candidate);
+        return Response.accepted(createdCandidate).build();
     }
 }
