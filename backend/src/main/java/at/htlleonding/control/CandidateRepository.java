@@ -14,6 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 @ApplicationScoped
@@ -76,11 +78,13 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
         for (Candidate candidate : candidates) {
             File imageFile = new File(PATH_IMAGES + candidate.getPathOfImage());
 
+            byte[] imageBytes;
             if (!imageFile.exists() || !imageFile.isFile()) {
-                imageFile = new File(PATH_IMAGES + DEFAULT_IMAGE);
+                imageBytes = loadDefaultImageBytes();
+            } else {
+                imageBytes = Files.readAllBytes(imageFile.toPath());
             }
 
-            byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
             CandidateImageDTO imageDTO = new CandidateImageDTO(candidate.id, base64Image);
             imageDTOList.add(imageDTO);
@@ -99,9 +103,16 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
         File imageFile = new File(imagePath);
 
         if (!imageFile.exists() || !imageFile.isFile()) {
-            String imagePathDefault = PATH_IMAGES + DEFAULT_IMAGE;
+            String imagePathDefault = PATH_IMAGES + candidate.getPathOfImage();
             File imageFileDefault = new File(imagePathDefault);
-            byte[] imageBytes = Files.readAllBytes(imageFileDefault.toPath());
+
+            byte[] imageBytes;
+            if (!imageFileDefault.exists() || !imageFileDefault.isFile()) {
+                imageBytes = loadDefaultImageBytes();
+            } else {
+                imageBytes = Files.readAllBytes(imageFileDefault.toPath());
+            }
+
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
             return new CandidateImageDTO(candidate.id, base64Image);
         }
@@ -112,6 +123,8 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
     }
 
     public String createImage(String schoolId, MultipartFormDataInput input) throws IOException {
+        ensureImagesDirectoryExists();
+
         // Validate file type
         String fileName;
         String[] allowedExtensions = new String[]{"jpg", "jpeg", "png"};
@@ -130,8 +143,7 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
 
             InputStream inputStream = inputPart.getBody(InputStream.class, null);
 
-            String uploadDirectory = "src/main/resources/images";
-            String filePath = uploadDirectory + File.separator + fileName;
+            String filePath = PATH_IMAGES + File.separator + fileName;
             writeFile(inputStream, filePath);
             return "Bild erfolgreich hochgeladen: " + filePath;
         }
@@ -154,5 +166,21 @@ public class CandidateRepository implements PanacheRepository<Candidate> {
     public Candidate createCandidate(Candidate candidate) {
         candidate.persist();
         return candidate;
+    }
+
+    private byte[] loadDefaultImageBytes() throws IOException {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE)) {
+            if (is == null) {
+                throw new IOException("Default image not found in classpath!");
+            }
+            return is.readAllBytes();
+        }
+    }
+
+    private void ensureImagesDirectoryExists() throws IOException {
+        Path path = Paths.get(PATH_IMAGES);
+        if (!Files.exists(path)) {
+            Files.createDirectories(path); // Creates the directory and any missing parent directories
+        }
     }
 }
